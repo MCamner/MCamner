@@ -3,6 +3,8 @@
 **IT Architect by trade. Builder by mindset.**  
 Bridging infrastructure, security and real-world systems.
 
+> Architecting systems that work in reality — not just in diagrams.
+
 ---
 
 ## 🧠 About Me
@@ -13,6 +15,14 @@ I design and build **secure, scalable digital workplaces** that actually work in
 - 🔐 Security & Identity (Smartcards, Zero Trust thinking)
 - ⚙️ Automation & system integration
 - 🧩 Turning complex environments into usable systems
+
+---
+
+## 🚀 What I Bring
+
+- Turning complex infrastructure into usable systems
+- Bridging security and usability without compromise
+- Designing solutions that survive real-world constraints
 
 ---
 
@@ -53,9 +63,9 @@ I design and build **secure, scalable digital workplaces** that actually work in
 I don’t chase complexity.  
 I build systems that are:
 
-- **Simple enough to operate**
-- **Robust enough to trust**
-- **Clear enough to scale**
+- 🧱 **Simple enough to operate**
+- 🔒 **Robust enough to trust**
+- 📐 **Clear enough to scale**
 
 ---
 
