@@ -51,15 +51,11 @@ I design and build **secure, scalable digital workplaces** that actually work in
 
 ---
 
-## 📊 GitHub Stats
+## 📊 GitHub Focus
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=MCamner&show_icons=true" />
-</p>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MCamner&layout=compact" />
-</p>
+- Building practical tools and workflows
+- Working across infrastructure, endpoint, and automation
+- Turning real-world constraints into usable systems
 
 ---
 
