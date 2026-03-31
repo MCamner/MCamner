@@ -1,88 +1,91 @@
 # 👋 Hi, I'm Mattias Camner
 
-**IT Architect by trade. Builder by mindset.**  
-Bridging infrastructure, security and real-world systems.
-
-> Architecting systems that work in reality — not just in diagrams.
+**IT Architect by trade. Builder by mindset.**
+Bridging infrastructure, security, and real-world systems.
 
 ---
 
 ## 🧠 About Me
 
-I design and build **secure, scalable digital workplaces** that actually work in reality — not just on paper.
+I design and build **secure, scalable digital workplaces** that work in reality — not just on paper.
 
-- 🏗️ IT Architecture (Endpoint, EUC, Infrastructure)
-- 🔐 Security & Identity (Smartcards, Zero Trust thinking)
-- ⚙️ Automation & system integration
-- 🧩 Turning complex environments into usable systems
+* 🏗️ Endpoint, EUC & Infrastructure Architecture
+* 🔐 Security, Identity & Zero Trust thinking
+* ⚙️ Automation & system integration
+* 🧩 Turning complex environments into usable systems
 
 ---
 
 ## 🚀 What I Bring
 
-- Turning complex infrastructure into usable systems
-- Bridging security and usability without compromise
-- Designing solutions that survive real-world constraints
+* Turning complex infrastructure into **usable systems**
+* Bridging **security and usability** without compromise
+* Designing solutions that survive **real-world constraints**
 
 ---
 
 ## 🚧 What I'm Working On
 
-- Digital Workplace architecture (Citrix, IGEL, Identity flows)
-- Secure authentication flows (Smartcard / SafeNet / CWA)
-- Infrastructure standardization & automation
-- Personal projects:
-  - 🎨 [Black Iris](https://blackiris.se)
-  - ✍️ [McAmner](https://mcamner.com)
+* Digital Workplace architecture (Citrix, IGEL, Identity flows)
+* Secure authentication flows (Smartcard / SafeNet / CWA)
+* Infrastructure standardization & automation
+
+**Personal projects:**
+
+* 🎨 https://blackiris.se
+* ✍️ https://mcamner.com
 
 ---
 
 ## 🛠️ Tech & Tools
 
-![Citrix](https://img.shields.io/badge/Citrix-Architecture-blue?style=for-the-badge)
-![IGEL OS](https://img.shields.io/badge/IGEL-OS-blueviolet?style=for-the-badge)
-![Active Directory](https://img.shields.io/badge/Active%20Directory-Identity-2b6cb0?style=for-the-badge)
-![SCCM](https://img.shields.io/badge/SCCM-Endpoint%20Management-1f6feb?style=for-the-badge)
-![VMware](https://img.shields.io/badge/VMware-Infrastructure-607d8b?style=for-the-badge)
-![Windows](https://img.shields.io/badge/Windows-Enterprise-0078d4?style=for-the-badge)
-![Linux](https://img.shields.io/badge/Linux-System%20Ops-fcc624?style=for-the-badge&logo=linux&logoColor=black)
-![Security](https://img.shields.io/badge/Security-Zero%20Trust-darkgreen?style=for-the-badge)
-![Automation](https://img.shields.io/badge/Automation-Scripting-orange?style=for-the-badge)
+<p>
+  <img src="https://img.shields.io/badge/Citrix-Architecture-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/IGEL-OS-blueviolet?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Active%20Directory-Identity-2b6cb0?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/SCCM-Endpoint%20Management-1f6feb?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/VMware-Infrastructure-607d8b?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Windows-Enterprise-0078d4?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Linux-System%20Ops-fcc624?style=for-the-badge&logo=linux&logoColor=black" />
+  <img src="https://img.shields.io/badge/Security-Zero%20Trust-darkgreen?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Automation-Scripting-orange?style=for-the-badge" />
+</p>
 
 ---
 
 ## 📊 GitHub Focus
 
-- Building practical tools and workflows
-- Working across infrastructure, endpoint, and automation
-- Turning real-world constraints into usable systems
+* Building practical tools and workflows
+* Working across infrastructure, endpoint, and automation
+* Turning real-world constraints into usable systems
 
 ---
 
 ## 🧭 Philosophy
 
-I don’t chase complexity.  
+I don’t chase complexity.
+
 I build systems that are:
 
-- 🧱 **Simple enough to operate**
-- 🔒 **Robust enough to trust**
-- 📐 **Clear enough to scale**
+* 🧱 Simple enough to operate
+* 🔒 Robust enough to trust
+* 📐 Clear enough to scale
 
 ---
 
 ## 📈 Current Focus
 
-- Designing future-proof digital workplace platforms
-- Improving security without killing usability
-- Building systems that survive real-world constraints
+* Designing future-proof digital workplace platforms
+* Improving security without killing usability
+* Building systems that survive real-world constraints
 
 ---
 
 ## 🌐 Connect
 
-- 🔗 [Website](https://mcamner.com)
-- 🎨 [Black Iris](https://blackiris.se)
-- 💼 [LinkedIn](https://www.linkedin.com/in/mattias-camner-75958022)
+* 🔗 https://mcamner.com
+* 🎨 https://blackiris.se
+* 💼 https://www.linkedin.com/in/mattias-camner-75958022
 
 ---
 
@@ -90,12 +93,13 @@ I build systems that are:
 
 Outside of tech:
 
-- 🥋 Brazilian Jiu-Jitsu (systems, pressure, efficiency)
-- 🎸 Guitar (Hendrix / metal / structure + feel)
-- 🧠 Psychology, systems thinking & identity
+* 🥋 Brazilian Jiu-Jitsu
+* 🎸 Guitar (Hendrix / metal / structure + feel)
+* 🧠 Psychology, systems thinking & identity
 
 ---
 
 ## 🧩 Motto
 
 > Build things that work. Then make them impossible to break.
+
