@@ -53,8 +53,13 @@ I design and build **secure, scalable digital workplaces** that actually work in
 
 ## 📊 GitHub Stats
 
-![Mattias's GitHub stats](https://github-readme-stats.vercel.app/api?username=MCamner&show_icons=true&hide_title=true)
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=MCamner&layout=compact)
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=MCamner&show_icons=true" alt="Mattias's GitHub stats" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MCamner&layout=compact" alt="Top Languages" />
+</p>
 
 ---
 
