@@ -81,6 +81,30 @@ I build systems that are:
 
 ---
 
+## 🚀 Featured Work
+
+### 💻 macos-scripts
+
+A structured toolkit for macOS automation, workflows, and terminal-driven operations.
+
+Built around a modular CLI system (`mqlaunch`) designed to simplify complex tasks and improve daily workflows.
+
+**Key aspects:**
+
+* Modular command architecture (menu-driven + CLI)
+* Focus on real-world usability — not just scripts, but workflows
+* Integrated automation, tools, and system utilities
+* Designed for clarity, speed, and repeatability
+
+**Why it matters:**
+
+This project reflects how I approach system design:
+turning fragmented tools into cohesive, usable systems.
+
+🔗 https://github.com/MCamner/macos-scripts
+
+---
+
 ## 🌐 Connect
 
 * 🔗 https://mcamner.com
