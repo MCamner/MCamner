@@ -2,7 +2,7 @@
 
 **IT Architect | Digital Workplace | Security & Infrastructure**
 
-I design and build secure, scalable digital workplaces that work in reality — not just on paper.
+I turn complex infrastructure into systems that actually work — secure, usable, and built for real-world constraints.
 
 ---
 
@@ -20,7 +20,7 @@ My focus is simple:
 
 ---
 
-## 🚀 What I Bring
+## 🚀 How I Work
 
 * Translate complex infrastructure into **usable, supportable systems**
 * Bridge **security and usability** without compromise
@@ -70,10 +70,14 @@ What started as separate shell utilities evolved into a more structured command 
 
 **Result:**
 
-* Turned scattered scripts into a modular CLI with one clear entrypoint
-* Improved day-to-day usability with menu-driven workflows and clearer discoverability
-* Added safer release handling with dry-run and rollback support
-* Made the project easier to maintain and extend without growing into one oversized launcher
+* Consolidated scattered shell scripts into a single modular CLI system
+* Introduced a clear entrypoint (`mqlaunch`) with structured workflows
+* Improved usability through menu-driven interaction and better discoverability
+* Enabled safer releases with dry-run and rollback support
+* Made the system easier to extend without turning into a monolithic tool
+
+**Impact:**
+Reduced friction in daily workflows and created a foundation for scalable, repeatable automation.
 
 **Why that matters:**
 
