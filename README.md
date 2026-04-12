@@ -100,13 +100,13 @@ Read the full case:
 
 ## 📊 On GitHub
 
-I use GitHub to document selected work through tools, cases, and practical system design.
+I use GitHub as a working system to document tools, cases, and practical architecture decisions.
 
 The focus is consistent:
 
-* practical tooling with clear operational value
-* architecture thinking grounded in real-world constraints
-* concise cases that show problem, design, and outcome
+* Practical tooling with clear operational value
+* Architecture thinking grounded in real-world constraints
+* Concise cases that show problem, design, and outcome
 
 ---
 
@@ -115,7 +115,8 @@ The focus is consistent:
 * [macos-scripts](./cases/macos-scripts.md) - from scattered shell utilities to a modular CLI system
 * [secure-workplace](./cases/secure-workplace.md) - designing secure digital workplace access that people can actually use
 * [identity-flow](./cases/identity-flow.md) - designing stronger authentication flows without creating fragile user journeys
-* More cases will be added over time as I turn practical delivery work into reusable patterns and write-ups
+
+More cases will be added over time as I turn practical delivery work into reusable patterns and write-ups.
 
 ---
 
