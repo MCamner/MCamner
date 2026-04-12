@@ -305,6 +305,10 @@
           <strong>Current browser</strong>
           <span id="browserName">Checking...</span>
         </div>
+        <div class="hero-stat">
+          <strong>Local helper agent</strong>
+          <span id="helperStatus">Checking...</span>
+        </div>
       </div>
       <div class="toolbar">
         <button id="rerunButton" type="button">Run Checks Again</button>
@@ -332,6 +336,7 @@
           <li>Query-string overrides for environment, client family, and endpoints.</li>
           <li>Improved client detection with visible confidence level.</li>
           <li>Downloadable reports as both text and JSON for support or ticket workflows.</li>
+          <li>Optional local helper-agent integration on <code>localhost</code> for host-level signals.</li>
         </ul>
 
         <h2 style="margin-top: 24px;">Config</h2>
@@ -362,6 +367,7 @@
       recommendedMinWidth: 1280,
       recommendedMinHeight: 800,
       endpointTimeoutMs: 8000,
+      helperUrls: ["http://127.0.0.1:38765/status"],
       endpoints: []
     };
 
@@ -370,6 +376,7 @@
     const clientFamilyNode = document.getElementById("clientFamily");
     const overallStatusNode = document.getElementById("overallStatus");
     const browserNameNode = document.getElementById("browserName");
+    const helperStatusNode = document.getElementById("helperStatus");
     const environmentNameNode = document.getElementById("environmentName");
     const pageTitleNode = document.getElementById("pageTitle");
     const pageDescriptionNode = document.getElementById("pageDescription");
@@ -445,6 +452,7 @@
         ...external,
         endpoints: Array.isArray(external.endpoints) ? external.endpoints.slice() : base.endpoints.slice()
       };
+      merged.helperUrls = Array.isArray(external.helperUrls) ? external.helperUrls.slice() : base.helperUrls.slice();
 
       if (overrides.environmentName) {
         merged.environmentName = overrides.environmentName;
@@ -459,6 +467,23 @@
         merged.endpoints = overrides.endpoints;
       }
       return merged;
+    }
+
+    async function loadHelperStatus(helperUrls) {
+      const urls = Array.isArray(helperUrls) && helperUrls.length ? helperUrls : [];
+      for (const url of urls) {
+        try {
+          const response = await fetch(url, { cache: "no-store" });
+          if (!response.ok) {
+            throw new Error("Helper returned " + response.status);
+          }
+          const data = await response.json();
+          return { url, data };
+        } catch (error) {
+          // try next URL
+        }
+      }
+      return null;
     }
 
     function detectClientFamily(userAgent, forcedClient) {
@@ -637,7 +662,7 @@
       }, "ok");
     }
 
-    function buildReport(meta, checks, config, configSource) {
+    function buildReport(meta, checks, config, configSource, helper) {
       const lines = [
         config.title,
         "Timestamp: " + new Date().toISOString(),
@@ -652,6 +677,7 @@
         "Languages: " + meta.languages,
         "Timezone: " + meta.timezone,
         "Online: " + String(meta.online),
+        "Local helper: " + (helper ? "Connected via " + helper.url : "Not available"),
         "",
         "Checks:"
       ];
@@ -666,12 +692,14 @@
       return lines.join("\n");
     }
 
-    function updateHeader(config, configSource, meta, overall) {
+    function updateHeader(config, configSource, meta, overall, helper) {
       pageTitleNode.textContent = config.title;
       pageDescriptionNode.textContent = config.description;
       environmentNameNode.textContent = config.environmentName;
       clientFamilyNode.textContent = meta.client.family;
       browserNameNode.textContent = meta.browser;
+      helperStatusNode.textContent = helper ? "Connected" : "Browser-only mode";
+      helperStatusNode.style.color = helper ? "var(--ok)" : "var(--warn)";
       overallStatusNode.textContent = labelFor(overall);
       overallStatusNode.style.color = overall === "ok" ? "var(--ok)" : overall === "warn" ? "var(--warn)" : "var(--fail)";
       configSourceNode.textContent = configSource;
@@ -707,20 +735,45 @@
         : (config.configSourceLabel || external.source);
 
       const meta = buildStaticChecks(config, overrides);
+      const helper = await loadHelperStatus(config.helperUrls);
+      const helperChecks = helper
+        ? [{
+            name: "Local helper agent",
+            status: "ok",
+            summary: "Connected to " + helper.url,
+            details: [
+              "Agent: " + (helper.data.agent && helper.data.agent.name ? helper.data.agent.name : "Unknown"),
+              "Hostname: " + (helper.data.hostname || "Unavailable"),
+              "Client detection: " + (helper.data.client_detection ? helper.data.client_detection.family : "Unavailable")
+            ]
+          }].concat((helper.data.checks || []).map((check) => ({
+            ...check,
+            name: "Agent: " + check.name
+          })))
+        : [{
+            name: "Local helper agent",
+            status: "warn",
+            summary: "No helper detected on localhost",
+            details: [
+              "Expected URL(s): " + (config.helperUrls || []).join(", "),
+              "The page is using browser-only checks."
+            ]
+          }];
       const endpointChecks = await Promise.all((config.endpoints || []).map((endpoint) => testEndpoint(endpoint, config.endpointTimeoutMs)));
-      const allChecks = meta.checks.concat(endpointChecks);
+      const allChecks = meta.checks.concat(helperChecks, endpointChecks);
       const overall = computeOverall(allChecks);
 
       renderChecks(allChecks);
-      updateHeader(config, configSource, meta, overall);
+      updateHeader(config, configSource, meta, overall, helper);
       updateConfigExample();
 
-      const reportText = buildReport(meta, allChecks, config, configSource);
+      const reportText = buildReport(meta, allChecks, config, configSource, helper);
       reportNode.textContent = reportText;
       lastRun = {
         timestamp: new Date().toISOString(),
         config,
         configSource,
+        helper,
         meta,
         checks: allChecks,
         overall,
@@ -757,6 +810,7 @@
           overall: lastRun.overall,
           configSource: lastRun.configSource,
           environment: lastRun.config.environmentName,
+          helper: lastRun.helper,
           checks: lastRun.checks,
           meta: lastRun.meta
         }, null, 2),

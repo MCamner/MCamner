@@ -7,6 +7,9 @@
   "recommendedMinWidth": 1280,
   "recommendedMinHeight": 800,
   "endpointTimeoutMs": 8000,
+  "helperUrls": [
+    "http://127.0.0.1:38765/status"
+  ],
   "endpoints": [
     {
       "name": "Example intranet",
