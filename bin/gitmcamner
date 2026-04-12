@@ -1,0 +1,254 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+APP_NAME="gitmcamner"
+
+resolve_source() {
+  local source="$1"
+
+  while [ -L "$source" ]; do
+    local dir
+    dir="$(cd -P "$(dirname "$source")" && pwd)"
+    source="$(readlink "$source")"
+    [[ "$source" != /* ]] && source="$dir/$source"
+  done
+
+  cd -P "$(dirname "$source")" && pwd
+}
+
+SCRIPT_DIR="$(resolve_source "${BASH_SOURCE[0]}")"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+run_git() {
+  git -C "$REPO_ROOT" "$@"
+}
+
+branch_name() {
+  run_git branch --show-current
+}
+
+has_worktree_changes() {
+  [ -n "$(run_git status --short)" ]
+}
+
+has_staged_changes() {
+  [ -n "$(run_git diff --cached --name-only)" ]
+}
+
+has_unstaged_changes() {
+  [ -n "$(run_git diff --name-only)" ] || [ -n "$(run_git ls-files --others --exclude-standard)" ]
+}
+
+print_divider() {
+  printf '%s\n' '----------------------------------------'
+}
+
+pause() {
+  printf '\nPress Enter to continue...'
+  read -r _
+}
+
+show_status() {
+  printf '\n'
+  run_git status --short --branch
+  printf '\n'
+}
+
+show_summary() {
+  local branch ahead behind staged unstaged
+  branch="$(branch_name)"
+  ahead="$(run_git rev-list --count @{u}..HEAD 2>/dev/null || printf '0')"
+  behind="$(run_git rev-list --count HEAD..@{u} 2>/dev/null || printf '0')"
+  staged="$(run_git diff --cached --name-only | wc -l | tr -d ' ')"
+  unstaged="$(run_git status --short | wc -l | tr -d ' ')"
+
+  printf '%s\n' "$APP_NAME"
+  printf 'Repository: %s\n' "$REPO_ROOT"
+  printf 'Branch: %s\n' "$branch"
+  printf 'Ahead: %s  Behind: %s  Changed entries: %s  Staged files: %s\n' \
+    "$ahead" "$behind" "$unstaged" "$staged"
+  print_divider
+  run_git status --short --branch
+  printf '\n'
+}
+
+prompt_commit_message() {
+  local message
+  printf '\nCommit message: '
+  read -r message
+  printf '%s' "$message"
+}
+
+add_all() {
+  run_git add -A
+  printf '\nStaged all changes in %s\n' "$REPO_ROOT"
+}
+
+commit_changes() {
+  if ! has_worktree_changes; then
+    printf '\nNothing to commit.\n'
+    return
+  fi
+
+  if ! has_staged_changes && has_unstaged_changes; then
+    add_all
+  fi
+
+  if ! has_staged_changes; then
+    printf '\nNothing staged to commit.\n'
+    return
+  fi
+
+  local message
+  message="$(prompt_commit_message)"
+
+  if [ -z "$message" ]; then
+    printf 'Commit cancelled.\n'
+    return
+  fi
+
+  run_git commit -m "$message"
+}
+
+push_main() {
+  run_git push origin "$(branch_name)"
+}
+
+pull_rebase() {
+  run_git pull --rebase --autostash origin "$(branch_name)"
+}
+
+add_commit_push() {
+  add_all
+
+  if ! has_staged_changes; then
+    printf '\nNothing staged after add. Skipping commit and push.\n'
+    return
+  fi
+
+  commit_changes
+
+  if has_worktree_changes; then
+    printf '\nWorking tree still has changes. Push skipped.\n'
+    return
+  fi
+
+  push_main
+}
+
+smart_sync() {
+  if ! has_worktree_changes; then
+    printf '\nNothing to sync locally. Trying pull --rebase and push.\n'
+    pull_rebase
+    push_main
+    return
+  fi
+
+  add_all
+
+  if ! has_staged_changes; then
+    printf '\nNothing staged after add. Sync cancelled.\n'
+    return
+  fi
+
+  local message
+  message="$(prompt_commit_message)"
+
+  if [ -z "$message" ]; then
+    printf 'Sync cancelled.\n'
+    return
+  fi
+
+  run_git commit -m "$message"
+  pull_rebase
+  push_main
+}
+
+show_recent_commits() {
+  printf '\n'
+  run_git --no-pager log --oneline -5
+  printf '\n'
+}
+
+print_help() {
+  printf '\nQuick keys:\n'
+  printf '  1  Show full status\n'
+  printf '  2  Add all changes\n'
+  printf '  3  Commit staged or unstaged work\n'
+  printf '  4  Pull with rebase\n'
+  printf '  5  Push current branch\n'
+  printf '  6  Add, commit, and push\n'
+  printf '  s  Smart sync: add, commit, pull --rebase, push\n'
+  printf '  l  Show last 5 commits\n'
+  printf '  q  Quit\n'
+}
+
+menu() {
+  while true; do
+    clear
+    show_summary
+    printf '1. Show status\n'
+    printf '2. Add all changes\n'
+    printf '3. Commit staged changes\n'
+    printf '4. Pull with rebase\n'
+    printf '5. Push current branch\n'
+    printf '6. Add, commit, and push\n'
+    printf 's. Smart sync\n'
+    printf 'l. Recent commits\n'
+    printf 'h. Help\n'
+    printf 'q. Quit\n\n'
+    printf 'Choose an option: '
+
+    local choice
+    read -r choice
+
+    case "$choice" in
+      1)
+        show_status
+        pause
+        ;;
+      2)
+        add_all
+        pause
+        ;;
+      3)
+        commit_changes
+        pause
+        ;;
+      4)
+        pull_rebase
+        pause
+        ;;
+      5)
+        push_main
+        pause
+        ;;
+      6)
+        add_commit_push
+        pause
+        ;;
+      s|S)
+        smart_sync
+        pause
+        ;;
+      l|L)
+        show_recent_commits
+        pause
+        ;;
+      h|H)
+        print_help
+        pause
+        ;;
+      q|Q)
+        exit 0
+        ;;
+      *)
+        printf '\nUnknown option.\n'
+        pause
+        ;;
+    esac
+  done
+}
+
+menu
