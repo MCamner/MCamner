@@ -62,6 +62,26 @@ turning fragmented tools into cohesive, usable systems that work in practice.
 
 ---
 
+## 📌 Case / Results
+
+### macos-scripts
+
+What started as separate shell utilities evolved into a more structured command system centered around `mqlaunch`.
+
+**Result:**
+
+* Turned scattered scripts into a modular CLI with one clear entrypoint
+* Improved day-to-day usability with menu-driven workflows and clearer discoverability
+* Added safer release handling with dry-run and rollback support
+* Made the project easier to maintain and extend without growing into one oversized launcher
+
+**Why that matters:**
+
+This is the kind of work I enjoy most:
+taking messy, useful pieces and shaping them into systems that are easier to operate, trust, and build on.
+
+---
+
 ## 🛠️ Tech & Tools
 
 * Citrix / EUC Architecture
@@ -116,4 +136,3 @@ Outside of tech:
 ## 🧩 Motto
 
 > Build things that work. Then make them impossible to break.
-
