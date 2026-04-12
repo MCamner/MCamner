@@ -11,6 +11,7 @@ The HTML page can only see browser-visible signals. This helper exposes a local 
 * local OS release data
 * simple client-family heuristics
 * local IP addresses
+* categorized checks for network, browser, certificates, Citrix, and management
 
 ## Run
 
@@ -35,3 +36,4 @@ http://127.0.0.1:38765/health
 * The agent is read-only.
 * It uses Python standard library only.
 * The browser page will fall back to browser-only checks if the helper is not running.
+* The current version uses practical heuristics and known local paths for IGEL/eLux-style environments.
