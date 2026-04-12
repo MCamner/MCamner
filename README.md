@@ -4,6 +4,8 @@
 
 I turn complex infrastructure into systems that actually work — secure, usable, and built for real-world constraints.
 
+I focus on bridging the gap between security, usability, and operational reality.
+
 ---
 
 ## 🧠 About Me
@@ -59,9 +61,7 @@ turning fragmented tools into cohesive, usable systems that work in practice.
 
 ---
 
-## 📌 Case / Results
-
-### macos-scripts
+## 📌 Case: macos-scripts
 
 What started as separate shell utilities evolved into a more structured command system centered around `mqlaunch`.
 
@@ -73,8 +73,7 @@ What started as separate shell utilities evolved into a more structured command 
 * Enabled safer releases with dry-run and rollback support
 * Made the system easier to extend without turning into a monolithic tool
 
-**Impact:**
-Reduced friction in daily workflows and created a foundation for scalable, repeatable automation.
+**Impact:** Reduced friction in daily workflows and created a foundation for scalable, repeatable automation.
 
 **Why that matters:**
 
