@@ -15,9 +15,6 @@ I operate at the intersection of:
 * ⚙️ Automation & System Integration
 * 🧩 Turning complex environments into usable systems
 
-My focus is simple:
-**build systems people can actually use — without compromising security.**
-
 ---
 
 ## 🚀 How I Work
@@ -102,12 +99,15 @@ Read the full case:
 
 ---
 
-## 📊 GitHub Focus
+## 📊 On GitHub
 
-* Building **practical tools and workflows**
-* Working across **infrastructure, endpoint, and automation**
-* Turning **real-world constraints into usable systems**
-* Documenting selected work as concise architecture and delivery cases
+I use GitHub to document selected work through tools, cases, and practical system design.
+
+The focus is consistent:
+
+* practical tooling with clear operational value
+* architecture thinking grounded in real-world constraints
+* concise cases that show problem, design, and outcome
 
 ---
 

@@ -24,6 +24,24 @@ The core problem was not lack of functionality. It was lack of structure around 
 
 ---
 
+## Before -> After
+
+Before:
+
+* useful scripts existed, but discovery depended too much on memory
+* related tasks were spread across multiple entrypoints and folders
+* growth risked turning the repo into a script dump rather than a coherent tool
+* repeatable operational flows were harder to maintain safely
+
+After:
+
+* `mqlaunch` provides one visible command surface for the system
+* workflows are grouped into clearer modules and menu paths
+* release handling is safer through dry-run and rollback support
+* the repo is easier to extend without collapsing into one monolithic shell file
+
+---
+
 ## Goal
 
 Create a command surface that makes terminal workflows:
@@ -60,6 +78,23 @@ Key design choices:
 * compatibility bridges where needed, instead of forcing a hard cutover
 
 This moved the repo from "collection of scripts" toward "operational command system".
+
+### Example flow
+
+```mermaid
+flowchart LR
+    A[User Command] --> B[mqlaunch Entry Point]
+    B --> C[Menu / Command Routing]
+    C --> D[Workflow Modules]
+    C --> E[Tooling / Utilities]
+    C --> F[Release Automation]
+
+    D -. reusable flow .-> G[Repeatable Daily Work]
+    E -. helper commands .-> G
+    F -. safer changes .-> G
+```
+
+The point is not just to add menus. It is to give many small utilities a stable product surface so the toolkit stays usable as it grows.
 
 ---
 
