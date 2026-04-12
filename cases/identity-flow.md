@@ -24,6 +24,24 @@ The problem is not only whether authentication is secure. The problem is whether
 
 ---
 
+## Before -> After
+
+Before:
+
+* authentication depended on too many hidden assumptions
+* failures were visible to users before they were understandable to support teams
+* ownership was split across layers without a clear operational view
+* strong controls created avoidable friction because the flow was hard to reason about
+
+After:
+
+* the authentication path is treated as a visible end-to-end system
+* failure domains are easier to separate and troubleshoot
+* trust boundaries are clearer across endpoint, middleware, identity, and access layers
+* stronger authentication becomes more supportable because the flow is more explicit
+
+---
+
 ## Goal
 
 Design an identity flow that preserves strong authentication while also improving:
@@ -68,6 +86,24 @@ That means being explicit about:
 * what operational signals are available when something fails
 
 This makes it easier to reason about both trust and troubleshooting.
+
+### Example flow
+
+```mermaid
+flowchart LR
+    A[Managed Endpoint] --> B[Token or Smartcard]
+    B --> C[Middleware / Certificate Layer]
+    C --> D[Identity Validation]
+    D --> E[Access Broker Policy]
+    E --> F[Workspace Access]
+
+    A -. device state .-> D
+    C -. failure visibility .-> G[Support / Troubleshooting]
+    D -. auth outcome .-> G
+    E -. access decision .-> G
+```
+
+The exact components vary by environment, but the design principle stays the same: make the flow and failure domains visible enough that security and operations can work from the same model.
 
 ---
 
