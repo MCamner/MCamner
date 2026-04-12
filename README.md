@@ -1,63 +1,85 @@
 # 👋 Hi, I'm Mattias Camner
 
-**IT Architect by trade. Builder by mindset.**
-Bridging infrastructure, security, and real-world systems.
+**IT Architect | Digital Workplace | Security & Infrastructure**
+
+I design and build secure, scalable digital workplaces that work in reality — not just on paper.
 
 ---
 
 ## 🧠 About Me
 
-I design and build **secure, scalable digital workplaces** that work in reality — not just on paper.
+I operate at the intersection of:
 
 * 🏗️ Endpoint, EUC & Infrastructure Architecture
-* 🔐 Security, Identity & Zero Trust thinking
-* ⚙️ Automation & system integration
+* 🔐 Security, Identity & Zero Trust
+* ⚙️ Automation & System Integration
 * 🧩 Turning complex environments into usable systems
+
+My focus is simple:
+**build systems people can actually use — without compromising security.**
 
 ---
 
 ## 🚀 What I Bring
 
-* Turning complex infrastructure into **usable systems**
-* Bridging **security and usability** without compromise
-* Designing solutions that survive **real-world constraints**
+* Translate complex infrastructure into **usable, supportable systems**
+* Bridge **security and usability** without compromise
+* Design solutions that **hold up in real-world environments**
+* Think in **systems, flows, and long-term operability**
 
 ---
 
-## 🚧 What I'm Working On
+## 🚧 Current Focus
 
-* Digital Workplace architecture (Citrix, IGEL, Identity flows)
-* Secure authentication flows (Smartcard / SafeNet / CWA)
+* Digital Workplace architecture (Citrix, IGEL, identity flows)
+* Secure authentication (Smartcard, SafeNet, CWA)
 * Infrastructure standardization & automation
+* Building practical tools and workflows
 
-**Personal projects:**
+---
 
-* 🎨 https://blackiris.se
-* ✍️ https://mcamner.com
+## 🚀 Featured Work
+
+### 💻 macos-scripts
+
+A practical macOS toolkit built around automation, workflows, and terminal-driven operations.
+
+At the core is **mqlaunch** — a modular CLI designed to simplify complex tasks and improve daily workflows.
+
+**Key aspects:**
+
+* Modular command architecture (menu-driven + CLI)
+* Workflow-focused utilities for real-world operations
+* Integrated automation, tools, and system utilities
+* Designed for clarity, speed, and repeatability
+
+**Why it matters:**
+
+This project reflects how I approach system design:
+turning fragmented tools into cohesive, usable systems that work in practice.
+
+🔗 https://github.com/MCamner/macos-scripts
 
 ---
 
 ## 🛠️ Tech & Tools
 
-<p>
-  <img src="https://img.shields.io/badge/Citrix-Architecture-blue?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/IGEL-OS-blueviolet?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Active%20Directory-Identity-2b6cb0?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/SCCM-Endpoint%20Management-1f6feb?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/VMware-Infrastructure-607d8b?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Windows-Enterprise-0078d4?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Linux-System%20Ops-fcc624?style=for-the-badge&logo=linux&logoColor=black" />
-  <img src="https://img.shields.io/badge/Security-Zero%20Trust-darkgreen?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Automation-Scripting-orange?style=for-the-badge" />
-</p>
+* Citrix / EUC Architecture
+* IGEL OS / Endpoint Management
+* Active Directory / Identity
+* SCCM / Endpoint Configuration
+* VMware Infrastructure
+* Windows Enterprise / Linux
+* Zero Trust / Security Architecture
+* Automation / Scripting
 
 ---
 
 ## 📊 GitHub Focus
 
-* Building practical tools and workflows
-* Working across infrastructure, endpoint, and automation
-* Turning real-world constraints into usable systems
+* Building **practical tools and workflows**
+* Working across **infrastructure, endpoint, and automation**
+* Turning **real-world constraints into usable systems**
 
 ---
 
@@ -70,37 +92,6 @@ I build systems that are:
 * 🧱 Simple enough to operate
 * 🔒 Robust enough to trust
 * 📐 Clear enough to scale
-
----
-
-## 📈 Current Focus
-
-* Designing future-proof digital workplace platforms
-* Improving security without killing usability
-* Building systems that survive real-world constraints
-
----
-
-## 🚀 Featured Work
-
-### 💻 macos-scripts
-
-A practical macOS toolkit built around automation, workflows, and terminal-driven operations.
-
-At the core is **`mqlaunch`** — a modular CLI designed to make repetitive tasks faster, cleaner, and easier to manage.
-
-**What it includes:**
-
-* Modular command architecture
-* Workflow-focused utilities for daily operations
-* Automation, tools, and system helpers in one structure
-* A design philosophy centered on clarity, speed, and repeatability
-
-**Why it matters:**
-This project reflects how I approach architecture and system design:
-turning fragmented tools into cohesive, usable systems that hold up in the real world.
-
-🔗 [View macos-scripts](https://github.com/MCamner/macos-scripts)
 
 ---
 
@@ -118,7 +109,7 @@ Outside of tech:
 
 * 🥋 Brazilian Jiu-Jitsu
 * 🎸 Guitar (Hendrix / metal / structure + feel)
-* 🧠 Psychology, systems thinking & identity
+* 🧠 Psychology & systems thinking
 
 ---
 
