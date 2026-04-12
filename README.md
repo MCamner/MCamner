@@ -80,6 +80,9 @@ What started as separate shell utilities evolved into a more structured command 
 This is the kind of work I enjoy most:
 taking messy, useful pieces and shaping them into systems that are easier to operate, trust, and build on.
 
+Read the full case:
+[macos-scripts case](./cases/macos-scripts.md)
+
 ---
 
 ## 🛠️ Tech & Tools
@@ -100,6 +103,14 @@ taking messy, useful pieces and shaping them into systems that are easier to ope
 * Building **practical tools and workflows**
 * Working across **infrastructure, endpoint, and automation**
 * Turning **real-world constraints into usable systems**
+* Documenting selected work as concise architecture and delivery cases
+
+---
+
+## 📚 Cases
+
+* [macos-scripts](./cases/macos-scripts.md) - from scattered shell utilities to a modular CLI system
+* More cases will be added over time as I turn practical delivery work into reusable patterns and write-ups
 
 ---
 
