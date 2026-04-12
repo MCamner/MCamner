@@ -12,6 +12,7 @@
       --muted: #68777d;
       --line: #d8d0c4;
       --accent: #174c5a;
+      --accent-soft: rgba(23, 76, 90, 0.08);
       --ok: #236443;
       --warn: #996d15;
       --fail: #8b2e2e;
@@ -35,7 +36,7 @@
     }
 
     main {
-      width: min(1120px, calc(100% - 32px));
+      width: min(1180px, calc(100% - 32px));
       margin: 40px auto 60px;
     }
 
@@ -52,16 +53,24 @@
       margin-bottom: 24px;
     }
 
-    .eyebrow {
-      display: inline-block;
+    .eyebrow,
+    .config-pill {
+      display: inline-flex;
+      align-items: center;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(23, 76, 90, 0.08);
+      background: var(--accent-soft);
       color: var(--accent);
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+    }
+
+    .eyebrow-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     h1, h2, h3, p {
@@ -78,7 +87,7 @@
 
     .hero p {
       margin-top: 18px;
-      max-width: 70ch;
+      max-width: 74ch;
       color: var(--muted);
       font-size: 17px;
       line-height: 1.6;
@@ -139,7 +148,7 @@
 
     .layout {
       display: grid;
-      grid-template-columns: 1.45fr 0.95fr;
+      grid-template-columns: 1.5fr 0.9fr;
       gap: 24px;
       align-items: start;
     }
@@ -221,16 +230,34 @@
       color: var(--muted);
     }
 
+    .config-box,
     .report {
       margin-top: 18px;
       width: 100%;
-      min-height: 260px;
       border: 1px solid var(--line);
       border-radius: 18px;
       padding: 16px;
       background: #fbfaf7;
+    }
+
+    .report {
+      min-height: 260px;
       font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       color: var(--ink);
+      white-space: pre-wrap;
+    }
+
+    .config-box strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .config-box code {
+      display: block;
+      margin-top: 8px;
+      font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      color: var(--muted);
       white-space: pre-wrap;
     }
 
@@ -251,14 +278,21 @@
 <body>
   <main>
     <section class="hero">
-      <span class="eyebrow">IGEL / eLux / Citrix Client Check</span>
-      <h1>Client Readiness Check</h1>
-      <p>
-        This first version is designed to be opened directly from an IGEL OS 12 or eLux 7 client.
+      <div class="eyebrow-row">
+        <span class="eyebrow">IGEL / eLux / Citrix Client Check</span>
+        <span class="config-pill" id="configSource">Loading config...</span>
+      </div>
+      <h1 id="pageTitle">Client Readiness Check</h1>
+      <p id="pageDescription">
+        This version is designed to be opened directly from an IGEL OS 12 or eLux 7 client.
         It cannot read protected OS settings on its own, but it can validate browser-visible signals,
         show likely client family, test basic readiness, and generate a report for support or operations.
       </p>
       <div class="hero-grid">
+        <div class="hero-stat">
+          <strong>Environment</strong>
+          <span id="environmentName">Checking...</span>
+        </div>
         <div class="hero-stat">
           <strong>Detected client</strong>
           <span id="clientFamily">Checking...</span>
@@ -275,6 +309,8 @@
       <div class="toolbar">
         <button id="rerunButton" type="button">Run Checks Again</button>
         <button id="copyButton" class="secondary" type="button">Copy Report</button>
+        <button id="downloadTextButton" class="secondary" type="button">Download TXT</button>
+        <button id="downloadJsonButton" class="secondary" type="button">Download JSON</button>
       </div>
     </section>
 
@@ -290,44 +326,60 @@
       </div>
 
       <aside class="panel">
-        <h2>What this version can do</h2>
+        <h2>What v2 adds</h2>
         <ul class="notes">
-          <li>Detect likely IGEL, eLux, or generic Linux client family from browser-visible signals.</li>
-          <li>Check browser basics such as HTTPS, online state, resolution, locale, timezone, and viewport.</li>
-          <li>Run simple endpoint reachability checks to internal URLs you define in the page config.</li>
-          <li>Generate a compact report that can be copied into support tickets or troubleshooting notes.</li>
+          <li>External JSON config support for environment name, notes, and endpoint lists.</li>
+          <li>Query-string overrides for environment, client family, and endpoints.</li>
+          <li>Improved client detection with visible confidence level.</li>
+          <li>Downloadable reports as both text and JSON for support or ticket workflows.</li>
         </ul>
 
-        <h2 style="margin-top: 24px;">What it cannot do alone</h2>
-        <ul class="notes">
-          <li>Read protected IGEL OS 12 or eLux 7 policy values directly from the operating system.</li>
-          <li>Verify Citrix Workspace configuration, certificates, or middleware beyond browser-visible behavior.</li>
-          <li>Inspect local device settings unless a helper service or management integration is added later.</li>
-        </ul>
+        <h2 style="margin-top: 24px;">Config</h2>
+        <div class="config-box">
+          <strong id="configSummary">Config source pending...</strong>
+          <div id="configNotes" class="footer-note">Waiting for config...</div>
+          <code id="configExample">?env=Pilot&client=igel&endpoint=Portal|https://example.com/</code>
+        </div>
 
         <h2 style="margin-top: 24px;">Report</h2>
         <div id="report" class="report">Running checks...</div>
         <p class="footer-note">
-          Tip: customize the endpoint list inside the page script before publishing this internally.
-          That lets you validate connectivity to Citrix gateways, portals, or support URLs.
+          Tip: this page now reads <code>client-readiness-config.json</code> by default. You can also override
+          values with URL parameters such as <code>?env=Pilot</code>, <code>?client=igel</code>, or
+          <code>?endpoint=Gateway|https://example.com/</code>.
         </p>
       </aside>
     </section>
   </main>
 
   <script>
-    const ENDPOINTS = [
-      { name: "Example intranet", url: "https://example.com/" },
-      { name: "Example Citrix gateway", url: "https://example.com/citrix/" }
-    ];
+    const DEFAULT_CONFIG = {
+      environmentName: "Default environment",
+      title: "Client Readiness Check",
+      description: "Browser-side readiness validation for IGEL OS 12, eLux 7, and similar client platforms.",
+      configSourceLabel: "Built-in defaults",
+      notes: "Use client-readiness-config.json or URL parameters to customize this page for your environment.",
+      recommendedMinWidth: 1280,
+      recommendedMinHeight: 800,
+      endpointTimeoutMs: 8000,
+      endpoints: []
+    };
 
     const checkGrid = document.getElementById("checkGrid");
     const reportNode = document.getElementById("report");
     const clientFamilyNode = document.getElementById("clientFamily");
     const overallStatusNode = document.getElementById("overallStatus");
     const browserNameNode = document.getElementById("browserName");
+    const environmentNameNode = document.getElementById("environmentName");
+    const pageTitleNode = document.getElementById("pageTitle");
+    const pageDescriptionNode = document.getElementById("pageDescription");
+    const configSourceNode = document.getElementById("configSource");
+    const configSummaryNode = document.getElementById("configSummary");
+    const configNotesNode = document.getElementById("configNotes");
+    const configExampleNode = document.getElementById("configExample");
 
     const statusPriority = { fail: 0, warn: 1, ok: 2 };
+    let lastRun = null;
 
     function statusClass(status) {
       return {
@@ -349,30 +401,95 @@
       return value || "Unavailable";
     }
 
-    function detectClientFamily(userAgent) {
-      const ua = userAgent.toLowerCase();
-      const forced = new URLSearchParams(window.location.search).get("client");
+    function parseEndpointParam(param) {
+      const parts = param.split("|");
+      if (parts.length < 2) {
+        return null;
+      }
+      const name = parts[0].trim();
+      const url = parts.slice(1).join("|").trim();
+      if (!name || !url) {
+        return null;
+      }
+      return { name, url };
+    }
 
-      if (forced === "igel" || forced === "elux") {
-        return { family: forced === "igel" ? "IGEL (forced)" : "eLux (forced)", confidence: "forced" };
+    function getQueryOverrides() {
+      const params = new URLSearchParams(window.location.search);
+      const endpoints = params.getAll("endpoint").map(parseEndpointParam).filter(Boolean);
+      return {
+        environmentName: params.get("env") || "",
+        forcedClient: params.get("client") || "",
+        title: params.get("title") || "",
+        notes: params.get("notes") || "",
+        endpoints
+      };
+    }
+
+    async function loadExternalConfig() {
+      try {
+        const response = await fetch("./client-readiness-config.json", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("Config file returned " + response.status);
+        }
+        const data = await response.json();
+        return { data, source: "External config file" };
+      } catch (error) {
+        return { data: {}, source: "Built-in defaults" };
+      }
+    }
+
+    function mergeConfig(base, external, overrides) {
+      const merged = {
+        ...base,
+        ...external,
+        endpoints: Array.isArray(external.endpoints) ? external.endpoints.slice() : base.endpoints.slice()
+      };
+
+      if (overrides.environmentName) {
+        merged.environmentName = overrides.environmentName;
+      }
+      if (overrides.title) {
+        merged.title = overrides.title;
+      }
+      if (overrides.notes) {
+        merged.notes = overrides.notes;
+      }
+      if (overrides.endpoints.length) {
+        merged.endpoints = overrides.endpoints;
+      }
+      return merged;
+    }
+
+    function detectClientFamily(userAgent, forcedClient) {
+      const ua = userAgent.toLowerCase();
+      const forced = (forcedClient || "").toLowerCase();
+
+      if (forced === "igel" || forced === "elux" || forced === "linux" || forced === "citrix") {
+        const forcedMap = {
+          igel: "IGEL (forced)",
+          elux: "eLux (forced)",
+          linux: "Linux thin client (forced)",
+          citrix: "Citrix-capable browser (forced)"
+        };
+        return { family: forcedMap[forced], confidence: "forced" };
       }
 
       if (ua.includes("igel")) {
         return { family: "IGEL (likely)", confidence: "high" };
       }
-
       if (ua.includes("elux") || ua.includes("unicon")) {
         return { family: "eLux (likely)", confidence: "high" };
       }
-
       if (ua.includes("citrix")) {
-        return { family: "Citrix-capable browser (generic)", confidence: "medium" };
+        return { family: "Citrix-capable browser (likely)", confidence: "medium" };
       }
-
+      if (ua.includes("thin") || ua.includes("kiosk")) {
+        return { family: "Thin client browser (possible)", confidence: "medium" };
+      }
       if (ua.includes("linux")) {
         return { family: "Linux thin client (generic)", confidence: "low" };
       }
-
       return { family: "Unknown client family", confidence: "low" };
     }
 
@@ -385,8 +502,8 @@
       return "Unknown browser";
     }
 
-    function buildStaticChecks() {
-      const client = detectClientFamily(navigator.userAgent);
+    function buildStaticChecks(config, overrides) {
+      const client = detectClientFamily(navigator.userAgent, overrides.forcedClient);
       const browser = detectBrowser(navigator.userAgent);
       const locale = navigator.language || "Unavailable";
       const languages = (navigator.languages || []).join(", ") || "Unavailable";
@@ -399,13 +516,14 @@
       const viewportHeight = window.innerHeight;
       const online = navigator.onLine;
 
+      const resolutionOk = width >= config.recommendedMinWidth && height >= config.recommendedMinHeight;
       const checks = [
         {
           name: "Client family",
-          status: client.confidence === "high" ? "ok" : client.confidence === "medium" ? "warn" : "warn",
-          summary: client.family,
+          status: client.confidence === "high" || client.confidence === "forced" ? "ok" : "warn",
+          summary: client.family + " (" + client.confidence + " confidence)",
           details: [
-            "Detection is heuristic unless ?client=igel or ?client=elux is used.",
+            "Detection is heuristic unless a forced client mode is supplied via query string.",
             "Browser user agent: " + navigator.userAgent
           ]
         },
@@ -421,11 +539,11 @@
         },
         {
           name: "Display",
-          status: width && width >= 1280 ? "ok" : "warn",
+          status: resolutionOk ? "ok" : "warn",
           summary: (width && height) ? width + "x" + height + " screen" : "Display unavailable",
           details: [
             "Viewport: " + viewportWidth + "x" + viewportHeight,
-            "Recommended baseline for admin-style workflows: 1280x800 or higher"
+            "Recommended baseline: " + config.recommendedMinWidth + "x" + config.recommendedMinHeight + " or higher"
           ]
         },
         {
@@ -451,16 +569,21 @@
       return { checks, client, browser, locale, languages, timezone, width, height, viewportWidth, viewportHeight, protocol, secureContext, online };
     }
 
-    async function testEndpoint(endpoint) {
+    async function testEndpoint(endpoint, timeoutMs) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
       const started = performance.now();
+
       try {
         const target = new URL(endpoint.url, window.location.href);
         const response = await fetch(target.toString(), {
           method: "GET",
           mode: "no-cors",
-          cache: "no-store"
+          cache: "no-store",
+          signal: controller.signal
         });
         const elapsed = Math.round(performance.now() - started);
+        clearTimeout(timer);
         return {
           name: endpoint.name,
           status: "ok",
@@ -473,6 +596,7 @@
           ]
         };
       } catch (error) {
+        clearTimeout(timer);
         return {
           name: endpoint.name,
           status: "fail",
@@ -513,10 +637,12 @@
       }, "ok");
     }
 
-    function buildReport(meta, checks) {
+    function buildReport(meta, checks, config, configSource) {
       const lines = [
-        "Client Readiness Check",
+        config.title,
         "Timestamp: " + new Date().toISOString(),
+        "Environment: " + config.environmentName,
+        "Config source: " + configSource,
         "Detected client: " + meta.client.family,
         "Browser: " + meta.browser,
         "Protocol: " + meta.protocol,
@@ -540,34 +666,102 @@
       return lines.join("\n");
     }
 
-    async function runChecks() {
-      reportNode.textContent = "Running checks...";
-      const meta = buildStaticChecks();
-      const endpointChecks = await Promise.all(ENDPOINTS.map(testEndpoint));
-      const allChecks = meta.checks.concat(endpointChecks);
-      const overall = computeOverall(allChecks);
-
-      renderChecks(allChecks);
-
+    function updateHeader(config, configSource, meta, overall) {
+      pageTitleNode.textContent = config.title;
+      pageDescriptionNode.textContent = config.description;
+      environmentNameNode.textContent = config.environmentName;
       clientFamilyNode.textContent = meta.client.family;
       browserNameNode.textContent = meta.browser;
       overallStatusNode.textContent = labelFor(overall);
       overallStatusNode.style.color = overall === "ok" ? "var(--ok)" : overall === "warn" ? "var(--warn)" : "var(--fail)";
+      configSourceNode.textContent = configSource;
+      configSummaryNode.textContent = config.environmentName + " via " + configSource;
+      configNotesNode.textContent = config.notes;
+    }
 
-      reportNode.textContent = buildReport(meta, allChecks);
+    function updateConfigExample() {
+      configExampleNode.textContent = "?env=Pilot&client=igel&endpoint=Portal|https://example.com/&endpoint=Gateway|https://example.com/citrix/";
+    }
+
+    function downloadFile(filename, content, type) {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    async function runChecks() {
+      reportNode.textContent = "Running checks...";
+
+      const overrides = getQueryOverrides();
+      const external = await loadExternalConfig();
+      const config = mergeConfig(DEFAULT_CONFIG, external.data, overrides);
+      const hasOverrides = overrides.endpoints.length || overrides.environmentName || overrides.forcedClient || overrides.title || overrides.notes;
+      const configSource = hasOverrides
+        ? (config.configSourceLabel || external.source) + " + URL overrides"
+        : (config.configSourceLabel || external.source);
+
+      const meta = buildStaticChecks(config, overrides);
+      const endpointChecks = await Promise.all((config.endpoints || []).map((endpoint) => testEndpoint(endpoint, config.endpointTimeoutMs)));
+      const allChecks = meta.checks.concat(endpointChecks);
+      const overall = computeOverall(allChecks);
+
+      renderChecks(allChecks);
+      updateHeader(config, configSource, meta, overall);
+      updateConfigExample();
+
+      const reportText = buildReport(meta, allChecks, config, configSource);
+      reportNode.textContent = reportText;
+      lastRun = {
+        timestamp: new Date().toISOString(),
+        config,
+        configSource,
+        meta,
+        checks: allChecks,
+        overall,
+        reportText
+      };
     }
 
     document.getElementById("rerunButton").addEventListener("click", runChecks);
+
     document.getElementById("copyButton").addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(reportNode.textContent);
-        document.getElementById("copyButton").textContent = "Copied";
+        const button = document.getElementById("copyButton");
+        button.textContent = "Copied";
         setTimeout(() => {
-          document.getElementById("copyButton").textContent = "Copy Report";
+          button.textContent = "Copy Report";
         }, 1200);
       } catch (error) {
         alert("Clipboard copy failed. You can still copy the report manually.");
       }
+    });
+
+    document.getElementById("downloadTextButton").addEventListener("click", () => {
+      if (!lastRun) return;
+      downloadFile("client-readiness-report.txt", lastRun.reportText, "text/plain;charset=utf-8");
+    });
+
+    document.getElementById("downloadJsonButton").addEventListener("click", () => {
+      if (!lastRun) return;
+      downloadFile(
+        "client-readiness-report.json",
+        JSON.stringify({
+          timestamp: lastRun.timestamp,
+          overall: lastRun.overall,
+          configSource: lastRun.configSource,
+          environment: lastRun.config.environmentName,
+          checks: lastRun.checks,
+          meta: lastRun.meta
+        }, null, 2),
+        "application/json;charset=utf-8"
+      );
     });
 
     runChecks();

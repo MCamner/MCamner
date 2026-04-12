@@ -128,7 +128,7 @@ This profile repo also includes small utilities that help maintain and evolve it
 Current example:
 
 * [`gitmcamner`](./bin/gitmcamner) - a terminal menu for `MCamner` repo workflows such as add, commit, pull/rebase, push, and smart sync
-* [client-readiness-check](./docs/client-readiness-check.html) - a first-version static HTML page for IGEL OS 12 / eLux 7 style browser-side readiness checks
+* [client-readiness-check](./docs/client-readiness-check.html) - a configurable browser-side readiness check for IGEL OS 12 / eLux 7 style clients, with JSON config, query params, and report export
 
 If GitHub Pages is enabled for `main` -> `/docs`, the expected URLs are:
 `https://mcamner.github.io/MCamner/`
