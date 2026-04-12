@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client Readiness Check</title>
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --panel: #fffdf8;
+      --ink: #1f2a2e;
+      --muted: #68777d;
+      --line: #d8d0c4;
+      --accent: #174c5a;
+      --ok: #236443;
+      --warn: #996d15;
+      --fail: #8b2e2e;
+      --ok-bg: #e7f4ec;
+      --warn-bg: #fff3d9;
+      --fail-bg: #f9e2e2;
+      --shadow: 0 20px 40px rgba(31, 42, 46, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(23, 76, 90, 0.11), transparent 30%),
+        linear-gradient(180deg, #f7f4ee 0%, #efe9df 100%);
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 40px auto 60px;
+    }
+
+    .hero,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(23, 76, 90, 0.08);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p {
+      margin: 0;
+    }
+
+    h1 {
+      margin-top: 16px;
+      font-size: clamp(32px, 6vw, 56px);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      max-width: 12ch;
+    }
+
+    .hero p {
+      margin-top: 18px;
+      max-width: 70ch;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .hero-grid,
+    .card-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 28px;
+    }
+
+    .hero-stat {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fcfaf5;
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-stat span {
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+    }
+
+    button.secondary {
+      background: #e9ece8;
+      color: var(--ink);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.45fr 0.95fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .panel h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .panel-copy {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .card-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .check-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fcfaf5;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .status-ok {
+      background: var(--ok-bg);
+      color: var(--ok);
+    }
+
+    .status-warn {
+      background: var(--warn-bg);
+      color: var(--warn);
+    }
+
+    .status-fail {
+      background: var(--fail-bg);
+      color: var(--fail);
+    }
+
+    .check-card h3 {
+      margin-top: 14px;
+      font-size: 19px;
+    }
+
+    .check-card p {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .detail-list,
+    .notes {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .detail-list li,
+    .notes li {
+      margin-top: 10px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .report {
+      margin-top: 18px;
+      width: 100%;
+      min-height: 260px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: #fbfaf7;
+      font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      color: var(--ink);
+      white-space: pre-wrap;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 920px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <span class="eyebrow">IGEL / eLux / Citrix Client Check</span>
+      <h1>Client Readiness Check</h1>
+      <p>
+        This first version is designed to be opened directly from an IGEL OS 12 or eLux 7 client.
+        It cannot read protected OS settings on its own, but it can validate browser-visible signals,
+        show likely client family, test basic readiness, and generate a report for support or operations.
+      </p>
+      <div class="hero-grid">
+        <div class="hero-stat">
+          <strong>Detected client</strong>
+          <span id="clientFamily">Checking...</span>
+        </div>
+        <div class="hero-stat">
+          <strong>Overall readiness</strong>
+          <span id="overallStatus">Checking...</span>
+        </div>
+        <div class="hero-stat">
+          <strong>Current browser</strong>
+          <span id="browserName">Checking...</span>
+        </div>
+      </div>
+      <div class="toolbar">
+        <button id="rerunButton" type="button">Run Checks Again</button>
+        <button id="copyButton" class="secondary" type="button">Copy Report</button>
+      </div>
+    </section>
+
+    <section class="layout">
+      <div class="panel">
+        <h2>Checks</h2>
+        <p class="panel-copy">
+          These checks stay inside the browser sandbox. They are useful for first-line readiness validation,
+          but not for deep policy inspection. For IGEL UMS, Scout/eLux, or local client settings, this page
+          should later be paired with a management backend or local helper.
+        </p>
+        <div class="card-grid" id="checkGrid"></div>
+      </div>
+
+      <aside class="panel">
+        <h2>What this version can do</h2>
+        <ul class="notes">
+          <li>Detect likely IGEL, eLux, or generic Linux client family from browser-visible signals.</li>
+          <li>Check browser basics such as HTTPS, online state, resolution, locale, timezone, and viewport.</li>
+          <li>Run simple endpoint reachability checks to internal URLs you define in the page config.</li>
+          <li>Generate a compact report that can be copied into support tickets or troubleshooting notes.</li>
+        </ul>
+
+        <h2 style="margin-top: 24px;">What it cannot do alone</h2>
+        <ul class="notes">
+          <li>Read protected IGEL OS 12 or eLux 7 policy values directly from the operating system.</li>
+          <li>Verify Citrix Workspace configuration, certificates, or middleware beyond browser-visible behavior.</li>
+          <li>Inspect local device settings unless a helper service or management integration is added later.</li>
+        </ul>
+
+        <h2 style="margin-top: 24px;">Report</h2>
+        <div id="report" class="report">Running checks...</div>
+        <p class="footer-note">
+          Tip: customize the endpoint list inside the page script before publishing this internally.
+          That lets you validate connectivity to Citrix gateways, portals, or support URLs.
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const ENDPOINTS = [
+      { name: "Example intranet", url: "https://example.com/" },
+      { name: "Example Citrix gateway", url: "https://example.com/citrix/" }
+    ];
+
+    const checkGrid = document.getElementById("checkGrid");
+    const reportNode = document.getElementById("report");
+    const clientFamilyNode = document.getElementById("clientFamily");
+    const overallStatusNode = document.getElementById("overallStatus");
+    const browserNameNode = document.getElementById("browserName");
+
+    const statusPriority = { fail: 0, warn: 1, ok: 2 };
+
+    function statusClass(status) {
+      return {
+        ok: "status-pill status-ok",
+        warn: "status-pill status-warn",
+        fail: "status-pill status-fail"
+      }[status];
+    }
+
+    function labelFor(status) {
+      return {
+        ok: "Ready",
+        warn: "Needs review",
+        fail: "Check required"
+      }[status];
+    }
+
+    function safeValue(value) {
+      return value || "Unavailable";
+    }
+
+    function detectClientFamily(userAgent) {
+      const ua = userAgent.toLowerCase();
+      const forced = new URLSearchParams(window.location.search).get("client");
+
+      if (forced === "igel" || forced === "elux") {
+        return { family: forced === "igel" ? "IGEL (forced)" : "eLux (forced)", confidence: "forced" };
+      }
+
+      if (ua.includes("igel")) {
+        return { family: "IGEL (likely)", confidence: "high" };
+      }
+
+      if (ua.includes("elux") || ua.includes("unicon")) {
+        return { family: "eLux (likely)", confidence: "high" };
+      }
+
+      if (ua.includes("citrix")) {
+        return { family: "Citrix-capable browser (generic)", confidence: "medium" };
+      }
+
+      if (ua.includes("linux")) {
+        return { family: "Linux thin client (generic)", confidence: "low" };
+      }
+
+      return { family: "Unknown client family", confidence: "low" };
+    }
+
+    function detectBrowser(userAgent) {
+      const ua = userAgent;
+      if (ua.includes("Edg/")) return "Microsoft Edge";
+      if (ua.includes("Chrome/")) return "Google Chrome / Chromium";
+      if (ua.includes("Firefox/")) return "Mozilla Firefox";
+      if (ua.includes("Safari/") && !ua.includes("Chrome/")) return "Safari / WebKit";
+      return "Unknown browser";
+    }
+
+    function buildStaticChecks() {
+      const client = detectClientFamily(navigator.userAgent);
+      const browser = detectBrowser(navigator.userAgent);
+      const locale = navigator.language || "Unavailable";
+      const languages = (navigator.languages || []).join(", ") || "Unavailable";
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Unavailable";
+      const protocol = window.location.protocol;
+      const secureContext = window.isSecureContext;
+      const width = window.screen ? window.screen.width : null;
+      const height = window.screen ? window.screen.height : null;
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const online = navigator.onLine;
+
+      const checks = [
+        {
+          name: "Client family",
+          status: client.confidence === "high" ? "ok" : client.confidence === "medium" ? "warn" : "warn",
+          summary: client.family,
+          details: [
+            "Detection is heuristic unless ?client=igel or ?client=elux is used.",
+            "Browser user agent: " + navigator.userAgent
+          ]
+        },
+        {
+          name: "Browser and protocol",
+          status: protocol === "https:" || window.location.hostname === "localhost" ? "ok" : "warn",
+          summary: browser + " over " + protocol.replace(":", "").toUpperCase(),
+          details: [
+            "Browser: " + browser,
+            "Secure context: " + (secureContext ? "Yes" : "No"),
+            "Protocol: " + protocol
+          ]
+        },
+        {
+          name: "Display",
+          status: width && width >= 1280 ? "ok" : "warn",
+          summary: (width && height) ? width + "x" + height + " screen" : "Display unavailable",
+          details: [
+            "Viewport: " + viewportWidth + "x" + viewportHeight,
+            "Recommended baseline for admin-style workflows: 1280x800 or higher"
+          ]
+        },
+        {
+          name: "Locale and timezone",
+          status: timezone !== "Unavailable" ? "ok" : "warn",
+          summary: locale + " / " + timezone,
+          details: [
+            "Primary locale: " + locale,
+            "Languages: " + languages
+          ]
+        },
+        {
+          name: "Browser online state",
+          status: online ? "ok" : "fail",
+          summary: online ? "Browser reports online" : "Browser reports offline",
+          details: [
+            "navigator.onLine: " + String(online),
+            "Use endpoint tests below for a more practical connectivity signal"
+          ]
+        }
+      ];
+
+      return { checks, client, browser, locale, languages, timezone, width, height, viewportWidth, viewportHeight, protocol, secureContext, online };
+    }
+
+    async function testEndpoint(endpoint) {
+      const started = performance.now();
+      try {
+        const target = new URL(endpoint.url, window.location.href);
+        const response = await fetch(target.toString(), {
+          method: "GET",
+          mode: "no-cors",
+          cache: "no-store"
+        });
+        const elapsed = Math.round(performance.now() - started);
+        return {
+          name: endpoint.name,
+          status: "ok",
+          summary: "Reachable in browser context",
+          details: [
+            "URL: " + target.toString(),
+            "Mode: no-cors fetch",
+            "Approximate response time: " + elapsed + " ms",
+            "Response type: " + response.type
+          ]
+        };
+      } catch (error) {
+        return {
+          name: endpoint.name,
+          status: "fail",
+          summary: "Request failed",
+          details: [
+            "URL: " + endpoint.url,
+            "Error: " + (error && error.message ? error.message : String(error))
+          ]
+        };
+      }
+    }
+
+    function renderChecks(checks) {
+      checkGrid.innerHTML = "";
+      checks.forEach((check) => {
+        const card = document.createElement("article");
+        card.className = "check-card";
+        card.innerHTML = `
+          <span class="${statusClass(check.status)}">${labelFor(check.status)}</span>
+          <h3>${check.name}</h3>
+          <p>${check.summary}</p>
+        `;
+        const list = document.createElement("ul");
+        list.className = "detail-list";
+        check.details.forEach((detail) => {
+          const item = document.createElement("li");
+          item.textContent = detail;
+          list.appendChild(item);
+        });
+        card.appendChild(list);
+        checkGrid.appendChild(card);
+      });
+    }
+
+    function computeOverall(checks) {
+      return checks.reduce((current, check) => {
+        return statusPriority[check.status] < statusPriority[current] ? check.status : current;
+      }, "ok");
+    }
+
+    function buildReport(meta, checks) {
+      const lines = [
+        "Client Readiness Check",
+        "Timestamp: " + new Date().toISOString(),
+        "Detected client: " + meta.client.family,
+        "Browser: " + meta.browser,
+        "Protocol: " + meta.protocol,
+        "Screen: " + safeValue(meta.width) + "x" + safeValue(meta.height),
+        "Viewport: " + meta.viewportWidth + "x" + meta.viewportHeight,
+        "Locale: " + meta.locale,
+        "Languages: " + meta.languages,
+        "Timezone: " + meta.timezone,
+        "Online: " + String(meta.online),
+        "",
+        "Checks:"
+      ];
+
+      checks.forEach((check) => {
+        lines.push("- [" + check.status.toUpperCase() + "] " + check.name + ": " + check.summary);
+        check.details.forEach((detail) => lines.push("    • " + detail));
+      });
+
+      lines.push("");
+      lines.push("Note: This page validates browser-visible readiness only. Protected OS and management settings require backend or local helper integration.");
+      return lines.join("\n");
+    }
+
+    async function runChecks() {
+      reportNode.textContent = "Running checks...";
+      const meta = buildStaticChecks();
+      const endpointChecks = await Promise.all(ENDPOINTS.map(testEndpoint));
+      const allChecks = meta.checks.concat(endpointChecks);
+      const overall = computeOverall(allChecks);
+
+      renderChecks(allChecks);
+
+      clientFamilyNode.textContent = meta.client.family;
+      browserNameNode.textContent = meta.browser;
+      overallStatusNode.textContent = labelFor(overall);
+      overallStatusNode.style.color = overall === "ok" ? "var(--ok)" : overall === "warn" ? "var(--warn)" : "var(--fail)";
+
+      reportNode.textContent = buildReport(meta, allChecks);
+    }
+
+    document.getElementById("rerunButton").addEventListener("click", runChecks);
+    document.getElementById("copyButton").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(reportNode.textContent);
+        document.getElementById("copyButton").textContent = "Copied";
+        setTimeout(() => {
+          document.getElementById("copyButton").textContent = "Copy Report";
+        }, 1200);
+      } catch (error) {
+        alert("Clipboard copy failed. You can still copy the report manually.");
+      }
+    });
+
+    runChecks();
+  </script>
+</body>
+</html>

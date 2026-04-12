@@ -128,6 +128,7 @@ This profile repo also includes small utilities that help maintain and evolve it
 Current example:
 
 * [`gitmcamner`](./bin/gitmcamner) - a terminal menu for `MCamner` repo workflows such as add, commit, pull/rebase, push, and smart sync
+* [client-readiness-check](./docs/client-readiness-check.html) - a first-version static HTML page for IGEL OS 12 / eLux 7 style browser-side readiness checks
 
 ---
 
