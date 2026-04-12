@@ -115,6 +115,7 @@ The focus is consistent:
 * [macos-scripts](./cases/macos-scripts.md) - from scattered shell utilities to a modular CLI system
 * [secure-workplace](./cases/secure-workplace.md) - designing secure digital workplace access that people can actually use
 * [identity-flow](./cases/identity-flow.md) - designing stronger authentication flows without creating fragile user journeys
+* [endpoint-standardization](./cases/endpoint-standardization.md) - reducing complexity and support friction through a more predictable endpoint model
 
 More cases will be added over time as I turn practical delivery work into reusable patterns and write-ups.
 
