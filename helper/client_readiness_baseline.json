@@ -1,0 +1,13 @@
+{
+  "expectedClientFamily": "",
+  "requiredPathsByCategory": {
+    "browser": [],
+    "certificates": [],
+    "citrix": [],
+    "management": []
+  },
+  "requiredDnsResolvers": [],
+  "requireDefaultRoute": false,
+  "requireProxyHints": false,
+  "notes": "Use this file to define the expected local baseline for a specific IGEL OS 12 or eLux 7 client profile."
+}
