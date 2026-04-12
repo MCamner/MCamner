@@ -24,6 +24,24 @@ On paper, each control can look reasonable. In practice, the combined experience
 
 ---
 
+## Before -> After
+
+Before:
+
+* access depended on multiple layers that were not always experienced as one coherent system
+* endpoint variation created instability and inconsistent user journeys
+* support effort increased because failure points crossed team and technology boundaries
+* security controls added friction when they were not matched with clear operational flows
+
+After:
+
+* the workplace is treated as a connected access system rather than a collection of isolated components
+* endpoint, identity, and access behavior are aligned more deliberately
+* supportability improves because failure domains are clearer
+* security becomes easier to enforce consistently because the operating model is more explicit
+
+---
+
 ## Goal
 
 Design a digital workplace model that balances:
@@ -67,6 +85,22 @@ Key design principles:
 
 In practical terms, that usually means clarifying the chain between device state, user state, authentication method, access broker, and resulting workspace behavior.
 
+### Example flow
+
+```mermaid
+flowchart LR
+    A[Managed Endpoint] --> B[Identity / Strong Auth]
+    B --> C[Access Broker]
+    C --> D[Digital Workspace]
+
+    A -. endpoint state .-> C
+    B -. auth result .-> E[Support / Operations]
+    C -. policy decision .-> E
+    D -. user experience .-> E
+```
+
+The specific platforms can change, but the important part is the model: endpoint state, identity, access control, and user experience need to be designed as one operational chain.
+
 ---
 
 ## Design Focus Areas
@@ -103,6 +137,19 @@ This is why I put weight on:
 * clearer ownership boundaries
 * fewer ambiguous handoffs between teams
 * workflows that make troubleshooting faster and less fragile
+
+---
+
+## Design Tradeoffs
+
+Secure workplace design is full of tradeoffs, and pretending otherwise usually creates brittle solutions.
+
+The balance I look for is:
+
+* strong controls without hiding the user journey behind avoidable complexity
+* standardization where it reduces risk, but not where it blocks necessary flexibility
+* security models that remain supportable under real operational pressure
+* incremental improvement instead of large redesigns that ignore existing dependencies
 
 ---
 
