@@ -115,6 +115,16 @@ Read the full case:
 
 ---
 
+## 🧰 Repo Utilities
+
+This profile repo also includes small utilities that help maintain and evolve it as a working system, not just a static README.
+
+Current example:
+
+* [`gitmcamner`](./bin/gitmcamner) - a terminal menu for `MCamner` repo workflows such as add, commit, pull/rebase, push, and smart sync
+
+---
+
 ## 🧭 Philosophy
 
 I don’t chase complexity.
