@@ -110,6 +110,7 @@ Read the full case:
 ## 📚 Cases
 
 * [macos-scripts](./cases/macos-scripts.md) - from scattered shell utilities to a modular CLI system
+* [secure-workplace](./cases/secure-workplace.md) - designing secure digital workplace access that people can actually use
 * More cases will be added over time as I turn practical delivery work into reusable patterns and write-ups
 
 ---
