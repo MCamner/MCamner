@@ -130,6 +130,10 @@ Current example:
 * [`gitmcamner`](./bin/gitmcamner) - a terminal menu for `MCamner` repo workflows such as add, commit, pull/rebase, push, and smart sync
 * [client-readiness-check](./docs/client-readiness-check.html) - a first-version static HTML page for IGEL OS 12 / eLux 7 style browser-side readiness checks
 
+If GitHub Pages is enabled for `main` -> `/docs`, the expected URLs are:
+`https://mcamner.github.io/MCamner/`
+`https://mcamner.github.io/MCamner/client-readiness-check.html`
+
 ---
 
 ## 🧭 Philosophy
