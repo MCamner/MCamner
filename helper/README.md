@@ -28,6 +28,9 @@ python3 helper/client_readiness_agent.py --baseline igel-os12
 python3 helper/client_readiness_agent.py --baseline elux7
 ```
 
+Named baselines are the preferred path for real client profiles.
+`client_readiness_baseline.json` is best treated as a generic fallback or local custom override.
+
 Default endpoint:
 
 ```text
@@ -94,3 +97,11 @@ Recommended approach:
 * place it in the platform-appropriate persistent area
 * start it with the matching named baseline
 * let the browser page connect to `localhost`
+
+## End-to-End Flow
+
+1. Deploy the helper to the client.
+2. Start it with the correct named baseline.
+3. Open the readiness page from the client browser.
+4. Confirm that the page shows helper connection and the expected baseline.
+5. Review category status first, then drill into individual checks and recommended actions.

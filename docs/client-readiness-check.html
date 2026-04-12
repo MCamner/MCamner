@@ -94,6 +94,7 @@
     }
 
     .hero-grid,
+    .summary-grid,
     .card-grid {
       display: grid;
       gap: 18px;
@@ -104,11 +105,36 @@
       margin-top: 28px;
     }
 
+    .summary-grid {
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      margin-bottom: 20px;
+    }
+
     .hero-stat {
       padding: 18px;
       border-radius: 18px;
       border: 1px solid var(--line);
       background: #fcfaf5;
+    }
+
+    .summary-card {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fcfaf5;
+    }
+
+    .summary-card strong {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-transform: capitalize;
+    }
+
+    .summary-card span {
+      font-size: 18px;
+      font-weight: 700;
     }
 
     .hero-stat strong {
@@ -347,7 +373,7 @@
         <div class="config-box">
           <strong id="configSummary">Config source pending...</strong>
           <div id="configNotes" class="footer-note">Waiting for config...</div>
-          <code id="configExample">?env=Pilot&client=igel&endpoint=Portal|https://example.com/</code>
+          <code id="configExample">?env=Pilot&baseline=igel-os12&endpoint=Portal|https://portal.example.local/</code>
         </div>
 
         <h2 style="margin-top: 24px;">Report</h2>
@@ -377,6 +403,9 @@
     };
 
     const checkGrid = document.getElementById("checkGrid");
+    const summaryGrid = document.createElement("div");
+    summaryGrid.className = "summary-grid";
+    checkGrid.parentNode.insertBefore(summaryGrid, checkGrid);
     const reportNode = document.getElementById("report");
     const clientFamilyNode = document.getElementById("clientFamily");
     const overallStatusNode = document.getElementById("overallStatus");
@@ -670,6 +699,25 @@
       });
     }
 
+    function renderCategorySummary(categories) {
+      summaryGrid.innerHTML = "";
+      const entries = Object.entries(categories || {});
+      if (!entries.length) {
+        return;
+      }
+
+      entries.forEach(([name, info]) => {
+        const card = document.createElement("div");
+        card.className = "summary-card";
+        const color = info.status === "ok" ? "var(--ok)" : info.status === "warn" ? "var(--warn)" : "var(--fail)";
+        card.innerHTML = `
+          <strong>${name}</strong>
+          <span style="color:${color}">${labelFor(info.status)}</span>
+        `;
+        summaryGrid.appendChild(card);
+      });
+    }
+
     function computeOverall(checks) {
       return checks.reduce((current, check) => {
         return statusPriority[check.status] < statusPriority[current] ? check.status : current;
@@ -723,7 +771,7 @@
     }
 
     function updateConfigExample() {
-      configExampleNode.textContent = "?env=Pilot&client=igel&endpoint=Portal|https://example.com/&endpoint=Gateway|https://example.com/citrix/";
+      configExampleNode.textContent = "?env=Pilot&baseline=igel-os12&endpoint=Portal|https://portal.example.local/&endpoint=Gateway|https://gateway.example.local/";
     }
 
     function downloadFile(filename, content, type) {
@@ -778,6 +826,7 @@
       const allChecks = meta.checks.concat(helperChecks, endpointChecks);
       const overall = computeOverall(allChecks);
 
+      renderCategorySummary(helper && helper.data ? helper.data.categories : {});
       renderChecks(allChecks);
       updateHeader(config, configSource, meta, overall, helper);
       updateConfigExample();

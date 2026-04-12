@@ -11,14 +11,5 @@
     "http://127.0.0.1:38765/status"
   ],
   "helperBaseline": "",
-  "endpoints": [
-    {
-      "name": "Example intranet",
-      "url": "https://example.com/"
-    },
-    {
-      "name": "Example Citrix gateway",
-      "url": "https://example.com/citrix/"
-    }
-  ]
+  "endpoints": []
 }
