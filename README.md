@@ -43,7 +43,7 @@ I operate at the intersection of:
 
 A practical macOS toolkit built around automation, workflows, and terminal-driven operations.
 
-At the core is **mqlaunch** — a modular CLI designed to simplify complex tasks and improve daily workflows.
+At the core is **`mqlaunch`** — a modular CLI designed to simplify complex tasks and improve daily workflows.
 
 **Key aspects:**
 
@@ -54,7 +54,7 @@ At the core is **mqlaunch** — a modular CLI designed to simplify complex tasks
 
 **Why it matters:**
 
-This project reflects how I approach system design:
+This project reflects how I approach system design in practice:
 turning fragmented tools into cohesive, usable systems that work in practice.
 
 🔗 https://github.com/MCamner/macos-scripts
