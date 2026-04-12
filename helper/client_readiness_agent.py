@@ -7,9 +7,13 @@ import platform
 import socket
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import parse_qs, urlparse
 
 
-BASELINE_PATH = os.path.join(os.path.dirname(__file__), "client_readiness_baseline.json")
+HELPER_DIR = os.path.dirname(__file__)
+DEFAULT_BASELINE_PATH = os.path.join(HELPER_DIR, "client_readiness_baseline.json")
+BASELINES_DIR = os.path.join(HELPER_DIR, "baselines")
+CURRENT_BASELINE_PATH = DEFAULT_BASELINE_PATH
 
 
 def utc_now():
@@ -34,6 +38,34 @@ def read_json_file(path):
             return {"available": True, "path": path, "values": json.load(handle)}
     except (OSError, json.JSONDecodeError):
         return {"available": False, "path": path, "values": {}}
+
+
+def list_available_baselines():
+    results = {}
+    if not os.path.isdir(BASELINES_DIR):
+        return results
+    for filename in sorted(os.listdir(BASELINES_DIR)):
+        if not filename.endswith(".json"):
+            continue
+        path = os.path.join(BASELINES_DIR, filename)
+        key = filename[:-5]
+        payload = read_json_file(path)
+        results[key] = {
+            "available": payload["available"],
+            "path": path,
+            "name": payload["values"].get("name", key) if payload["available"] else key
+        }
+    return results
+
+
+def resolve_baseline_path(name):
+    if not name:
+        return DEFAULT_BASELINE_PATH
+    safe = os.path.basename(name)
+    candidate = os.path.join(BASELINES_DIR, safe + ".json")
+    if os.path.exists(candidate):
+        return candidate
+    return DEFAULT_BASELINE_PATH
 
 
 def read_os_release():
@@ -417,8 +449,9 @@ def apply_baseline(checks, detection, baseline, dns_info, route_info, proxy_hint
     return checks
 
 
-def collect_status():
-    baseline_file = read_json_file(BASELINE_PATH)
+def collect_status(selected_baseline=None):
+    baseline_path = resolve_baseline_path(selected_baseline) if selected_baseline else CURRENT_BASELINE_PATH
+    baseline_file = read_json_file(baseline_path)
     baseline = baseline_file["values"] if baseline_file["available"] else {}
     os_release = read_os_release()
     detection = detect_client_family(os_release)
@@ -443,7 +476,7 @@ def collect_status():
         "timestamp": utc_now(),
         "agent": {
             "name": "client-readiness-agent",
-            "version": "0.3.0",
+            "version": "0.4.0",
             "mode": "read-only"
         },
         "hostname": socket.gethostname(),
@@ -455,10 +488,13 @@ def collect_status():
             "python": platform.python_version()
         },
         "baseline": {
-            "available": baseline_file["available"],
-            "path": baseline_file["path"],
-            "notes": baseline.get("notes", "")
+          "available": baseline_file["available"],
+          "path": baseline_file["path"],
+          "name": baseline.get("name", os.path.basename(baseline_path)),
+          "notes": baseline.get("notes", ""),
+          "selected": selected_baseline or os.path.splitext(os.path.basename(baseline_path))[0]
         },
+        "available_baselines": list_available_baselines(),
         "os_release": os_release,
         "client_detection": detection,
         "ip_addresses": addresses,
@@ -469,7 +505,7 @@ def collect_status():
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "ClientReadinessAgent/0.3"
+    server_version = "ClientReadinessAgent/0.4"
 
     def _send_json(self, payload, status=200):
         body = json.dumps(payload, indent=2).encode("utf-8")
@@ -482,11 +518,15 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_GET(self):
-        if self.path == "/health":
+        parsed = urlparse(self.path)
+        query = parse_qs(parsed.query)
+        baseline = query.get("baseline", [""])[0].strip()
+
+        if parsed.path == "/health":
             self._send_json({"status": "ok", "timestamp": utc_now()})
             return
-        if self.path == "/status":
-            self._send_json(collect_status())
+        if parsed.path == "/status":
+            self._send_json(collect_status(selected_baseline=baseline or None))
             return
         self._send_json({"error": "Not found", "path": self.path}, status=404)
 
@@ -495,13 +535,23 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main():
+    global CURRENT_BASELINE_PATH
+
     parser = argparse.ArgumentParser(description="Local read-only helper for the client readiness page.")
     parser.add_argument("--host", default="127.0.0.1", help="Bind host, default: 127.0.0.1")
     parser.add_argument("--port", default=38765, type=int, help="Bind port, default: 38765")
+    parser.add_argument("--baseline", default="", help="Baseline name from helper/baselines or explicit baseline file path")
     args = parser.parse_args()
+
+    if args.baseline:
+        if os.path.isfile(args.baseline):
+            CURRENT_BASELINE_PATH = args.baseline
+        else:
+            CURRENT_BASELINE_PATH = resolve_baseline_path(args.baseline)
 
     server = ThreadingHTTPServer((args.host, args.port), Handler)
     print(f"Client readiness agent listening on http://{args.host}:{args.port}")
+    print(f"Using baseline: {CURRENT_BASELINE_PATH}")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

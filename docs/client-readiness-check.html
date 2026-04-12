@@ -309,6 +309,10 @@
           <strong>Local helper agent</strong>
           <span id="helperStatus">Checking...</span>
         </div>
+        <div class="hero-stat">
+          <strong>Selected baseline</strong>
+          <span id="baselineName">Checking...</span>
+        </div>
       </div>
       <div class="toolbar">
         <button id="rerunButton" type="button">Run Checks Again</button>
@@ -368,6 +372,7 @@
       recommendedMinHeight: 800,
       endpointTimeoutMs: 8000,
       helperUrls: ["http://127.0.0.1:38765/status"],
+      helperBaseline: "",
       endpoints: []
     };
 
@@ -377,6 +382,7 @@
     const overallStatusNode = document.getElementById("overallStatus");
     const browserNameNode = document.getElementById("browserName");
     const helperStatusNode = document.getElementById("helperStatus");
+    const baselineNameNode = document.getElementById("baselineName");
     const environmentNameNode = document.getElementById("environmentName");
     const pageTitleNode = document.getElementById("pageTitle");
     const pageDescriptionNode = document.getElementById("pageDescription");
@@ -429,6 +435,7 @@
         forcedClient: params.get("client") || "",
         title: params.get("title") || "",
         notes: params.get("notes") || "",
+        helperBaseline: params.get("baseline") || "",
         endpoints
       };
     }
@@ -463,22 +470,29 @@
       if (overrides.notes) {
         merged.notes = overrides.notes;
       }
+      if (overrides.helperBaseline) {
+        merged.helperBaseline = overrides.helperBaseline;
+      }
       if (overrides.endpoints.length) {
         merged.endpoints = overrides.endpoints;
       }
       return merged;
     }
 
-    async function loadHelperStatus(helperUrls) {
+    async function loadHelperStatus(helperUrls, helperBaseline) {
       const urls = Array.isArray(helperUrls) && helperUrls.length ? helperUrls : [];
       for (const url of urls) {
         try {
-          const response = await fetch(url, { cache: "no-store" });
+          const target = new URL(url, window.location.href);
+          if (helperBaseline) {
+            target.searchParams.set("baseline", helperBaseline);
+          }
+          const response = await fetch(target.toString(), { cache: "no-store" });
           if (!response.ok) {
             throw new Error("Helper returned " + response.status);
           }
           const data = await response.json();
-          return { url, data };
+          return { url: target.toString(), data };
         } catch (error) {
           // try next URL
         }
@@ -700,6 +714,7 @@
       browserNameNode.textContent = meta.browser;
       helperStatusNode.textContent = helper ? "Connected" : "Browser-only mode";
       helperStatusNode.style.color = helper ? "var(--ok)" : "var(--warn)";
+      baselineNameNode.textContent = helper && helper.data && helper.data.baseline ? helper.data.baseline.name : (config.helperBaseline || "Default");
       overallStatusNode.textContent = labelFor(overall);
       overallStatusNode.style.color = overall === "ok" ? "var(--ok)" : overall === "warn" ? "var(--warn)" : "var(--fail)";
       configSourceNode.textContent = configSource;
@@ -735,7 +750,7 @@
         : (config.configSourceLabel || external.source);
 
       const meta = buildStaticChecks(config, overrides);
-      const helper = await loadHelperStatus(config.helperUrls);
+      const helper = await loadHelperStatus(config.helperUrls, config.helperBaseline);
       const helperChecks = helper
         ? [{
             name: "Local helper agent",

@@ -10,6 +10,7 @@
   "helperUrls": [
     "http://127.0.0.1:38765/status"
   ],
+  "helperBaseline": "",
   "endpoints": [
     {
       "name": "Example intranet",

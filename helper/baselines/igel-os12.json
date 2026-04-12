@@ -1,0 +1,18 @@
+{
+  "name": "IGEL OS 12 baseline",
+  "expectedClientFamily": "IGEL",
+  "requiredPathsByCategory": {
+    "browser": [
+      "/usr/bin/chromium"
+    ],
+    "certificates": [],
+    "citrix": [],
+    "management": [
+      "/etc/igel"
+    ]
+  },
+  "requiredDnsResolvers": [],
+  "requireDefaultRoute": true,
+  "requireProxyHints": false,
+  "notes": "Use for IGEL OS 12-style clients where IGEL management and a Chromium-based browser are expected."
+}

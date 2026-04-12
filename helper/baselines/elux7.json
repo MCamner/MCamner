@@ -1,0 +1,21 @@
+{
+  "name": "eLux 7 baseline",
+  "expectedClientFamily": "eLux",
+  "requiredPathsByCategory": {
+    "browser": [],
+    "certificates": [
+      "/setup/cacerts"
+    ],
+    "citrix": [
+      "/setup/ica"
+    ],
+    "management": [
+      "/setup",
+      "/etc/unicon"
+    ]
+  },
+  "requiredDnsResolvers": [],
+  "requireDefaultRoute": true,
+  "requireProxyHints": false,
+  "notes": "Use for eLux 7-style clients where Scout/eLux management, /setup, and Citrix paths are expected."
+}

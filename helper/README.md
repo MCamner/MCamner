@@ -13,11 +13,19 @@ The HTML page can only see browser-visible signals. This helper exposes a local 
 * local IP addresses
 * categorized checks for network, browser, certificates, Citrix, and management
 * optional baseline comparison through `client_readiness_baseline.json`
+* named baseline profiles from `helper/baselines/`
 
 ## Run
 
 ```bash
 python3 helper/client_readiness_agent.py
+```
+
+Select a named baseline:
+
+```bash
+python3 helper/client_readiness_agent.py --baseline igel-os12
+python3 helper/client_readiness_agent.py --baseline elux7
 ```
 
 Default endpoint:
