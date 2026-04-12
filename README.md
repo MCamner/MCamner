@@ -130,6 +130,7 @@ Current example:
 * [`gitmcamner`](./bin/gitmcamner) - a terminal menu for `MCamner` repo workflows such as add, commit, pull/rebase, push, and smart sync
 * [client-readiness-check](./docs/client-readiness-check.html) - a configurable browser-side readiness check for IGEL OS 12 / eLux 7 style clients, with JSON config, query params, and report export
 * [`client_readiness_agent.py`](./helper/client_readiness_agent.py) - a small local Python helper-agent that exposes host-level readiness data on `localhost`
+* [helper deployment notes](./helper/README.md) - suggested placement and launcher examples for IGEL OS 12 (`/custom`) and eLux 7 (`/setup`)
 
 If GitHub Pages is enabled for `main` -> `/docs`, the expected URLs are:
 `https://mcamner.github.io/MCamner/`
