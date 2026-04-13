@@ -1,6 +1,6 @@
 # 👋 Hi, I'm Mattias Camner
 
-I design and build real-world infrastructure systems — where **security, usability, and operations actually work together**.
+I design and build real-world infrastructure systems... — where **security, usability, and operations actually work together**.
 
 🚀 **Currently building:**
 **macos-scripts** — a modular CLI that turns scattered terminal workflows into one structured system.
@@ -11,9 +11,9 @@ I design and build real-world infrastructure systems — where **security, usabi
 
 I build systems that:
 
-* reduce operational friction
-* improve security without breaking usability
-* scale in real environments
+- reduce operational friction  
+- improve security without breaking usability  
+- scale in real environments  
 
 If you work with **EUC, infrastructure, or secure digital workplaces** — we should talk.
 
@@ -24,6 +24,14 @@ If you work with **EUC, infrastructure, or secure digital workplaces** — we sh
 A practical macOS toolkit built around automation, workflows, and terminal-driven operations.
 
 At the core is **mqlaunch** — a modular CLI designed to simplify complex tasks and improve daily workflows.
+
+### ⚡ Quick Start
+
+```bash
+git clone https://github.com/MCamner/macos-scripts
+cd macos-scripts
+./install.sh
+mqlaunch
 
 ### What it does
 
