@@ -36,12 +36,16 @@ cd macos-scripts
 mqlaunch
 ```
 
+---
+
 ### What it does
 
 * Consolidates scattered shell scripts into one system
 * Provides a structured command interface (CLI + menu)
 * Improves workflow speed, clarity, and repeatability
 * Adds safety with **dry-run** and **rollback support**
+
+---
 
 ### Why it matters
 
@@ -56,20 +60,20 @@ This project is about turning **useful chaos into usable systems**.
 
 ## 📌 Case: macos-scripts
 
-**Before**
+### Before
 
 * Scattered shell scripts
 * Low discoverability
 * High friction in daily workflows
 
-**After**
+### After
 
 * Single modular CLI (**mqlaunch**)
 * Structured workflows
 * Safer releases (dry-run + rollback)
 * Extensible without becoming monolithic
 
-**Impact**
+### Impact
 
 Reduced friction in daily operations and created a foundation for scalable automation.
 
@@ -129,7 +133,7 @@ I focus on turning complex environments into systems that are:
 
 I use GitHub as a **working system**, not just a portfolio.
 
-Focus:
+### Focus
 
 * Practical tooling with clear operational value
 * Architecture grounded in real-world constraints
@@ -162,9 +166,9 @@ I build systems that are:
 
 ## 🌐 Connect
 
-🔗 https://mcamner.com
-🎨 https://blackiris.se
-💼 https://www.linkedin.com/in/mattias-camner-75958022
+* 🔗 https://mcamner.com
+* 🎨 https://blackiris.se
+* 💼 https://www.linkedin.com/in/mattias-camner-75958022
 
 ---
 
@@ -181,3 +185,4 @@ Outside of tech:
 ## 🧩 Motto
 
 **Build things that work. Then make them impossible to break.**
+
