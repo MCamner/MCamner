@@ -36,6 +36,8 @@ cd macos-scripts
 mqlaunch
 ```
 
+---
+
 ## 🎬 Demo
 
 ### 🖥️ mqlaunch in action
