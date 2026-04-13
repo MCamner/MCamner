@@ -23,9 +23,20 @@ If you work with **EUC, infrastructure, or secure digital workplaces** — we sh
 
 ## 🚀 Featured: macos-scripts
 
+![macos-scripts preview](docs/mqlaunch-demo.png)
+
+<p align="left">
+  <img src="https://img.shields.io/badge/status-active-success" />
+  <img src="https://img.shields.io/badge/type-cli-blue" />
+  <img src="https://img.shields.io/badge/platform-macOS-lightgrey" />
+  <img src="https://img.shields.io/badge/focus-automation-orange" />
+</p>
+
 A practical macOS toolkit built around automation, workflows, and terminal-driven operations.
 
 At the core is **mqlaunch** — a modular CLI designed to simplify complex tasks and improve daily workflows.
+
+---
 
 ### ⚡ Quick Start
 
@@ -35,6 +46,11 @@ cd macos-scripts
 ./install.sh
 mqlaunch
 ```
+
+---
+
+## 🎬 Demo
+
 
 ---
 
