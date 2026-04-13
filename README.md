@@ -8,9 +8,6 @@
 
 Turn scattered terminal commands into one clean interface.
 
-```bash
-mqlaunch system check
-
 ---
 
 **IT Architect | Digital Workplace | Security & Infrastructure**
