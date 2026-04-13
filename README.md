@@ -1,6 +1,8 @@
 # 👋 Hi, I'm Mattias Camner
 
-I design and build real-world infrastructure systems... — where **security, usability, and operations actually work together**.
+I design and build real-world infrastructure systems — where **security, usability, and operations actually work together**.
+
+Focused on **EUC, Zero Trust, and automation in complex environments**.
 
 🚀 **Currently building:**
 **macos-scripts** — a modular CLI that turns scattered terminal workflows into one structured system.
@@ -11,9 +13,9 @@ I design and build real-world infrastructure systems... — where **security, us
 
 I build systems that:
 
-- reduce operational friction  
-- improve security without breaking usability  
-- scale in real environments  
+* reduce operational friction
+* improve security without breaking usability
+* scale in real environments
 
 If you work with **EUC, infrastructure, or secure digital workplaces** — we should talk.
 
@@ -32,6 +34,7 @@ git clone https://github.com/MCamner/macos-scripts
 cd macos-scripts
 ./install.sh
 mqlaunch
+```
 
 ### What it does
 
@@ -178,4 +181,3 @@ Outside of tech:
 ## 🧩 Motto
 
 **Build things that work. Then make them impossible to break.**
-
