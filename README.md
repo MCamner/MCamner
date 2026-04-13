@@ -1,40 +1,94 @@
 # 👋 Hi, I'm Mattias Camner
 
-> Turning terminal chaos into structured command systems.
+I design and build real-world infrastructure systems — where **security, usability, and operations actually work together**.
+
+🚀 **Currently building:**
+**macos-scripts** — a modular CLI that turns scattered terminal workflows into one structured system.
+
+---
+
+## 💡 TL;DR
+
+I build systems that:
+
+* reduce operational friction
+* improve security without breaking usability
+* scale in real environments
+
+If you work with **EUC, infrastructure, or secure digital workplaces** — we should talk.
 
 ---
 
 ## 🚀 Featured: macos-scripts
 
-Turn scattered terminal commands into one clean interface.
+A practical macOS toolkit built around automation, workflows, and terminal-driven operations.
+
+At the core is **mqlaunch** — a modular CLI designed to simplify complex tasks and improve daily workflows.
+
+### What it does
+
+* Consolidates scattered shell scripts into one system
+* Provides a structured command interface (CLI + menu)
+* Improves workflow speed, clarity, and repeatability
+* Adds safety with **dry-run** and **rollback support**
+
+### Why it matters
+
+Most environments don’t fail because of missing tools —
+they fail because tools are fragmented and hard to operate.
+
+This project is about turning **useful chaos into usable systems**.
+
+🔗 https://github.com/MCamner/macos-scripts
 
 ---
 
-**IT Architect | Digital Workplace | Security & Infrastructure**
+## 📌 Case: macos-scripts
 
-I turn complex infrastructure into systems that actually work — secure, usable, and built for real-world constraints.
+**Before**
 
-I focus on bridging the gap between security, usability, and operational reality.
+* Scattered shell scripts
+* Low discoverability
+* High friction in daily workflows
+
+**After**
+
+* Single modular CLI (**mqlaunch**)
+* Structured workflows
+* Safer releases (dry-run + rollback)
+* Extensible without becoming monolithic
+
+**Impact**
+
+Reduced friction in daily operations and created a foundation for scalable automation.
+
+🔗 Full case:
+https://github.com/MCamner/MCamner/blob/main/cases/macos-scripts.md
 
 ---
 
-## 🧠 About Me
+## 🧠 What I Do
 
-I operate at the intersection of:
+I work at the intersection of:
 
-* 🏗️ Endpoint, EUC & Infrastructure Architecture
+* 🏗️ Endpoint & Infrastructure Architecture
 * 🔐 Security, Identity & Zero Trust
 * ⚙️ Automation & System Integration
-* 🧩 Turning complex environments into usable systems
+
+I focus on turning complex environments into systems that are:
+
+* usable
+* secure
+* operationally realistic
 
 ---
 
 ## 🚀 How I Work
 
-* Translate complex infrastructure into **usable, supportable systems**
-* Bridge **security and usability** without compromise
-* Design solutions that **hold up in real-world environments**
-* Think in **systems, flows, and long-term operability**
+* Reduce complexity — don’t add layers
+* Build for real operations, not slides
+* Balance security with actual usability
+* Design systems that survive production, not just design reviews
 
 ---
 
@@ -44,54 +98,6 @@ I operate at the intersection of:
 * Secure authentication (Smartcard, SafeNet, CWA)
 * Infrastructure standardization & automation
 * Building practical tools and workflows
-
----
-
-## 🚀 Featured Work
-
-### 💻 macos-scripts
-
-A practical macOS toolkit built around automation, workflows, and terminal-driven operations.
-
-At the core is **`mqlaunch`** — a modular CLI designed to simplify complex tasks and improve daily workflows.
-
-**Key aspects:**
-
-* Modular command architecture (menu-driven + CLI)
-* Workflow-focused utilities for real-world operations
-* Integrated automation, tools, and system utilities
-* Designed for clarity, speed, and repeatability
-
-**Why it matters:**
-
-This project reflects how I approach system design in practice:
-turning fragmented tools into cohesive, usable systems that work in practice.
-
-🔗 https://github.com/MCamner/macos-scripts
-
----
-
-## 📌 Case: macos-scripts
-
-What started as separate shell utilities evolved into a more structured command system centered around `mqlaunch`.
-
-**Result:**
-
-* Consolidated scattered shell scripts into a single modular CLI system
-* Introduced a clear entrypoint (`mqlaunch`) with structured workflows
-* Improved usability through menu-driven interaction and better discoverability
-* Enabled safer releases with dry-run and rollback support
-* Made the system easier to extend without turning into a monolithic tool
-
-**Impact:** Reduced friction in daily workflows and created a foundation for scalable, repeatable automation.
-
-**Why that matters:**
-
-This is the kind of work I enjoy most:
-taking messy, useful pieces and shaping them into systems that are easier to operate, trust, and build on.
-
-Read the full case:
-[macos-scripts case](./cases/macos-scripts.md)
 
 ---
 
@@ -110,41 +116,24 @@ Read the full case:
 
 ## 📊 On GitHub
 
-I use GitHub as a working system to document tools, cases, and practical architecture decisions.
+I use GitHub as a **working system**, not just a portfolio.
 
-The focus is consistent:
+Focus:
 
 * Practical tooling with clear operational value
-* Architecture thinking grounded in real-world constraints
-* Concise cases that show problem, design, and outcome
+* Architecture grounded in real-world constraints
+* Cases that show **problem → design → outcome**
 
 ---
 
 ## 📚 Cases
 
-* [macos-scripts](./cases/macos-scripts.md) - from scattered shell utilities to a modular CLI system
-* [secure-workplace](./cases/secure-workplace.md) - designing secure digital workplace access that people can actually use
-* [identity-flow](./cases/identity-flow.md) - designing stronger authentication flows without creating fragile user journeys
-* [endpoint-standardization](./cases/endpoint-standardization.md) - reducing complexity and support friction through a more predictable endpoint model
+* macos-scripts — modular CLI system from scattered scripts
+* secure-workplace — secure access that people can actually use
+* identity-flow — stronger authentication without fragile UX
+* endpoint-standardization — reducing complexity & support friction
 
-More cases will be added over time as I turn practical delivery work into reusable patterns and write-ups.
-
----
-
-## 🧰 Repo Utilities
-
-This profile repo also includes small utilities that help maintain and evolve it as a working system, not just a static README.
-
-Current example:
-
-* [`gitmcamner`](./bin/gitmcamner) - a terminal menu for `MCamner` repo workflows such as add, commit, pull/rebase, push, and smart sync
-* [client-readiness-check](./docs/client-readiness-check.html) - a configurable browser-side readiness check for IGEL OS 12 / eLux 7 style clients, with JSON config, query params, and report export
-* [`client_readiness_agent.py`](./helper/client_readiness_agent.py) - a small local Python helper-agent that exposes host-level readiness data on `localhost`
-* [helper deployment notes](./helper/README.md) - suggested placement and launcher examples for IGEL OS 12 (`/custom`) and eLux 7 (`/setup`)
-
-If GitHub Pages is enabled for `main` -> `/docs`, the expected URLs are:
-`https://mcamner.github.io/MCamner/`
-`https://mcamner.github.io/MCamner/client-readiness-check.html`
+More will be added over time.
 
 ---
 
@@ -162,9 +151,9 @@ I build systems that are:
 
 ## 🌐 Connect
 
-* 🔗 https://mcamner.com
-* 🎨 https://blackiris.se
-* 💼 https://www.linkedin.com/in/mattias-camner-75958022
+🔗 https://mcamner.com
+🎨 https://blackiris.se
+💼 https://www.linkedin.com/in/mattias-camner-75958022
 
 ---
 
@@ -180,4 +169,5 @@ Outside of tech:
 
 ## 🧩 Motto
 
-> Build things that work. Then make them impossible to break.
+**Build things that work. Then make them impossible to break.**
+
