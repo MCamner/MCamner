@@ -51,11 +51,6 @@ mqlaunch
 
 ## 🎬 Demo
 
-
----
-
-## 🎬 Demo
-
 ### 🖥️ mqlaunch in action
 
 ```text
