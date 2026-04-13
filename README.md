@@ -36,6 +36,73 @@ cd macos-scripts
 mqlaunch
 ```
 
+## 🎬 Demo
+
+### 🖥️ mqlaunch in action
+
+```text
+$ mqlaunch
+
+══════════════════════════════════════════════════════
+  MQ LAUNCH — Terminal Workflow System
+══════════════════════════════════════════════════════
+
+WORKFLOWS
+  1. Dev          2. Git
+  3. Network      4. Performance
+  5. Tools        6. System
+
+SYSTEM
+  7. Self-check   8. Debug bundle
+  9. Release      10. Status
+
+Select option: _
+```
+
+---
+
+### ⚡ Example workflow
+
+```bash
+mqlaunch dev
+mqlaunch git
+mqlaunch performance
+```
+
+```text
+> Running system checks...
+✔ Disk OK
+✔ Network OK
+✔ Config valid
+
+> Launching dev workflow...
+→ Opening project
+→ Syncing repo
+→ Starting tools
+
+✔ Ready
+```
+
+---
+
+### 🧠 Why this matters
+
+Instead of remembering commands like:
+
+```bash
+git pull --rebase
+npm run build
+./scripts/check.sh
+```
+
+You run:
+
+```bash
+mqlaunch dev
+```
+
+👉 One entrypoint. Structured workflows. Repeatable results.
+
 ---
 
 ### What it does
