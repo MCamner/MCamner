@@ -264,13 +264,7 @@ Outside of tech:
 
 ## 🧩 Motto
 
-<<<<<<< HEAD
 **Build things that work. Then make them impossible to break.**
-
-||||||| parent of 9df76fc (update documentation)
-> Build things that work. Then make them impossible to break.
-=======
-> Build things that work. Then make them impossible to break.
 
 ## Client Readiness Check
 
@@ -316,4 +310,3 @@ Result:
 See the full write-up here:
 
 [Client Readiness Check case](./cases/client-readiness-check.md)
->>>>>>> 9df76fc (update documentation)
