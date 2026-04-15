@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import json
+import os
 import platform
 import socket
 import subprocess
+from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 
@@ -11,13 +13,23 @@ HOST = "127.0.0.1"
 PORT = 38765
 
 
+CERT_SEARCH_PATHS = [
+    "/etc/ssl/certs",
+    "/etc/pki/tls/certs",
+    "/usr/local/share/ca-certificates",
+    "/etc/ca-certificates",
+    os.path.expanduser("~/.pki"),
+    os.path.expanduser("~/.config"),
+]
+
+
 def run_command(cmd):
     try:
         result = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
-            timeout=5,
+            timeout=8,
             check=False
         )
         return {
@@ -74,12 +86,10 @@ def get_dns_servers_linux():
 
 
 def get_wifi_ssid_linux():
-    # Try iwgetid first
     result = run_command(["sh", "-c", "iwgetid -r 2>/dev/null || true"])
     if result["stdout"]:
         return result["stdout"]
 
-    # Fallback: nmcli if available
     result = run_command([
         "sh", "-c",
         "nmcli -t -f active,ssid dev wifi 2>/dev/null | awk -F: '$1==\"yes\" {print $2; exit}'"
@@ -153,14 +163,164 @@ def get_network_info():
     return info
 
 
-def get_certificates():
+def parse_openssl_date(value):
+    try:
+        parsed = datetime.strptime(value.strip(), "%b %d %H:%M:%S %Y %Z")
+        return parsed.replace(tzinfo=timezone.utc)
+    except Exception:
+        return None
+
+
+def classify_certificate(subject, issuer, extended_usage, path):
+    combined = " ".join([
+        subject or "",
+        issuer or "",
+        " ".join(extended_usage or []),
+        path or ""
+    ]).lower()
+
+    has_client_auth = "client auth" in combined or "tls web client authentication" in combined
+    has_smartcard_logon = "smartcard" in combined or "smart card" in combined
+    source = "system"
+
+    lowered_path = (path or "").lower()
+    if "/home/" in lowered_path or "/.pki" in lowered_path or "/.config" in lowered_path:
+        source = "user"
+
     return {
-        "store_available": False,
-        "certificates": [],
-        "notes": [
-            "Certificate inspection is not implemented yet.",
-            "Next step: add OS12/Linux certificate enumeration."
-        ]
+        "has_client_auth": has_client_auth,
+        "has_smartcard_logon": has_smartcard_logon,
+        "source": source
+    }
+
+
+def extract_certificate_info(path):
+    subject_res = run_command(["openssl", "x509", "-in", path, "-noout", "-subject"])
+    issuer_res = run_command(["openssl", "x509", "-in", path, "-noout", "-issuer"])
+    start_res = run_command(["openssl", "x509", "-in", path, "-noout", "-startdate"])
+    end_res = run_command(["openssl", "x509", "-in", path, "-noout", "-enddate"])
+    serial_res = run_command(["openssl", "x509", "-in", path, "-noout", "-serial"])
+    fp_res = run_command(["openssl", "x509", "-in", path, "-noout", "-fingerprint", "-sha256"])
+    text_res = run_command(["openssl", "x509", "-in", path, "-noout", "-text"])
+
+    if not subject_res["ok"]:
+        return None
+
+    subject = subject_res["stdout"].replace("subject=", "", 1).strip()
+    issuer = issuer_res["stdout"].replace("issuer=", "", 1).strip() if issuer_res["ok"] else ""
+    valid_from_raw = start_res["stdout"].replace("notBefore=", "", 1).strip() if start_res["ok"] else ""
+    valid_to_raw = end_res["stdout"].replace("notAfter=", "", 1).strip() if end_res["ok"] else ""
+    serial = serial_res["stdout"].replace("serial=", "", 1).strip() if serial_res["ok"] else ""
+    thumbprint = fp_res["stdout"].split("=", 1)[1].strip() if fp_res["ok"] and "=" in fp_res["stdout"] else ""
+
+    extended_usage = []
+    text_blob = text_res["stdout"] if text_res["ok"] else ""
+    if "Extended Key Usage" in text_blob:
+        lines = text_blob.splitlines()
+        for idx, line in enumerate(lines):
+            if "Extended Key Usage" in line and idx + 1 < len(lines):
+                next_line = lines[idx + 1].strip()
+                if next_line:
+                    extended_usage = [item.strip() for item in next_line.split(",") if item.strip()]
+                break
+
+    valid_to_dt = parse_openssl_date(valid_to_raw)
+    now = datetime.now(timezone.utc)
+    expired = bool(valid_to_dt and valid_to_dt < now)
+    expires_soon = bool(valid_to_dt and not expired and (valid_to_dt - now).days <= 30)
+
+    flags = classify_certificate(subject, issuer, extended_usage, path)
+
+    return {
+        "path": path,
+        "subject": subject,
+        "issuer": issuer,
+        "valid_from": valid_from_raw,
+        "valid_to": valid_to_raw,
+        "serial": serial,
+        "thumbprint": thumbprint,
+        "extended_usage": extended_usage,
+        "expired": expired,
+        "expires_soon": expires_soon,
+        "has_client_auth": flags["has_client_auth"],
+        "has_smartcard_logon": flags["has_smartcard_logon"],
+        "source": flags["source"]
+    }
+
+
+def find_certificate_files():
+    files = []
+    seen = set()
+    for base in CERT_SEARCH_PATHS:
+        if not os.path.exists(base):
+            continue
+        if os.path.isfile(base):
+            candidates = [base]
+        else:
+            candidates = []
+            for root, _, names in os.walk(base):
+                for name in names:
+                    lowered = name.lower()
+                    if lowered.endswith((".crt", ".cer", ".pem")):
+                        candidates.append(os.path.join(root, name))
+        for path in candidates:
+            if path not in seen:
+                seen.add(path)
+                files.append(path)
+    return files
+
+
+def get_certificates():
+    openssl_check = run_command(["openssl", "version"])
+    if not openssl_check["ok"]:
+        return {
+            "store_available": False,
+            "certificates": [],
+            "notes": [
+                "OpenSSL is not available, so certificate inspection could not run."
+            ]
+        }
+
+    found_files = find_certificate_files()
+    certificates = []
+
+    for path in found_files[:200]:
+        info = extract_certificate_info(path)
+        if info:
+            certificates.append(info)
+
+    client_auth_count = sum(1 for c in certificates if c.get("has_client_auth"))
+    smartcard_count = sum(1 for c in certificates if c.get("has_smartcard_logon"))
+    expired_count = sum(1 for c in certificates if c.get("expired"))
+    soon_count = sum(1 for c in certificates if c.get("expires_soon"))
+
+    notes = [
+        f"OpenSSL certificate scan completed across {len(found_files)} candidate files.",
+        "This version scans readable certificate files and does not yet inspect PKCS#11 token stores."
+    ]
+
+    if not certificates:
+        notes.append("No readable certificate files were found in the configured search paths.")
+    if expired_count:
+        notes.append(f"{expired_count} certificate(s) appear to be expired.")
+    if soon_count:
+        notes.append(f"{soon_count} certificate(s) expire within 30 days.")
+    if client_auth_count == 0:
+        notes.append("No obvious client-auth certificate was identified in the scanned files.")
+
+    return {
+        "store_available": True,
+        "search_paths": CERT_SEARCH_PATHS,
+        "candidate_files": len(found_files),
+        "certificates": certificates,
+        "summary": {
+            "total": len(certificates),
+            "client_auth": client_auth_count,
+            "smartcard_logon": smartcard_count,
+            "expired": expired_count,
+            "expires_soon": soon_count
+        },
+        "notes": notes
     }
 
 
@@ -184,7 +344,7 @@ def build_status_payload(baseline_name=""):
     return {
         "agent": {
           "name": "client-helper",
-          "version": "0.2.0"
+          "version": "0.3.0"
         },
         "hostname": socket.gethostname(),
         "os": {
@@ -202,7 +362,7 @@ def build_status_payload(baseline_name=""):
         "categories": {
           "host": {"status": "ok"},
           "network": {"status": "ok"},
-          "certificates": {"status": "warn"},
+          "certificates": {"status": "ok"},
           "smartcard": {"status": "warn"}
         },
         "checks": [
@@ -216,10 +376,10 @@ def build_status_payload(baseline_name=""):
           },
           {
             "name": "Certificates",
-            "status": "warn",
-            "summary": "Certificate inspection not implemented yet.",
+            "status": "ok",
+            "summary": "Certificate scanning is available.",
             "details": [
-              "Use /certificates after certificate enumeration is implemented."
+              "Use /certificates for scanned PEM/CRT/CER certificate summaries."
             ]
           },
           {
