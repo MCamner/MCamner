@@ -399,7 +399,11 @@
       endpointTimeoutMs: 8000,
       helperUrls: ["http://127.0.0.1:38765/status"],
       helperBaseline: "",
-      endpoints: []
+      endpoints: [],
+      expectations: {
+        locale: "",
+        timezone: ""
+      }
     };
 
     const checkGrid = document.getElementById("checkGrid");
@@ -486,9 +490,16 @@
       const merged = {
         ...base,
         ...external,
-        endpoints: Array.isArray(external.endpoints) ? external.endpoints.slice() : base.endpoints.slice()
+        endpoints: Array.isArray(external.endpoints) ? external.endpoints.slice() : base.endpoints.slice(),
+        expectations: {
+          ...base.expectations,
+          ...(external.expectations || {})
+        }
       };
-      merged.helperUrls = Array.isArray(external.helperUrls) ? external.helperUrls.slice() : base.helperUrls.slice();
+
+      merged.helperUrls = Array.isArray(external.helperUrls)
+        ? external.helperUrls.slice()
+        : base.helperUrls.slice();
 
       if (overrides.environmentName) {
         merged.environmentName = overrides.environmentName;
@@ -533,9 +544,10 @@
       const ua = userAgent.toLowerCase();
       const forced = (forcedClient || "").toLowerCase();
 
-      if (forced === "igel" || forced === "elux" || forced === "linux" || forced === "citrix") {
+      if (forced === "igel" || forced === "elux" || forced === "linux" || forced === "citrix" || forced === "igel-os12") {
         const forcedMap = {
           igel: "IGEL (forced)",
+          "igel-os12": "IGEL OS 12 (forced)",
           elux: "eLux (forced)",
           linux: "Linux thin client (forced)",
           citrix: "Citrix-capable browser (forced)"
@@ -583,17 +595,47 @@
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
       const online = navigator.onLine;
-
+      const expectedLocale = config.expectations && config.expectations.locale ? config.expectations.locale : "";
+      const expectedTimezone = config.expectations && config.expectations.timezone ? config.expectations.timezone : "";
       const resolutionOk = width >= config.recommendedMinWidth && height >= config.recommendedMinHeight;
+
+      let localeStatus = "ok";
+      const localeDetails = [
+        "Primary locale: " + locale,
+        "Languages: " + languages
+      ];
+
+      if (expectedLocale && locale !== expectedLocale) {
+        localeStatus = "warn";
+        localeDetails.push("Expected locale: " + expectedLocale);
+      }
+
+      if (expectedTimezone) {
+        if (timezone === "Unavailable") {
+          localeStatus = "warn";
+          localeDetails.push("Expected timezone: " + expectedTimezone);
+        } else if (timezone !== expectedTimezone) {
+          localeStatus = "warn";
+          localeDetails.push("Expected timezone: " + expectedTimezone);
+          localeDetails.push("Detected timezone differs from expected region.");
+        }
+      }
+
       const checks = [
         {
           name: "Client family",
           status: client.confidence === "high" || client.confidence === "forced" ? "ok" : "warn",
           summary: client.family + " (" + client.confidence + " confidence)",
-          details: [
-            "Detection is heuristic unless a forced client mode is supplied via query string.",
-            "Browser user agent: " + navigator.userAgent
-          ]
+          details: client.confidence === "low"
+            ? [
+                "The browser does not expose a reliable OS-specific identifier for IGEL OS 12 or eLux in this session.",
+                "Detection is therefore heuristic unless a client mode is forced via query string or config.",
+                "Browser user agent: " + navigator.userAgent
+              ]
+            : [
+                "Client family was identified with " + client.confidence + " confidence.",
+                "Browser user agent: " + navigator.userAgent
+              ]
         },
         {
           name: "Browser and protocol",
@@ -611,17 +653,15 @@
           summary: (width && height) ? width + "x" + height + " screen" : "Display unavailable",
           details: [
             "Viewport: " + viewportWidth + "x" + viewportHeight,
-            "Recommended baseline: " + config.recommendedMinWidth + "x" + config.recommendedMinHeight + " or higher"
+            "Recommended baseline: " + config.recommendedMinWidth + "x" + config.recommendedMinHeight + " or higher",
+            "Screen and viewport are different measurements and may vary due to scaling, browser chrome, or rendering behavior."
           ]
         },
         {
           name: "Locale and timezone",
-          status: timezone !== "Unavailable" ? "ok" : "warn",
+          status: localeStatus,
           summary: locale + " / " + timezone,
-          details: [
-            "Primary locale: " + locale,
-            "Languages: " + languages
-          ]
+          details: localeDetails
         },
         {
           name: "Browser online state",
@@ -629,12 +669,26 @@
           summary: online ? "Browser reports online" : "Browser reports offline",
           details: [
             "navigator.onLine: " + String(online),
-            "Use endpoint tests below for a more practical connectivity signal"
+            "This is a lightweight browser signal only. Use endpoint tests below for a more practical connectivity check."
           ]
         }
       ];
 
-      return { checks, client, browser, locale, languages, timezone, width, height, viewportWidth, viewportHeight, protocol, secureContext, online };
+      return {
+        checks,
+        client,
+        browser,
+        locale,
+        languages,
+        timezone,
+        width,
+        height,
+        viewportWidth,
+        viewportHeight,
+        protocol,
+        secureContext,
+        online
+      };
     }
 
     async function testEndpoint(endpoint, timeoutMs) {
@@ -762,7 +816,9 @@
       browserNameNode.textContent = meta.browser;
       helperStatusNode.textContent = helper ? "Connected" : "Browser-only mode";
       helperStatusNode.style.color = helper ? "var(--ok)" : "var(--warn)";
-      baselineNameNode.textContent = helper && helper.data && helper.data.baseline ? helper.data.baseline.name : (config.helperBaseline || "Default");
+      baselineNameNode.textContent = helper && helper.data && helper.data.baseline
+        ? helper.data.baseline.name
+        : (config.helperBaseline || "Default");
       overallStatusNode.textContent = labelFor(overall);
       overallStatusNode.style.color = overall === "ok" ? "var(--ok)" : overall === "warn" ? "var(--warn)" : "var(--fail)";
       configSourceNode.textContent = configSource;
@@ -771,7 +827,7 @@
     }
 
     function updateConfigExample() {
-      configExampleNode.textContent = "?env=Pilot&baseline=igel-os12&endpoint=Portal|https://portal.example.local/&endpoint=Gateway|https://gateway.example.local/";
+      configExampleNode.textContent = "?env=Pilot&baseline=igel-os12&client=igel-os12&endpoint=Portal|https://portal.example.local/&endpoint=Gateway|https://gateway.example.local/";
     }
 
     function downloadFile(filename, content, type) {
@@ -792,19 +848,27 @@
       const overrides = getQueryOverrides();
       const external = await loadExternalConfig();
       const config = mergeConfig(DEFAULT_CONFIG, external.data, overrides);
-      const hasOverrides = overrides.endpoints.length || overrides.environmentName || overrides.forcedClient || overrides.title || overrides.notes;
+      const hasOverrides =
+        overrides.endpoints.length ||
+        overrides.environmentName ||
+        overrides.forcedClient ||
+        overrides.title ||
+        overrides.notes;
+
       const configSource = hasOverrides
         ? (config.configSourceLabel || external.source) + " + URL overrides"
         : (config.configSourceLabel || external.source);
 
       const meta = buildStaticChecks(config, overrides);
       const helper = await loadHelperStatus(config.helperUrls, config.helperBaseline);
+
       const helperChecks = helper
         ? [{
             name: "Local helper agent",
             status: "ok",
             summary: "Connected to " + helper.url,
             details: [
+              "Deep validation is available through the local helper.",
               "Agent: " + (helper.data.agent && helper.data.agent.name ? helper.data.agent.name : "Unknown"),
               "Hostname: " + (helper.data.hostname || "Unavailable"),
               "Client detection: " + (helper.data.client_detection ? helper.data.client_detection.family : "Unavailable")
@@ -816,13 +880,18 @@
         : [{
             name: "Local helper agent",
             status: "warn",
-            summary: "No helper detected on localhost",
+            summary: "Not detected — running in browser-only mode",
             details: [
               "Expected URL(s): " + (config.helperUrls || []).join(", "),
-              "The page is using browser-only checks."
+              "Deep validation is unavailable until a local helper agent is installed and reachable.",
+              "Browser-only mode can still validate browser, display, locale, and basic connectivity."
             ]
           }];
-      const endpointChecks = await Promise.all((config.endpoints || []).map((endpoint) => testEndpoint(endpoint, config.endpointTimeoutMs)));
+
+      const endpointChecks = await Promise.all(
+        (config.endpoints || []).map((endpoint) => testEndpoint(endpoint, config.endpointTimeoutMs))
+      );
+
       const allChecks = meta.checks.concat(helperChecks, endpointChecks);
       const overall = computeOverall(allChecks);
 
@@ -833,6 +902,7 @@
 
       const reportText = buildReport(meta, allChecks, config, configSource, helper);
       reportNode.textContent = reportText;
+
       lastRun = {
         timestamp: new Date().toISOString(),
         config,
