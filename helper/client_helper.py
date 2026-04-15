@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import json
-import os
 import platform
 import socket
 import subprocess
@@ -42,7 +41,7 @@ def get_ip_addresses():
         hostname = socket.gethostname()
         for item in socket.getaddrinfo(hostname, None):
             addr = item[4][0]
-            if ":" not in addr and addr not in ips and not addr.startswith("127."):
+            if ":" not in addr and not addr.startswith("127.") and addr not in ips:
                 ips.append(addr)
     except Exception:
         pass
@@ -54,6 +53,11 @@ def get_default_gateway_linux():
     return result["stdout"] if result["ok"] and result["stdout"] else ""
 
 
+def get_active_interface_linux():
+    result = run_command(["sh", "-c", "ip route | awk '/default/ {print $5; exit}'"])
+    return result["stdout"] if result["ok"] and result["stdout"] else ""
+
+
 def get_dns_servers_linux():
     servers = []
     try:
@@ -62,22 +66,39 @@ def get_dns_servers_linux():
                 line = line.strip()
                 if line.startswith("nameserver "):
                     parts = line.split()
-                    if len(parts) >= 2:
+                    if len(parts) >= 2 and parts[1] not in servers:
                         servers.append(parts[1])
     except Exception:
         pass
     return servers
 
 
-def get_active_interface_linux():
-    result = run_command(["sh", "-c", "ip route | awk '/default/ {print $5; exit}'"])
-    return result["stdout"] if result["ok"] and result["stdout"] else ""
-
-
 def get_wifi_ssid_linux():
-    # Placeholder. Later replace with nmcli / iwgetid / platform-specific logic.
+    # Try iwgetid first
     result = run_command(["sh", "-c", "iwgetid -r 2>/dev/null || true"])
-    return result["stdout"] if result["stdout"] else ""
+    if result["stdout"]:
+        return result["stdout"]
+
+    # Fallback: nmcli if available
+    result = run_command([
+        "sh", "-c",
+        "nmcli -t -f active,ssid dev wifi 2>/dev/null | awk -F: '$1==\"yes\" {print $2; exit}'"
+    ])
+    if result["stdout"]:
+        return result["stdout"]
+
+    return ""
+
+
+def classify_interface(name):
+    if not name:
+        return "unknown"
+    lowered = name.lower()
+    if lowered.startswith(("wlan", "wifi", "wl")):
+        return "wifi"
+    if lowered.startswith(("eth", "en")):
+        return "lan"
+    return "other"
 
 
 def get_network_info():
@@ -89,6 +110,7 @@ def get_network_info():
         "wifi_connected": False,
         "ssid": "",
         "active_interface": "",
+        "interface_type": "unknown",
         "ip_addresses": [],
         "default_gateway": "",
         "dns_servers": [],
@@ -102,35 +124,47 @@ def get_network_info():
         gateway = get_default_gateway_linux()
         dns_servers = get_dns_servers_linux()
         ssid = get_wifi_ssid_linux()
+        interface_type = classify_interface(active_interface)
 
         info["active_interface"] = active_interface
+        info["interface_type"] = interface_type
         info["default_gateway"] = gateway
         info["dns_servers"] = dns_servers
         info["ssid"] = ssid
+
         info["wifi_connected"] = bool(ssid)
-        info["wifi_enabled"] = True if ssid else False
-        info["lan_connected"] = bool(active_interface and active_interface.startswith(("eth", "en")))
-        info["notes"].append("Linux network inspection is currently baseline-level.")
+        info["wifi_enabled"] = bool(ssid or interface_type == "wifi")
+        info["lan_connected"] = interface_type == "lan" and bool(info["ip_addresses"])
+
+        if interface_type == "wifi" and bool(info["ip_addresses"]):
+            info["notes"].append("Active connection appears to use Wi-Fi.")
+        elif interface_type == "lan" and bool(info["ip_addresses"]):
+            info["notes"].append("Active connection appears to use wired LAN.")
+        else:
+            info["notes"].append("Active network type could not be determined with high confidence.")
+
+        if not gateway:
+            info["notes"].append("Default gateway was not detected.")
+        if not dns_servers:
+            info["notes"].append("No DNS servers were detected from resolv.conf.")
     else:
-        info["notes"].append(f"Network inspection not yet implemented for {platform.system()}.")
+        info["notes"].append(f"Network inspection is not implemented yet for {platform.system()}.")
 
     return info
 
 
 def get_certificates():
-    # Placeholder. Replace later with real certificate store / smartcard parsing.
     return {
         "store_available": False,
         "certificates": [],
         "notes": [
             "Certificate inspection is not implemented yet.",
-            "Next step: add OS12/Linux certificate enumeration and smartcard-backed cert discovery."
+            "Next step: add OS12/Linux certificate enumeration."
         ]
     }
 
 
 def get_smartcard():
-    # Placeholder. Replace later with pcsc_scan / opensc / pkcs11 integration.
     return {
         "reader_present": False,
         "card_inserted": False,
@@ -141,7 +175,7 @@ def get_smartcard():
         "status": "not_implemented",
         "notes": [
             "Smartcard inspection is not implemented yet.",
-            "Next step: add PC/SC reader detection and card/certificate enumeration."
+            "Next step: add PC/SC reader detection and card enumeration."
         ]
     }
 
@@ -149,53 +183,53 @@ def get_smartcard():
 def build_status_payload(baseline_name=""):
     return {
         "agent": {
-            "name": "client-helper",
-            "version": "0.1.0"
+          "name": "client-helper",
+          "version": "0.2.0"
         },
         "hostname": socket.gethostname(),
         "os": {
-            "system": platform.system(),
-            "release": platform.release(),
-            "version": platform.version(),
-            "machine": platform.machine()
+          "system": platform.system(),
+          "release": platform.release(),
+          "version": platform.version(),
+          "machine": platform.machine()
         },
         "baseline": {
-            "name": baseline_name or "Default"
+          "name": baseline_name or "Default"
         },
         "client_detection": {
-            "family": f"{platform.system()} host"
+          "family": f"{platform.system()} host"
         },
         "categories": {
-            "host": {"status": "ok"},
-            "network": {"status": "ok"},
-            "certificates": {"status": "warn"},
-            "smartcard": {"status": "warn"}
+          "host": {"status": "ok"},
+          "network": {"status": "ok"},
+          "certificates": {"status": "warn"},
+          "smartcard": {"status": "warn"}
         },
         "checks": [
-            {
-                "name": "Network summary",
-                "status": "ok",
-                "summary": "Helper can provide host-level network data.",
-                "details": [
-                    "Use /network for interface, IP, gateway, DNS, and Wi-Fi summary."
-                ]
-            },
-            {
-                "name": "Certificates",
-                "status": "warn",
-                "summary": "Certificate inspection not implemented yet.",
-                "details": [
-                    "Use /certificates after certificate enumeration is implemented."
-                ]
-            },
-            {
-                "name": "Smartcard",
-                "status": "warn",
-                "summary": "Smartcard inspection not implemented yet.",
-                "details": [
-                    "Use /smartcard after PC/SC integration is implemented."
-                ]
-            }
+          {
+            "name": "Network summary",
+            "status": "ok",
+            "summary": "Helper can provide host-level network data.",
+            "details": [
+              "Use /network for interface, IP, gateway, DNS, and Wi-Fi summary."
+            ]
+          },
+          {
+            "name": "Certificates",
+            "status": "warn",
+            "summary": "Certificate inspection not implemented yet.",
+            "details": [
+              "Use /certificates after certificate enumeration is implemented."
+            ]
+          },
+          {
+            "name": "Smartcard",
+            "status": "warn",
+            "summary": "Smartcard inspection not implemented yet.",
+            "details": [
+              "Use /smartcard after PC/SC integration is implemented."
+            ]
+          }
         ]
     }
 

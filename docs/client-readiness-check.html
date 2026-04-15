@@ -519,6 +519,19 @@
       return merged;
     }
 
+    async function fetchHelperJson(baseUrl, path) {
+      try {
+        const target = new URL(path, baseUrl);
+        const response = await fetch(target.toString(), { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("Helper returned " + response.status);
+        }
+        return await response.json();
+      } catch (error) {
+        return null;
+      }
+    }
+
     async function loadHelperStatus(helperUrls, helperBaseline) {
       const urls = Array.isArray(helperUrls) && helperUrls.length ? helperUrls : [];
       for (const url of urls) {
@@ -532,7 +545,20 @@
             throw new Error("Helper returned " + response.status);
           }
           const data = await response.json();
-          return { url: target.toString(), data };
+
+          const baseUrl = new URL(".", target.toString()).toString();
+          const network = await fetchHelperJson(baseUrl, "./network");
+          const certificates = await fetchHelperJson(baseUrl, "./certificates");
+          const smartcard = await fetchHelperJson(baseUrl, "./smartcard");
+
+          return {
+            url: target.toString(),
+            baseUrl,
+            data,
+            network,
+            certificates,
+            smartcard
+          };
         } catch (error) {
           // try next URL
         }
@@ -888,11 +914,44 @@
             ]
           }];
 
+      const networkChecks = helper && helper.network
+        ? [{
+            name: "Network",
+            status:
+              helper.network.active_interface && helper.network.ip_addresses && helper.network.ip_addresses.length
+                ? "ok"
+                : "warn",
+            summary:
+              helper.network.active_interface
+                ? "Active interface: " + helper.network.active_interface
+                : "No active interface detected",
+            details: [
+              "Interface type: " + (helper.network.interface_type || "Unavailable"),
+              "IP addresses: " + ((helper.network.ip_addresses || []).join(", ") || "Unavailable"),
+              "Default gateway: " + (helper.network.default_gateway || "Unavailable"),
+              "DNS servers: " + ((helper.network.dns_servers || []).join(", ") || "Unavailable"),
+              "LAN connected: " + String(!!helper.network.lan_connected),
+              "Wi-Fi enabled: " + String(!!helper.network.wifi_enabled),
+              "Wi-Fi connected: " + String(!!helper.network.wifi_connected),
+              "SSID: " + (helper.network.ssid || "Unavailable")
+            ].concat((helper.network.notes || []).map((note) => "Note: " + note))
+          }]
+        : helper
+          ? [{
+              name: "Network",
+              status: "warn",
+              summary: "Network endpoint returned no data",
+              details: [
+                "The helper is running, but /network did not return usable data."
+              ]
+            }]
+          : [];
+
       const endpointChecks = await Promise.all(
         (config.endpoints || []).map((endpoint) => testEndpoint(endpoint, config.endpointTimeoutMs))
       );
 
-      const allChecks = meta.checks.concat(helperChecks, endpointChecks);
+      const allChecks = meta.checks.concat(helperChecks, networkChecks, endpointChecks);
       const overall = computeOverall(allChecks);
 
       renderCategorySummary(helper && helper.data ? helper.data.categories : {});
