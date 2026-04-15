@@ -1,15 +1,38 @@
 {
-  "environmentName": "Default environment",
-  "title": "Client Readiness Check",
-  "description": "Browser-side readiness validation for IGEL OS 12, eLux 7, and similar client platforms.",
-  "configSourceLabel": "client-readiness-config.json",
-  "notes": "Customize this file with your environment name, internal endpoints, and expected baseline values before sharing the page with clients.",
-  "recommendedMinWidth": 1280,
-  "recommendedMinHeight": 800,
-  "endpointTimeoutMs": 8000,
-  "helperUrls": [
-    "http://127.0.0.1:38765/status"
+  "environment": "IGEL OS12 – Sweden baseline",
+  "targetClient": "igel-os12",
+  "expectations": {
+    "locale": "sv-SE",
+    "timezone": "Europe/Stockholm",
+    "minScreen": {
+      "width": 1280,
+      "height": 800
+    }
+  },
+  "endpoints": [
+    {
+      "name": "Internet connectivity",
+      "url": "https://example.com",
+      "expected": "reachable"
+    },
+    {
+      "name": "Documentation reachability",
+      "url": "https://www.google.com",
+      "expected": "reachable"
+    },
+    {
+      "name": "Internal gateway (example)",
+      "url": "https://gateway.company.local",
+      "expected": "reachable"
+    },
+    {
+      "name": "Citrix StoreFront (example)",
+      "url": "https://storefront.company.local",
+      "expected": "reachable"
+    }
   ],
-  "helperBaseline": "",
-  "endpoints": []
+  "helper": {
+    "expected": true,
+    "endpoint": "http://127.0.0.1:38765/status"
+  }
 }

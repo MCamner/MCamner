@@ -264,5 +264,56 @@ Outside of tech:
 
 ## 🧩 Motto
 
+<<<<<<< HEAD
 **Build things that work. Then make them impossible to break.**
 
+||||||| parent of 9df76fc (update documentation)
+> Build things that work. Then make them impossible to break.
+=======
+> Build things that work. Then make them impossible to break.
+
+## Client Readiness Check
+
+A browser-based readiness check designed for locked-down client environments such as IGEL OS 12.
+
+### Why it exists
+
+In thin client environments, support teams often need a fast way to validate whether a client is usable before escalating deeper issues.
+
+This tool is built around a simple model:
+
+- **Browser for baseline checks**
+- **Local helper for deep validation**
+
+### What browser-only mode can validate
+
+- Browser and protocol
+- Display and viewport
+- Locale and language
+- Basic connectivity signals
+- Basic endpoint reachability
+
+### What requires a local helper
+
+- Local certificate validation
+- Smartcard detection
+- Citrix Workspace related checks
+- Deeper OS-level validation
+
+### Real-world test
+
+The page was tested on a real IGEL OS 12 client.
+
+Result:
+- Browser-based validation worked correctly
+- The client was detected as a generic Linux thin client, which is expected in a restricted browser environment
+- Locale was reported as `sv-SE`
+- Timezone was reported as `Europe/Berlin`
+- No localhost helper was available, so the page correctly fell back to browser-only mode
+
+### Case
+
+See the full write-up here:
+
+[Client Readiness Check case](./cases/client-readiness-check.md)
+>>>>>>> 9df76fc (update documentation)
