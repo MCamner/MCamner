@@ -6,6 +6,27 @@ Focused on **EUC, Zero Trust, and automation in complex environments**.
 
 ---
 
+## 🚀 Featured: macos-scripts
+
+<p align="center">
+  <img src="docs/mqlaunch-demo.png" alt="mqlaunch demo" width="800"/>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/status-active-success" />
+  <img src="https://img.shields.io/badge/type-CLI-blue" />
+  <img src="https://img.shields.io/badge/platform-macOS-lightgrey" />
+  <img src="https://img.shields.io/badge/focus-automation-orange" />
+</p>
+
+A practical macOS toolkit built around **automation, workflows, and terminal-driven operations**.
+
+At the core is:
+
+> **mqlaunch — a modular CLI that turns scattered terminal workflows into one structured system**
+
+---
+
 ## 💡 TL;DR
 
 I build systems that:
