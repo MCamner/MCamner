@@ -1,6 +1,10 @@
 {
   "environment": "IGEL OS12 – Sweden baseline",
+  "environmentName": "IGEL OS12 – Sweden",
   "targetClient": "igel-os12",
+  "title": "Client Readiness Check",
+  "description": "Browser-side readiness validation for IGEL OS 12, eLux 7, and similar client platforms.",
+  "notes": "Configured for Sweden baseline. Override with URL parameters such as ?env=Pilot or ?client=igel-os12.",
   "expectations": {
     "locale": "sv-SE",
     "timezone": "Europe/Stockholm",
@@ -9,6 +13,7 @@
       "height": 800
     }
   },
+  "helperUrls": ["http://127.0.0.1:38765/status"],
   "endpoints": [
     {
       "name": "Internet connectivity",
@@ -30,9 +35,5 @@
       "url": "https://storefront.company.local",
       "expected": "reachable"
     }
-  ],
-  "helper": {
-    "expected": true,
-    "endpoint": "http://127.0.0.1:38765/status"
-  }
+  ]
 }

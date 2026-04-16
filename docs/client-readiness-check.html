@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -165,6 +165,11 @@
       cursor: pointer;
       background: var(--accent);
       color: white;
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
     }
 
     button.secondary {
@@ -341,10 +346,10 @@
         </div>
       </div>
       <div class="toolbar">
-        <button id="rerunButton" type="button">Run Checks Again</button>
+        <button id="rerunButton" type="button">Run Checks</button>
         <button id="copyButton" class="secondary" type="button">Copy Report</button>
-        <button id="downloadTextButton" class="secondary" type="button">Download TXT</button>
-        <button id="downloadJsonButton" class="secondary" type="button">Download JSON</button>
+        <button id="downloadTextButton" class="secondary" type="button" disabled>Download TXT</button>
+        <button id="downloadJsonButton" class="secondary" type="button" disabled>Download JSON</button>
       </div>
     </section>
 
@@ -360,13 +365,14 @@
       </div>
 
       <aside class="panel">
-        <h2>What v2 adds</h2>
+        <h2>About the checks</h2>
         <ul class="notes">
-          <li>External JSON config support for environment name, notes, and endpoint lists.</li>
-          <li>Query-string overrides for environment, client family, and endpoints.</li>
-          <li>Improved client detection with visible confidence level.</li>
-          <li>Downloadable reports as both text and JSON for support or ticket workflows.</li>
-          <li>Optional local helper-agent integration on <code>localhost</code> for host-level signals.</li>
+          <li><strong>Client family</strong> – identified via User Agent. Low confidence is expected on generic Linux clients without an IGEL-specific UA string.</li>
+          <li><strong>Browser and protocol</strong> – HTTPS or localhost is required for a secure context. HTTP triggers a warning.</li>
+          <li><strong>Display and resolution</strong> – validated against the configured minimum (default 1280×800).</li>
+          <li><strong>Locale and timezone</strong> – compared against <code>expectations</code> in config. A mismatch produces a warning, not a failure.</li>
+          <li><strong>Endpoint tests</strong> – use <code>no-cors fetch</code>. A reachable URL always reports OK regardless of HTTP status code — this is a browser sandbox limitation.</li>
+          <li><strong>Local helper agent</strong> – if the agent is running on <code>localhost:38765</code>, deeper OS-level checks for network, certificates, and smartcard become available.</li>
         </ul>
 
         <h2 style="margin-top: 24px;">Config</h2>
@@ -377,7 +383,7 @@
         </div>
 
         <h2 style="margin-top: 24px;">Report</h2>
-        <div id="report" class="report">Running checks...</div>
+        <div id="report" class="report" aria-live="polite" aria-label="Report">Running checks...</div>
         <p class="footer-note">
           Tip: this page now reads <code>client-readiness-config.json</code> by default. You can also override
           values with URL parameters such as <code>?env=Pilot</code>, <code>?client=igel</code>, or
@@ -497,9 +503,14 @@
         }
       };
 
-      merged.helperUrls = Array.isArray(external.helperUrls)
-        ? external.helperUrls.slice()
-        : base.helperUrls.slice();
+      // Support both helperUrls (array) and helper.endpoint (legacy single string) in config
+      if (Array.isArray(external.helperUrls) && external.helperUrls.length) {
+        merged.helperUrls = external.helperUrls.slice();
+      } else if (external.helper && external.helper.endpoint) {
+        merged.helperUrls = [external.helper.endpoint];
+      } else {
+        merged.helperUrls = base.helperUrls.slice();
+      }
 
       if (overrides.environmentName) {
         merged.environmentName = overrides.environmentName;
@@ -869,7 +880,10 @@
     }
 
     async function runChecks() {
-      reportNode.textContent = "Running checks...";
+      reportNode.textContent = "Kör kontroller...";
+      const rerunBtn = document.getElementById("rerunButton");
+      rerunBtn.disabled = true;
+      rerunBtn.textContent = "Running checks...";
 
       const overrides = getQueryOverrides();
       const external = await loadExternalConfig();
@@ -972,6 +986,11 @@
         overall,
         reportText
       };
+
+      rerunBtn.disabled = false;
+      rerunBtn.textContent = "Run Checks Again";
+      document.getElementById("downloadTextButton").disabled = false;
+      document.getElementById("downloadJsonButton").disabled = false;
     }
 
     document.getElementById("rerunButton").addEventListener("click", runChecks);
@@ -980,7 +999,7 @@
       try {
         await navigator.clipboard.writeText(reportNode.textContent);
         const button = document.getElementById("copyButton");
-        button.textContent = "Copied";
+        button.textContent = "Copied!";
         setTimeout(() => {
           button.textContent = "Copy Report";
         }, 1200);
