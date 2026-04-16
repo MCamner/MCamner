@@ -171,6 +171,34 @@ show_recent_commits() {
   printf '\n'
 }
 
+create_release() {
+  if has_worktree_changes; then
+    printf '\nCannot create release: uncommitted changes exist.\n'
+    printf 'Please commit or stash changes first.\n'
+    return
+  fi
+
+  local version tag_message
+  printf '\nRelease version (e.g., v1.0.0): '
+  read -r version
+
+  if [ -z "$version" ]; then
+    printf 'Release cancelled.\n'
+    return
+  fi
+
+  printf 'Release message: '
+  read -r tag_message
+
+  if [ -z "$tag_message" ]; then
+    tag_message="Release $version"
+  fi
+
+  run_git tag -a "$version" -m "$tag_message"
+  run_git push origin "$version"
+  printf '\nRelease %s created and pushed.\n' "$version"
+}
+
 print_help() {
   printf '\nQuick keys:\n'
   printf '  1  Show full status\n'
@@ -181,6 +209,7 @@ print_help() {
   printf '  6  Add, commit, and push\n'
   printf '  s  Smart sync: add, commit, pull --rebase, push\n'
   printf '  l  Show last 5 commits\n'
+  printf '  r  Create and push release tag\n'
   printf '  q  Quit\n'
 }
 
@@ -196,6 +225,7 @@ menu() {
     printf '6. Add, commit, and push\n'
     printf 's. Smart sync\n'
     printf 'l. Recent commits\n'
+    printf 'r. Create release\n'
     printf 'h. Help\n'
     printf 'q. Quit\n\n'
     printf 'Choose an option: '
@@ -234,6 +264,10 @@ menu() {
         ;;
       l|L)
         show_recent_commits
+        pause
+        ;;
+      r|R)
+        create_release
         pause
         ;;
       h|H)
