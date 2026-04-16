@@ -63,6 +63,45 @@ At the core is:
 
 ---
 
+## 🧩 Architecture
+
+<p align="center">
+  <img src="docs/macos-scripts-architecture.png" alt="macos-scripts architecture" width="900"/>
+</p>
+
+```mermaid
+## 🧩 Architecture
+
+```mermaid
+flowchart TD
+    U[User] --> M[mqlaunch<br/>CLI entrypoint]
+    M --> W[Workflow layer]
+    W --> D[Dev]
+    W --> G[Git]
+    W --> N[Network]
+    W --> P[Performance]
+    W --> T[Tools]
+    W --> S[System]
+
+    D --> X[Scripts and utilities]
+    G --> X
+    N --> X
+    P --> X
+    T --> X
+    S --> X
+
+    X --> O[macOS environment]
+```
+
+**What this means**
+
+* `mqlaunch` is the single entrypoint
+* workflows provide structured execution
+* scripts stay modular underneath
+* the system remains extensible without becoming chaotic
+
+
+
 ## 🧩 Architecture (Simplified)
 
 ```
