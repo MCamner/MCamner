@@ -45,16 +45,16 @@ The page was tested on a real IGEL OS 12 client.
 
 ### Result summary
 
-**Timestamp:** 2026-04-14T12:00:11.340Z  
-**Environment:** Default environment  
-**Detected client:** Linux thin client (generic)  
-**Browser:** Google Chrome / Chromium  
-**Protocol:** HTTPS  
-**Screen:** 1920x1080  
-**Viewport:** 1922x947  
-**Locale:** sv-SE  
-**Timezone:** Europe/Berlin  
-**Online:** true  
+**Timestamp:** 2026-04-14T12:00:11.340Z
+**Environment:** Default environment
+**Detected client:** Linux thin client (generic)
+**Browser:** Google Chrome / Chromium
+**Protocol:** HTTPS
+**Screen:** 1920x1080
+**Viewport:** 1922x947
+**Locale:** sv-SE
+**Timezone:** Europe/Berlin
+**Online:** true
 **Local helper:** Not available
 
 ### Check interpretation
@@ -130,11 +130,11 @@ The result is a readiness check that:
 
 Recommended next improvements:
 
-1. Add clearer UI language for browser-only mode  
-2. Allow explicit client mode such as `igel-os12`  
-3. Add expected locale/timezone checks per environment  
-4. Add helper-based validation for certificates and smartcards  
-5. Add more environment-specific endpoint tests  
+1. Add clearer UI language for browser-only mode
+2. Allow explicit client mode such as `igel-os12`
+3. Add expected locale/timezone checks per environment
+4. Add helper-based validation for certificates and smartcards
+5. Add more environment-specific endpoint tests
 6. Improve result grouping into:
    - Browser baseline
    - Deep validation

@@ -6,6 +6,27 @@ Focused on **EUC, Zero Trust, and automation in complex environments**.
 
 ---
 
+## 🚀 Featured: Client Readiness Check
+
+A browser-based client readiness validation tool for endpoint environments.
+
+<p align="center">
+  <img src="https://img.shields.io/badge/status-active-success" />
+  <img src="https://img.shields.io/badge/type-Web%20App-blue" />
+  <img src="https://img.shields.io/badge/platform-Cross--platform-lightgrey" />
+  <img src="https://img.shields.io/badge/focus-Validation-orange" />
+</p>
+
+Checks browser signals, network connectivity, certificates, and Citrix readiness. Includes a Python helper agent for host-level data.
+
+### Quick Start
+
+1. Open `docs/index.html` in your browser.
+2. Run the Python agent: `python3 helper/client_readiness_agent.py`
+3. Perform checks on the page.
+
+---
+
 ## 🚀 Featured: macos-scripts
 
 <p align="center">

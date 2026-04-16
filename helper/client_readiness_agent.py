@@ -7,6 +7,7 @@ import platform
 import socket
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from typing import Any, Dict, List
 from urllib.parse import parse_qs, urlparse
 
 
@@ -20,11 +21,11 @@ def utc_now():
     return datetime.now(timezone.utc).isoformat()
 
 
-def status_priority(status):
+def status_priority(status: str) -> int:
     return {"fail": 0, "warn": 1, "ok": 2}.get(status, 1)
 
 
-def collapse_status(statuses):
+def collapse_status(statuses: List[str]) -> str:
     result = "ok"
     for status in statuses:
         if status_priority(status) < status_priority(result):
@@ -32,7 +33,7 @@ def collapse_status(statuses):
     return result
 
 
-def read_json_file(path):
+def read_json_file(path: str) -> Dict[str, Any]:
     try:
         with open(path, "r", encoding="utf-8") as handle:
             return {"available": True, "path": path, "values": json.load(handle)}
@@ -53,7 +54,7 @@ def list_available_baselines():
         results[key] = {
             "available": payload["available"],
             "path": path,
-            "name": payload["values"].get("name", key) if payload["available"] else key
+            "name": payload["values"].get("name", key) if payload["available"] else key,
         }
     return results
 
@@ -88,8 +89,19 @@ def read_os_release():
 def detect_client_family(os_release):
     release_blob = " ".join(os_release.get("values", {}).values()).lower()
     heuristics = [
-        ("IGEL (possible)", any(os.path.exists(path) for path in ("/etc/igel", "/opt/IGEL", "/opt/igel"))),
-        ("eLux (possible)", any(os.path.exists(path) for path in ("/etc/elux", "/etc/unicon", "/opt/unicon"))),
+        (
+            "IGEL (possible)",
+            any(
+                os.path.exists(path) for path in ("/etc/igel", "/opt/IGEL", "/opt/igel")
+            ),
+        ),
+        (
+            "eLux (possible)",
+            any(
+                os.path.exists(path)
+                for path in ("/etc/elux", "/etc/unicon", "/opt/unicon")
+            ),
+        ),
     ]
 
     for label, matched in heuristics:
@@ -133,7 +145,7 @@ def path_summary(paths):
     present = [path for path in paths if file_exists(path)]
     return {
         "present": present,
-        "missing": [path for path in paths if path not in present]
+        "missing": [path for path in paths if path not in present],
     }
 
 
@@ -175,7 +187,15 @@ def find_proxy_hints():
     return hints
 
 
-def make_check(category, name, status, summary, details, baseline_required=False, recommended_action=""):
+def make_check(
+    category,
+    name,
+    status,
+    summary,
+    details,
+    baseline_required=False,
+    recommended_action="",
+):
     return {
         "category": category,
         "name": name,
@@ -183,7 +203,7 @@ def make_check(category, name, status, summary, details, baseline_required=False
         "summary": summary,
         "details": details,
         "baseline_required": baseline_required,
-        "recommended_action": recommended_action
+        "recommended_action": recommended_action,
     }
 
 
@@ -195,7 +215,7 @@ def base_checks(os_release, addresses, detection):
             "ok",
             "Local helper agent is running",
             ["Read-only Python helper is serving JSON on localhost."],
-            recommended_action="Keep the agent running locally on the client."
+            recommended_action="Keep the agent running locally on the client.",
         ),
         make_check(
             "agent",
@@ -203,26 +223,34 @@ def base_checks(os_release, addresses, detection):
             "ok" if socket.gethostname() else "warn",
             socket.gethostname() or "Hostname unavailable",
             ["Collected from Python socket hostname lookup."],
-            recommended_action="Ensure hostname is available for support identification."
+            recommended_action="Ensure hostname is available for support identification.",
         ),
         make_check(
             "os",
             "OS release",
             "ok" if os_release["available"] else "warn",
-            os_release["path"] if os_release["available"] else "Could not read /etc/os-release",
+            os_release["path"]
+            if os_release["available"]
+            else "Could not read /etc/os-release",
             [
-                "PRETTY_NAME: " + os_release["values"].get("PRETTY_NAME", "Unavailable"),
-                "ID: " + os_release["values"].get("ID", "Unavailable")
+                "PRETTY_NAME: "
+                + os_release["values"].get("PRETTY_NAME", "Unavailable"),
+                "ID: " + os_release["values"].get("ID", "Unavailable"),
             ],
-            recommended_action="Verify OS identification path or use platform-specific paths if /etc/os-release is unavailable."
+            recommended_action=(
+                "Verify OS identification path or use platform-specific paths "
+                "if /etc/os-release is unavailable."
+            ),
         ),
         make_check(
             "network",
             "IP addresses",
             "ok" if addresses else "warn",
-            ", ".join(addresses) if addresses else "No non-loopback IPv4 addresses found",
+            ", ".join(addresses)
+            if addresses
+            else "No non-loopback IPv4 addresses found",
             ["Collected from local hostname address resolution."],
-            recommended_action="Check network attachment, hostname resolution, and interface state."
+            recommended_action="Check network attachment, hostname resolution, and interface state.",
         ),
         make_check(
             "os",
@@ -230,8 +258,8 @@ def base_checks(os_release, addresses, detection):
             "ok" if detection["confidence"] == "high" else "warn",
             detection["family"] + " (" + detection["confidence"] + " confidence)",
             ["Based on local paths and /etc/os-release heuristics."],
-            recommended_action="Add clearer platform-specific paths or baseline expectations if confidence remains low."
-        )
+            recommended_action="Add clearer platform-specific paths or baseline expectations if confidence remains low.",
+        ),
     ]
 
 
@@ -245,26 +273,40 @@ def network_checks():
             "network",
             "Default route",
             "ok" if route_info["has_default_route"] else "warn",
-            "Default route present" if route_info["has_default_route"] else "No default route detected",
-            ["/proc/net/route checked" if route_info["available"] else "/proc/net/route not available on this platform"],
-            recommended_action="Check routing or platform-specific route inspection."
+            "Default route present"
+            if route_info["has_default_route"]
+            else "No default route detected",
+            [
+                "/proc/net/route checked"
+                if route_info["available"]
+                else "/proc/net/route not available on this platform"
+            ],
+            recommended_action="Check routing or platform-specific route inspection.",
         ),
         make_check(
             "network",
             "DNS resolvers",
             "ok" if resolv_info["nameservers"] else "warn",
-            ", ".join(resolv_info["nameservers"]) if resolv_info["nameservers"] else "No nameservers found",
-            ["/etc/resolv.conf parsed" if resolv_info["available"] else "/etc/resolv.conf not available"],
-            recommended_action="Ensure DNS resolvers are present and aligned with the expected client baseline."
+            ", ".join(resolv_info["nameservers"])
+            if resolv_info["nameservers"]
+            else "No nameservers found",
+            [
+                "/etc/resolv.conf parsed"
+                if resolv_info["available"]
+                else "/etc/resolv.conf not available"
+            ],
+            recommended_action="Ensure DNS resolvers are present and aligned with the expected client baseline.",
         ),
         make_check(
             "network",
             "Proxy hints",
             "warn" if proxy_hints else "ok",
             "Proxy variables present" if proxy_hints else "No proxy variables detected",
-            proxy_hints if proxy_hints else ["No http_proxy/https_proxy environment hints found."],
-            recommended_action="Check whether a proxy is expected for browser, IdP, or Citrix access in this environment."
-        )
+            proxy_hints
+            if proxy_hints
+            else ["No http_proxy/https_proxy environment hints found."],
+            recommended_action="Check whether a proxy is expected for browser, IdP, or Citrix access in this environment.",
+        ),
     ]
 
 
@@ -273,7 +315,7 @@ def browser_checks():
         "/usr/bin/chromium",
         "/usr/bin/chromium-browser",
         "/usr/bin/google-chrome",
-        "/usr/bin/firefox"
+        "/usr/bin/firefox",
     ]
     info = path_summary(browser_paths)
     return [
@@ -281,9 +323,15 @@ def browser_checks():
             "browser",
             "Known browser binaries",
             "ok" if info["present"] else "warn",
-            ", ".join(info["present"]) if info["present"] else "No known browser paths found",
-            ["Present: " + ", ".join(info["present"]) if info["present"] else "No matching browser paths detected."],
-            recommended_action="Verify which browser is installed or adjust baseline paths for the client platform."
+            ", ".join(info["present"])
+            if info["present"]
+            else "No known browser paths found",
+            [
+                "Present: " + ", ".join(info["present"])
+                if info["present"]
+                else "No matching browser paths detected."
+            ],
+            recommended_action="Verify which browser is installed or adjust baseline paths for the client platform.",
         )
     ]
 
@@ -292,7 +340,7 @@ def certificate_checks():
     certificate_targets = {
         "Browser certificates": ["/setup/cacerts/browser", "/setup/cacerts"],
         "Citrix certificates": ["/setup/cacerts/intcerts", "/setup/cacerts"],
-        "Smartcard login certificates": ["/setup/cacerts/login"]
+        "Smartcard login certificates": ["/setup/cacerts/login"],
     }
 
     checks = []
@@ -303,28 +351,37 @@ def certificate_checks():
                 "certificates",
                 name,
                 "ok" if info["present"] else "warn",
-                ", ".join(info["present"]) if info["present"] else "No expected path present",
-                ["Missing: " + ", ".join(info["missing"]) if info["missing"] else "All expected paths are present."],
-                recommended_action="Verify required CA, browser, Citrix, or smartcard certificate locations."
+                ", ".join(info["present"])
+                if info["present"]
+                else "No expected path present",
+                [
+                    "Missing: " + ", ".join(info["missing"])
+                    if info["missing"]
+                    else "All expected paths are present."
+                ],
+                recommended_action="Verify required CA, browser, Citrix, or smartcard certificate locations.",
             )
         )
     return checks
 
 
 def citrix_checks():
-    targets = [
-        "/setup/ica",
-        "/setup/ica/AuthManConfig.xml"
-    ]
+    targets = ["/setup/ica", "/setup/ica/AuthManConfig.xml"]
     info = path_summary(targets)
     return [
         make_check(
             "citrix",
             "Citrix config paths",
             "ok" if info["present"] else "warn",
-            ", ".join(info["present"]) if info["present"] else "No Citrix config paths detected",
-            ["Missing: " + ", ".join(info["missing"]) if info["missing"] else "All expected Citrix paths are present."],
-            recommended_action="Validate Citrix Workspace / ICA configuration paths on the client."
+            ", ".join(info["present"])
+            if info["present"]
+            else "No Citrix config paths detected",
+            [
+                "Missing: " + ", ".join(info["missing"])
+                if info["missing"]
+                else "All expected Citrix paths are present."
+            ],
+            recommended_action="Validate Citrix Workspace / ICA configuration paths on the client.",
         )
     ]
 
@@ -346,9 +403,15 @@ def management_checks(detection):
             "management",
             label,
             "ok" if info["present"] else "warn",
-            ", ".join(info["present"]) if info["present"] else "No known management paths detected",
-            ["Missing: " + ", ".join(info["missing"]) if info["missing"] else "Management-relevant paths found."],
-            recommended_action="Verify UMS, Scout, or local management-relevant paths for the expected client family."
+            ", ".join(info["present"])
+            if info["present"]
+            else "No known management paths detected",
+            [
+                "Missing: " + ", ".join(info["missing"])
+                if info["missing"]
+                else "Management-relevant paths found."
+            ],
+            recommended_action="Verify UMS, Scout, or local management-relevant paths for the expected client family.",
         )
     ]
 
@@ -365,7 +428,7 @@ def summarize_categories(checks):
     for category, category_checks in categories.items():
         result[category] = {
             "status": collapse_status([check["status"] for check in category_checks]),
-            "count": len(category_checks)
+            "count": len(category_checks),
         }
     return result
 
@@ -377,17 +440,30 @@ def apply_baseline(checks, detection, baseline, dns_info, route_info, proxy_hint
             if check["name"] == "Client family":
                 actual = detection["family"].lower()
                 if expected_family in actual:
-                    check["details"].append("Baseline: client family matches expected value.")
+                    check["details"].append(
+                        "Baseline: client family matches expected value."
+                    )
                 else:
                     check["status"] = "fail"
                     check["baseline_required"] = True
-                    check["details"].append("Baseline mismatch: expected client family containing '" + baseline["expectedClientFamily"] + "'.")
-                    check["recommended_action"] = "Confirm device family or assign the correct baseline."
+                    check["details"].append(
+                        "Baseline mismatch: expected client family containing '"
+                        + baseline["expectedClientFamily"]
+                        + "'."
+                    )
+                    check[
+                        "recommended_action"
+                    ] = "Confirm device family or assign the correct baseline."
 
     required_paths = baseline.get("requiredPathsByCategory", {})
     for category, paths in required_paths.items():
         for path in paths:
-            matching = [check for check in checks if check["category"] == category and path in " ".join(check["details"] + [check["summary"]])]
+            matching = [
+                check
+                for check in checks
+                if check["category"] == category
+                and path in " ".join(check["details"] + [check["summary"]])
+            ]
             if matching:
                 for check in matching:
                     check["baseline_required"] = True
@@ -398,9 +474,11 @@ def apply_baseline(checks, detection, baseline, dns_info, route_info, proxy_hint
                         "Baseline required path",
                         "fail",
                         "Required path missing: " + path,
-                        ["Baseline requires this path, but no existing check reported it present."],
+                        [
+                            "Baseline requires this path, but no existing check reported it present."
+                        ],
                         baseline_required=True,
-                        recommended_action="Verify that the required path exists on the client or update the baseline."
+                        recommended_action="Verify that the required path exists on the client or update the baseline.",
                     )
                 )
 
@@ -413,10 +491,16 @@ def apply_baseline(checks, detection, baseline, dns_info, route_info, proxy_hint
                 "network",
                 "Baseline DNS resolvers",
                 "ok" if not missing_dns else "fail",
-                "All required DNS resolvers present" if not missing_dns else "Missing required DNS resolvers",
-                ["Missing: " + ", ".join(missing_dns) if missing_dns else "Required resolvers are present."],
+                "All required DNS resolvers present"
+                if not missing_dns
+                else "Missing required DNS resolvers",
+                [
+                    "Missing: " + ", ".join(missing_dns)
+                    if missing_dns
+                    else "Required resolvers are present."
+                ],
                 baseline_required=True,
-                recommended_action="Align resolver configuration with the expected environment baseline."
+                recommended_action="Align resolver configuration with the expected environment baseline.",
             )
         )
 
@@ -426,10 +510,12 @@ def apply_baseline(checks, detection, baseline, dns_info, route_info, proxy_hint
                 "network",
                 "Baseline default route",
                 "ok" if route_info.get("has_default_route") else "fail",
-                "Default route present" if route_info.get("has_default_route") else "Default route required by baseline but not detected",
+                "Default route present"
+                if route_info.get("has_default_route")
+                else "Default route required by baseline but not detected",
                 ["Baseline requires a default route."],
                 baseline_required=True,
-                recommended_action="Verify routing or use a platform-specific route check if this is a managed client."
+                recommended_action="Verify routing or use a platform-specific route check if this is a managed client.",
             )
         )
 
@@ -439,10 +525,14 @@ def apply_baseline(checks, detection, baseline, dns_info, route_info, proxy_hint
                 "network",
                 "Baseline proxy expectation",
                 "ok" if proxy_hints else "fail",
-                "Proxy hints detected" if proxy_hints else "Proxy hints required by baseline but not detected",
-                proxy_hints if proxy_hints else ["No proxy environment variables found."],
+                "Proxy hints detected"
+                if proxy_hints
+                else "Proxy hints required by baseline but not detected",
+                proxy_hints
+                if proxy_hints
+                else ["No proxy environment variables found."],
                 baseline_required=True,
-                recommended_action="Verify proxy settings for browser, IdP, and Citrix access."
+                recommended_action="Verify proxy settings for browser, IdP, and Citrix access.",
             )
         )
 
@@ -450,7 +540,11 @@ def apply_baseline(checks, detection, baseline, dns_info, route_info, proxy_hint
 
 
 def collect_status(selected_baseline=None):
-    baseline_path = resolve_baseline_path(selected_baseline) if selected_baseline else CURRENT_BASELINE_PATH
+    baseline_path = (
+        resolve_baseline_path(selected_baseline)
+        if selected_baseline
+        else CURRENT_BASELINE_PATH
+    )
     baseline_file = read_json_file(baseline_path)
     baseline = baseline_file["values"] if baseline_file["available"] else {}
     os_release = read_os_release()
@@ -467,17 +561,23 @@ def collect_status(selected_baseline=None):
     checks.extend(certificate_checks())
     checks.extend(citrix_checks())
     checks.extend(management_checks(detection))
-    checks = apply_baseline(checks, detection, baseline, dns_info, route_info, proxy_hints)
+    checks = apply_baseline(
+        checks, detection, baseline, dns_info, route_info, proxy_hints
+    )
 
     categories = summarize_categories(checks)
-    overall = collapse_status([entry["status"] for entry in categories.values()]) if categories else "warn"
+    overall = (
+        collapse_status([entry["status"] for entry in categories.values()])
+        if categories
+        else "warn"
+    )
 
     return {
         "timestamp": utc_now(),
         "agent": {
             "name": "client-readiness-agent",
             "version": "0.4.0",
-            "mode": "read-only"
+            "mode": "read-only",
         },
         "hostname": socket.gethostname(),
         "platform": {
@@ -485,14 +585,15 @@ def collect_status(selected_baseline=None):
             "release": platform.release(),
             "version": platform.version(),
             "machine": platform.machine(),
-            "python": platform.python_version()
+            "python": platform.python_version(),
         },
         "baseline": {
-          "available": baseline_file["available"],
-          "path": baseline_file["path"],
-          "name": baseline.get("name", os.path.basename(baseline_path)),
-          "notes": baseline.get("notes", ""),
-          "selected": selected_baseline or os.path.splitext(os.path.basename(baseline_path))[0]
+            "available": baseline_file["available"],
+            "path": baseline_file["path"],
+            "name": baseline.get("name", os.path.basename(baseline_path)),
+            "notes": baseline.get("notes", ""),
+            "selected": selected_baseline
+            or os.path.splitext(os.path.basename(baseline_path))[0],
         },
         "available_baselines": list_available_baselines(),
         "os_release": os_release,
@@ -500,7 +601,7 @@ def collect_status(selected_baseline=None):
         "ip_addresses": addresses,
         "overall_status": overall,
         "categories": categories,
-        "checks": checks
+        "checks": checks,
     }
 
 
@@ -537,10 +638,20 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     global CURRENT_BASELINE_PATH
 
-    parser = argparse.ArgumentParser(description="Local read-only helper for the client readiness page.")
-    parser.add_argument("--host", default="127.0.0.1", help="Bind host, default: 127.0.0.1")
-    parser.add_argument("--port", default=38765, type=int, help="Bind port, default: 38765")
-    parser.add_argument("--baseline", default="", help="Baseline name from helper/baselines or explicit baseline file path")
+    parser = argparse.ArgumentParser(
+        description="Local read-only helper for the client readiness page."
+    )
+    parser.add_argument(
+        "--host", default="127.0.0.1", help="Bind host, default: 127.0.0.1"
+    )
+    parser.add_argument(
+        "--port", default=38765, type=int, help="Bind port, default: 38765"
+    )
+    parser.add_argument(
+        "--baseline",
+        default="",
+        help="Baseline name from helper/baselines or explicit baseline file path",
+    )
     args = parser.parse_args()
 
     if args.baseline:
