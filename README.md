@@ -10,9 +10,9 @@ Focused on **EUC, Zero Trust, and automation in complex environments**.
 
 I build systems that:
 
-- reduce operational friction  
-- improve security without breaking usability  
-- scale in real-world environments  
+* reduce operational friction
+* improve security without breaking usability
+* scale in real-world environments
 
 If you work with **EUC, infrastructure, or secure digital workplaces — we should talk.**
 
@@ -119,27 +119,32 @@ This project turns:
 ## 📌 Case: macos-scripts
 
 ### Problem
-- Scattered shell scripts  
-- Low discoverability  
-- High friction in daily workflows  
+
+* Scattered shell scripts
+* Low discoverability
+* High friction in daily workflows
 
 ### Constraints
-- Real-world environments  
-- Mixed tooling  
-- Need for safe execution  
+
+* Real-world environments
+* Mixed tooling
+* Need for safe execution
 
 ### Solution
-- Single modular CLI (`mqlaunch`)  
-- Structured workflows  
-- Dry-run + rollback support  
+
+* Single modular CLI (`mqlaunch`)
+* Structured workflows
+* Dry-run + rollback support
 
 ### Outcome
-- Reduced operational friction  
-- Improved consistency  
-- Foundation for scalable automation  
 
-🔗 Full case:  
+* Reduced operational friction
+* Improved consistency
+* Foundation for scalable automation
+
+🔗 Full case:
 https://github.com/MCamner/MCamner/blob/main/cases/macos-scripts.md
+
 
 ---
 
@@ -180,10 +185,10 @@ https://github.com/MCamner/MCamner/blob/main/cases/client-readiness-check.md
 
 ## 🎯 Who This Is For
 
-- IT Architects  
-- Endpoint / EUC Engineers  
-- Platform / Infrastructure Engineers  
-- Anyone working with complex operational environments  
+* IT Architects
+* Endpoint / EUC Engineers
+* Platform / Infrastructure Engineers
+* Anyone working with complex operational environments
 
 ---
 
