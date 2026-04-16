@@ -53,16 +53,6 @@ My focus is simple:
 
 ---
 
-## 🚀 Featured Project: macos-scripts
-
-A practical macOS toolkit built around **automation, workflows, and terminal-driven operations**.
-
-At the core is:
-
-> **mqlaunch — a modular CLI that turns scattered terminal workflows into one structured system**
-
----
-
 ## 🧩 Architecture
 
 <p align="center">
@@ -75,8 +65,6 @@ At the core is:
 * workflows provide structured execution
 * scripts stay modular underneath
 * the system remains extensible without becoming chaotic
-
-## 🧩 Architecture (Simplified)
 
 ```
 User
