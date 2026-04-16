@@ -43,9 +43,9 @@ If you work with **EUC, infrastructure, or secure digital workplaces — we shou
 
 I work at the intersection of:
 
-- 🏗️ Endpoint & Infrastructure Architecture  
-- 🔐 Security, Identity & Zero Trust  
-- ⚙️ Automation & System Integration  
+* 🏗️ Endpoint & Infrastructure Architecture
+* 🔐 Security, Identity & Zero Trust
+* ⚙️ Automation & System Integration
 
 My focus is simple:
 
@@ -65,22 +65,6 @@ My focus is simple:
 * workflows provide structured execution
 * scripts stay modular underneath
 * the system remains extensible without becoming chaotic
-
-```
-User
-  ↓
-mqlaunch (CLI entrypoint)
-  ↓
-Workflows (Dev / Git / Network / etc)
-  ↓
-Scripts & Tools
-  ↓
-System (macOS / environment)
-```
-
-👉 One entrypoint  
-👉 Structured execution  
-👉 Repeatable results  
 
 ---
 
@@ -128,9 +112,9 @@ Most environments don’t fail because of missing tools.
 
 They fail because:
 
-- tools are fragmented  
-- workflows are unclear  
-- execution is inconsistent  
+* tools are fragmented
+* workflows are unclear
+* execution is inconsistent
 
 This project turns:
 
@@ -164,10 +148,8 @@ This project turns:
 * Improved consistency
 * Foundation for scalable automation
 
-
 🔗 Full case:
 https://github.com/MCamner/MCamner/blob/main/cases/macos-scripts.md
-
 
 ---
 
@@ -177,32 +159,34 @@ A browser-based readiness check designed for **locked-down environments**.
 
 ### Model
 
-- Browser → baseline validation  
-- Local helper → deep validation  
+* Browser → baseline validation
+* Local helper → deep validation
 
 ### What it validates
 
 **Browser-only:**
-- Display, locale, connectivity  
+
+* Display, locale, connectivity
 
 **With helper:**
-- Certificates  
-- Smartcards  
-- Citrix Workspace  
+
+* Certificates
+* Smartcards
+* Citrix Workspace
 
 👉 Built and tested on real IGEL OS 12 clients.
 
-🔗 Case:  
+🔗 Case:
 https://github.com/MCamner/MCamner/blob/main/cases/client-readiness-check.md
 
 ---
 
 ## 🧭 How I Work
 
-- Reduce complexity — don’t add layers  
-- Build for real operations, not slides  
-- Balance security with usability  
-- Design systems that survive production  
+* Reduce complexity — don’t add layers
+* Build for real operations, not slides
+* Balance security with usability
+* Design systems that survive production
 
 ---
 
@@ -217,14 +201,14 @@ https://github.com/MCamner/MCamner/blob/main/cases/client-readiness-check.md
 
 ## 🛠️ Tech & Tools
 
-- Citrix / EUC Architecture  
-- IGEL OS / Endpoint Management  
-- Active Directory / Identity  
-- SCCM / Intune  
-- VMware  
-- Windows / Linux  
-- Zero Trust Architecture  
-- Automation & Scripting  
+* Citrix / EUC Architecture
+* IGEL OS / Endpoint Management
+* Active Directory / Identity
+* SCCM / Intune
+* VMware
+* Windows / Linux
+* Zero Trust Architecture
+* Automation & Scripting
 
 ---
 
@@ -232,18 +216,18 @@ https://github.com/MCamner/MCamner/blob/main/cases/client-readiness-check.md
 
 I use GitHub as a **working system**, not just a portfolio.
 
-- Real problems  
-- Real constraints  
-- Real solutions  
+* Real problems
+* Real constraints
+* Real solutions
 
 ---
 
 ## 📚 Cases
 
-- macos-scripts — modular CLI system  
-- secure-workplace — usable security  
-- identity-flow — stronger auth without breaking UX  
-- endpoint-standardization — reducing complexity  
+* macos-scripts — modular CLI system
+* secure-workplace — usable security
+* identity-flow — stronger auth without breaking UX
+* endpoint-standardization — reducing complexity
 
 More coming.
 
@@ -251,9 +235,9 @@ More coming.
 
 ## 🌐 Connect
 
-- https://mcamner.com  
-- https://blackiris.se  
-- https://www.linkedin.com/in/mattias-camner-75958022  
+* https://mcamner.com
+* https://blackiris.se
+* https://www.linkedin.com/in/mattias-camner-75958022
 
 ---
 
@@ -261,9 +245,9 @@ More coming.
 
 Outside of tech:
 
-- 🥋 Brazilian Jiu-Jitsu  
-- 🎸 Guitar (Hendrix / metal)  
-- 🧠 Psychology & systems thinking  
+* 🥋 Brazilian Jiu-Jitsu
+* 🎸 Guitar (Hendrix / metal)
+* 🧠 Psychology & systems thinking
 
 ---
 
