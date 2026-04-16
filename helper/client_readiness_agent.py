@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import locale
 import os
 import platform
 import socket
@@ -260,6 +261,22 @@ def base_checks(os_release, addresses, detection):
             ["Based on local paths and /etc/os-release heuristics."],
             recommended_action="Add clearer platform-specific paths or baseline expectations if confidence remains low.",
         ),
+        make_check(
+            "os",
+            "Locale",
+            "ok",
+            locale.getlocale()[0] or "C",
+            ["System locale setting."],
+            recommended_action="Verify locale matches environment expectations.",
+        ),
+        make_check(
+            "os",
+            "Timezone",
+            "ok",
+            datetime.now().astimezone().tzinfo.tzname(datetime.now()) or "UTC",
+            ["System timezone setting."],
+            recommended_action="Verify timezone matches environment expectations.",
+        ),
     ]
 
 
@@ -362,6 +379,27 @@ def certificate_checks():
                 recommended_action="Verify required CA, browser, Citrix, or smartcard certificate locations.",
             )
         )
+
+    # Smartcard check
+    pcsc_running = False
+    try:
+        import subprocess
+
+        result = subprocess.run(["pgrep", "pcscd"], capture_output=True, text=True)
+        pcsc_running = result.returncode == 0
+    except Exception:
+        pass
+    checks.append(
+        make_check(
+            "certificates",
+            "Smartcard support",
+            "ok" if pcsc_running else "warn",
+            "PC/SC daemon running" if pcsc_running else "PC/SC daemon not detected",
+            ["Checked for running pcscd process."],
+            recommended_action="Ensure PC/SC daemon is installed and running for smartcard support.",
+        )
+    )
+
     return checks
 
 

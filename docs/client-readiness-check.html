@@ -399,7 +399,7 @@
       title: "Client Readiness Check",
       description: "Browser-side readiness validation for IGEL OS 12, eLux 7, and similar client platforms.",
       configSourceLabel: "Built-in defaults",
-      notes: "Use client-readiness-config.json or URL parameters to customize this page for your environment.",
+      notes: "Use client-readiness-config.json or URL parameters to customize. For specific clients, add ?baseline=igel-os12 or ?baseline=elux7 to the URL.",
       recommendedMinWidth: 1280,
       recommendedMinHeight: 800,
       endpointTimeoutMs: 8000,
@@ -851,7 +851,7 @@
       environmentNameNode.textContent = config.environmentName;
       clientFamilyNode.textContent = meta.client.family;
       browserNameNode.textContent = meta.browser;
-      helperStatusNode.textContent = helper ? "Connected" : "Browser-only mode";
+      helperStatusNode.textContent = helper ? "Connected" : "Browser-only mode: Limited checks. Start helper for full validation.";
       helperStatusNode.style.color = helper ? "var(--ok)" : "var(--warn)";
       baselineNameNode.textContent = helper && helper.data && helper.data.baseline
         ? helper.data.baseline.name
