@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client Readiness v2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.5;
+    }
+    h1, h2 { margin-top: 1.5rem; }
+    .toolbar, .summary {
+      display: grid;
+      gap: 1rem;
+      margin: 1rem 0 1.5rem;
+    }
+    .toolbar {
+      grid-template-columns: 1fr;
+    }
+    .summary {
+      grid-template-columns: repeat(4, minmax(120px, 1fr));
+    }
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1rem;
+      background: #fafafa;
+    }
+    .meta {
+      margin: 1rem 0 1.5rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #f8f8f8;
+    }
+    .meta div {
+      margin: 0.25rem 0;
+    }
+    .meta strong {
+      display: inline-block;
+      min-width: 140px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      min-width: 280px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #f5f5f5; }
+    .PASS { color: #0a7a2f; font-weight: bold; }
+    .FAIL { color: #b42318; font-weight: bold; }
+    .WARN { color: #b26a00; font-weight: bold; }
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <h1>Client Readiness v2</h1>
+  <p>Multi-profile readiness evaluation with live → saved → sample fallback</p>
+
+  <div class="toolbar">
+    <div class="card">
+      <label for="profile-select">Baseline profile</label>
+      <select id="profile-select"></select>
+    </div>
+  </div>
+
+  <div id="meta" class="meta"></div>
+  <div id="summary" class="summary"></div>
+
+  <h2>Results</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Severity</th>
+        <th>Expected</th>
+        <th>Actual</th>
+        <th>Evidence</th>
+        <th>Remediation</th>
+      </tr>
+    </thead>
+    <tbody id="results-body"></tbody>
+  </table>
+
+  <script src="evaluator.js"></script>
+  <script>
+    const PROFILE_INDEX_URL = "profiles/index.json";
+
+    const DATA_SOURCES = [
+      {
+        key: "live-helper",
+        url: "http://127.0.0.1:38765/status",
+        timeoutMs: 2500,
+        cache: "no-store"
+      },
+      {
+        key: "saved-live",
+        url: "live-client-data.json",
+        timeoutMs: 1500,
+        cache: "no-store"
+      },
+      {
+        key: "sample-data",
+        url: "sample-client-data.json",
+        timeoutMs: 1500,
+        cache: "default"
+      }
+    ];
+
+    async function loadJson(url, options = {}) {
+      const controller = new AbortController();
+      const timeoutMs = options.timeoutMs || 2000;
+      const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+      try {
+        const res = await fetch(url, {
+          cache: options.cache || "default",
+          signal: controller.signal
+        });
+
+        clearTimeout(timeout);
+
+        if (!res.ok) {
+          throw new Error(`Failed to load ${url} (${res.status})`);
+        }
+
+        return await res.json();
+      } catch (err) {
+        clearTimeout(timeout);
+        throw err;
+      }
+    }
+
+    async function loadClientData() {
+      const errors = [];
+
+      for (const source of DATA_SOURCES) {
+        try {
+          const data = await loadJson(source.url, {
+            timeoutMs: source.timeoutMs,
+            cache: source.cache
+          });
+
+          return {
+            source: source.key,
+            url: source.url,
+            data
+          };
+        } catch (err) {
+          errors.push(`${source.key}: ${err.message}`);
+        }
+      }
+
+      throw new Error("All data sources failed: " + errors.join(" | "));
+    }
+
+    function renderMeta(payload, profile) {
+      const root = document.getElementById("meta");
+      const helperMeta = payload.data && payload.data.meta ? payload.data.meta : {};
+
+      root.innerHTML = `
+        <div><strong>Profile:</strong> ${profile.label || profile.profile || "unknown"}</div>
+        <div><strong>Data source:</strong> ${payload.source}</div>
+        <div><strong>Location:</strong> ${payload.url}</div>
+        <div><strong>Platform:</strong> ${helperMeta.platform || "unknown"}</div>
+        <div><strong>Release:</strong> ${helperMeta.platform_release || "unknown"}</div>
+        <div><strong>Agent version:</strong> ${helperMeta.agent_version || "n/a"}</div>
+        <div><strong>Hostname:</strong> ${helperMeta.hostname || payload.data?.network?.hostname || "unknown"}</div>
+      `;
+    }
+
+    function renderSummary(summary) {
+      const root = document.getElementById("summary");
+      root.innerHTML = `
+        <div class="card"><strong>Total</strong><br>${summary.total}</div>
+        <div class="card"><strong>Passed</strong><br>${summary.passed}</div>
+        <div class="card"><strong>Failed</strong><br>${summary.failed}</div>
+        <div class="card"><strong>Critical failed</strong><br>${summary.critical_failed ?? 0}</div>
+      `;
+    }
+
+    function renderResults(results) {
+      const body = document.getElementById("results-body");
+      body.innerHTML = results.map((r) => `
+        <tr>
+          <td>${r.id}</td>
+          <td>${r.title}</td>
+          <td class="${r.status}">${r.status}</td>
+          <td>${r.severity}</td>
+          <td><pre>${JSON.stringify(r.expected, null, 2)}</pre></td>
+          <td><pre>${JSON.stringify(r.actual, null, 2)}</pre></td>
+          <td>${r.evidence}</td>
+          <td>${r.remediation || ""}</td>
+        </tr>
+      `).join("");
+    }
+
+    function getSelectedProfileId(profileIndex) {
+      const params = new URLSearchParams(window.location.search);
+      const requested = params.get("profile");
+      const validIds = new Set(profileIndex.profiles.map(p => p.id));
+
+      if (requested && validIds.has(requested)) {
+        return requested;
+      }
+
+      return profileIndex.default_profile;
+    }
+
+    function updateUrlProfile(profileId) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("profile", profileId);
+      window.history.replaceState({}, "", url);
+    }
+
+    function populateProfileSelect(profileIndex, selectedId) {
+      const select = document.getElementById("profile-select");
+      select.innerHTML = profileIndex.profiles.map((profile) => `
+        <option value="${profile.id}" ${profile.id === selectedId ? "selected" : ""}>
+          ${profile.label}
+        </option>
+      `).join("");
+      return select;
+    }
+
+    async function evaluateSelectedProfile(profileIndex, selectedId, clientPayload) {
+      const profileMeta = profileIndex.profiles.find(p => p.id === selectedId);
+      const profile = await loadJson(profileMeta.path, { timeoutMs: 2000, cache: "no-store" });
+
+      renderMeta(clientPayload, profile);
+      const output = window.ClientReadinessEvaluator.evaluateProfile(profile, clientPayload.data);
+      renderSummary(output.summary);
+      renderResults(output.results);
+    }
+
+    async function main() {
+      try {
+        const [profileIndex, clientPayload] = await Promise.all([
+          loadJson(PROFILE_INDEX_URL, { timeoutMs: 2000, cache: "no-store" }),
+          loadClientData()
+        ]);
+
+        const selectedId = getSelectedProfileId(profileIndex);
+        const select = populateProfileSelect(profileIndex, selectedId);
+
+        await evaluateSelectedProfile(profileIndex, selectedId, clientPayload);
+
+        select.addEventListener("change", async (event) => {
+          const newProfileId = event.target.value;
+          updateUrlProfile(newProfileId);
+          await evaluateSelectedProfile(profileIndex, newProfileId, clientPayload);
+        });
+      } catch (err) {
+        document.body.insertAdjacentHTML(
+          "beforeend",
+          `<p style="color:red;"><strong>Error:</strong> ${err.message}</p>`
+        );
+      }
+    }
+
+    main();
+  </script>
+</body>
+</html>

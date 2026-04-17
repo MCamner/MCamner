@@ -1,0 +1,25 @@
+{
+  "default_profile": "igel-os12-citrix",
+  "profiles": [
+    {
+      "id": "igel-os12-citrix",
+      "label": "IGEL OS 12 + Citrix",
+      "path": "profiles/igel-os12-citrix.json"
+    },
+    {
+      "id": "elux7-citrix",
+      "label": "eLux 7 + Citrix",
+      "path": "profiles/elux7-citrix.json"
+    },
+    {
+      "id": "macos-citrix",
+      "label": "macOS + Citrix",
+      "path": "profiles/macos-citrix.json"
+    },
+    {
+      "id": "kiosk",
+      "label": "Kiosk Mode",
+      "path": "profiles/kiosk.json"
+    }
+  ]
+}

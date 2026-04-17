@@ -1,0 +1,16 @@
+{
+  "profile": "kiosk",
+  "label": "Kiosk Mode",
+  "checks": [
+    {
+      "id": "NET-001",
+      "title": "Client must be online",
+      "severity": "critical",
+      "category": "network",
+      "source": "network.online",
+      "operator": "equals",
+      "expected": true,
+      "remediation": "Check network connection and client uplink"
+    }
+  ]
+}

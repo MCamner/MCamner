@@ -1,0 +1,26 @@
+{
+  "profile": "elux7-citrix",
+  "label": "eLux 7 + Citrix",
+  "checks": [
+    {
+      "id": "CERT-ROOT-001",
+      "title": "Root CA must be present",
+      "severity": "critical",
+      "category": "security",
+      "source": "certificates.installed",
+      "operator": "contains",
+      "expected": ["Company Root CA"],
+      "remediation": "Install approved root certificate bundle"
+    },
+    {
+      "id": "CTX-001",
+      "title": "Citrix Workspace must be installed",
+      "severity": "high",
+      "category": "application",
+      "source": "citrix.installed",
+      "operator": "equals",
+      "expected": true,
+      "remediation": "Install Citrix Workspace for eLux"
+    }
+  ]
+}
