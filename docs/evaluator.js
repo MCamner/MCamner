@@ -50,117 +50,155 @@
     const e = String(expected || "").split(".").map(Number);
     const len = Math.max(a.length, e.length);
 
-    for (let i = 0; i < len; i += 1) {
+    for (let i = 0; i < len; i++) {
       const av = a[i] || 0;
       const ev = e[i] || 0;
-      if (av > ev) {
-        return {
-          ok: true,
-          actual,
-          expected,
-          detail: `Version ${actual} satisfies minimum ${expected}`
-        };
-      }
-      if (av < ev) {
-        return {
-          ok: false,
-          actual,
-          expected,
-          detail: `Version ${actual} is below minimum ${expected}`
-        };
-      }
+      if (av > ev) return { ok: true, actual, expected, detail: "Version OK" };
+      if (av < ev) return { ok: false, actual, expected, detail: "Version too low" };
     }
 
-    return {
-      ok: true,
-      actual,
-      expected,
-      detail: `Version ${actual} satisfies minimum ${expected}`
-    };
+    return { ok: true, actual, expected, detail: "Version OK" };
   }
 
   function compareCertNameExists(actual, expected) {
     const certs = Array.isArray(actual) ? actual : [];
     const wanted = String(expected || "").toLowerCase();
 
-    const match = certs.find((cert) => {
-      const name = String((cert && cert.name) || "").toLowerCase();
-      return name === wanted || name.includes(wanted);
-    });
+    const match = certs.find((c) =>
+      String(c.name || "").toLowerCase().includes(wanted)
+    );
 
     return {
       ok: Boolean(match),
       actual: match || null,
       expected,
       detail: match
-        ? `Found certificate: ${match.name || expected}`
+        ? `Found certificate: ${match.name}`
         : `Certificate not found: ${expected}`
     };
   }
 
+  function parseDate(str) {
+    if (!str) return null;
+    const d = new Date(str);
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  function compareCertExpiry(actual, rule) {
+    const certs = Array.isArray(actual) ? actual : [];
+    const name = String(rule.match || "").toLowerCase();
+    const warnDays = rule.warn_days || 30;
+    const failDays = rule.fail_days || 0;
+
+    const cert = certs.find((c) =>
+      String(c.name || "").toLowerCase().includes(name)
+    );
+
+    if (!cert) {
+      return {
+        ok: false,
+        status: "FAIL",
+        detail: `Certificate not found: ${rule.match}`
+      };
+    }
+
+    const expiry = parseDate(cert.not_after);
+
+    if (!expiry) {
+      return {
+        ok: false,
+        status: "FAIL",
+        detail: "Invalid or missing expiry date"
+      };
+    }
+
+    const now = new Date();
+    const diffDays = Math.floor((expiry - now) / (1000 * 60 * 60 * 24));
+
+    if (diffDays < failDays) {
+      return {
+        ok: false,
+        status: "FAIL",
+        detail: `Expired ${Math.abs(diffDays)} days ago`
+      };
+    }
+
+    if (diffDays <= warnDays) {
+      return {
+        ok: true,
+        status: "WARN",
+        detail: `Expires in ${diffDays} days`
+      };
+    }
+
+    return {
+      ok: true,
+      status: "PASS",
+      detail: `Valid (${diffDays} days remaining)`
+    };
+  }
+
   function evaluateRule(rule, data) {
-    const sourceValue = getByPath(data, rule.evidence_field || rule.source);
-    let comparison;
+    const sourceValue = getByPath(data, rule.source);
+    let result;
 
     switch (rule.operator) {
       case "contains":
-        comparison = compareContains(sourceValue, rule.expected);
+        result = compareContains(sourceValue, rule.expected);
         break;
       case "equals":
-        comparison = compareEquals(sourceValue, rule.expected);
+        result = compareEquals(sourceValue, rule.expected);
         break;
       case "min_version":
-        comparison = compareMinVersion(sourceValue, rule.expected);
+        result = compareMinVersion(sourceValue, rule.expected);
         break;
       case "cert_name_exists":
-        comparison = compareCertNameExists(sourceValue, rule.expected);
+        result = compareCertNameExists(sourceValue, rule.expected);
+        break;
+      case "cert_expiry_days":
+        result = compareCertExpiry(sourceValue, rule);
         break;
       default:
-        comparison = {
+        result = {
           ok: false,
-          actual: sourceValue,
-          expected: rule.expected,
-          detail: `Unsupported operator: ${rule.operator}`
+          detail: "Unsupported operator"
         };
     }
+
+    const status = result.status || (result.ok ? "PASS" : "FAIL");
 
     return {
       id: rule.id,
       title: rule.title,
-      category: rule.category || "general",
       severity: rule.severity || "medium",
-      status: comparison.ok ? "PASS" : "FAIL",
-      expected: comparison.expected,
-      actual: comparison.actual,
-      evidence: comparison.detail,
+      status,
+      expected: rule.expected || rule.match,
+      actual: result.actual || null,
+      evidence: result.detail,
       remediation: rule.remediation || "",
-      source: rule.source || rule.evidence_field || "",
       timestamp: new Date().toISOString()
     };
   }
 
   function evaluateProfile(profile, data) {
-    const checks = Array.isArray(profile.checks) ? profile.checks : [];
-    const results = checks.map((rule) => evaluateRule(rule, data));
+    const results = profile.checks.map((rule) =>
+      evaluateRule(rule, data)
+    );
 
     const summary = {
       total: results.length,
-      passed: results.filter((r) => r.status === "PASS").length,
-      failed: results.filter((r) => r.status === "FAIL").length,
-      critical_failed: results.filter(
-        (r) => r.status === "FAIL" && r.severity === "critical"
-      ).length
+      passed: results.filter(r => r.status === "PASS").length,
+      failed: results.filter(r => r.status === "FAIL").length,
+      warnings: results.filter(r => r.status === "WARN").length
     };
 
     return {
-      profile: profile.profile || "unknown",
       summary,
       results
     };
   }
 
   global.ClientReadinessEvaluator = {
-    evaluateRule,
     evaluateProfile
   };
 })(window);
