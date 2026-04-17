@@ -10,6 +10,7 @@
       "source": "certificates.installed",
       "operator": "contains",
       "expected": ["Company Root CA"],
+      "required_capability": "certificates.installed",
       "remediation": "Install approved root certificate bundle via UMS"
     },
     {
@@ -20,7 +21,21 @@
       "source": "certificates.details",
       "operator": "cert_name_exists",
       "expected": "Company Root CA",
+      "required_capability": "certificates.details",
       "remediation": "Verify root CA is present in the expected trust store"
+    },
+    {
+      "id": "CERT-EXP-001",
+      "title": "Root CA must not expire soon",
+      "severity": "high",
+      "category": "security",
+      "source": "certificates.details",
+      "operator": "cert_expiry_days",
+      "match": "Company Root CA",
+      "warn_days": 60,
+      "fail_days": 0,
+      "required_capability": "certificates.details",
+      "remediation": "Renew or replace certificate before expiry"
     },
     {
       "id": "CTX-001",
@@ -30,6 +45,7 @@
       "source": "citrix.installed",
       "operator": "equals",
       "expected": true,
+      "required_capability": "citrix.installed",
       "remediation": "Install Citrix Workspace for the target platform"
     },
     {
@@ -40,6 +56,7 @@
       "source": "citrix.version",
       "operator": "min_version",
       "expected": "23.11.0",
+      "required_capability": "citrix.version",
       "remediation": "Upgrade Citrix Workspace to approved baseline"
     }
   ]

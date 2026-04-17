@@ -50,30 +50,50 @@
     const e = String(expected || "").split(".").map(Number);
     const len = Math.max(a.length, e.length);
 
-    for (let i = 0; i < len; i++) {
+    for (let i = 0; i < len; i += 1) {
       const av = a[i] || 0;
       const ev = e[i] || 0;
-      if (av > ev) return { ok: true, actual, expected, detail: "Version OK" };
-      if (av < ev) return { ok: false, actual, expected, detail: "Version too low" };
+      if (av > ev) {
+        return {
+          ok: true,
+          actual,
+          expected,
+          detail: `Version ${actual} satisfies minimum ${expected}`
+        };
+      }
+      if (av < ev) {
+        return {
+          ok: false,
+          actual,
+          expected,
+          detail: `Version ${actual} is below minimum ${expected}`
+        };
+      }
     }
 
-    return { ok: true, actual, expected, detail: "Version OK" };
+    return {
+      ok: true,
+      actual,
+      expected,
+      detail: `Version ${actual} satisfies minimum ${expected}`
+    };
   }
 
   function compareCertNameExists(actual, expected) {
     const certs = Array.isArray(actual) ? actual : [];
     const wanted = String(expected || "").toLowerCase();
 
-    const match = certs.find((c) =>
-      String(c.name || "").toLowerCase().includes(wanted)
-    );
+    const match = certs.find((cert) => {
+      const name = String((cert && cert.name) || "").toLowerCase();
+      return name === wanted || name.includes(wanted);
+    });
 
     return {
       ok: Boolean(match),
       actual: match || null,
       expected,
       detail: match
-        ? `Found certificate: ${match.name}`
+        ? `Found certificate: ${match.name || expected}`
         : `Certificate not found: ${expected}`
     };
   }
@@ -138,67 +158,98 @@
     };
   }
 
+  function hasCapability(data, requiredCapability) {
+    if (!requiredCapability) return true;
+    const capabilities = getByPath(data, "meta.capabilities");
+    return Array.isArray(capabilities) && capabilities.includes(requiredCapability);
+  }
+
   function evaluateRule(rule, data) {
-    const sourceValue = getByPath(data, rule.source);
-    let result;
+    if (!hasCapability(data, rule.required_capability)) {
+      return {
+        id: rule.id,
+        title: rule.title,
+        category: rule.category || "general",
+        severity: rule.severity || "medium",
+        status: "UNSUPPORTED",
+        expected: rule.expected || rule.match || null,
+        actual: null,
+        evidence: `Missing helper capability: ${rule.required_capability}`,
+        remediation: rule.remediation || "",
+        source: rule.source || "",
+        timestamp: new Date().toISOString()
+      };
+    }
+
+    const sourceValue = getByPath(data, rule.evidence_field || rule.source);
+    let comparison;
 
     switch (rule.operator) {
       case "contains":
-        result = compareContains(sourceValue, rule.expected);
+        comparison = compareContains(sourceValue, rule.expected);
         break;
       case "equals":
-        result = compareEquals(sourceValue, rule.expected);
+        comparison = compareEquals(sourceValue, rule.expected);
         break;
       case "min_version":
-        result = compareMinVersion(sourceValue, rule.expected);
+        comparison = compareMinVersion(sourceValue, rule.expected);
         break;
       case "cert_name_exists":
-        result = compareCertNameExists(sourceValue, rule.expected);
+        comparison = compareCertNameExists(sourceValue, rule.expected);
         break;
       case "cert_expiry_days":
-        result = compareCertExpiry(sourceValue, rule);
+        comparison = compareCertExpiry(sourceValue, rule);
         break;
       default:
-        result = {
+        comparison = {
           ok: false,
-          detail: "Unsupported operator"
+          actual: sourceValue,
+          expected: rule.expected,
+          detail: `Unsupported operator: ${rule.operator}`
         };
     }
 
-    const status = result.status || (result.ok ? "PASS" : "FAIL");
+    const status = comparison.status || (comparison.ok ? "PASS" : "FAIL");
 
     return {
       id: rule.id,
       title: rule.title,
+      category: rule.category || "general",
       severity: rule.severity || "medium",
       status,
-      expected: rule.expected || rule.match,
-      actual: result.actual || null,
-      evidence: result.detail,
+      expected: comparison.expected,
+      actual: comparison.actual,
+      evidence: comparison.detail,
       remediation: rule.remediation || "",
+      source: rule.source || rule.evidence_field || "",
       timestamp: new Date().toISOString()
     };
   }
 
   function evaluateProfile(profile, data) {
-    const results = profile.checks.map((rule) =>
-      evaluateRule(rule, data)
-    );
+    const checks = Array.isArray(profile.checks) ? profile.checks : [];
+    const results = checks.map((rule) => evaluateRule(rule, data));
 
     const summary = {
       total: results.length,
-      passed: results.filter(r => r.status === "PASS").length,
-      failed: results.filter(r => r.status === "FAIL").length,
-      warnings: results.filter(r => r.status === "WARN").length
+      passed: results.filter((r) => r.status === "PASS").length,
+      failed: results.filter((r) => r.status === "FAIL").length,
+      warnings: results.filter((r) => r.status === "WARN").length,
+      unsupported: results.filter((r) => r.status === "UNSUPPORTED").length,
+      critical_failed: results.filter(
+        (r) => r.status === "FAIL" && r.severity === "critical"
+      ).length
     };
 
     return {
+      profile: profile.profile || "unknown",
       summary,
       results
     };
   }
 
   global.ClientReadinessEvaluator = {
+    evaluateRule,
     evaluateProfile
   };
 })(window);

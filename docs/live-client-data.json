@@ -1,10 +1,23 @@
 {
   "meta": {
-    "agent_version": "2.1.0",
+    "agent_version": "2.3.0",
+    "baseline_version": "2026.04.17",
+    "profile": "igel-os12-citrix",
     "platform": "Darwin",
     "platform_release": "25.4.0",
     "machine": "arm64",
-    "hostname": "Zephyr.local"
+    "hostname": "Zephyr.local",
+    "capabilities": [
+      "certificates.details",
+      "certificates.installed",
+      "citrix.installed",
+      "citrix.version",
+      "meta.baseline_version",
+      "meta.profile",
+      "network.hostname",
+      "network.local_ips",
+      "network.online"
+    ]
   },
   "certificates": {
     "installed": [

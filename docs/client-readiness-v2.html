@@ -31,7 +31,7 @@
       background: #fafafa;
     }
     .meta {
-      margin: 1rem 0 1.5rem;
+      margin: 1rem 0 1rem;
       padding: 0.75rem 1rem;
       border: 1px solid #ddd;
       border-radius: 10px;
@@ -43,6 +43,15 @@
     .meta strong {
       display: inline-block;
       min-width: 140px;
+    }
+    .warning {
+      margin: 0 0 1rem;
+      padding: 0.9rem 1rem;
+      border: 1px solid #f5c26b;
+      border-radius: 10px;
+      background: #fff7e6;
+      color: #8a5a00;
+      display: none;
     }
     label {
       font-weight: bold;
@@ -87,6 +96,7 @@
     </div>
   </div>
 
+  <div id="profile-warning" class="warning"></div>
   <div id="meta" class="meta"></div>
   <div id="summary" class="summary"></div>
 
@@ -184,7 +194,8 @@
       const helperMeta = payload.data && payload.data.meta ? payload.data.meta : {};
 
       root.innerHTML = `
-        <div><strong>Profile:</strong> ${profile.label || profile.profile || "unknown"}</div>
+        <div><strong>Selected profile:</strong> ${profile.label || profile.profile || "unknown"}</div>
+        <div><strong>Helper profile:</strong> ${helperMeta.profile || "n/a"}</div>
         <div><strong>Data source:</strong> ${payload.source}</div>
         <div><strong>Location:</strong> ${payload.url}</div>
         <div><strong>Platform:</strong> ${helperMeta.platform || "unknown"}</div>
@@ -194,13 +205,27 @@
       `;
     }
 
+    function renderWarning(selectedProfileId, helperProfileId) {
+      const root = document.getElementById("profile-warning");
+
+      if (!helperProfileId || helperProfileId === selectedProfileId) {
+        root.style.display = "none";
+        root.textContent = "";
+        return;
+      }
+
+      root.style.display = "block";
+      root.textContent = `Profile mismatch: selected "${selectedProfileId}" but helper reports "${helperProfileId}". Results may be misleading.`;
+    }
+
     function renderSummary(summary) {
       const root = document.getElementById("summary");
       root.innerHTML = `
         <div class="card"><strong>Total</strong><br>${summary.total}</div>
         <div class="card"><strong>Passed</strong><br>${summary.passed}</div>
         <div class="card"><strong>Failed</strong><br>${summary.failed}</div>
-        <div class="card"><strong>Critical failed</strong><br>${summary.critical_failed ?? 0}</div>
+        <div class="card"><strong>Warnings</strong><br>${summary.warnings ?? 0}</div>
+        <div class="card"><strong>Unsupported</strong><br>${summary.unsupported ?? 0}</div>
       `;
     }
 
@@ -220,13 +245,17 @@
       `).join("");
     }
 
-    function getSelectedProfileId(profileIndex) {
+    function getRequestedProfileId(profileIndex, helperProfileId) {
       const params = new URLSearchParams(window.location.search);
       const requested = params.get("profile");
       const validIds = new Set(profileIndex.profiles.map(p => p.id));
 
       if (requested && validIds.has(requested)) {
         return requested;
+      }
+
+      if (helperProfileId && validIds.has(helperProfileId)) {
+        return helperProfileId;
       }
 
       return profileIndex.default_profile;
@@ -252,7 +281,11 @@
       const profileMeta = profileIndex.profiles.find(p => p.id === selectedId);
       const profile = await loadJson(profileMeta.path, { timeoutMs: 2000, cache: "no-store" });
 
+      const helperProfileId = clientPayload?.data?.meta?.profile || null;
+
       renderMeta(clientPayload, profile);
+      renderWarning(selectedId, helperProfileId);
+
       const output = window.ClientReadinessEvaluator.evaluateProfile(profile, clientPayload.data);
       renderSummary(output.summary);
       renderResults(output.results);
@@ -265,7 +298,11 @@
           loadClientData()
         ]);
 
-        const selectedId = getSelectedProfileId(profileIndex);
+        const helperProfileId = clientPayload?.data?.meta?.profile || null;
+        const selectedId = getRequestedProfileId(profileIndex, helperProfileId);
+
+        updateUrlProfile(selectedId);
+
         const select = populateProfileSelect(profileIndex, selectedId);
 
         await evaluateSelectedProfile(profileIndex, selectedId, clientPayload);

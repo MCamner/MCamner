@@ -12,6 +12,9 @@ from pathlib import Path
 from typing import Any
 
 
+BASELINE_VERSION = "2026.04.17"
+
+
 def command_exists(name: str) -> bool:
     return shutil.which(name) is not None
 
@@ -40,13 +43,31 @@ def check_online(host: str = "8.8.8.8", port: int = 53, timeout: float = 2.0) ->
         return False
 
 
-def collect_meta() -> dict[str, Any]:
+def collect_capabilities() -> list[str]:
+    capabilities = [
+        "network.online",
+        "network.hostname",
+        "network.local_ips",
+        "citrix.installed",
+        "citrix.version",
+        "certificates.installed",
+        "certificates.details",
+        "meta.profile",
+        "meta.baseline_version",
+    ]
+    return sorted(capabilities)
+
+
+def collect_meta(profile_name: str) -> dict[str, Any]:
     return {
-        "agent_version": "2.1.0",
+        "agent_version": "2.3.0",
+        "baseline_version": BASELINE_VERSION,
+        "profile": profile_name,
         "platform": platform.system(),
         "platform_release": platform.release(),
         "machine": platform.machine(),
         "hostname": socket.gethostname(),
+        "capabilities": collect_capabilities(),
     }
 
 
@@ -103,10 +124,7 @@ def collect_certificates() -> dict[str, Any]:
                 "/System/Library/Keychains/SystemRootCertificates.keychain",
                 "system-root",
             ),
-            (
-                "/Library/Keychains/System.keychain",
-                "system",
-            ),
+            ("/Library/Keychains/System.keychain", "system"),
         ]
 
         for keychain_path, store_name in keychain_sources:
@@ -181,9 +199,9 @@ def collect_network() -> dict[str, Any]:
     }
 
 
-def build_payload() -> dict[str, Any]:
+def build_payload(profile_name: str) -> dict[str, Any]:
     return {
-        "meta": collect_meta(),
+        "meta": collect_meta(profile_name),
         "certificates": collect_certificates(),
         "citrix": collect_citrix(),
         "network": collect_network(),
@@ -193,12 +211,17 @@ def build_payload() -> dict[str, Any]:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Client Readiness Agent v2")
     parser.add_argument(
+        "--profile",
+        default="macos-citrix",
+        help="Profile ID to attach to helper output (default: macos-citrix)",
+    )
+    parser.add_argument(
         "--pretty", action="store_true", help="Pretty-print JSON output"
     )
     parser.add_argument("--out", help="Write JSON output to file")
     args = parser.parse_args()
 
-    payload = build_payload()
+    payload = build_payload(args.profile)
     json_text = json.dumps(payload, indent=2 if args.pretty else None)
 
     if args.out:
