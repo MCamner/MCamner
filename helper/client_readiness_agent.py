@@ -88,16 +88,19 @@ def read_os_release():
 
 
 def detect_client_family(os_release):
+    if platform.system() == "Darwin":
+        return {"family": "macOS", "confidence": "high"}
+
     release_blob = " ".join(os_release.get("values", {}).values()).lower()
     heuristics = [
         (
-            "IGEL (possible)",
+            "IGEL OS",
             any(
                 os.path.exists(path) for path in ("/etc/igel", "/opt/IGEL", "/opt/igel")
             ),
         ),
         (
-            "eLux (possible)",
+            "eLux",
             any(
                 os.path.exists(path)
                 for path in ("/etc/elux", "/etc/unicon", "/opt/unicon")
@@ -107,10 +110,16 @@ def detect_client_family(os_release):
 
     for label, matched in heuristics:
         if matched:
+            # Try to refine IGEL OS version
+            if label == "IGEL OS":
+                if os_release["values"].get(
+                    "VARIANT_ID"
+                ) == "os12" or "12" in os_release["values"].get("VERSION_ID", ""):
+                    return {"family": "IGEL OS 12", "confidence": "high"}
             return {"family": label, "confidence": "high"}
 
     if "igel" in release_blob:
-        return {"family": "IGEL (possible)", "confidence": "medium"}
+        return {"family": "IGEL OS (possible)", "confidence": "medium"}
     if "elux" in release_blob or "unicon" in release_blob:
         return {"family": "eLux (possible)", "confidence": "medium"}
     if "linux" in release_blob:
@@ -159,12 +168,26 @@ def read_file_lines(path, limit=20):
 
 
 def parse_proc_route():
+    if platform.system() == "Darwin":
+        return check_default_route_macos()
+
     path = "/proc/net/route"
     if not os.path.exists(path):
         return {"available": False, "has_default_route": False}
     lines = read_file_lines(path, limit=10)
     has_default = any("\t00000000\t" in line for line in lines[1:])
     return {"available": True, "has_default_route": has_default}
+
+
+def check_default_route_macos():
+    try:
+        import subprocess
+
+        result = subprocess.run(["netstat", "-rn"], capture_output=True, text=True)
+        has_default = "default" in result.stdout
+        return {"available": True, "has_default_route": has_default}
+    except Exception:
+        return {"available": False, "has_default_route": False}
 
 
 def parse_resolv_conf():
@@ -229,14 +252,26 @@ def base_checks(os_release, addresses, detection):
         make_check(
             "os",
             "OS release",
-            "ok" if os_release["available"] else "warn",
+            "ok"
+            if os_release["available"] or platform.system() == "Darwin"
+            else "warn",
             os_release["path"]
             if os_release["available"]
-            else "Could not read /etc/os-release",
+            else (
+                "macOS version " + platform.mac_ver()[0]
+                if platform.system() == "Darwin"
+                else "Could not read /etc/os-release"
+            ),
             [
                 "PRETTY_NAME: "
-                + os_release["values"].get("PRETTY_NAME", "Unavailable"),
-                "ID: " + os_release["values"].get("ID", "Unavailable"),
+                + os_release["values"].get(
+                    "PRETTY_NAME",
+                    "Unavailable" if platform.system() != "Darwin" else "macOS",
+                ),
+                "ID: "
+                + os_release["values"].get(
+                    "ID", "Unavailable" if platform.system() != "Darwin" else "darwin"
+                ),
             ],
             recommended_action=(
                 "Verify OS identification path or use platform-specific paths "
@@ -333,6 +368,9 @@ def browser_checks():
         "/usr/bin/chromium-browser",
         "/usr/bin/google-chrome",
         "/usr/bin/firefox",
+        "/Applications/Google Chrome.app",
+        "/Applications/Firefox.app",
+        "/Applications/Safari.app",
     ]
     info = path_summary(browser_paths)
     return [
@@ -340,7 +378,7 @@ def browser_checks():
             "browser",
             "Known browser binaries",
             "ok" if info["present"] else "warn",
-            ", ".join(info["present"])
+            ", ".join([os.path.basename(p) for p in info["present"]])
             if info["present"]
             else "No known browser paths found",
             [
@@ -520,7 +558,14 @@ def citrix_checks():
 
 
 def management_checks(detection):
-    if "IGEL" in detection["family"]:
+    if platform.system() == "Darwin":
+        targets = [
+            "/Library/LaunchAgents",
+            "/Library/LaunchDaemons",
+            "/Library/Managed Preferences",
+        ]
+        label = "macOS management paths"
+    elif "IGEL" in detection["family"]:
         targets = ["/etc/igel", "/opt/IGEL", "/opt/igel"]
         label = "IGEL local management paths"
     elif "eLux" in detection["family"]:
