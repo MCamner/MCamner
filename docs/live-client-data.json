@@ -1,0 +1,827 @@
+{
+  "meta": {
+    "agent_version": "2.0.0",
+    "platform": "Darwin",
+    "platform_release": "25.4.0",
+    "machine": "arm64",
+    "hostname": "Zephyr.local"
+  },
+  "certificates": {
+    "installed": [
+      "DigiCert TLS ECC P384 Root G5",
+      "XRamp Global Certification Authority",
+      "OISTE WISeKey Global Root GB CA",
+      "Amazon Root CA 2",
+      "Actalis Authentication Root CA",
+      "ISRG Root X1",
+      "Apple Platform Code Signing ECC Root CA - G1",
+      "accv@accv.es",
+      "Certainly Root R1",
+      "Certum Trusted Root CA",
+      "TUBITAK Kamu SM SSL Kok Sertifikasi - Surum 1",
+      "GTS Root R3",
+      "Certum Trusted Network CA",
+      "Certainly Root E1",
+      "certSIGN ROOT CA",
+      "SwissSign Gold CA - G2",
+      "T-TeleSec GlobalRoot Class 2",
+      "Entrust.net Certification Authority (2048)",
+      "D-TRUST Root Class 3 CA 2 2009",
+      "DigiCert Assured ID Root G2",
+      "ePKI Root Certification Authority",
+      "GeoTrust Primary Certification Authority - G2",
+      "GlobalSign",
+      "USERTrust RSA Certification Authority",
+      "Atos TrustedRoot Root CA ECC TLS 2021",
+      "Sectigo Public Email Protection Root R46",
+      "TeliaSonera Root CA v1",
+      "Starfield Class 2 Certification Authority",
+      "AffirmTrust Premium ECC",
+      "DigiCert High Assurance EV Root CA",
+      "GlobalSign Secure Mail Root E45",
+      "TWCA Global Root CA",
+      "OISTE WISeKey Global Root GC CA",
+      "Buypass Class 3 Root CA",
+      "Apple Platform Developer ECC Root CA - G1",
+      "SECOM SMIME RSA Root CA 2024",
+      "Atos TrustedRoot 2011",
+      "CA Disig Root R2",
+      "IdenTrust Public Sector Root CA 1",
+      "Telia Root CA v2",
+      "SSL.com Client RSA Root CA 2022",
+      "SSL.com Root Certification Authority ECC",
+      "Security Communication ECC RootCA1",
+      "AC RAIZ FNMT-RCM",
+      "SSL.com EV Root Certification Authority RSA R2",
+      "SECOM TLS RSA Root CA 2024",
+      "SSL.com EV Root Certification Authority ECC",
+      "USERTrust ECC Certification Authority",
+      "HARICA TLS RSA Root CA 2021",
+      "Sectigo Public Time Stamping Root R46",
+      "Atos TrustedRoot Root CA RSA G2 2020",
+      "GlobalSign Root E46",
+      "DigiCert TLS RSA4096 Root G5",
+      "DigiCert SMIME ECC P384 Root G5",
+      "QuoVadis Root CA 3 G3",
+      "emSign ECC Root CA - G3",
+      "Apple Platform ECC Root CA - G1",
+      "HARICA Client RSA Root CA 2021",
+      "Certum Trusted Network CA 2",
+      "0x4E65744C6F636B204172616E792028436C61737320476F6C64292046C59174616EC3BA73C3AD7476C3A16E79  \"NetLock Arany (Class Gold) F\\305\\221tan\\303\\272s\\303\\255tv\\303\\241ny",
+      "NAVER Global Root Certification Authority",
+      "Trustwave Global Certification Authority",
+      "Sectigo Public Email Protection Root E46",
+      "T-TeleSec GlobalRoot Class 3",
+      "Apple Root CA - G3",
+      "QuoVadis Root CA 2",
+      "Microsoft RSA Root Certificate Authority 2017",
+      "SSL.com Client ECC Root CA 2022",
+      "GlobalSign Root CA",
+      "QuoVadis Root CA 2 G3",
+      "DigiCert Global Root G3",
+      "Entrust Root Certification Authority",
+      "Microsoft ECC Root Certificate Authority 2017",
+      "ISRG Root X2",
+      "OISTE WISeKey Global Root GA CA",
+      "COMODO ECC Certification Authority",
+      "DigiCert SMIME RSA4096 Root G5",
+      "Apple Platform TLS RSA Root CA - G1",
+      "GlobalSign Root R46",
+      "Apple Platform Developer RSA Root CA - G1",
+      "AAA Certificate Services",
+      "DigiCert Global Root G2",
+      "GlobalSign Secure Mail Root R45",
+      "Trustwave Global ECC P256 Certification Authority",
+      "QuoVadis Root CA 3",
+      "Global Chambersign Root - 2008",
+      "TWCA Root Certification Authority",
+      "Chambers of Commerce Root - 2008",
+      "Buypass Class 2 Root CA",
+      "Entrust Root Certification Authority - EC1",
+      "Hellenic Academic and Research Institutions ECC RootCA 2015",
+      "Security Communication RootCA2",
+      "Starfield Services Root Certificate Authority - G2",
+      "SSL.com Root Certification Authority RSA",
+      "SwissSign Silver CA - G2",
+      "DigiCert Assured ID Root G3",
+      "GlobalSign",
+      "GTS Root R2",
+      "Autoridad de Certificacion Firmaprofesional CIF A62634068",
+      "HiPKI Root CA - G1",
+      "Trustwave Global ECC P384 Certification Authority",
+      "Atos TrustedRoot Root CA RSA TLS 2021",
+      "AffirmTrust Commercial",
+      "Sectigo Public Server Authentication Root E46",
+      "SecureTrust CA",
+      "Apple Platform TLS ECC Root CA - G1",
+      "info@e-szigno.hu",
+      "Apple Root CA",
+      "SECOM TLS ECC Root CA 2024",
+      "HARICA TLS ECC Root CA 2021",
+      "Amazon Root CA 3",
+      "QuoVadis Root CA 1 G3",
+      "GDCA TrustAUTH R5 ROOT",
+      "Amazon Root CA 1",
+      "GlobalSign",
+      "COMODO RSA Certification Authority",
+      "SSL.com TLS RSA Root CA 2022",
+      "Developer ID Certification Authority",
+      "Apple Platform Multipurpose RSA Root CA - G1",
+      "Starfield Root Certificate Authority - G2",
+      "COMODO Certification Authority",
+      "Hellenic Academic and Research Institutions RootCA 2015",
+      "ComSign Global Root CA",
+      "AffirmTrust Networking",
+      "Entrust Root Certification Authority - G2",
+      "Apple Root CA - G2",
+      "Apple Platform RSA Root CA - G1",
+      "DigiCert Trusted Root G4",
+      "info@izenpe.com",
+      "GTS Root R1",
+      "Sectigo Public Server Authentication Root R46",
+      "D-TRUST Root Class 3 CA 2 EV 2009",
+      "Apple Root Certificate Authority",
+      "emSign Root CA - G1",
+      "GLOBALTRUST 2020",
+      "DigiCert Assured ID Root CA",
+      "GlobalSign Verified Mark Root R42",
+      "Apple Platform Code Signing RSA Root CA - G1",
+      "GTS Root R4",
+      "DigiCert Global Root CA",
+      "Go Daddy Root Certificate Authority - G2",
+      "Go Daddy Class 2 Certification Authority",
+      "Hongkong Post Root CA 3",
+      "Certigna",
+      "Certum EC-384 CA",
+      "Sectigo Public Time Stamping Root E46",
+      "IdenTrust Commercial Root CA 1",
+      "Certum CA",
+      "GlobalSign",
+      "Amazon Root CA 4",
+      "SSL.com TLS ECC Root CA 2022",
+      "AffirmTrust Premium",
+      "CFCA EV ROOT",
+      "HARICA Client ECC Root CA 2021",
+      "Apple Platform Multipurpose ECC Root CA - G1",
+      "D-TRUST Root CA 3 2013",
+      "Entrust Root Certification Authority - G4",
+      "Atos TrustedRoot Root CA ECC G2 2020",
+      "certSIGN ROOT CA G2",
+      "Apple Platform Bootstrap ECC Root CA - G1"
+    ],
+    "details": [
+      {
+        "name": "DigiCert TLS ECC P384 Root G5",
+        "store": "system-root"
+      },
+      {
+        "name": "XRamp Global Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "OISTE WISeKey Global Root GB CA",
+        "store": "system-root"
+      },
+      {
+        "name": "Amazon Root CA 2",
+        "store": "system-root"
+      },
+      {
+        "name": "Actalis Authentication Root CA",
+        "store": "system-root"
+      },
+      {
+        "name": "ISRG Root X1",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Platform Code Signing ECC Root CA - G1",
+        "store": "system-root"
+      },
+      {
+        "name": "accv@accv.es",
+        "store": "system-root"
+      },
+      {
+        "name": "Certainly Root R1",
+        "store": "system-root"
+      },
+      {
+        "name": "Certum Trusted Root CA",
+        "store": "system-root"
+      },
+      {
+        "name": "TUBITAK Kamu SM SSL Kok Sertifikasi - Surum 1",
+        "store": "system-root"
+      },
+      {
+        "name": "GTS Root R3",
+        "store": "system-root"
+      },
+      {
+        "name": "Certum Trusted Network CA",
+        "store": "system-root"
+      },
+      {
+        "name": "Certainly Root E1",
+        "store": "system-root"
+      },
+      {
+        "name": "certSIGN ROOT CA",
+        "store": "system-root"
+      },
+      {
+        "name": "SwissSign Gold CA - G2",
+        "store": "system-root"
+      },
+      {
+        "name": "T-TeleSec GlobalRoot Class 2",
+        "store": "system-root"
+      },
+      {
+        "name": "Entrust.net Certification Authority (2048)",
+        "store": "system-root"
+      },
+      {
+        "name": "D-TRUST Root Class 3 CA 2 2009",
+        "store": "system-root"
+      },
+      {
+        "name": "DigiCert Assured ID Root G2",
+        "store": "system-root"
+      },
+      {
+        "name": "ePKI Root Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "GeoTrust Primary Certification Authority - G2",
+        "store": "system-root"
+      },
+      {
+        "name": "GlobalSign",
+        "store": "system-root"
+      },
+      {
+        "name": "USERTrust RSA Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "Atos TrustedRoot Root CA ECC TLS 2021",
+        "store": "system-root"
+      },
+      {
+        "name": "Sectigo Public Email Protection Root R46",
+        "store": "system-root"
+      },
+      {
+        "name": "TeliaSonera Root CA v1",
+        "store": "system-root"
+      },
+      {
+        "name": "Starfield Class 2 Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "AffirmTrust Premium ECC",
+        "store": "system-root"
+      },
+      {
+        "name": "DigiCert High Assurance EV Root CA",
+        "store": "system-root"
+      },
+      {
+        "name": "GlobalSign Secure Mail Root E45",
+        "store": "system-root"
+      },
+      {
+        "name": "TWCA Global Root CA",
+        "store": "system-root"
+      },
+      {
+        "name": "OISTE WISeKey Global Root GC CA",
+        "store": "system-root"
+      },
+      {
+        "name": "Buypass Class 3 Root CA",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Platform Developer ECC Root CA - G1",
+        "store": "system-root"
+      },
+      {
+        "name": "SECOM SMIME RSA Root CA 2024",
+        "store": "system-root"
+      },
+      {
+        "name": "Atos TrustedRoot 2011",
+        "store": "system-root"
+      },
+      {
+        "name": "CA Disig Root R2",
+        "store": "system-root"
+      },
+      {
+        "name": "IdenTrust Public Sector Root CA 1",
+        "store": "system-root"
+      },
+      {
+        "name": "Telia Root CA v2",
+        "store": "system-root"
+      },
+      {
+        "name": "SSL.com Client RSA Root CA 2022",
+        "store": "system-root"
+      },
+      {
+        "name": "SSL.com Root Certification Authority ECC",
+        "store": "system-root"
+      },
+      {
+        "name": "Security Communication ECC RootCA1",
+        "store": "system-root"
+      },
+      {
+        "name": "AC RAIZ FNMT-RCM",
+        "store": "system-root"
+      },
+      {
+        "name": "SSL.com EV Root Certification Authority RSA R2",
+        "store": "system-root"
+      },
+      {
+        "name": "SECOM TLS RSA Root CA 2024",
+        "store": "system-root"
+      },
+      {
+        "name": "SSL.com EV Root Certification Authority ECC",
+        "store": "system-root"
+      },
+      {
+        "name": "USERTrust ECC Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "HARICA TLS RSA Root CA 2021",
+        "store": "system-root"
+      },
+      {
+        "name": "Sectigo Public Time Stamping Root R46",
+        "store": "system-root"
+      },
+      {
+        "name": "Atos TrustedRoot Root CA RSA G2 2020",
+        "store": "system-root"
+      },
+      {
+        "name": "GlobalSign Root E46",
+        "store": "system-root"
+      },
+      {
+        "name": "DigiCert TLS RSA4096 Root G5",
+        "store": "system-root"
+      },
+      {
+        "name": "DigiCert SMIME ECC P384 Root G5",
+        "store": "system-root"
+      },
+      {
+        "name": "QuoVadis Root CA 3 G3",
+        "store": "system-root"
+      },
+      {
+        "name": "emSign ECC Root CA - G3",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Platform ECC Root CA - G1",
+        "store": "system-root"
+      },
+      {
+        "name": "HARICA Client RSA Root CA 2021",
+        "store": "system-root"
+      },
+      {
+        "name": "Certum Trusted Network CA 2",
+        "store": "system-root"
+      },
+      {
+        "name": "0x4E65744C6F636B204172616E792028436C61737320476F6C64292046C59174616EC3BA73C3AD7476C3A16E79  \"NetLock Arany (Class Gold) F\\305\\221tan\\303\\272s\\303\\255tv\\303\\241ny",
+        "store": "system-root"
+      },
+      {
+        "name": "NAVER Global Root Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "Trustwave Global Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "Sectigo Public Email Protection Root E46",
+        "store": "system-root"
+      },
+      {
+        "name": "T-TeleSec GlobalRoot Class 3",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Root CA - G3",
+        "store": "system-root"
+      },
+      {
+        "name": "QuoVadis Root CA 2",
+        "store": "system-root"
+      },
+      {
+        "name": "Microsoft RSA Root Certificate Authority 2017",
+        "store": "system-root"
+      },
+      {
+        "name": "SSL.com Client ECC Root CA 2022",
+        "store": "system-root"
+      },
+      {
+        "name": "GlobalSign Root CA",
+        "store": "system-root"
+      },
+      {
+        "name": "QuoVadis Root CA 2 G3",
+        "store": "system-root"
+      },
+      {
+        "name": "DigiCert Global Root G3",
+        "store": "system-root"
+      },
+      {
+        "name": "Entrust Root Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "Microsoft ECC Root Certificate Authority 2017",
+        "store": "system-root"
+      },
+      {
+        "name": "ISRG Root X2",
+        "store": "system-root"
+      },
+      {
+        "name": "OISTE WISeKey Global Root GA CA",
+        "store": "system-root"
+      },
+      {
+        "name": "COMODO ECC Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "DigiCert SMIME RSA4096 Root G5",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Platform TLS RSA Root CA - G1",
+        "store": "system-root"
+      },
+      {
+        "name": "GlobalSign Root R46",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Platform Developer RSA Root CA - G1",
+        "store": "system-root"
+      },
+      {
+        "name": "AAA Certificate Services",
+        "store": "system-root"
+      },
+      {
+        "name": "DigiCert Global Root G2",
+        "store": "system-root"
+      },
+      {
+        "name": "GlobalSign Secure Mail Root R45",
+        "store": "system-root"
+      },
+      {
+        "name": "Trustwave Global ECC P256 Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "QuoVadis Root CA 3",
+        "store": "system-root"
+      },
+      {
+        "name": "Global Chambersign Root - 2008",
+        "store": "system-root"
+      },
+      {
+        "name": "TWCA Root Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "Chambers of Commerce Root - 2008",
+        "store": "system-root"
+      },
+      {
+        "name": "Buypass Class 2 Root CA",
+        "store": "system-root"
+      },
+      {
+        "name": "Entrust Root Certification Authority - EC1",
+        "store": "system-root"
+      },
+      {
+        "name": "Hellenic Academic and Research Institutions ECC RootCA 2015",
+        "store": "system-root"
+      },
+      {
+        "name": "Security Communication RootCA2",
+        "store": "system-root"
+      },
+      {
+        "name": "Starfield Services Root Certificate Authority - G2",
+        "store": "system-root"
+      },
+      {
+        "name": "SSL.com Root Certification Authority RSA",
+        "store": "system-root"
+      },
+      {
+        "name": "SwissSign Silver CA - G2",
+        "store": "system-root"
+      },
+      {
+        "name": "DigiCert Assured ID Root G3",
+        "store": "system-root"
+      },
+      {
+        "name": "GlobalSign",
+        "store": "system-root"
+      },
+      {
+        "name": "GTS Root R2",
+        "store": "system-root"
+      },
+      {
+        "name": "Autoridad de Certificacion Firmaprofesional CIF A62634068",
+        "store": "system-root"
+      },
+      {
+        "name": "HiPKI Root CA - G1",
+        "store": "system-root"
+      },
+      {
+        "name": "Trustwave Global ECC P384 Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "Atos TrustedRoot Root CA RSA TLS 2021",
+        "store": "system-root"
+      },
+      {
+        "name": "AffirmTrust Commercial",
+        "store": "system-root"
+      },
+      {
+        "name": "Sectigo Public Server Authentication Root E46",
+        "store": "system-root"
+      },
+      {
+        "name": "SecureTrust CA",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Platform TLS ECC Root CA - G1",
+        "store": "system-root"
+      },
+      {
+        "name": "info@e-szigno.hu",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Root CA",
+        "store": "system-root"
+      },
+      {
+        "name": "SECOM TLS ECC Root CA 2024",
+        "store": "system-root"
+      },
+      {
+        "name": "HARICA TLS ECC Root CA 2021",
+        "store": "system-root"
+      },
+      {
+        "name": "Amazon Root CA 3",
+        "store": "system-root"
+      },
+      {
+        "name": "QuoVadis Root CA 1 G3",
+        "store": "system-root"
+      },
+      {
+        "name": "GDCA TrustAUTH R5 ROOT",
+        "store": "system-root"
+      },
+      {
+        "name": "Amazon Root CA 1",
+        "store": "system-root"
+      },
+      {
+        "name": "GlobalSign",
+        "store": "system-root"
+      },
+      {
+        "name": "COMODO RSA Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "SSL.com TLS RSA Root CA 2022",
+        "store": "system-root"
+      },
+      {
+        "name": "Developer ID Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Platform Multipurpose RSA Root CA - G1",
+        "store": "system-root"
+      },
+      {
+        "name": "Starfield Root Certificate Authority - G2",
+        "store": "system-root"
+      },
+      {
+        "name": "COMODO Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "Hellenic Academic and Research Institutions RootCA 2015",
+        "store": "system-root"
+      },
+      {
+        "name": "ComSign Global Root CA",
+        "store": "system-root"
+      },
+      {
+        "name": "AffirmTrust Networking",
+        "store": "system-root"
+      },
+      {
+        "name": "Entrust Root Certification Authority - G2",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Root CA - G2",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Platform RSA Root CA - G1",
+        "store": "system-root"
+      },
+      {
+        "name": "DigiCert Trusted Root G4",
+        "store": "system-root"
+      },
+      {
+        "name": "info@izenpe.com",
+        "store": "system-root"
+      },
+      {
+        "name": "GTS Root R1",
+        "store": "system-root"
+      },
+      {
+        "name": "Sectigo Public Server Authentication Root R46",
+        "store": "system-root"
+      },
+      {
+        "name": "D-TRUST Root Class 3 CA 2 EV 2009",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Root Certificate Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "emSign Root CA - G1",
+        "store": "system-root"
+      },
+      {
+        "name": "GLOBALTRUST 2020",
+        "store": "system-root"
+      },
+      {
+        "name": "DigiCert Assured ID Root CA",
+        "store": "system-root"
+      },
+      {
+        "name": "GlobalSign Verified Mark Root R42",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Platform Code Signing RSA Root CA - G1",
+        "store": "system-root"
+      },
+      {
+        "name": "GTS Root R4",
+        "store": "system-root"
+      },
+      {
+        "name": "DigiCert Global Root CA",
+        "store": "system-root"
+      },
+      {
+        "name": "Go Daddy Root Certificate Authority - G2",
+        "store": "system-root"
+      },
+      {
+        "name": "Go Daddy Class 2 Certification Authority",
+        "store": "system-root"
+      },
+      {
+        "name": "Hongkong Post Root CA 3",
+        "store": "system-root"
+      },
+      {
+        "name": "Certigna",
+        "store": "system-root"
+      },
+      {
+        "name": "Certum EC-384 CA",
+        "store": "system-root"
+      },
+      {
+        "name": "Sectigo Public Time Stamping Root E46",
+        "store": "system-root"
+      },
+      {
+        "name": "IdenTrust Commercial Root CA 1",
+        "store": "system-root"
+      },
+      {
+        "name": "Certum CA",
+        "store": "system-root"
+      },
+      {
+        "name": "GlobalSign",
+        "store": "system-root"
+      },
+      {
+        "name": "Amazon Root CA 4",
+        "store": "system-root"
+      },
+      {
+        "name": "SSL.com TLS ECC Root CA 2022",
+        "store": "system-root"
+      },
+      {
+        "name": "AffirmTrust Premium",
+        "store": "system-root"
+      },
+      {
+        "name": "CFCA EV ROOT",
+        "store": "system-root"
+      },
+      {
+        "name": "HARICA Client ECC Root CA 2021",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Platform Multipurpose ECC Root CA - G1",
+        "store": "system-root"
+      },
+      {
+        "name": "D-TRUST Root CA 3 2013",
+        "store": "system-root"
+      },
+      {
+        "name": "Entrust Root Certification Authority - G4",
+        "store": "system-root"
+      },
+      {
+        "name": "Atos TrustedRoot Root CA ECC G2 2020",
+        "store": "system-root"
+      },
+      {
+        "name": "certSIGN ROOT CA G2",
+        "store": "system-root"
+      },
+      {
+        "name": "Apple Platform Bootstrap ECC Root CA - G1",
+        "store": "system-root"
+      }
+    ]
+  },
+  "citrix": {
+    "installed": false,
+    "version": "unknown",
+    "path": null
+  },
+  "network": {
+    "online": true,
+    "hostname": "Zephyr.local",
+    "local_ips": [
+      "192.168.0.61"
+    ]
+  }
+}
