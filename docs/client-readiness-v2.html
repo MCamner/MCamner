@@ -32,9 +32,12 @@
       border-radius: 10px;
       background: #f8f8f8;
     }
+    .meta div {
+      margin: 0.25rem 0;
+    }
     .meta strong {
       display: inline-block;
-      min-width: 110px;
+      min-width: 120px;
     }
     table {
       width: 100%;
@@ -60,7 +63,7 @@
 </head>
 <body>
   <h1>Client Readiness v2</h1>
-  <p>Evaluation engine test view</p>
+  <p>Evaluation engine with live → saved → sample fallback</p>
 
   <div id="meta" class="meta"></div>
   <div id="summary" class="summary"></div>
@@ -84,65 +87,87 @@
 
   <script src="evaluator.js"></script>
   <script>
-    const LIVE_STATUS_URL = "http://127.0.0.1:38765/status";
-    const SAMPLE_DATA_URL = "sample-client-data.json";
     const PROFILE_URL = "client-readiness-config.v2.json";
 
-    async function loadJson(path) {
-      const res = await fetch(path);
-      if (!res.ok) throw new Error("Failed to load " + path);
-      return res.json();
-    }
+    const DATA_SOURCES = [
+      {
+        key: "live-helper",
+        url: "http://127.0.0.1:38765/status",
+        timeoutMs: 2500,
+        cache: "no-store"
+      },
+      {
+        key: "saved-live",
+        url: "live-client-data.json",
+        timeoutMs: 1500,
+        cache: "no-store"
+      },
+      {
+        key: "sample-data",
+        url: "sample-client-data.json",
+        timeoutMs: 1500,
+        cache: "default"
+      }
+    ];
 
-    async function loadLiveData() {
+    async function loadJson(url, options = {}) {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 2500);
+      const timeoutMs = options.timeoutMs || 2000;
+      const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
       try {
-        const res = await fetch(LIVE_STATUS_URL, {
-          signal: controller.signal,
-          cache: "no-store"
+        const res = await fetch(url, {
+          cache: options.cache || "default",
+          signal: controller.signal
         });
+
         clearTimeout(timeout);
 
         if (!res.ok) {
-          throw new Error("Helper returned " + res.status);
+          throw new Error(`Failed to load ${url} (${res.status})`);
         }
 
-        const json = await res.json();
-        return {
-          source: "live-helper",
-          url: LIVE_STATUS_URL,
-          data: json
-        };
+        return await res.json();
       } catch (err) {
         clearTimeout(timeout);
-        return null;
+        throw err;
       }
     }
 
     async function loadClientData() {
-      const live = await loadLiveData();
-      if (live) return live;
+      const errors = [];
 
-      const sample = await loadJson(SAMPLE_DATA_URL);
-      return {
-        source: "sample-data",
-        url: SAMPLE_DATA_URL,
-        data: sample
-      };
+      for (const source of DATA_SOURCES) {
+        try {
+          const data = await loadJson(source.url, {
+            timeoutMs: source.timeoutMs,
+            cache: source.cache
+          });
+
+          return {
+            source: source.key,
+            url: source.url,
+            data
+          };
+        } catch (err) {
+          errors.push(`${source.key}: ${err.message}`);
+        }
+      }
+
+      throw new Error("All data sources failed: " + errors.join(" | "));
     }
 
-    function renderMeta(meta) {
+    function renderMeta(payload) {
       const root = document.getElementById("meta");
-      const helperMeta = meta.data && meta.data.meta ? meta.data.meta : {};
+      const helperMeta = payload.data && payload.data.meta ? payload.data.meta : {};
 
       root.innerHTML = `
-        <div><strong>Data source:</strong> ${meta.source}</div>
-        <div><strong>Location:</strong> ${meta.url}</div>
+        <div><strong>Data source:</strong> ${payload.source}</div>
+        <div><strong>Location:</strong> ${payload.url}</div>
         <div><strong>Platform:</strong> ${helperMeta.platform || "unknown"}</div>
         <div><strong>Release:</strong> ${helperMeta.platform_release || "unknown"}</div>
         <div><strong>Agent version:</strong> ${helperMeta.agent_version || "n/a"}</div>
+        <div><strong>Hostname:</strong> ${helperMeta.hostname || payload.data?.network?.hostname || "unknown"}</div>
       `;
     }
 
@@ -175,7 +200,7 @@
     async function main() {
       try {
         const [profile, clientPayload] = await Promise.all([
-          loadJson(PROFILE_URL),
+          loadJson(PROFILE_URL, { timeoutMs: 2000, cache: "no-store" }),
           loadClientData()
         ]);
 
