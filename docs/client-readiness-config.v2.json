@@ -1,0 +1,35 @@
+{
+  "profile": "igel-os12-citrix",
+  "checks": [
+    {
+      "id": "CERT-ROOT-001",
+      "title": "Root CA must be present",
+      "severity": "critical",
+      "category": "security",
+      "source": "certificates.installed",
+      "operator": "contains",
+      "expected": ["Company Root CA"],
+      "remediation": "Install approved root certificate bundle via UMS"
+    },
+    {
+      "id": "CTX-001",
+      "title": "Citrix Workspace must be installed",
+      "severity": "high",
+      "category": "application",
+      "source": "citrix.installed",
+      "operator": "equals",
+      "expected": true,
+      "remediation": "Install Citrix Workspace for the target platform"
+    },
+    {
+      "id": "CTX-002",
+      "title": "Citrix Workspace must meet minimum version",
+      "severity": "medium",
+      "category": "application",
+      "source": "citrix.version",
+      "operator": "min_version",
+      "expected": "23.11.0",
+      "remediation": "Upgrade Citrix Workspace to approved baseline"
+    }
+  ]
+}

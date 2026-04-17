@@ -1,0 +1,15 @@
+{
+  "certificates": {
+    "installed": [
+      "Company Root CA",
+      "Company Issuing CA"
+    ]
+  },
+  "citrix": {
+    "installed": true,
+    "version": "24.1.0"
+  },
+  "network": {
+    "online": true
+  }
+}

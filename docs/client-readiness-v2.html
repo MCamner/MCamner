@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client Readiness v2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.5;
+    }
+    h1, h2 { margin-top: 1.5rem; }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(120px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0 2rem;
+    }
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1rem;
+      background: #fafafa;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #f5f5f5; }
+    .PASS { color: #0a7a2f; font-weight: bold; }
+    .FAIL { color: #b42318; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Client Readiness v2</h1>
+  <p>Evaluation engine test view</p>
+
+  <div id="summary" class="summary"></div>
+
+  <h2>Results</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Severity</th>
+        <th>Expected</th>
+        <th>Actual</th>
+        <th>Evidence</th>
+        <th>Remediation</th>
+      </tr>
+    </thead>
+    <tbody id="results-body"></tbody>
+  </table>
+
+  <script src="evaluator.js"></script>
+  <script>
+    async function loadJson(path) {
+      const res = await fetch(path);
+      if (!res.ok) throw new Error("Failed to load " + path);
+      return res.json();
+    }
+
+    function renderSummary(summary) {
+      const root = document.getElementById("summary");
+      root.innerHTML = `
+        <div class="card"><strong>Total</strong><br>${summary.total}</div>
+        <div class="card"><strong>Passed</strong><br>${summary.passed}</div>
+        <div class="card"><strong>Failed</strong><br>${summary.failed}</div>
+        <div class="card"><strong>Critical failed</strong><br>${summary.critical_failed}</div>
+      `;
+    }
+
+    function renderResults(results) {
+      const body = document.getElementById("results-body");
+      body.innerHTML = results.map((r) => `
+        <tr>
+          <td>${r.id}</td>
+          <td>${r.title}</td>
+          <td class="${r.status}">${r.status}</td>
+          <td>${r.severity}</td>
+          <td><pre>${JSON.stringify(r.expected, null, 2)}</pre></td>
+          <td><pre>${JSON.stringify(r.actual, null, 2)}</pre></td>
+          <td>${r.evidence}</td>
+          <td>${r.remediation || ""}</td>
+        </tr>
+      `).join("");
+    }
+
+    async function main() {
+      try {
+        const [profile, data] = await Promise.all([
+          loadJson("client-readiness-config.v2.json"),
+          loadJson("sample-client-data.json")
+        ]);
+
+        const output = window.ClientReadinessEvaluator.evaluateProfile(profile, data);
+        renderSummary(output.summary);
+        renderResults(output.results);
+      } catch (err) {
+        document.body.insertAdjacentHTML(
+          "beforeend",
+          `<p style="color:red;"><strong>Error:</strong> ${err.message}</p>`
+        );
+      }
+    }
+
+    main();
+  </script>
+</body>
+</html>
