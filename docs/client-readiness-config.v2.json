@@ -12,6 +12,16 @@
       "remediation": "Install approved root certificate bundle via UMS"
     },
     {
+      "id": "CERT-ROOT-DETAIL-001",
+      "title": "Root CA must exist in certificate details",
+      "severity": "critical",
+      "category": "security",
+      "source": "certificates.details",
+      "operator": "cert_name_exists",
+      "expected": "Company Root CA",
+      "remediation": "Verify root CA is present in the expected trust store"
+    },
+    {
       "id": "CTX-001",
       "title": "Citrix Workspace must be installed",
       "severity": "high",

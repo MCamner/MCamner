@@ -1,6 +1,6 @@
 {
   "meta": {
-    "agent_version": "2.0.0",
+    "agent_version": "2.1.0",
     "platform": "Darwin",
     "platform_release": "25.4.0",
     "machine": "arm64",
@@ -8,807 +8,1165 @@
   },
   "certificates": {
     "installed": [
-      "DigiCert TLS ECC P384 Root G5",
-      "XRamp Global Certification Authority",
-      "OISTE WISeKey Global Root GB CA",
-      "Amazon Root CA 2",
-      "Actalis Authentication Root CA",
-      "ISRG Root X1",
-      "Apple Platform Code Signing ECC Root CA - G1",
-      "accv@accv.es",
-      "Certainly Root R1",
-      "Certum Trusted Root CA",
-      "TUBITAK Kamu SM SSL Kok Sertifikasi - Surum 1",
-      "GTS Root R3",
-      "Certum Trusted Network CA",
-      "Certainly Root E1",
-      "certSIGN ROOT CA",
-      "SwissSign Gold CA - G2",
-      "T-TeleSec GlobalRoot Class 2",
-      "Entrust.net Certification Authority (2048)",
-      "D-TRUST Root Class 3 CA 2 2009",
-      "DigiCert Assured ID Root G2",
-      "ePKI Root Certification Authority",
-      "GeoTrust Primary Certification Authority - G2",
-      "GlobalSign",
-      "USERTrust RSA Certification Authority",
-      "Atos TrustedRoot Root CA ECC TLS 2021",
-      "Sectigo Public Email Protection Root R46",
-      "TeliaSonera Root CA v1",
-      "Starfield Class 2 Certification Authority",
-      "AffirmTrust Premium ECC",
-      "DigiCert High Assurance EV Root CA",
-      "GlobalSign Secure Mail Root E45",
-      "TWCA Global Root CA",
-      "OISTE WISeKey Global Root GC CA",
-      "Buypass Class 3 Root CA",
-      "Apple Platform Developer ECC Root CA - G1",
-      "SECOM SMIME RSA Root CA 2024",
-      "Atos TrustedRoot 2011",
-      "CA Disig Root R2",
-      "IdenTrust Public Sector Root CA 1",
-      "Telia Root CA v2",
-      "SSL.com Client RSA Root CA 2022",
-      "SSL.com Root Certification Authority ECC",
-      "Security Communication ECC RootCA1",
-      "AC RAIZ FNMT-RCM",
-      "SSL.com EV Root Certification Authority RSA R2",
-      "SECOM TLS RSA Root CA 2024",
-      "SSL.com EV Root Certification Authority ECC",
-      "USERTrust ECC Certification Authority",
-      "HARICA TLS RSA Root CA 2021",
-      "Sectigo Public Time Stamping Root R46",
-      "Atos TrustedRoot Root CA RSA G2 2020",
-      "GlobalSign Root E46",
-      "DigiCert TLS RSA4096 Root G5",
-      "DigiCert SMIME ECC P384 Root G5",
-      "QuoVadis Root CA 3 G3",
-      "emSign ECC Root CA - G3",
-      "Apple Platform ECC Root CA - G1",
-      "HARICA Client RSA Root CA 2021",
-      "Certum Trusted Network CA 2",
       "0x4E65744C6F636B204172616E792028436C61737320476F6C64292046C59174616EC3BA73C3AD7476C3A16E79  \"NetLock Arany (Class Gold) F\\305\\221tan\\303\\272s\\303\\255tv\\303\\241ny",
-      "NAVER Global Root Certification Authority",
-      "Trustwave Global Certification Authority",
-      "Sectigo Public Email Protection Root E46",
-      "T-TeleSec GlobalRoot Class 3",
-      "Apple Root CA - G3",
-      "QuoVadis Root CA 2",
-      "Microsoft RSA Root Certificate Authority 2017",
-      "SSL.com Client ECC Root CA 2022",
-      "GlobalSign Root CA",
-      "QuoVadis Root CA 2 G3",
-      "DigiCert Global Root G3",
-      "Entrust Root Certification Authority",
-      "Microsoft ECC Root Certificate Authority 2017",
-      "ISRG Root X2",
-      "OISTE WISeKey Global Root GA CA",
-      "COMODO ECC Certification Authority",
-      "DigiCert SMIME RSA4096 Root G5",
-      "Apple Platform TLS RSA Root CA - G1",
-      "GlobalSign Root R46",
-      "Apple Platform Developer RSA Root CA - G1",
       "AAA Certificate Services",
-      "DigiCert Global Root G2",
-      "GlobalSign Secure Mail Root R45",
-      "Trustwave Global ECC P256 Certification Authority",
-      "QuoVadis Root CA 3",
-      "Global Chambersign Root - 2008",
-      "TWCA Root Certification Authority",
-      "Chambers of Commerce Root - 2008",
-      "Buypass Class 2 Root CA",
-      "Entrust Root Certification Authority - EC1",
-      "Hellenic Academic and Research Institutions ECC RootCA 2015",
-      "Security Communication RootCA2",
-      "Starfield Services Root Certificate Authority - G2",
-      "SSL.com Root Certification Authority RSA",
-      "SwissSign Silver CA - G2",
-      "DigiCert Assured ID Root G3",
-      "GlobalSign",
-      "GTS Root R2",
-      "Autoridad de Certificacion Firmaprofesional CIF A62634068",
-      "HiPKI Root CA - G1",
-      "Trustwave Global ECC P384 Certification Authority",
-      "Atos TrustedRoot Root CA RSA TLS 2021",
+      "AC RAIZ FNMT-RCM",
+      "Actalis Authentication Root CA",
       "AffirmTrust Commercial",
-      "Sectigo Public Server Authentication Root E46",
-      "SecureTrust CA",
-      "Apple Platform TLS ECC Root CA - G1",
-      "info@e-szigno.hu",
-      "Apple Root CA",
-      "SECOM TLS ECC Root CA 2024",
-      "HARICA TLS ECC Root CA 2021",
-      "Amazon Root CA 3",
-      "QuoVadis Root CA 1 G3",
-      "GDCA TrustAUTH R5 ROOT",
-      "Amazon Root CA 1",
-      "GlobalSign",
-      "COMODO RSA Certification Authority",
-      "SSL.com TLS RSA Root CA 2022",
-      "Developer ID Certification Authority",
-      "Apple Platform Multipurpose RSA Root CA - G1",
-      "Starfield Root Certificate Authority - G2",
-      "COMODO Certification Authority",
-      "Hellenic Academic and Research Institutions RootCA 2015",
-      "ComSign Global Root CA",
       "AffirmTrust Networking",
-      "Entrust Root Certification Authority - G2",
-      "Apple Root CA - G2",
-      "Apple Platform RSA Root CA - G1",
-      "DigiCert Trusted Root G4",
-      "info@izenpe.com",
-      "GTS Root R1",
-      "Sectigo Public Server Authentication Root R46",
-      "D-TRUST Root Class 3 CA 2 EV 2009",
-      "Apple Root Certificate Authority",
-      "emSign Root CA - G1",
-      "GLOBALTRUST 2020",
-      "DigiCert Assured ID Root CA",
-      "GlobalSign Verified Mark Root R42",
-      "Apple Platform Code Signing RSA Root CA - G1",
-      "GTS Root R4",
-      "DigiCert Global Root CA",
-      "Go Daddy Root Certificate Authority - G2",
-      "Go Daddy Class 2 Certification Authority",
-      "Hongkong Post Root CA 3",
-      "Certigna",
-      "Certum EC-384 CA",
-      "Sectigo Public Time Stamping Root E46",
-      "IdenTrust Commercial Root CA 1",
-      "Certum CA",
-      "GlobalSign",
-      "Amazon Root CA 4",
-      "SSL.com TLS ECC Root CA 2022",
       "AffirmTrust Premium",
-      "CFCA EV ROOT",
-      "HARICA Client ECC Root CA 2021",
+      "AffirmTrust Premium ECC",
+      "Amazon Root CA 1",
+      "Amazon Root CA 2",
+      "Amazon Root CA 3",
+      "Amazon Root CA 4",
+      "Apple Platform Bootstrap ECC Root CA - G1",
+      "Apple Platform Code Signing ECC Root CA - G1",
+      "Apple Platform Code Signing RSA Root CA - G1",
+      "Apple Platform Developer ECC Root CA - G1",
+      "Apple Platform Developer RSA Root CA - G1",
+      "Apple Platform ECC Root CA - G1",
       "Apple Platform Multipurpose ECC Root CA - G1",
-      "D-TRUST Root CA 3 2013",
-      "Entrust Root Certification Authority - G4",
+      "Apple Platform Multipurpose RSA Root CA - G1",
+      "Apple Platform RSA Root CA - G1",
+      "Apple Platform TLS ECC Root CA - G1",
+      "Apple Platform TLS RSA Root CA - G1",
+      "Apple Root CA",
+      "Apple Root CA - G2",
+      "Apple Root CA - G3",
+      "Apple Root Certificate Authority",
+      "Apple Worldwide Developer Relations Certification Authority",
+      "Atos TrustedRoot 2011",
       "Atos TrustedRoot Root CA ECC G2 2020",
+      "Atos TrustedRoot Root CA ECC TLS 2021",
+      "Atos TrustedRoot Root CA RSA G2 2020",
+      "Atos TrustedRoot Root CA RSA TLS 2021",
+      "Autoridad de Certificacion Firmaprofesional CIF A62634068",
+      "Buypass Class 2 Root CA",
+      "Buypass Class 3 Root CA",
+      "CA Disig Root R2",
+      "CFCA EV ROOT",
+      "COMODO Certification Authority",
+      "COMODO ECC Certification Authority",
+      "COMODO RSA Certification Authority",
+      "Certainly Root E1",
+      "Certainly Root R1",
+      "Certigna",
+      "Certum CA",
+      "Certum EC-384 CA",
+      "Certum Trusted Network CA",
+      "Certum Trusted Network CA 2",
+      "Certum Trusted Root CA",
+      "Chambers of Commerce Root - 2008",
+      "ComSign Global Root CA",
+      "D-TRUST Root CA 3 2013",
+      "D-TRUST Root Class 3 CA 2 2009",
+      "D-TRUST Root Class 3 CA 2 EV 2009",
+      "Developer ID Certification Authority",
+      "DigiCert Assured ID Root CA",
+      "DigiCert Assured ID Root G2",
+      "DigiCert Assured ID Root G3",
+      "DigiCert Global Root CA",
+      "DigiCert Global Root G2",
+      "DigiCert Global Root G3",
+      "DigiCert High Assurance EV Root CA",
+      "DigiCert SMIME ECC P384 Root G5",
+      "DigiCert SMIME RSA4096 Root G5",
+      "DigiCert TLS ECC P384 Root G5",
+      "DigiCert TLS RSA4096 Root G5",
+      "DigiCert Trusted Root G4",
+      "Entrust Root Certification Authority",
+      "Entrust Root Certification Authority - EC1",
+      "Entrust Root Certification Authority - G2",
+      "Entrust Root Certification Authority - G4",
+      "Entrust.net Certification Authority (2048)",
+      "GDCA TrustAUTH R5 ROOT",
+      "GLOBALTRUST 2020",
+      "GTS Root R1",
+      "GTS Root R2",
+      "GTS Root R3",
+      "GTS Root R4",
+      "GeoTrust Primary Certification Authority - G2",
+      "Global Chambersign Root - 2008",
+      "GlobalSign",
+      "GlobalSign Root CA",
+      "GlobalSign Root E46",
+      "GlobalSign Root R46",
+      "GlobalSign Secure Mail Root E45",
+      "GlobalSign Secure Mail Root R45",
+      "GlobalSign Verified Mark Root R42",
+      "Go Daddy Class 2 Certification Authority",
+      "Go Daddy Root Certificate Authority - G2",
+      "HARICA Client ECC Root CA 2021",
+      "HARICA Client RSA Root CA 2021",
+      "HARICA TLS ECC Root CA 2021",
+      "HARICA TLS RSA Root CA 2021",
+      "Hellenic Academic and Research Institutions ECC RootCA 2015",
+      "Hellenic Academic and Research Institutions RootCA 2015",
+      "HiPKI Root CA - G1",
+      "Hongkong Post Root CA 3",
+      "ISRG Root X1",
+      "ISRG Root X2",
+      "IdenTrust Commercial Root CA 1",
+      "IdenTrust Public Sector Root CA 1",
+      "ManSys-MacBook-Air.local",
+      "Microsoft ECC Root Certificate Authority 2017",
+      "Microsoft RSA Root Certificate Authority 2017",
+      "NAVER Global Root Certification Authority",
+      "OISTE WISeKey Global Root GA CA",
+      "OISTE WISeKey Global Root GB CA",
+      "OISTE WISeKey Global Root GC CA",
+      "QuoVadis Root CA 1 G3",
+      "QuoVadis Root CA 2",
+      "QuoVadis Root CA 2 G3",
+      "QuoVadis Root CA 3",
+      "QuoVadis Root CA 3 G3",
+      "SECOM SMIME RSA Root CA 2024",
+      "SECOM TLS ECC Root CA 2024",
+      "SECOM TLS RSA Root CA 2024",
+      "SSL.com Client ECC Root CA 2022",
+      "SSL.com Client RSA Root CA 2022",
+      "SSL.com EV Root Certification Authority ECC",
+      "SSL.com EV Root Certification Authority RSA R2",
+      "SSL.com Root Certification Authority ECC",
+      "SSL.com Root Certification Authority RSA",
+      "SSL.com TLS ECC Root CA 2022",
+      "SSL.com TLS RSA Root CA 2022",
+      "Sectigo Public Email Protection Root E46",
+      "Sectigo Public Email Protection Root R46",
+      "Sectigo Public Server Authentication Root E46",
+      "Sectigo Public Server Authentication Root R46",
+      "Sectigo Public Time Stamping Root E46",
+      "Sectigo Public Time Stamping Root R46",
+      "SecureTrust CA",
+      "Security Communication ECC RootCA1",
+      "Security Communication RootCA2",
+      "Server Fallback SSL Certificate",
+      "Starfield Class 2 Certification Authority",
+      "Starfield Root Certificate Authority - G2",
+      "Starfield Services Root Certificate Authority - G2",
+      "SwissSign Gold CA - G2",
+      "SwissSign Silver CA - G2",
+      "T-TeleSec GlobalRoot Class 2",
+      "T-TeleSec GlobalRoot Class 3",
+      "TUBITAK Kamu SM SSL Kok Sertifikasi - Surum 1",
+      "TWCA Global Root CA",
+      "TWCA Root Certification Authority",
+      "Telia Root CA v2",
+      "TeliaSonera Root CA v1",
+      "Trustwave Global Certification Authority",
+      "Trustwave Global ECC P256 Certification Authority",
+      "Trustwave Global ECC P384 Certification Authority",
+      "USERTrust ECC Certification Authority",
+      "USERTrust RSA Certification Authority",
+      "XRamp Global Certification Authority",
+      "accv@accv.es",
+      "certSIGN ROOT CA",
       "certSIGN ROOT CA G2",
-      "Apple Platform Bootstrap ECC Root CA - G1"
+      "com.apple.kerberos.kdc",
+      "com.apple.systemdefault",
+      "ePKI Root Certification Authority",
+      "emSign ECC Root CA - G3",
+      "emSign Root CA - G1",
+      "info@e-szigno.hu",
+      "info@izenpe.com"
     ],
     "details": [
       {
+        "thumbprint": "17F3DE5E9F0F19E98EF61F32266E20C407AE30EE",
+        "store": "system-root",
         "name": "DigiCert TLS ECC P384 Root G5",
-        "store": "system-root"
+        "subject": "0x304E310B300906035504061302555331173015060355040A130E44494749434552542C20494E432E312630240603550403131D444947494345525420544C5320454343205033383420524F4F54204735  \"0N1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0270\\025\\006\\003U\\004\\012\\023\\016DIGICERT, INC.1&0$\\006\\003U\\004\\003\\023\\035DIGICERT TLS ECC P384 ROOT G5"
       },
       {
+        "thumbprint": "B80186D1EB9C86A54104CF3054F34C52B7E558C6",
+        "store": "system-root",
         "name": "XRamp Global Certification Authority",
-        "store": "system-root"
+        "subject": "0x308182310B3009060355040613025553311E301C060355040B13155757572E5852414D5053454355524954592E434F4D31243022060355040A131B5852414D5020534543555249545920534552564943455320494E43312D302B060355040313245852414D5020474C4F42414C2043455254494649434154494F4E20415554484F52495459  \"0\\201\\2021\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0360\\034\\006\\003U\\004\\013\\023\\025WWW.XRAMPSECURITY.COM1$0\"\\006\\003U\\004\\012\\023\\033XRAMP SECURITY SERVICES INC1-0+\\006\\003U\\004\\003\\023$XRAMP GLOBAL CERTIFICATION AUTHORITY"
       },
       {
+        "thumbprint": "0FF9407618D3D76A4B98F0A8359E0CFD27ACCCED",
+        "store": "system-root",
         "name": "OISTE WISeKey Global Root GB CA",
-        "store": "system-root"
+        "subject": "0x306D310B30090603550406130243483110300E060355040A1307574953454B455931223020060355040B13194F4953544520464F554E444154494F4E20454E444F52534544312830260603550403131F4F4953544520574953454B455920474C4F42414C20524F4F54204742204341  \"0m1\\0130\\011\\006\\003U\\004\\006\\023\\002CH1\\0200\\016\\006\\003U\\004\\012\\023\\007WISEKEY1\"0 \\006\\003U\\004\\013\\023\\031OISTE FOUNDATION ENDORSED1(0&\\006\\003U\\004\\003\\023\\037OISTE WISEKEY GLOBAL ROOT GB CA"
       },
       {
+        "thumbprint": "5A8CEF45D7A69859767A8C8B4496B578CF474B1A",
+        "store": "system-root",
         "name": "Amazon Root CA 2",
-        "store": "system-root"
+        "subject": "0x3039310B3009060355040613025553310F300D060355040A1306414D415A4F4E3119301706035504031310414D415A4F4E20524F4F542043412032  \"091\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0170\\015\\006\\003U\\004\\012\\023\\006AMAZON1\\0310\\027\\006\\003U\\004\\003\\023\\020AMAZON ROOT CA 2"
       },
       {
+        "thumbprint": "F373B387065A28848AF2F34ACE192BDDC78E9CAC",
+        "store": "system-root",
         "name": "Actalis Authentication Root CA",
-        "store": "system-root"
+        "subject": "0x306B310B3009060355040613024954310E300C06035504070C054D696C616E31233021060355040A0C1A416374616C697320532E702E412E2F30333335383532303936373127302506035504030C1E416374616C69732041757468656E7469636174696F6E20526F6F74204341  \"0k1\\0130\\011\\006\\003U\\004\\006\\023\\002IT1\\0160\\014\\006\\003U\\004\\007\\014\\005Milan1#0!\\006\\003U\\004\\012\\014\\032Actalis S.p.A./033585209671'0%\\006\\003U\\004\\003\\014\\036Actalis Authentication Root CA"
       },
       {
+        "thumbprint": "CABD2A79A1076A31F21D253635CB039D4329A5E8",
+        "store": "system-root",
         "name": "ISRG Root X1",
-        "store": "system-root"
+        "subject": "0x304F310B300906035504061302555331293027060355040A1320494E5445524E45542053454355524954592052455345415243482047524F5550311530130603550403130C4953524720524F4F54205831  \"0O1\\0130\\011\\006\\003U\\004\\006\\023\\002US1)0'\\006\\003U\\004\\012\\023 INTERNET SECURITY RESEARCH GROUP1\\0250\\023\\006\\003U\\004\\003\\023\\014ISRG ROOT X1"
       },
       {
+        "thumbprint": "E8DA8B1EFCFE2EB2FCEB9D41981E1869A71A9C13",
+        "store": "system-root",
         "name": "Apple Platform Code Signing ECC Root CA - G1",
-        "store": "system-root"
+        "subject": "0x3059310B300906035504061302555331133011060355040A0C0A4170706C6520496E632E3135303306035504030C2C4170706C6520506C6174666F726D20436F6465205369676E696E672045434320526F6F74204341202D204731  \"0Y1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1503\\006\\003U\\004\\003\\014,Apple Platform Code Signing ECC Root CA - G1"
       },
       {
+        "thumbprint": "93057A8815C64FCE882FFA9116522878BC536417",
+        "store": "system-root",
         "name": "accv@accv.es",
-        "store": "system-root"
+        "subject": "0x30423112301006035504030C09414343565241495A313110300E060355040B0C07504B4941434356310D300B060355040A0C0441434356310B3009060355040613024553  \"0B1\\0220\\020\\006\\003U\\004\\003\\014\\011ACCVRAIZ11\\0200\\016\\006\\003U\\004\\013\\014\\007PKIACCV1\\0150\\013\\006\\003U\\004\\012\\014\\004ACCV1\\0130\\011\\006\\003U\\004\\006\\023\\002ES"
       },
       {
+        "thumbprint": "A050EE0F2871F427B2126D6F509625BACC8642AF",
+        "store": "system-root",
         "name": "Certainly Root R1",
-        "store": "system-root"
+        "subject": "0x303D310B300906035504061302555331123010060355040A13094345525441494E4C59311A3018060355040313114345525441494E4C5920524F4F54205231  \"0=1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0220\\020\\006\\003U\\004\\012\\023\\011CERTAINLY1\\0320\\030\\006\\003U\\004\\003\\023\\021CERTAINLY ROOT R1"
       },
       {
+        "thumbprint": "C88344C018AE9FCCF187B78F22D1C5D74584BAE5",
+        "store": "system-root",
         "name": "Certum Trusted Root CA",
-        "store": "system-root"
+        "subject": "0x307A310B300906035504061302504C3121301F060355040A131841535345434F20444154412053595354454D5320532E412E31273025060355040B131E43455254554D2043455254494649434154494F4E20415554484F52495459311F301D0603550403131643455254554D205452555354454420524F4F54204341  \"0z1\\0130\\011\\006\\003U\\004\\006\\023\\002PL1!0\\037\\006\\003U\\004\\012\\023\\030ASSECO DATA SYSTEMS S.A.1'0%\\006\\003U\\004\\013\\023\\036CERTUM CERTIFICATION AUTHORITY1\\0370\\035\\006\\003U\\004\\003\\023\\026CERTUM TRUSTED ROOT CA"
       },
       {
+        "thumbprint": "3143649BECCE27ECED3A3F0B8F0DE4E891DDEECA",
+        "store": "system-root",
         "name": "TUBITAK Kamu SM SSL Kok Sertifikasi - Surum 1",
-        "store": "system-root"
+        "subject": "0x3081D2310B3009060355040613025452311830160603550407130F4745425A45202D204B4F4341454C4931423040060355040A13395455524B4959452042494C494D53454C2056452054454B4E4F4C4F4A494B20415241535449524D41204B5552554D55202D205455424954414B312D302B060355040B13244B414D5520534552544946494B4153594F4E204D45524B455A49202D204B414D5520534D313630340603550403132D5455424954414B204B414D5520534D2053534C204B4F4B20534552544946494B415349202D20535552554D2031  \"0\\201\\3221\\0130\\011\\006\\003U\\004\\006\\023\\002TR1\\0300\\026\\006\\003U\\004\\007\\023\\017GEBZE - KOCAELI1B0@\\006\\003U\\004\\012\\0239TURKIYE BILIMSEL VE TEKNOLOJIK ARASTIRMA KURUMU - TUBITAK1-0+\\006\\003U\\004\\013\\023$KAMU SERTIFIKASYON MERKEZI - KAMU SM1604\\006\\003U\\004\\003\\023-TUBITAK KAMU SM SSL KOK SERTIFIKASI - SURUM 1"
       },
       {
+        "thumbprint": "EDE571802BC892B95B833CD232683F09CDA01E46",
+        "store": "system-root",
         "name": "GTS Root R3",
-        "store": "system-root"
+        "subject": "0x3047310B300906035504061302555331223020060355040A1319474F4F474C45205452555354205345525649434553204C4C43311430120603550403130B47545320524F4F54205233  \"0G1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\"0 \\006\\003U\\004\\012\\023\\031GOOGLE TRUST SERVICES LLC1\\0240\\022\\006\\003U\\004\\003\\023\\013GTS ROOT R3"
       },
       {
+        "thumbprint": "07E032E020B72C3F192F0628A2593A19A70F069E",
+        "store": "system-root",
         "name": "Certum Trusted Network CA",
-        "store": "system-root"
+        "subject": "0x307E310B300906035504061302504C31223020060355040A1319554E495A45544F20544543484E4F4C4F4749455320532E412E31273025060355040B131E43455254554D2043455254494649434154494F4E20415554484F52495459312230200603550403131943455254554D2054525553544544204E4554574F524B204341  \"0~1\\0130\\011\\006\\003U\\004\\006\\023\\002PL1\"0 \\006\\003U\\004\\012\\023\\031UNIZETO TECHNOLOGIES S.A.1'0%\\006\\003U\\004\\013\\023\\036CERTUM CERTIFICATION AUTHORITY1\"0 \\006\\003U\\004\\003\\023\\031CERTUM TRUSTED NETWORK CA"
       },
       {
+        "thumbprint": "F9E16DDC0189CFD58245633EC5377DC2EB936F2B",
+        "store": "system-root",
         "name": "Certainly Root E1",
-        "store": "system-root"
+        "subject": "0x303D310B300906035504061302555331123010060355040A13094345525441494E4C59311A3018060355040313114345525441494E4C5920524F4F54204531  \"0=1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0220\\020\\006\\003U\\004\\012\\023\\011CERTAINLY1\\0320\\030\\006\\003U\\004\\003\\023\\021CERTAINLY ROOT E1"
       },
       {
+        "thumbprint": "FAB7EE36972662FB2DB02AF6BF03FDE87C4B2F9B",
+        "store": "system-root",
         "name": "certSIGN ROOT CA",
-        "store": "system-root"
+        "subject": "0x303B310B300906035504061302524F3111300F060355040A1308434552545349474E31193017060355040B1310434552545349474E20524F4F54204341  \"0;1\\0130\\011\\006\\003U\\004\\006\\023\\002RO1\\0210\\017\\006\\003U\\004\\012\\023\\010CERTSIGN1\\0310\\027\\006\\003U\\004\\013\\023\\020CERTSIGN ROOT CA"
       },
       {
+        "thumbprint": "D8C5388AB7301B1B6ED47AE645253A6F9F1A2761",
+        "store": "system-root",
         "name": "SwissSign Gold CA - G2",
-        "store": "system-root"
+        "subject": "0x3045310B300906035504061302434831153013060355040A130C53574953535349474E204147311F301D0603550403131653574953535349474E20474F4C44204341202D204732  \"0E1\\0130\\011\\006\\003U\\004\\006\\023\\002CH1\\0250\\023\\006\\003U\\004\\012\\023\\014SWISSSIGN AG1\\0370\\035\\006\\003U\\004\\003\\023\\026SWISSSIGN GOLD CA - G2"
       },
       {
+        "thumbprint": "590D2D7D884F402E617EA562321765CF17D894E9",
+        "store": "system-root",
         "name": "T-TeleSec GlobalRoot Class 2",
-        "store": "system-root"
+        "subject": "0x308182310B3009060355040613024445312B3029060355040A0C22542D53797374656D7320456E746572707269736520536572766963657320476D6248311F301D060355040B0C16542D53797374656D732054727573742043656E7465723125302306035504030C1C542D54656C6553656320476C6F62616C526F6F7420436C6173732032  \"0\\201\\2021\\0130\\011\\006\\003U\\004\\006\\023\\002DE1+0)\\006\\003U\\004\\012\\014\"T-Systems Enterprise Services GmbH1\\0370\\035\\006\\003U\\004\\013\\014\\026T-Systems Trust Center1%0#\\006\\003U\\004\\003\\014\\034T-TeleSec GlobalRoot Class 2"
       },
       {
+        "thumbprint": "503006091D97D4F5AE39F7CBE7927D7D652D3431",
+        "store": "system-root",
         "name": "Entrust.net Certification Authority (2048)",
-        "store": "system-root"
+        "subject": "0x3081B431143012060355040A130B454E54525553542E4E45543140303E060355040B14377777772E656E74727573742E6E65742F4350535F3230343820696E636F72702E206279207265662E20286C696D697473206C6961622E2931253023060355040B131C284329203139393920454E54525553542E4E4554204C494D49544544313330310603550403132A454E54525553542E4E45542043455254494649434154494F4E20415554484F5249545920283230343829  \"0\\201\\2641\\0240\\022\\006\\003U\\004\\012\\023\\013ENTRUST.NET1@0>\\006\\003U\\004\\013\\0247www.entrust.net/CPS_2048 incorp. by ref. (limits liab.)1%0#\\006\\003U\\004\\013\\023\\034(C) 1999 ENTRUST.NET LIMITED1301\\006\\003U\\004\\003\\023*ENTRUST.NET CERTIFICATION AUTHORITY (2048)"
       },
       {
+        "thumbprint": "58E8ABB0361533FB80F79B1B6D29D3FF8D5F00F0",
+        "store": "system-root",
         "name": "D-TRUST Root Class 3 CA 2 2009",
-        "store": "system-root"
+        "subject": "0x304D310B300906035504061302444531153013060355040A0C0C442D547275737420476D62483127302506035504030C1E442D545255535420526F6F7420436C617373203320434120322032303039  \"0M1\\0130\\011\\006\\003U\\004\\006\\023\\002DE1\\0250\\023\\006\\003U\\004\\012\\014\\014D-Trust GmbH1'0%\\006\\003U\\004\\003\\014\\036D-TRUST Root Class 3 CA 2 2009"
       },
       {
+        "thumbprint": "A14B48D943EE0A0E40904F3CE0A4C09193515D3F",
+        "store": "system-root",
         "name": "DigiCert Assured ID Root G2",
-        "store": "system-root"
+        "subject": "0x3065310B300906035504061302555331153013060355040A130C444947494345525420494E4331193017060355040B13105757572E44494749434552542E434F4D312430220603550403131B4449474943455254204153535552454420494420524F4F54204732  \"0e1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0250\\023\\006\\003U\\004\\012\\023\\014DIGICERT INC1\\0310\\027\\006\\003U\\004\\013\\023\\020WWW.DIGICERT.COM1$0\"\\006\\003U\\004\\003\\023\\033DIGICERT ASSURED ID ROOT G2"
       },
       {
+        "thumbprint": "67650DF17E8E7E5B8240A4F4564BCFE23D69C6F0",
+        "store": "system-root",
         "name": "ePKI Root Certification Authority",
-        "store": "system-root"
+        "subject": "0x305E310B300906035504061302545731233021060355040A0C1A4368756E676877612054656C65636F6D20436F2E2C204C74642E312A3028060355040B0C2165504B4920526F6F742043657274696669636174696F6E20417574686F72697479  \"0^1\\0130\\011\\006\\003U\\004\\006\\023\\002TW1#0!\\006\\003U\\004\\012\\014\\032Chunghwa Telecom Co., Ltd.1*0(\\006\\003U\\004\\013\\014!ePKI Root Certification Authority"
       },
       {
+        "thumbprint": "8D1784D537F3037DEC70FE578B519A99E610D7B0",
+        "store": "system-root",
         "name": "GeoTrust Primary Certification Authority - G2",
-        "store": "system-root"
+        "subject": "0x308198310B300906035504061302555331163014060355040A130D47454F545255535420494E432E31393037060355040B133028432920323030372047454F545255535420494E432E202D20464F5220415554484F52495A454420555345204F4E4C59313630340603550403132D47454F5452555354205052494D4152592043455254494649434154494F4E20415554484F52495459202D204732  \"0\\201\\2301\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0260\\024\\006\\003U\\004\\012\\023\\015GEOTRUST INC.1907\\006\\003U\\004\\013\\0230(C) 2007 GEOTRUST INC. - FOR AUTHORIZED USE ONLY1604\\006\\003U\\004\\003\\023-GEOTRUST PRIMARY CERTIFICATION AUTHORITY - G2"
       },
       {
+        "thumbprint": "D69B561148F01C77C54578C10926DF5B856976AD",
+        "store": "system-root",
         "name": "GlobalSign",
-        "store": "system-root"
+        "subject": "0x304C3120301E060355040B1317474C4F42414C5349474E20524F4F54204341202D20523331133011060355040A130A474C4F42414C5349474E311330110603550403130A474C4F42414C5349474E  \"0L1 0\\036\\006\\003U\\004\\013\\023\\027GLOBALSIGN ROOT CA - R31\\0230\\021\\006\\003U\\004\\012\\023\\012GLOBALSIGN1\\0230\\021\\006\\003U\\004\\003\\023\\012GLOBALSIGN"
       },
       {
+        "thumbprint": "2B8F1B57330DBBA2D07A6C51F70EE90DDAB9AD8E",
+        "store": "system-root",
         "name": "USERTrust RSA Certification Authority",
-        "store": "system-root"
+        "subject": "0x308188310B3009060355040613025553311330110603550408130A4E4557204A4552534559311430120603550407130B4A45525345592043495459311E301C060355040A131554484520555345525452555354204E4554574F524B312E302C06035504031325555345525452555354205253412043455254494649434154494F4E20415554484F52495459  \"0\\201\\2101\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\010\\023\\012NEW JERSEY1\\0240\\022\\006\\003U\\004\\007\\023\\013JERSEY CITY1\\0360\\034\\006\\003U\\004\\012\\023\\025THE USERTRUST NETWORK1.0,\\006\\003U\\004\\003\\023%USERTRUST RSA CERTIFICATION AUTHORITY"
       },
       {
+        "thumbprint": "9EBC751042B302F381F4F73062D48FC3A751B2DD",
+        "store": "system-root",
         "name": "Atos TrustedRoot Root CA ECC TLS 2021",
-        "store": "system-root"
+        "subject": "0x304C312E302C06035504030C2541746F732054727573746564526F6F7420526F6F742043412045434320544C532032303231310D300B060355040A0C0441746F73310B3009060355040613024445  \"0L1.0,\\006\\003U\\004\\003\\014%Atos TrustedRoot Root CA ECC TLS 20211\\0150\\013\\006\\003U\\004\\012\\014\\004Atos1\\0130\\011\\006\\003U\\004\\006\\023\\002DE"
       },
       {
+        "thumbprint": "D37B8B0AE84244FB6B8038EEAE9180261A487066",
+        "store": "system-root",
         "name": "Sectigo Public Email Protection Root R46",
-        "store": "system-root"
+        "subject": "0x305A310B300906035504061302474231183016060355040A130F5345435449474F204C494D495445443131302F060355040313285345435449474F205055424C494320454D41494C2050524F54454354494F4E20524F4F5420523436  \"0Z1\\0130\\011\\006\\003U\\004\\006\\023\\002GB1\\0300\\026\\006\\003U\\004\\012\\023\\017SECTIGO LIMITED110/\\006\\003U\\004\\003\\023(SECTIGO PUBLIC EMAIL PROTECTION ROOT R46"
       },
       {
+        "thumbprint": "4313BB96F1D5869BC14E6A92F6CFF63469878237",
+        "store": "system-root",
         "name": "TeliaSonera Root CA v1",
-        "store": "system-root"
+        "subject": "0x303731143012060355040A0C0B54656C6961536F6E657261311F301D06035504030C1654656C6961536F6E65726120526F6F74204341207631  \"071\\0240\\022\\006\\003U\\004\\012\\014\\013TeliaSonera1\\0370\\035\\006\\003U\\004\\003\\014\\026TeliaSonera Root CA v1"
       },
       {
+        "thumbprint": "AD7E1C28B064EF8F6003402014C3D0E3370EB58A",
+        "store": "system-root",
         "name": "Starfield Class 2 Certification Authority",
-        "store": "system-root"
+        "subject": "0x3068310B300906035504061302555331253023060355040A131C535441524649454C4420544543484E4F4C4F474945532C20494E432E31323030060355040B1329535441524649454C4420434C41535320322043455254494649434154494F4E20415554484F52495459  \"0h1\\0130\\011\\006\\003U\\004\\006\\023\\002US1%0#\\006\\003U\\004\\012\\023\\034STARFIELD TECHNOLOGIES, INC.1200\\006\\003U\\004\\013\\023)STARFIELD CLASS 2 CERTIFICATION AUTHORITY"
       },
       {
+        "thumbprint": "B8236B002F1D16865301556C11A437CAEBFFC3BB",
+        "store": "system-root",
         "name": "AffirmTrust Premium ECC",
-        "store": "system-root"
+        "subject": "0x3045310B300906035504061302555331143012060355040A0C0B41666669726D54727573743120301E06035504030C1741666669726D5472757374205072656D69756D20454343  \"0E1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0240\\022\\006\\003U\\004\\012\\014\\013AffirmTrust1 0\\036\\006\\003U\\004\\003\\014\\027AffirmTrust Premium ECC"
       },
       {
+        "thumbprint": "5FB7EE0633E259DBAD0C4C9AE6D38F1A61C7DC25",
+        "store": "system-root",
         "name": "DigiCert High Assurance EV Root CA",
-        "store": "system-root"
+        "subject": "0x306C310B300906035504061302555331153013060355040A130C444947494345525420494E4331193017060355040B13105757572E44494749434552542E434F4D312B30290603550403132244494749434552542048494748204153535552414E434520455620524F4F54204341  \"0l1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0250\\023\\006\\003U\\004\\012\\023\\014DIGICERT INC1\\0310\\027\\006\\003U\\004\\013\\023\\020WWW.DIGICERT.COM1+0)\\006\\003U\\004\\003\\023\"DIGICERT HIGH ASSURANCE EV ROOT CA"
       },
       {
+        "thumbprint": "182E1F324F89DFBEFE8889F093C2C4A02B677521",
+        "store": "system-root",
         "name": "GlobalSign Secure Mail Root E45",
-        "store": "system-root"
+        "subject": "0x3052310B300906035504061302424531193017060355040A1310474C4F42414C5349474E204E562D5341312830260603550403131F474C4F42414C5349474E20534543555245204D41494C20524F4F5420453435  \"0R1\\0130\\011\\006\\003U\\004\\006\\023\\002BE1\\0310\\027\\006\\003U\\004\\012\\023\\020GLOBALSIGN NV-SA1(0&\\006\\003U\\004\\003\\023\\037GLOBALSIGN SECURE MAIL ROOT E45"
       },
       {
+        "thumbprint": "9CBB4853F6A4F6D352A4E83252556013F5ADAF65",
+        "store": "system-root",
         "name": "TWCA Global Root CA",
-        "store": "system-root"
+        "subject": "0x3051310B300906035504061302545731123010060355040A130954414957414E2D43413110300E060355040B1307524F4F54204341311C301A060355040313135457434120474C4F42414C20524F4F54204341  \"0Q1\\0130\\011\\006\\003U\\004\\006\\023\\002TW1\\0220\\020\\006\\003U\\004\\012\\023\\011TAIWAN-CA1\\0200\\016\\006\\003U\\004\\013\\023\\007ROOT CA1\\0340\\032\\006\\003U\\004\\003\\023\\023TWCA GLOBAL ROOT CA"
       },
       {
+        "thumbprint": "E011845E34DEBE8881B99CF61626D1961FC3B931",
+        "store": "system-root",
         "name": "OISTE WISeKey Global Root GC CA",
-        "store": "system-root"
+        "subject": "0x306D310B30090603550406130243483110300E060355040A1307574953454B455931223020060355040B13194F4953544520464F554E444154494F4E20454E444F52534544312830260603550403131F4F4953544520574953454B455920474C4F42414C20524F4F54204743204341  \"0m1\\0130\\011\\006\\003U\\004\\006\\023\\002CH1\\0200\\016\\006\\003U\\004\\012\\023\\007WISEKEY1\"0 \\006\\003U\\004\\013\\023\\031OISTE FOUNDATION ENDORSED1(0&\\006\\003U\\004\\003\\023\\037OISTE WISEKEY GLOBAL ROOT GC CA"
       },
       {
+        "thumbprint": "DAFAF7FA6684EC068F1450BDC7C281A5BCA96457",
+        "store": "system-root",
         "name": "Buypass Class 3 Root CA",
-        "store": "system-root"
+        "subject": "0x304E310B3009060355040613024E4F311D301B060355040A0C14427579706173732041532D3938333136333332373120301E06035504030C174275797061737320436C617373203320526F6F74204341  \"0N1\\0130\\011\\006\\003U\\004\\006\\023\\002NO1\\0350\\033\\006\\003U\\004\\012\\014\\024Buypass AS-9831633271 0\\036\\006\\003U\\004\\003\\014\\027Buypass Class 3 Root CA"
       },
       {
+        "thumbprint": "5B408A802A9BC7D3F3DF1577DF14C1FBAD43C34A",
+        "store": "system-root",
         "name": "Apple Platform Developer ECC Root CA - G1",
-        "store": "system-root"
+        "subject": "0x3056310B300906035504061302555331133011060355040A0C0A4170706C6520496E632E3132303006035504030C294170706C6520506C6174666F726D20446576656C6F7065722045434320526F6F74204341202D204731  \"0V1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1200\\006\\003U\\004\\003\\014)Apple Platform Developer ECC Root CA - G1"
       },
       {
+        "thumbprint": "90A5E1BDC53F6908C2E3739FE755E37F75F38447",
+        "store": "system-root",
         "name": "SECOM SMIME RSA Root CA 2024",
-        "store": "system-root"
+        "subject": "0x305C310B3009060355040613024A5031263024060355040A131D5345434F4D2054525553542053595354454D5320434F2E2C204C54442E312530230603550403131C5345434F4D20534D494D452052534120524F4F542043412032303234  \"0\\1341\\0130\\011\\006\\003U\\004\\006\\023\\002JP1&0$\\006\\003U\\004\\012\\023\\035SECOM TRUST SYSTEMS CO., LTD.1%0#\\006\\003U\\004\\003\\023\\034SECOM SMIME RSA ROOT CA 2024"
       },
       {
+        "thumbprint": "2BB1F53E550C1DC5F1D4E6B76A464B550602AC21",
+        "store": "system-root",
         "name": "Atos TrustedRoot 2011",
-        "store": "system-root"
+        "subject": "0x303C311E301C06035504030C1541746F732054727573746564526F6F742032303131310D300B060355040A0C0441746F73310B3009060355040613024445  \"0<1\\0360\\034\\006\\003U\\004\\003\\014\\025Atos TrustedRoot 20111\\0150\\013\\006\\003U\\004\\012\\014\\004Atos1\\0130\\011\\006\\003U\\004\\006\\023\\002DE"
       },
       {
+        "thumbprint": "B561EBEAA4DEE4254B691A98A55747C234C7D971",
+        "store": "system-root",
         "name": "CA Disig Root R2",
-        "store": "system-root"
+        "subject": "0x3052310B300906035504061302534B311330110603550407130A4252415449534C41564131133011060355040A130A444953494720412E532E3119301706035504031310434120444953494720524F4F54205232  \"0R1\\0130\\011\\006\\003U\\004\\006\\023\\002SK1\\0230\\021\\006\\003U\\004\\007\\023\\012BRATISLAVA1\\0230\\021\\006\\003U\\004\\012\\023\\012DISIG A.S.1\\0310\\027\\006\\003U\\004\\003\\023\\020CA DISIG ROOT R2"
       },
       {
+        "thumbprint": "BA29416077983FF4F3EFF231053B2EEA6D4D45FD",
+        "store": "system-root",
         "name": "IdenTrust Public Sector Root CA 1",
-        "store": "system-root"
+        "subject": "0x304D310B300906035504061302555331123010060355040A13094944454E5452555354312A3028060355040313214944454E5452555354205055424C494320534543544F5220524F4F542043412031  \"0M1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0220\\020\\006\\003U\\004\\012\\023\\011IDENTRUST1*0(\\006\\003U\\004\\003\\023!IDENTRUST PUBLIC SECTOR ROOT CA 1"
       },
       {
+        "thumbprint": "B999CDD173508AC44705089C8C88FBBEA02B40CD",
+        "store": "system-root",
         "name": "Telia Root CA v2",
-        "store": "system-root"
+        "subject": "0x3044310B3009060355040613024649311A3018060355040A0C1154656C69612046696E6C616E64204F796A3119301706035504030C1054656C696120526F6F74204341207632  \"0D1\\0130\\011\\006\\003U\\004\\006\\023\\002FI1\\0320\\030\\006\\003U\\004\\012\\014\\021Telia Finland Oyj1\\0310\\027\\006\\003U\\004\\003\\014\\020Telia Root CA v2"
       },
       {
+        "thumbprint": "AA5970E520329FCBD0D5799FFB1B821DFD1F7965",
+        "store": "system-root",
         "name": "SSL.com Client RSA Root CA 2022",
-        "store": "system-root"
+        "subject": "0x3051310B300906035504061302555331183016060355040A0C0F53534C20436F72706F726174696F6E3128302606035504030C1F53534C2E636F6D20436C69656E742052534120526F6F742043412032303232  \"0Q1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0300\\026\\006\\003U\\004\\012\\014\\017SSL Corporation1(0&\\006\\003U\\004\\003\\014\\037SSL.com Client RSA Root CA 2022"
       },
       {
+        "thumbprint": "C3197C3924E654AF1BC4AB20957AE2C30E13026A",
+        "store": "system-root",
         "name": "SSL.com Root Certification Authority ECC",
-        "store": "system-root"
+        "subject": "0x307C310B3009060355040613025553310E300C06035504080C0554657861733110300E06035504070C07486F7573746F6E31183016060355040A0C0F53534C20436F72706F726174696F6E3131302F06035504030C2853534C2E636F6D20526F6F742043657274696669636174696F6E20417574686F7269747920454343  \"0|1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0160\\014\\006\\003U\\004\\010\\014\\005Texas1\\0200\\016\\006\\003U\\004\\007\\014\\007Houston1\\0300\\026\\006\\003U\\004\\012\\014\\017SSL Corporation110/\\006\\003U\\004\\003\\014(SSL.com Root Certification Authority ECC"
       },
       {
+        "thumbprint": "B80E26A9BFD2B23BC0EF46C9BAC7BBF61D0D4141",
+        "store": "system-root",
         "name": "Security Communication ECC RootCA1",
-        "store": "system-root"
+        "subject": "0x3061310B3009060355040613024A5031253023060355040A131C5345434F4D2054525553542053595354454D5320434F2E2C4C54442E312B302906035504031322534543555249545920434F4D4D554E49434154494F4E2045434320524F4F54434131  \"0a1\\0130\\011\\006\\003U\\004\\006\\023\\002JP1%0#\\006\\003U\\004\\012\\023\\034SECOM TRUST SYSTEMS CO.,LTD.1+0)\\006\\003U\\004\\003\\023\"SECURITY COMMUNICATION ECC ROOTCA1"
       },
       {
+        "thumbprint": "EC503507B215C4956219E2A89A5B42992C4C2C20",
+        "store": "system-root",
         "name": "AC RAIZ FNMT-RCM",
-        "store": "system-root"
+        "subject": "0x303B310B30090603550406130245533111300F060355040A0C08464E4D542D52434D31193017060355040B0C104143205241495A20464E4D542D52434D  \"0;1\\0130\\011\\006\\003U\\004\\006\\023\\002ES1\\0210\\017\\006\\003U\\004\\012\\014\\010FNMT-RCM1\\0310\\027\\006\\003U\\004\\013\\014\\020AC RAIZ FNMT-RCM"
       },
       {
+        "thumbprint": "743AF0529BD032A0F44A83CDD4BAA97B7C2EC49A",
+        "store": "system-root",
         "name": "SSL.com EV Root Certification Authority RSA R2",
-        "store": "system-root"
+        "subject": "0x308182310B3009060355040613025553310E300C06035504080C0554657861733110300E06035504070C07486F7573746F6E31183016060355040A0C0F53534C20436F72706F726174696F6E3137303506035504030C2E53534C2E636F6D20455620526F6F742043657274696669636174696F6E20417574686F7269747920525341205232  \"0\\201\\2021\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0160\\014\\006\\003U\\004\\010\\014\\005Texas1\\0200\\016\\006\\003U\\004\\007\\014\\007Houston1\\0300\\026\\006\\003U\\004\\012\\014\\017SSL Corporation1705\\006\\003U\\004\\003\\014.SSL.com EV Root Certification Authority RSA R2"
       },
       {
+        "thumbprint": "FB97967CEF8D986306C03BB611F8E01397A298D3",
+        "store": "system-root",
         "name": "SECOM TLS RSA Root CA 2024",
-        "store": "system-root"
+        "subject": "0x305A310B3009060355040613024A5031263024060355040A131D5345434F4D2054525553542053595354454D5320434F2E2C204C54442E312330210603550403131A5345434F4D20544C532052534120524F4F542043412032303234  \"0Z1\\0130\\011\\006\\003U\\004\\006\\023\\002JP1&0$\\006\\003U\\004\\012\\023\\035SECOM TRUST SYSTEMS CO., LTD.1#0!\\006\\003U\\004\\003\\023\\032SECOM TLS RSA ROOT CA 2024"
       },
       {
+        "thumbprint": "4CDD51A3D1F5203214B0C6C532230391C746426D",
+        "store": "system-root",
         "name": "SSL.com EV Root Certification Authority ECC",
-        "store": "system-root"
+        "subject": "0x307F310B3009060355040613025553310E300C06035504080C0554657861733110300E06035504070C07486F7573746F6E31183016060355040A0C0F53534C20436F72706F726174696F6E3134303206035504030C2B53534C2E636F6D20455620526F6F742043657274696669636174696F6E20417574686F7269747920454343  \"0\\1771\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0160\\014\\006\\003U\\004\\010\\014\\005Texas1\\0200\\016\\006\\003U\\004\\007\\014\\007Houston1\\0300\\026\\006\\003U\\004\\012\\014\\017SSL Corporation1402\\006\\003U\\004\\003\\014+SSL.com EV Root Certification Authority ECC"
       },
       {
+        "thumbprint": "D1CBCA5DB2D52A7F693B674DE5F05A1D0C957DF0",
+        "store": "system-root",
         "name": "USERTrust ECC Certification Authority",
-        "store": "system-root"
+        "subject": "0x308188310B3009060355040613025553311330110603550408130A4E4557204A4552534559311430120603550407130B4A45525345592043495459311E301C060355040A131554484520555345525452555354204E4554574F524B312E302C06035504031325555345525452555354204543432043455254494649434154494F4E20415554484F52495459  \"0\\201\\2101\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\010\\023\\012NEW JERSEY1\\0240\\022\\006\\003U\\004\\007\\023\\013JERSEY CITY1\\0360\\034\\006\\003U\\004\\012\\023\\025THE USERTRUST NETWORK1.0,\\006\\003U\\004\\003\\023%USERTRUST ECC CERTIFICATION AUTHORITY"
       },
       {
+        "thumbprint": "022D0582FA88CE140C0679DE7F1410E945D7A56D",
+        "store": "system-root",
         "name": "HARICA TLS RSA Root CA 2021",
-        "store": "system-root"
+        "subject": "0x306C310B300906035504061302475231373035060355040A0C2E48656C6C656E69632041636164656D696320616E6420526573656172636820496E737469747574696F6E732043413124302206035504030C1B48415249434120544C532052534120526F6F742043412032303231  \"0l1\\0130\\011\\006\\003U\\004\\006\\023\\002GR1705\\006\\003U\\004\\012\\014.Hellenic Academic and Research Institutions CA1$0\"\\006\\003U\\004\\003\\014\\033HARICA TLS RSA Root CA 2021"
       },
       {
+        "thumbprint": "52421AEAC424C2435E7F5355A30437A3B1745879",
+        "store": "system-root",
         "name": "Sectigo Public Time Stamping Root R46",
-        "store": "system-root"
+        "subject": "0x3057310B300906035504061302474231183016060355040A130F5345435449474F204C494D49544544312E302C060355040313255345435449474F205055424C49432054494D45205354414D50494E4720524F4F5420523436  \"0W1\\0130\\011\\006\\003U\\004\\006\\023\\002GB1\\0300\\026\\006\\003U\\004\\012\\023\\017SECTIGO LIMITED1.0,\\006\\003U\\004\\003\\023%SECTIGO PUBLIC TIME STAMPING ROOT R46"
       },
       {
+        "thumbprint": "32D127FA93B1C14C99E24A40BC7F94411B5AACA4",
+        "store": "system-root",
         "name": "Atos TrustedRoot Root CA RSA G2 2020",
-        "store": "system-root"
+        "subject": "0x304B310B3009060355040613024445310D300B060355040A0C0441746F73312D302B06035504030C2441746F732054727573746564526F6F7420526F6F74204341205253412047322032303230  \"0K1\\0130\\011\\006\\003U\\004\\006\\023\\002DE1\\0150\\013\\006\\003U\\004\\012\\014\\004Atos1-0+\\006\\003U\\004\\003\\014$Atos TrustedRoot Root CA RSA G2 2020"
       },
       {
+        "thumbprint": "39B46CD5FE8006EBE22F4ABB0833A0AFDBB9DD84",
+        "store": "system-root",
         "name": "GlobalSign Root E46",
-        "store": "system-root"
+        "subject": "0x3046310B300906035504061302424531193017060355040A1310474C4F42414C5349474E204E562D5341311C301A06035504031313474C4F42414C5349474E20524F4F5420453436  \"0F1\\0130\\011\\006\\003U\\004\\006\\023\\002BE1\\0310\\027\\006\\003U\\004\\012\\023\\020GLOBALSIGN NV-SA1\\0340\\032\\006\\003U\\004\\003\\023\\023GLOBALSIGN ROOT E46"
       },
       {
+        "thumbprint": "A78849DC5D7C758C8CDE399856B3AAD0B2A57135",
+        "store": "system-root",
         "name": "DigiCert TLS RSA4096 Root G5",
-        "store": "system-root"
+        "subject": "0x304D310B300906035504061302555331173015060355040A130E44494749434552542C20494E432E312530230603550403131C444947494345525420544C53205253413430393620524F4F54204735  \"0M1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0270\\025\\006\\003U\\004\\012\\023\\016DIGICERT, INC.1%0#\\006\\003U\\004\\003\\023\\034DIGICERT TLS RSA4096 ROOT G5"
       },
       {
+        "thumbprint": "1CB8A708C90D207901A0B2367FF09565E45324FE",
+        "store": "system-root",
         "name": "DigiCert SMIME ECC P384 Root G5",
-        "store": "system-root"
+        "subject": "0x3050310B300906035504061302555331173015060355040A130E44494749434552542C20494E432E312830260603550403131F444947494345525420534D494D4520454343205033383420524F4F54204735  \"0P1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0270\\025\\006\\003U\\004\\012\\023\\016DIGICERT, INC.1(0&\\006\\003U\\004\\003\\023\\037DIGICERT SMIME ECC P384 ROOT G5"
       },
       {
+        "thumbprint": "4812BD923CA8C43906E7306D2796E6A4CF222E7D",
+        "store": "system-root",
         "name": "QuoVadis Root CA 3 G3",
-        "store": "system-root"
+        "subject": "0x3048310B300906035504061302424D31193017060355040A131051554F5641444953204C494D49544544311E301C0603550403131551554F564144495320524F4F542043412033204733  \"0H1\\0130\\011\\006\\003U\\004\\006\\023\\002BM1\\0310\\027\\006\\003U\\004\\012\\023\\020QUOVADIS LIMITED1\\0360\\034\\006\\003U\\004\\003\\023\\025QUOVADIS ROOT CA 3 G3"
       },
       {
+        "thumbprint": "3043FA4FF257DCA0C380EE2E58EA78B23FE6BBC1",
+        "store": "system-root",
         "name": "emSign ECC Root CA - G3",
-        "store": "system-root"
+        "subject": "0x306B310B300906035504061302494E31133011060355040B130A454D5349474E20504B4931253023060355040A131C454D554448524120544543484E4F4C4F47494553204C494D495445443120301E06035504031317454D5349474E2045434320524F4F54204341202D204733  \"0k1\\0130\\011\\006\\003U\\004\\006\\023\\002IN1\\0230\\021\\006\\003U\\004\\013\\023\\012EMSIGN PKI1%0#\\006\\003U\\004\\012\\023\\034EMUDHRA TECHNOLOGIES LIMITED1 0\\036\\006\\003U\\004\\003\\023\\027EMSIGN ECC ROOT CA - G3"
       },
       {
+        "thumbprint": "76A5A99929FA37F994384BD51EFD6EACBEE6AD44",
+        "store": "system-root",
         "name": "Apple Platform ECC Root CA - G1",
-        "store": "system-root"
+        "subject": "0x304C310B300906035504061302555331133011060355040A0C0A4170706C6520496E632E3128302606035504030C1F4170706C6520506C6174666F726D2045434320526F6F74204341202D204731  \"0L1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1(0&\\006\\003U\\004\\003\\014\\037Apple Platform ECC Root CA - G1"
       },
       {
+        "thumbprint": "46C6900A773AB6BCF465ADACFCE3F707006EDE6E",
+        "store": "system-root",
         "name": "HARICA Client RSA Root CA 2021",
-        "store": "system-root"
+        "subject": "0x306F310B300906035504061302475231373035060355040A0C2E48656C6C656E69632041636164656D696320616E6420526573656172636820496E737469747574696F6E732043413127302506035504030C1E48415249434120436C69656E742052534120526F6F742043412032303231  \"0o1\\0130\\011\\006\\003U\\004\\006\\023\\002GR1705\\006\\003U\\004\\012\\014.Hellenic Academic and Research Institutions CA1'0%\\006\\003U\\004\\003\\014\\036HARICA Client RSA Root CA 2021"
       },
       {
+        "thumbprint": "D3DD483E2BBF4C05E8AF10F5FA7626CFD3DC3092",
+        "store": "system-root",
         "name": "Certum Trusted Network CA 2",
-        "store": "system-root"
+        "subject": "0x308180310B300906035504061302504C31223020060355040A1319554E495A45544F20544543484E4F4C4F4749455320532E412E31273025060355040B131E43455254554D2043455254494649434154494F4E20415554484F52495459312430220603550403131B43455254554D2054525553544544204E4554574F524B2043412032  \"0\\201\\2001\\0130\\011\\006\\003U\\004\\006\\023\\002PL1\"0 \\006\\003U\\004\\012\\023\\031UNIZETO TECHNOLOGIES S.A.1'0%\\006\\003U\\004\\013\\023\\036CERTUM CERTIFICATION AUTHORITY1$0\"\\006\\003U\\004\\003\\023\\033CERTUM TRUSTED NETWORK CA 2"
       },
       {
+        "thumbprint": "06083F593F15A104A069A46BA903D006B7970991",
+        "store": "system-root",
         "name": "0x4E65744C6F636B204172616E792028436C61737320476F6C64292046C59174616EC3BA73C3AD7476C3A16E79  \"NetLock Arany (Class Gold) F\\305\\221tan\\303\\272s\\303\\255tv\\303\\241ny",
-        "store": "system-root"
+        "subject": "0x3081A7310B30090603550406130248553111300F06035504070C08427564617065737431153013060355040A0C0C4E65744C6F636B204B66742E31373035060355040B0C2E54616EC3BA73C3AD7476C3A16E796B696164C3B36B202843657274696669636174696F6E205365727669636573293135303306035504030C2C4E65744C6F636B204172616E792028436C61737320476F6C64292046C59174616EC3BA73C3AD7476C3A16E79  \"0\\201\\2471\\0130\\011\\006\\003U\\004\\006\\023\\002HU1\\0210\\017\\006\\003U\\004\\007\\014\\010Budapest1\\0250\\023\\006\\003U\\004\\012\\014\\014NetLock Kft.1705\\006\\003U\\004\\013\\014.Tan\\303\\272s\\303\\255tv\\303\\241nykiad\\303\\263k (Certification Services)1503\\006\\003U\\004\\003\\014,NetLock Arany (Class Gold) F\\305\\221tan\\303\\272s\\303\\255tv\\303\\241ny"
       },
       {
+        "thumbprint": "8F6BF2A9274ADA14A0C4F48E6127F9C01E785DD1",
+        "store": "system-root",
         "name": "NAVER Global Root Certification Authority",
-        "store": "system-root"
+        "subject": "0x3069310B3009060355040613024B5231263024060355040A0C1D4E4156455220425553494E45535320504C4154464F524D20436F72702E3132303006035504030C294E4156455220476C6F62616C20526F6F742043657274696669636174696F6E20417574686F72697479  \"0i1\\0130\\011\\006\\003U\\004\\006\\023\\002KR1&0$\\006\\003U\\004\\012\\014\\035NAVER BUSINESS PLATFORM Corp.1200\\006\\003U\\004\\003\\014)NAVER Global Root Certification Authority"
       },
       {
+        "thumbprint": "2F8F364FE1589744215987A52A9AD06995267FB5",
+        "store": "system-root",
         "name": "Trustwave Global Certification Authority",
-        "store": "system-root"
+        "subject": "0x308188310B30090603550406130255533111300F06035504080C08496C6C696E6F69733110300E06035504070C074368696361676F3121301F060355040A0C1854727573747761766520486F6C64696E67732C20496E632E3131302F06035504030C2854727573747761766520476C6F62616C2043657274696669636174696F6E20417574686F72697479  \"0\\201\\2101\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0210\\017\\006\\003U\\004\\010\\014\\010Illinois1\\0200\\016\\006\\003U\\004\\007\\014\\007Chicago1!0\\037\\006\\003U\\004\\012\\014\\030Trustwave Holdings, Inc.110/\\006\\003U\\004\\003\\014(Trustwave Global Certification Authority"
       },
       {
+        "thumbprint": "3AC5C378345BE1829246ED1786B393917B51F214",
+        "store": "system-root",
         "name": "Sectigo Public Email Protection Root E46",
-        "store": "system-root"
+        "subject": "0x305A310B300906035504061302474231183016060355040A130F5345435449474F204C494D495445443131302F060355040313285345435449474F205055424C494320454D41494C2050524F54454354494F4E20524F4F5420453436  \"0Z1\\0130\\011\\006\\003U\\004\\006\\023\\002GB1\\0300\\026\\006\\003U\\004\\012\\023\\017SECTIGO LIMITED110/\\006\\003U\\004\\003\\023(SECTIGO PUBLIC EMAIL PROTECTION ROOT E46"
       },
       {
+        "thumbprint": "55A6723ECBF2ECCDC3237470199D2ABE11E381D1",
+        "store": "system-root",
         "name": "T-TeleSec GlobalRoot Class 3",
-        "store": "system-root"
+        "subject": "0x308182310B3009060355040613024445312B3029060355040A0C22542D53797374656D7320456E746572707269736520536572766963657320476D6248311F301D060355040B0C16542D53797374656D732054727573742043656E7465723125302306035504030C1C542D54656C6553656320476C6F62616C526F6F7420436C6173732033  \"0\\201\\2021\\0130\\011\\006\\003U\\004\\006\\023\\002DE1+0)\\006\\003U\\004\\012\\014\"T-Systems Enterprise Services GmbH1\\0370\\035\\006\\003U\\004\\013\\014\\026T-Systems Trust Center1%0#\\006\\003U\\004\\003\\014\\034T-TeleSec GlobalRoot Class 3"
       },
       {
+        "thumbprint": "B52CB02FD567E0359FE8FA4D4C41037970FE01B0",
+        "store": "system-root",
         "name": "Apple Root CA - G3",
-        "store": "system-root"
+        "subject": "0x3067311B301906035504030C124170706C6520526F6F74204341202D20473331263024060355040B0C1D4170706C652043657274696669636174696F6E20417574686F7269747931133011060355040A0C0A4170706C6520496E632E310B3009060355040613025553  \"0g1\\0330\\031\\006\\003U\\004\\003\\014\\022Apple Root CA - G31&0$\\006\\003U\\004\\013\\014\\035Apple Certification Authority1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1\\0130\\011\\006\\003U\\004\\006\\023\\002US"
       },
       {
+        "thumbprint": "CA3AFBCF1240364B44B216208880483919937CF7",
+        "store": "system-root",
         "name": "QuoVadis Root CA 2",
-        "store": "system-root"
+        "subject": "0x3045310B300906035504061302424D31193017060355040A131051554F5641444953204C494D49544544311B30190603550403131251554F564144495320524F4F542043412032  \"0E1\\0130\\011\\006\\003U\\004\\006\\023\\002BM1\\0310\\027\\006\\003U\\004\\012\\023\\020QUOVADIS LIMITED1\\0330\\031\\006\\003U\\004\\003\\023\\022QUOVADIS ROOT CA 2"
       },
       {
+        "thumbprint": "73A5E64A3BFF8316FF0EDCCC618A906E4EAE4D74",
+        "store": "system-root",
         "name": "Microsoft RSA Root Certificate Authority 2017",
-        "store": "system-root"
+        "subject": "0x3065310B3009060355040613025553311E301C060355040A13154D4943524F534F465420434F52504F524154494F4E313630340603550403132D4D4943524F534F46542052534120524F4F5420434552544946494341544520415554484F524954592032303137  \"0e1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0360\\034\\006\\003U\\004\\012\\023\\025MICROSOFT CORPORATION1604\\006\\003U\\004\\003\\023-MICROSOFT RSA ROOT CERTIFICATE AUTHORITY 2017"
       },
       {
+        "thumbprint": "807B1D9D65723DC756F9ECC5008349F6F2ACF486",
+        "store": "system-root",
         "name": "SSL.com Client ECC Root CA 2022",
-        "store": "system-root"
+        "subject": "0x3051310B300906035504061302555331183016060355040A0C0F53534C20436F72706F726174696F6E3128302606035504030C1F53534C2E636F6D20436C69656E742045434320526F6F742043412032303232  \"0Q1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0300\\026\\006\\003U\\004\\012\\014\\017SSL Corporation1(0&\\006\\003U\\004\\003\\014\\037SSL.com Client ECC Root CA 2022"
       },
       {
+        "thumbprint": "B1BC968BD4F49D622AA89A81F2150152A41D829C",
+        "store": "system-root",
         "name": "GlobalSign Root CA",
-        "store": "system-root"
+        "subject": "0x3057310B300906035504061302424531193017060355040A1310474C4F42414C5349474E204E562D53413110300E060355040B1307524F4F54204341311B301906035504031312474C4F42414C5349474E20524F4F54204341  \"0W1\\0130\\011\\006\\003U\\004\\006\\023\\002BE1\\0310\\027\\006\\003U\\004\\012\\023\\020GLOBALSIGN NV-SA1\\0200\\016\\006\\003U\\004\\013\\023\\007ROOT CA1\\0330\\031\\006\\003U\\004\\003\\023\\022GLOBALSIGN ROOT CA"
       },
       {
+        "thumbprint": "093C61F38B8BDC7D55DF7538020500E125F5C836",
+        "store": "system-root",
         "name": "QuoVadis Root CA 2 G3",
-        "store": "system-root"
+        "subject": "0x3048310B300906035504061302424D31193017060355040A131051554F5641444953204C494D49544544311E301C0603550403131551554F564144495320524F4F542043412032204733  \"0H1\\0130\\011\\006\\003U\\004\\006\\023\\002BM1\\0310\\027\\006\\003U\\004\\012\\023\\020QUOVADIS LIMITED1\\0360\\034\\006\\003U\\004\\003\\023\\025QUOVADIS ROOT CA 2 G3"
       },
       {
+        "thumbprint": "7E04DE896A3E666D00E687D33FFAD93BE83D349E",
+        "store": "system-root",
         "name": "DigiCert Global Root G3",
-        "store": "system-root"
+        "subject": "0x3061310B300906035504061302555331153013060355040A130C444947494345525420494E4331193017060355040B13105757572E44494749434552542E434F4D3120301E06035504031317444947494345525420474C4F42414C20524F4F54204733  \"0a1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0250\\023\\006\\003U\\004\\012\\023\\014DIGICERT INC1\\0310\\027\\006\\003U\\004\\013\\023\\020WWW.DIGICERT.COM1 0\\036\\006\\003U\\004\\003\\023\\027DIGICERT GLOBAL ROOT G3"
       },
       {
+        "thumbprint": "B31EB1B740E36C8402DADC37D44DF5D4674952F9",
+        "store": "system-root",
         "name": "Entrust Root Certification Authority",
-        "store": "system-root"
+        "subject": "0x3081B0310B300906035504061302555331163014060355040A130D454E54525553542C20494E432E31393037060355040B13305757572E454E54525553542E4E45542F43505320495320494E434F52504F5241544544204259205245464552454E4345311F301D060355040B1316284329203230303620454E54525553542C20494E432E312D302B06035504031324454E545255535420524F4F542043455254494649434154494F4E20415554484F52495459  \"0\\201\\2601\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0260\\024\\006\\003U\\004\\012\\023\\015ENTRUST, INC.1907\\006\\003U\\004\\013\\0230WWW.ENTRUST.NET/CPS IS INCORPORATED BY REFERENCE1\\0370\\035\\006\\003U\\004\\013\\023\\026(C) 2006 ENTRUST, INC.1-0+\\006\\003U\\004\\003\\023$ENTRUST ROOT CERTIFICATION AUTHORITY"
       },
       {
+        "thumbprint": "999A64C37FF47D9FAB95F14769891460EEC4C3C5",
+        "store": "system-root",
         "name": "Microsoft ECC Root Certificate Authority 2017",
-        "store": "system-root"
+        "subject": "0x3065310B3009060355040613025553311E301C060355040A13154D4943524F534F465420434F52504F524154494F4E313630340603550403132D4D4943524F534F46542045434320524F4F5420434552544946494341544520415554484F524954592032303137  \"0e1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0360\\034\\006\\003U\\004\\012\\023\\025MICROSOFT CORPORATION1604\\006\\003U\\004\\003\\023-MICROSOFT ECC ROOT CERTIFICATE AUTHORITY 2017"
       },
       {
+        "thumbprint": "BDB1B93CD5978D45C6261455F8DB95C75AD153AF",
+        "store": "system-root",
         "name": "ISRG Root X2",
-        "store": "system-root"
+        "subject": "0x304F310B300906035504061302555331293027060355040A1320494E5445524E45542053454355524954592052455345415243482047524F5550311530130603550403130C4953524720524F4F54205832  \"0O1\\0130\\011\\006\\003U\\004\\006\\023\\002US1)0'\\006\\003U\\004\\012\\023 INTERNET SECURITY RESEARCH GROUP1\\0250\\023\\006\\003U\\004\\003\\023\\014ISRG ROOT X2"
       },
       {
+        "thumbprint": "5922A1E15AEA163521F898396A4646B0441B0FA9",
+        "store": "system-root",
         "name": "OISTE WISeKey Global Root GA CA",
-        "store": "system-root"
+        "subject": "0x30818A310B30090603550406130243483110300E060355040A1307574953454B4559311B3019060355040B1312434F5059524947485420284329203230303531223020060355040B13194F4953544520464F554E444154494F4E20454E444F52534544312830260603550403131F4F4953544520574953454B455920474C4F42414C20524F4F54204741204341  \"0\\201\\2121\\0130\\011\\006\\003U\\004\\006\\023\\002CH1\\0200\\016\\006\\003U\\004\\012\\023\\007WISEKEY1\\0330\\031\\006\\003U\\004\\013\\023\\022COPYRIGHT (C) 20051\"0 \\006\\003U\\004\\013\\023\\031OISTE FOUNDATION ENDORSED1(0&\\006\\003U\\004\\003\\023\\037OISTE WISEKEY GLOBAL ROOT GA CA"
       },
       {
+        "thumbprint": "9F744E9F2B4DBAEC0F312C50B6563B8E2D93C311",
+        "store": "system-root",
         "name": "COMODO ECC Certification Authority",
-        "store": "system-root"
+        "subject": "0x308185310B3009060355040613024742311B30190603550408131247524541544552204D414E434845535445523110300E0603550407130753414C464F5244311A3018060355040A1311434F4D4F444F204341204C494D49544544312B302906035504031322434F4D4F444F204543432043455254494649434154494F4E20415554484F52495459  \"0\\201\\2051\\0130\\011\\006\\003U\\004\\006\\023\\002GB1\\0330\\031\\006\\003U\\004\\010\\023\\022GREATER MANCHESTER1\\0200\\016\\006\\003U\\004\\007\\023\\007SALFORD1\\0320\\030\\006\\003U\\004\\012\\023\\021COMODO CA LIMITED1+0)\\006\\003U\\004\\003\\023\"COMODO ECC CERTIFICATION AUTHORITY"
       },
       {
+        "thumbprint": "5BC5ADE29AA754DA848953A5FED75B4686D05708",
+        "store": "system-root",
         "name": "DigiCert SMIME RSA4096 Root G5",
-        "store": "system-root"
+        "subject": "0x304F310B300906035504061302555331173015060355040A130E44494749434552542C20494E432E312730250603550403131E444947494345525420534D494D45205253413430393620524F4F54204735  \"0O1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0270\\025\\006\\003U\\004\\012\\023\\016DIGICERT, INC.1'0%\\006\\003U\\004\\003\\023\\036DIGICERT SMIME RSA4096 ROOT G5"
       },
       {
+        "thumbprint": "8070CB6877C459CD41FBB14D993AADF89578BA67",
+        "store": "system-root",
         "name": "Apple Platform TLS RSA Root CA - G1",
-        "store": "system-root"
+        "subject": "0x3050310B300906035504061302555331133011060355040A0C0A4170706C6520496E632E312C302A06035504030C234170706C6520506C6174666F726D20544C532052534120526F6F74204341202D204731  \"0P1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1,0*\\006\\003U\\004\\003\\014#Apple Platform TLS RSA Root CA - G1"
       },
       {
+        "thumbprint": "53A2B04BCA6BD645E6398A8EC40DD2BF77C3A290",
+        "store": "system-root",
         "name": "GlobalSign Root R46",
-        "store": "system-root"
+        "subject": "0x3046310B300906035504061302424531193017060355040A1310474C4F42414C5349474E204E562D5341311C301A06035504031313474C4F42414C5349474E20524F4F5420523436  \"0F1\\0130\\011\\006\\003U\\004\\006\\023\\002BE1\\0310\\027\\006\\003U\\004\\012\\023\\020GLOBALSIGN NV-SA1\\0340\\032\\006\\003U\\004\\003\\023\\023GLOBALSIGN ROOT R46"
       },
       {
+        "thumbprint": "69D54A494054BACCE442CA714866EE9DA3D1A6BC",
+        "store": "system-root",
         "name": "Apple Platform Developer RSA Root CA - G1",
-        "store": "system-root"
+        "subject": "0x3056310B300906035504061302555331133011060355040A0C0A4170706C6520496E632E3132303006035504030C294170706C6520506C6174666F726D20446576656C6F7065722052534120526F6F74204341202D204731  \"0V1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1200\\006\\003U\\004\\003\\014)Apple Platform Developer RSA Root CA - G1"
       },
       {
+        "thumbprint": "D1EB23A46D17D68FD92564C2F1F1601764D8E349",
+        "store": "system-root",
         "name": "AAA Certificate Services",
-        "store": "system-root"
+        "subject": "0x307B310B3009060355040613024742311B301906035504080C1247726561746572204D616E636865737465723110300E06035504070C0753616C666F7264311A3018060355040A0C11436F6D6F646F204341204C696D697465643121301F06035504030C18414141204365727469666963617465205365727669636573  \"0{1\\0130\\011\\006\\003U\\004\\006\\023\\002GB1\\0330\\031\\006\\003U\\004\\010\\014\\022Greater Manchester1\\0200\\016\\006\\003U\\004\\007\\014\\007Salford1\\0320\\030\\006\\003U\\004\\012\\014\\021Comodo CA Limited1!0\\037\\006\\003U\\004\\003\\014\\030AAA Certificate Services"
       },
       {
+        "thumbprint": "DF3C24F9BFD666761B268073FE06D1CC8D4F82A4",
+        "store": "system-root",
         "name": "DigiCert Global Root G2",
-        "store": "system-root"
+        "subject": "0x3061310B300906035504061302555331153013060355040A130C444947494345525420494E4331193017060355040B13105757572E44494749434552542E434F4D3120301E06035504031317444947494345525420474C4F42414C20524F4F54204732  \"0a1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0250\\023\\006\\003U\\004\\012\\023\\014DIGICERT INC1\\0310\\027\\006\\003U\\004\\013\\023\\020WWW.DIGICERT.COM1 0\\036\\006\\003U\\004\\003\\023\\027DIGICERT GLOBAL ROOT G2"
       },
       {
+        "thumbprint": "7618D1F380243D5240C6116AAD5777097D8130A0",
+        "store": "system-root",
         "name": "GlobalSign Secure Mail Root R45",
-        "store": "system-root"
+        "subject": "0x3052310B300906035504061302424531193017060355040A1310474C4F42414C5349474E204E562D5341312830260603550403131F474C4F42414C5349474E20534543555245204D41494C20524F4F5420523435  \"0R1\\0130\\011\\006\\003U\\004\\006\\023\\002BE1\\0310\\027\\006\\003U\\004\\012\\023\\020GLOBALSIGN NV-SA1(0&\\006\\003U\\004\\003\\023\\037GLOBALSIGN SECURE MAIL ROOT R45"
       },
       {
+        "thumbprint": "B49082DD450CBE8B5BB166D3E2A40826CDED42CF",
+        "store": "system-root",
         "name": "Trustwave Global ECC P256 Certification Authority",
-        "store": "system-root"
+        "subject": "0x308191310B30090603550406130255533111300F06035504081308494C4C494E4F49533110300E060355040713074348494341474F3121301F060355040A131854525553545741564520484F4C44494E47532C20494E432E313A30380603550403133154525553545741564520474C4F42414C2045434320503235362043455254494649434154494F4E20415554484F52495459  \"0\\201\\2211\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0210\\017\\006\\003U\\004\\010\\023\\010ILLINOIS1\\0200\\016\\006\\003U\\004\\007\\023\\007CHICAGO1!0\\037\\006\\003U\\004\\012\\023\\030TRUSTWAVE HOLDINGS, INC.1:08\\006\\003U\\004\\003\\0231TRUSTWAVE GLOBAL ECC P256 CERTIFICATION AUTHORITY"
       },
       {
+        "thumbprint": "1F4914F7D874951DDDAE02C0BEFD3A2D82755185",
+        "store": "system-root",
         "name": "QuoVadis Root CA 3",
-        "store": "system-root"
+        "subject": "0x3045310B300906035504061302424D31193017060355040A131051554F5641444953204C494D49544544311B30190603550403131251554F564144495320524F4F542043412033  \"0E1\\0130\\011\\006\\003U\\004\\006\\023\\002BM1\\0310\\027\\006\\003U\\004\\012\\023\\020QUOVADIS LIMITED1\\0330\\031\\006\\003U\\004\\003\\023\\022QUOVADIS ROOT CA 3"
       },
       {
+        "thumbprint": "4ABDEEEC950D359C89AEC752A12C5B29F6D6AA0C",
+        "store": "system-root",
         "name": "Global Chambersign Root - 2008",
-        "store": "system-root"
+        "subject": "0x3081AC310B3009060355040613024555314330410603550407133A4D414452494420285345452043555252454E542041444452455353204154205757572E43414D45524649524D412E434F4D2F41444452455353293112301006035504051309413832373433323837311B3019060355040A131241432043414D45524649524D4120532E412E312730250603550403131E474C4F42414C204348414D4245525349474E20524F4F54202D2032303038  \"0\\201\\2541\\0130\\011\\006\\003U\\004\\006\\023\\002EU1C0A\\006\\003U\\004\\007\\023:MADRID (SEE CURRENT ADDRESS AT WWW.CAMERFIRMA.COM/ADDRESS)1\\0220\\020\\006\\003U\\004\\005\\023\\011A827432871\\0330\\031\\006\\003U\\004\\012\\023\\022AC CAMERFIRMA S.A.1'0%\\006\\003U\\004\\003\\023\\036GLOBAL CHAMBERSIGN ROOT - 2008"
       },
       {
+        "thumbprint": "CF9E876DD3EBFC422697A3B5A37AA076A9062348",
+        "store": "system-root",
         "name": "TWCA Root Certification Authority",
-        "store": "system-root"
+        "subject": "0x305F310B300906035504061302545731123010060355040A0C0954414957414E2D43413110300E060355040B0C07526F6F74204341312A302806035504030C215457434120526F6F742043657274696669636174696F6E20417574686F72697479  \"0_1\\0130\\011\\006\\003U\\004\\006\\023\\002TW1\\0220\\020\\006\\003U\\004\\012\\014\\011TAIWAN-CA1\\0200\\016\\006\\003U\\004\\013\\014\\007Root CA1*0(\\006\\003U\\004\\003\\014!TWCA Root Certification Authority"
       },
       {
+        "thumbprint": "786A74AC76AB147F9C6A3050BA9EA87EFE9ACE3C",
+        "store": "system-root",
         "name": "Chambers of Commerce Root - 2008",
-        "store": "system-root"
+        "subject": "0x3081AE310B3009060355040613024555314330410603550407133A4D414452494420285345452043555252454E542041444452455353204154205757572E43414D45524649524D412E434F4D2F41444452455353293112301006035504051309413832373433323837311B3019060355040A131241432043414D45524649524D4120532E412E31293027060355040313204348414D42455253204F4620434F4D4D4552434520524F4F54202D2032303038  \"0\\201\\2561\\0130\\011\\006\\003U\\004\\006\\023\\002EU1C0A\\006\\003U\\004\\007\\023:MADRID (SEE CURRENT ADDRESS AT WWW.CAMERFIRMA.COM/ADDRESS)1\\0220\\020\\006\\003U\\004\\005\\023\\011A827432871\\0330\\031\\006\\003U\\004\\012\\023\\022AC CAMERFIRMA S.A.1)0'\\006\\003U\\004\\003\\023 CHAMBERS OF COMMERCE ROOT - 2008"
       },
       {
+        "thumbprint": "490A7574DE870A47FE58EEF6C76BEBC60B124099",
+        "store": "system-root",
         "name": "Buypass Class 2 Root CA",
-        "store": "system-root"
+        "subject": "0x304E310B3009060355040613024E4F311D301B060355040A0C14427579706173732041532D3938333136333332373120301E06035504030C174275797061737320436C617373203220526F6F74204341  \"0N1\\0130\\011\\006\\003U\\004\\006\\023\\002NO1\\0350\\033\\006\\003U\\004\\012\\014\\024Buypass AS-9831633271 0\\036\\006\\003U\\004\\003\\014\\027Buypass Class 2 Root CA"
       },
       {
+        "thumbprint": "20D80640DF9B25F512253A11EAF7598AEB14B547",
+        "store": "system-root",
         "name": "Entrust Root Certification Authority - EC1",
-        "store": "system-root"
+        "subject": "0x3081BF310B300906035504061302555331163014060355040A130D454E54525553542C20494E432E31283026060355040B131F534545205757572E454E54525553542E4E45542F4C4547414C2D5445524D5331393037060355040B1330284329203230313220454E54525553542C20494E432E202D20464F5220415554484F52495A454420555345204F4E4C59313330310603550403132A454E545255535420524F4F542043455254494649434154494F4E20415554484F52495459202D20454331  \"0\\201\\2771\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0260\\024\\006\\003U\\004\\012\\023\\015ENTRUST, INC.1(0&\\006\\003U\\004\\013\\023\\037SEE WWW.ENTRUST.NET/LEGAL-TERMS1907\\006\\003U\\004\\013\\0230(C) 2012 ENTRUST, INC. - FOR AUTHORIZED USE ONLY1301\\006\\003U\\004\\003\\023*ENTRUST ROOT CERTIFICATION AUTHORITY - EC1"
       },
       {
+        "thumbprint": "9FF1718D92D59AF37D7497B4BC6F84680BBAB666",
+        "store": "system-root",
         "name": "Hellenic Academic and Research Institutions ECC RootCA 2015",
-        "store": "system-root"
+        "subject": "0x3081AA310B3009060355040613024752310F300D06035504071306415448454E5331443042060355040A133B48454C4C454E49432041434144454D494320414E4420524553454152434820494E535449545554494F4E5320434552542E20415554484F52495459314430420603550403133B48454C4C454E49432041434144454D494320414E4420524553454152434820494E535449545554494F4E532045434320524F4F5443412032303135  \"0\\201\\2521\\0130\\011\\006\\003U\\004\\006\\023\\002GR1\\0170\\015\\006\\003U\\004\\007\\023\\006ATHENS1D0B\\006\\003U\\004\\012\\023;HELLENIC ACADEMIC AND RESEARCH INSTITUTIONS CERT. AUTHORITY1D0B\\006\\003U\\004\\003\\023;HELLENIC ACADEMIC AND RESEARCH INSTITUTIONS ECC ROOTCA 2015"
       },
       {
+        "thumbprint": "5F3B8CF2F810B37D78B4CEEC1919C37334B9C774",
+        "store": "system-root",
         "name": "Security Communication RootCA2",
-        "store": "system-root"
+        "subject": "0x305D310B3009060355040613024A5031253023060355040A131C5345434F4D2054525553542053595354454D5320434F2E2C4C54442E31273025060355040B131E534543555249545920434F4D4D554E49434154494F4E20524F4F54434132  \"0]1\\0130\\011\\006\\003U\\004\\006\\023\\002JP1%0#\\006\\003U\\004\\012\\023\\034SECOM TRUST SYSTEMS CO.,LTD.1'0%\\006\\003U\\004\\013\\023\\036SECURITY COMMUNICATION ROOTCA2"
       },
       {
+        "thumbprint": "925A8F8D2C6D04E0665F596AFF22D863E8256F3F",
+        "store": "system-root",
         "name": "Starfield Services Root Certificate Authority - G2",
-        "store": "system-root"
+        "subject": "0x308198310B30090603550406130255533110300E060355040813074152495A4F4E41311330110603550407130A53434F54545344414C4531253023060355040A131C535441524649454C4420544543484E4F4C4F474945532C20494E432E313B303906035504031332535441524649454C4420534552564943455320524F4F5420434552544946494341544520415554484F52495459202D204732  \"0\\201\\2301\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0200\\016\\006\\003U\\004\\010\\023\\007ARIZONA1\\0230\\021\\006\\003U\\004\\007\\023\\012SCOTTSDALE1%0#\\006\\003U\\004\\012\\023\\034STARFIELD TECHNOLOGIES, INC.1;09\\006\\003U\\004\\003\\0232STARFIELD SERVICES ROOT CERTIFICATE AUTHORITY - G2"
       },
       {
+        "thumbprint": "B7AB3308D1EA4477BA1480125A6FBDA936490CBB",
+        "store": "system-root",
         "name": "SSL.com Root Certification Authority RSA",
-        "store": "system-root"
+        "subject": "0x307C310B3009060355040613025553310E300C06035504080C0554657861733110300E06035504070C07486F7573746F6E31183016060355040A0C0F53534C20436F72706F726174696F6E3131302F06035504030C2853534C2E636F6D20526F6F742043657274696669636174696F6E20417574686F7269747920525341  \"0|1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0160\\014\\006\\003U\\004\\010\\014\\005Texas1\\0200\\016\\006\\003U\\004\\007\\014\\007Houston1\\0300\\026\\006\\003U\\004\\012\\014\\017SSL Corporation110/\\006\\003U\\004\\003\\014(SSL.com Root Certification Authority RSA"
       },
       {
+        "thumbprint": "9BAAE59F56EE21CB435ABE2593DFA7F040D11DCB",
+        "store": "system-root",
         "name": "SwissSign Silver CA - G2",
-        "store": "system-root"
+        "subject": "0x3047310B300906035504061302434831153013060355040A130C53574953535349474E2041473121301F0603550403131853574953535349474E2053494C564552204341202D204732  \"0G1\\0130\\011\\006\\003U\\004\\006\\023\\002CH1\\0250\\023\\006\\003U\\004\\012\\023\\014SWISSSIGN AG1!0\\037\\006\\003U\\004\\003\\023\\030SWISSSIGN SILVER CA - G2"
       },
       {
+        "thumbprint": "F517A24F9A48C6C9F8A200269FDC0F482CAB3089",
+        "store": "system-root",
         "name": "DigiCert Assured ID Root G3",
-        "store": "system-root"
+        "subject": "0x3065310B300906035504061302555331153013060355040A130C444947494345525420494E4331193017060355040B13105757572E44494749434552542E434F4D312430220603550403131B4449474943455254204153535552454420494420524F4F54204733  \"0e1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0250\\023\\006\\003U\\004\\012\\023\\014DIGICERT INC1\\0310\\027\\006\\003U\\004\\013\\023\\020WWW.DIGICERT.COM1$0\"\\006\\003U\\004\\003\\023\\033DIGICERT ASSURED ID ROOT G3"
       },
       {
+        "thumbprint": "8094640EB5A7A1CA119C1FDDD59F810263A7FBD1",
+        "store": "system-root",
         "name": "GlobalSign",
-        "store": "system-root"
+        "subject": "0x304C3120301E060355040B1317474C4F42414C5349474E20524F4F54204341202D20523631133011060355040A130A474C4F42414C5349474E311330110603550403130A474C4F42414C5349474E  \"0L1 0\\036\\006\\003U\\004\\013\\023\\027GLOBALSIGN ROOT CA - R61\\0230\\021\\006\\003U\\004\\012\\023\\012GLOBALSIGN1\\0230\\021\\006\\003U\\004\\003\\023\\012GLOBALSIGN"
       },
       {
+        "thumbprint": "9A44497632DBDEFAD0BCFB5A7B17BD9E56092494",
+        "store": "system-root",
         "name": "GTS Root R2",
-        "store": "system-root"
+        "subject": "0x3047310B300906035504061302555331223020060355040A1319474F4F474C45205452555354205345525649434553204C4C43311430120603550403130B47545320524F4F54205232  \"0G1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\"0 \\006\\003U\\004\\012\\023\\031GOOGLE TRUST SERVICES LLC1\\0240\\022\\006\\003U\\004\\003\\023\\013GTS ROOT R2"
       },
       {
+        "thumbprint": "AEC5FB3FC8E1BFC4E54F03075A9AE800B7F7B6FA",
+        "store": "system-root",
         "name": "Autoridad de Certificacion Firmaprofesional CIF A62634068",
-        "store": "system-root"
+        "subject": "0x3051310B30090603550406130245533142304006035504030C394175746F72696461642064652043657274696669636163696F6E204669726D6170726F666573696F6E616C2043494620413632363334303638  \"0Q1\\0130\\011\\006\\003U\\004\\006\\023\\002ES1B0@\\006\\003U\\004\\003\\0149Autoridad de Certificacion Firmaprofesional CIF A62634068"
       },
       {
+        "thumbprint": "6A92E4A8EE1BEC964537E3295749CD96E3E5D260",
+        "store": "system-root",
         "name": "HiPKI Root CA - G1",
-        "store": "system-root"
+        "subject": "0x304F310B300906035504061302545731233021060355040A0C1A4368756E676877612054656C65636F6D20436F2E2C204C74642E311B301906035504030C124869504B4920526F6F74204341202D204731  \"0O1\\0130\\011\\006\\003U\\004\\006\\023\\002TW1#0!\\006\\003U\\004\\012\\014\\032Chunghwa Telecom Co., Ltd.1\\0330\\031\\006\\003U\\004\\003\\014\\022HiPKI Root CA - G1"
       },
       {
+        "thumbprint": "E7F3A3C8CF6FC3042E6D0E6732C59E68950D5ED2",
+        "store": "system-root",
         "name": "Trustwave Global ECC P384 Certification Authority",
-        "store": "system-root"
+        "subject": "0x308191310B30090603550406130255533111300F06035504081308494C4C494E4F49533110300E060355040713074348494341474F3121301F060355040A131854525553545741564520484F4C44494E47532C20494E432E313A30380603550403133154525553545741564520474C4F42414C2045434320503338342043455254494649434154494F4E20415554484F52495459  \"0\\201\\2211\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0210\\017\\006\\003U\\004\\010\\023\\010ILLINOIS1\\0200\\016\\006\\003U\\004\\007\\023\\007CHICAGO1!0\\037\\006\\003U\\004\\012\\023\\030TRUSTWAVE HOLDINGS, INC.1:08\\006\\003U\\004\\003\\0231TRUSTWAVE GLOBAL ECC P384 CERTIFICATION AUTHORITY"
       },
       {
+        "thumbprint": "18523B0D0637E4D63ADF23E498FB5B16FB867448",
+        "store": "system-root",
         "name": "Atos TrustedRoot Root CA RSA TLS 2021",
-        "store": "system-root"
+        "subject": "0x304C312E302C06035504030C2541746F732054727573746564526F6F7420526F6F742043412052534120544C532032303231310D300B060355040A0C0441746F73310B3009060355040613024445  \"0L1.0,\\006\\003U\\004\\003\\014%Atos TrustedRoot Root CA RSA TLS 20211\\0150\\013\\006\\003U\\004\\012\\014\\004Atos1\\0130\\011\\006\\003U\\004\\006\\023\\002DE"
       },
       {
+        "thumbprint": "F9B5B632455F9CBEEC575F80DCE96E2CC7B278B7",
+        "store": "system-root",
         "name": "AffirmTrust Commercial",
-        "store": "system-root"
+        "subject": "0x3044310B300906035504061302555331143012060355040A0C0B41666669726D5472757374311F301D06035504030C1641666669726D547275737420436F6D6D65726369616C  \"0D1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0240\\022\\006\\003U\\004\\012\\014\\013AffirmTrust1\\0370\\035\\006\\003U\\004\\003\\014\\026AffirmTrust Commercial"
       },
       {
+        "thumbprint": "EC8A396C40F02EBC4275D49FAB1C1A5B67BED29A",
+        "store": "system-root",
         "name": "Sectigo Public Server Authentication Root E46",
-        "store": "system-root"
+        "subject": "0x305F310B300906035504061302474231183016060355040A130F5345435449474F204C494D49544544313630340603550403132D5345435449474F205055424C4943205345525645522041555448454E5449434154494F4E20524F4F5420453436  \"0_1\\0130\\011\\006\\003U\\004\\006\\023\\002GB1\\0300\\026\\006\\003U\\004\\012\\023\\017SECTIGO LIMITED1604\\006\\003U\\004\\003\\023-SECTIGO PUBLIC SERVER AUTHENTICATION ROOT E46"
       },
       {
+        "thumbprint": "8782C6C304353BCFD29692D2593E7D44D934FF11",
+        "store": "system-root",
         "name": "SecureTrust CA",
-        "store": "system-root"
+        "subject": "0x3048310B30090603550406130255533120301E060355040A1317534543555245545255535420434F52504F524154494F4E311730150603550403130E5345435552455452555354204341  \"0H1\\0130\\011\\006\\003U\\004\\006\\023\\002US1 0\\036\\006\\003U\\004\\012\\023\\027SECURETRUST CORPORATION1\\0270\\025\\006\\003U\\004\\003\\023\\016SECURETRUST CA"
       },
       {
+        "thumbprint": "FEFDCA08C6021E06692D5AF11697268533AD74C8",
+        "store": "system-root",
         "name": "Apple Platform TLS ECC Root CA - G1",
-        "store": "system-root"
+        "subject": "0x3050310B300906035504061302555331133011060355040A0C0A4170706C6520496E632E312C302A06035504030C234170706C6520506C6174666F726D20544C532045434320526F6F74204341202D204731  \"0P1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1,0*\\006\\003U\\004\\003\\014#Apple Platform TLS ECC Root CA - G1"
       },
       {
+        "thumbprint": "89DF74FE5CF40F4A80F9E3377D54DA91E101318E",
+        "store": "system-root",
         "name": "info@e-szigno.hu",
-        "store": "system-root"
+        "subject": "0x308182310B30090603550406130248553111300F06035504070C08427564617065737431163014060355040A0C0D4D6963726F736563204C74642E3127302506035504030C1E4D6963726F73656320652D537A69676E6F20526F6F742043412032303039311F301D06092A864886F70D0109011610696E666F40652D737A69676E6F2E6875  \"0\\201\\2021\\0130\\011\\006\\003U\\004\\006\\023\\002HU1\\0210\\017\\006\\003U\\004\\007\\014\\010Budapest1\\0260\\024\\006\\003U\\004\\012\\014\\015Microsec Ltd.1'0%\\006\\003U\\004\\003\\014\\036Microsec e-Szigno Root CA 20091\\0370\\035\\006\\011*\\206H\\206\\367\\015\\001\\011\\001\\026\\020info@e-szigno.hu"
       },
       {
+        "thumbprint": "611E5B662C593A08FF58D14AE22452D198DF6C60",
+        "store": "system-root",
         "name": "Apple Root CA",
-        "store": "system-root"
+        "subject": "0x3062310B300906035504061302555331133011060355040A130A4150504C4520494E432E31263024060355040B131D4150504C452043455254494649434154494F4E20415554484F52495459311630140603550403130D4150504C4520524F4F54204341  \"0b1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\023\\012APPLE INC.1&0$\\006\\003U\\004\\013\\023\\035APPLE CERTIFICATION AUTHORITY1\\0260\\024\\006\\003U\\004\\003\\023\\015APPLE ROOT CA"
       },
       {
+        "thumbprint": "7A1F222D72B2C3198744DB6169E8A64BD70D440E",
+        "store": "system-root",
         "name": "SECOM TLS ECC Root CA 2024",
-        "store": "system-root"
+        "subject": "0x305A310B3009060355040613024A5031263024060355040A131D5345434F4D2054525553542053595354454D5320434F2E2C204C54442E312330210603550403131A5345434F4D20544C532045434320524F4F542043412032303234  \"0Z1\\0130\\011\\006\\003U\\004\\006\\023\\002JP1&0$\\006\\003U\\004\\012\\023\\035SECOM TRUST SYSTEMS CO., LTD.1#0!\\006\\003U\\004\\003\\023\\032SECOM TLS ECC ROOT CA 2024"
       },
       {
+        "thumbprint": "BCB0C19DE9989270193857E98DA7B45D6EEE0148",
+        "store": "system-root",
         "name": "HARICA TLS ECC Root CA 2021",
-        "store": "system-root"
+        "subject": "0x306C310B300906035504061302475231373035060355040A0C2E48656C6C656E69632041636164656D696320616E6420526573656172636820496E737469747574696F6E732043413124302206035504030C1B48415249434120544C532045434320526F6F742043412032303231  \"0l1\\0130\\011\\006\\003U\\004\\006\\023\\002GR1705\\006\\003U\\004\\012\\014.Hellenic Academic and Research Institutions CA1$0\"\\006\\003U\\004\\003\\014\\033HARICA TLS ECC Root CA 2021"
       },
       {
+        "thumbprint": "0D44DD8C3C8C1A1A58756481E90F2E2AFFB3D26E",
+        "store": "system-root",
         "name": "Amazon Root CA 3",
-        "store": "system-root"
+        "subject": "0x3039310B3009060355040613025553310F300D060355040A1306414D415A4F4E3119301706035504031310414D415A4F4E20524F4F542043412033  \"091\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0170\\015\\006\\003U\\004\\012\\023\\006AMAZON1\\0310\\027\\006\\003U\\004\\003\\023\\020AMAZON ROOT CA 3"
       },
       {
+        "thumbprint": "1B8EEA5796291AC939EAB80A811A7373C0937967",
+        "store": "system-root",
         "name": "QuoVadis Root CA 1 G3",
-        "store": "system-root"
+        "subject": "0x3048310B300906035504061302424D31193017060355040A131051554F5641444953204C494D49544544311E301C0603550403131551554F564144495320524F4F542043412031204733  \"0H1\\0130\\011\\006\\003U\\004\\006\\023\\002BM1\\0310\\027\\006\\003U\\004\\012\\023\\020QUOVADIS LIMITED1\\0360\\034\\006\\003U\\004\\003\\023\\025QUOVADIS ROOT CA 1 G3"
       },
       {
+        "thumbprint": "0F36385B811A25C39B314E83CAE9346670CC74B4",
+        "store": "system-root",
         "name": "GDCA TrustAUTH R5 ROOT",
-        "store": "system-root"
+        "subject": "0x3062310B300906035504061302434E31323030060355040A0C294755414E4720444F4E4720434552544946494341544520415554484F5249545920434F2E2C4C54442E311F301D06035504030C16474443412054727573744155544820523520524F4F54  \"0b1\\0130\\011\\006\\003U\\004\\006\\023\\002CN1200\\006\\003U\\004\\012\\014)GUANG DONG CERTIFICATE AUTHORITY CO.,LTD.1\\0370\\035\\006\\003U\\004\\003\\014\\026GDCA TrustAUTH R5 ROOT"
       },
       {
+        "thumbprint": "8DA7F965EC5EFC37910F1C6E59FDC1CC6A6EDE16",
+        "store": "system-root",
         "name": "Amazon Root CA 1",
-        "store": "system-root"
+        "subject": "0x3039310B3009060355040613025553310F300D060355040A1306414D415A4F4E3119301706035504031310414D415A4F4E20524F4F542043412031  \"091\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0170\\015\\006\\003U\\004\\012\\023\\006AMAZON1\\0310\\027\\006\\003U\\004\\003\\023\\020AMAZON ROOT CA 1"
       },
       {
+        "thumbprint": "1F24C630CDA418EF2069FFAD4FDD5F463A1B69AA",
+        "store": "system-root",
         "name": "GlobalSign",
-        "store": "system-root"
+        "subject": "0x305031243022060355040B131B474C4F42414C5349474E2045434320524F4F54204341202D20523531133011060355040A130A474C4F42414C5349474E311330110603550403130A474C4F42414C5349474E  \"0P1$0\"\\006\\003U\\004\\013\\023\\033GLOBALSIGN ECC ROOT CA - R51\\0230\\021\\006\\003U\\004\\012\\023\\012GLOBALSIGN1\\0230\\021\\006\\003U\\004\\003\\023\\012GLOBALSIGN"
       },
       {
+        "thumbprint": "AFE5D244A8D1194230FF479FE2F897BBCD7A8CB4",
+        "store": "system-root",
         "name": "COMODO RSA Certification Authority",
-        "store": "system-root"
+        "subject": "0x308185310B3009060355040613024742311B30190603550408131247524541544552204D414E434845535445523110300E0603550407130753414C464F5244311A3018060355040A1311434F4D4F444F204341204C494D49544544312B302906035504031322434F4D4F444F205253412043455254494649434154494F4E20415554484F52495459  \"0\\201\\2051\\0130\\011\\006\\003U\\004\\006\\023\\002GB1\\0330\\031\\006\\003U\\004\\010\\023\\022GREATER MANCHESTER1\\0200\\016\\006\\003U\\004\\007\\023\\007SALFORD1\\0320\\030\\006\\003U\\004\\012\\023\\021COMODO CA LIMITED1+0)\\006\\003U\\004\\003\\023\"COMODO RSA CERTIFICATION AUTHORITY"
       },
       {
+        "thumbprint": "EC2C834072AF269510FF0EF203EE3170F6789DCA",
+        "store": "system-root",
         "name": "SSL.com TLS RSA Root CA 2022",
-        "store": "system-root"
+        "subject": "0x304E310B300906035504061302555331183016060355040A0C0F53534C20436F72706F726174696F6E3125302306035504030C1C53534C2E636F6D20544C532052534120526F6F742043412032303232  \"0N1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0300\\026\\006\\003U\\004\\012\\014\\017SSL Corporation1%0#\\006\\003U\\004\\003\\014\\034SSL.com TLS RSA Root CA 2022"
       },
       {
+        "thumbprint": "3B166C3B7DC4B751C9FE2AFAB9135641E388E186",
+        "store": "system-root",
         "name": "Developer ID Certification Authority",
-        "store": "system-root"
+        "subject": "0x3079312D302B06035504030C24446576656C6F7065722049442043657274696669636174696F6E20417574686F7269747931263024060355040B0C1D4170706C652043657274696669636174696F6E20417574686F7269747931133011060355040A0C0A4170706C6520496E632E310B3009060355040613025553  \"0y1-0+\\006\\003U\\004\\003\\014$Developer ID Certification Authority1&0$\\006\\003U\\004\\013\\014\\035Apple Certification Authority1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1\\0130\\011\\006\\003U\\004\\006\\023\\002US"
       },
       {
+        "thumbprint": "1147FDB5C83DFB8B51FAE511411BC7B6ABD9953A",
+        "store": "system-root",
         "name": "Apple Platform Multipurpose RSA Root CA - G1",
-        "store": "system-root"
+        "subject": "0x3059310B300906035504061302555331133011060355040A0C0A4170706C6520496E632E3135303306035504030C2C4170706C6520506C6174666F726D204D756C7469707572706F73652052534120526F6F74204341202D204731  \"0Y1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1503\\006\\003U\\004\\003\\014,Apple Platform Multipurpose RSA Root CA - G1"
       },
       {
+        "thumbprint": "B51C067CEE2B0C3DF855AB2D92F4FE39D4E70F0E",
+        "store": "system-root",
         "name": "Starfield Root Certificate Authority - G2",
-        "store": "system-root"
+        "subject": "0x30818F310B30090603550406130255533110300E060355040813074152495A4F4E41311330110603550407130A53434F54545344414C4531253023060355040A131C535441524649454C4420544543484E4F4C4F474945532C20494E432E3132303006035504031329535441524649454C4420524F4F5420434552544946494341544520415554484F52495459202D204732  \"0\\201\\2171\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0200\\016\\006\\003U\\004\\010\\023\\007ARIZONA1\\0230\\021\\006\\003U\\004\\007\\023\\012SCOTTSDALE1%0#\\006\\003U\\004\\012\\023\\034STARFIELD TECHNOLOGIES, INC.1200\\006\\003U\\004\\003\\023)STARFIELD ROOT CERTIFICATE AUTHORITY - G2"
       },
       {
+        "thumbprint": "6631BF9EF74F9EB6C9D5A60CBA6ABED1F7BDEF7B",
+        "store": "system-root",
         "name": "COMODO Certification Authority",
-        "store": "system-root"
+        "subject": "0x308181310B3009060355040613024742311B30190603550408131247524541544552204D414E434845535445523110300E0603550407130753414C464F5244311A3018060355040A1311434F4D4F444F204341204C494D49544544312730250603550403131E434F4D4F444F2043455254494649434154494F4E20415554484F52495459  \"0\\201\\2011\\0130\\011\\006\\003U\\004\\006\\023\\002GB1\\0330\\031\\006\\003U\\004\\010\\023\\022GREATER MANCHESTER1\\0200\\016\\006\\003U\\004\\007\\023\\007SALFORD1\\0320\\030\\006\\003U\\004\\012\\023\\021COMODO CA LIMITED1'0%\\006\\003U\\004\\003\\023\\036COMODO CERTIFICATION AUTHORITY"
       },
       {
+        "thumbprint": "010C0695A6981914FFBF5FC6B0B695EA29E912A6",
+        "store": "system-root",
         "name": "Hellenic Academic and Research Institutions RootCA 2015",
-        "store": "system-root"
+        "subject": "0x3081A6310B3009060355040613024752310F300D06035504071306415448454E5331443042060355040A133B48454C4C454E49432041434144454D494320414E4420524553454152434820494E535449545554494F4E5320434552542E20415554484F524954593140303E0603550403133748454C4C454E49432041434144454D494320414E4420524553454152434820494E535449545554494F4E5320524F4F5443412032303135  \"0\\201\\2461\\0130\\011\\006\\003U\\004\\006\\023\\002GR1\\0170\\015\\006\\003U\\004\\007\\023\\006ATHENS1D0B\\006\\003U\\004\\012\\023;HELLENIC ACADEMIC AND RESEARCH INSTITUTIONS CERT. AUTHORITY1@0>\\006\\003U\\004\\003\\0237HELLENIC ACADEMIC AND RESEARCH INSTITUTIONS ROOTCA 2015"
       },
       {
+        "thumbprint": "AE3B31BF8FD891079CF1DF34CBCE6E70D37FB5B0",
+        "store": "system-root",
         "name": "ComSign Global Root CA",
-        "store": "system-root"
+        "subject": "0x3045311F301D06035504031316434F4D5349474E20474C4F42414C20524F4F5420434131153013060355040A130C434F4D5349474E204C54442E310B300906035504061302494C  \"0E1\\0370\\035\\006\\003U\\004\\003\\023\\026COMSIGN GLOBAL ROOT CA1\\0250\\023\\006\\003U\\004\\012\\023\\014COMSIGN LTD.1\\0130\\011\\006\\003U\\004\\006\\023\\002IL"
       },
       {
+        "thumbprint": "293621028B20ED02F566C532D1D6ED909F45002F",
+        "store": "system-root",
         "name": "AffirmTrust Networking",
-        "store": "system-root"
+        "subject": "0x3044310B300906035504061302555331143012060355040A0C0B41666669726D5472757374311F301D06035504030C1641666669726D5472757374204E6574776F726B696E67  \"0D1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0240\\022\\006\\003U\\004\\012\\014\\013AffirmTrust1\\0370\\035\\006\\003U\\004\\003\\014\\026AffirmTrust Networking"
       },
       {
+        "thumbprint": "8CF427FD790C3AD166068DE81E57EFBB932272D4",
+        "store": "system-root",
         "name": "Entrust Root Certification Authority - G2",
-        "store": "system-root"
+        "subject": "0x3081BE310B300906035504061302555331163014060355040A130D454E54525553542C20494E432E31283026060355040B131F534545205757572E454E54525553542E4E45542F4C4547414C2D5445524D5331393037060355040B1330284329203230303920454E54525553542C20494E432E202D20464F5220415554484F52495A454420555345204F4E4C593132303006035504031329454E545255535420524F4F542043455254494649434154494F4E20415554484F52495459202D204732  \"0\\201\\2761\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0260\\024\\006\\003U\\004\\012\\023\\015ENTRUST, INC.1(0&\\006\\003U\\004\\013\\023\\037SEE WWW.ENTRUST.NET/LEGAL-TERMS1907\\006\\003U\\004\\013\\0230(C) 2009 ENTRUST, INC. - FOR AUTHORIZED USE ONLY1200\\006\\003U\\004\\003\\023)ENTRUST ROOT CERTIFICATION AUTHORITY - G2"
       },
       {
+        "thumbprint": "14698989BFB2950921A42452646D37B50AF017E2",
+        "store": "system-root",
         "name": "Apple Root CA - G2",
-        "store": "system-root"
+        "subject": "0x3067311B301906035504030C124170706C6520526F6F74204341202D20473231263024060355040B0C1D4170706C652043657274696669636174696F6E20417574686F7269747931133011060355040A0C0A4170706C6520496E632E310B3009060355040613025553  \"0g1\\0330\\031\\006\\003U\\004\\003\\014\\022Apple Root CA - G21&0$\\006\\003U\\004\\013\\014\\035Apple Certification Authority1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1\\0130\\011\\006\\003U\\004\\006\\023\\002US"
       },
       {
+        "thumbprint": "C63A11F6B67E9D93F945471EB218365481EEA998",
+        "store": "system-root",
         "name": "Apple Platform RSA Root CA - G1",
-        "store": "system-root"
+        "subject": "0x304C310B300906035504061302555331133011060355040A0C0A4170706C6520496E632E3128302606035504030C1F4170706C6520506C6174666F726D2052534120526F6F74204341202D204731  \"0L1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1(0&\\006\\003U\\004\\003\\014\\037Apple Platform RSA Root CA - G1"
       },
       {
+        "thumbprint": "DDFB16CD4931C973A2037D3FC83A4D7D775D05E4",
+        "store": "system-root",
         "name": "DigiCert Trusted Root G4",
-        "store": "system-root"
+        "subject": "0x3062310B300906035504061302555331153013060355040A130C444947494345525420494E4331193017060355040B13105757572E44494749434552542E434F4D3121301F060355040313184449474943455254205452555354454420524F4F54204734  \"0b1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0250\\023\\006\\003U\\004\\012\\023\\014DIGICERT INC1\\0310\\027\\006\\003U\\004\\013\\023\\020WWW.DIGICERT.COM1!0\\037\\006\\003U\\004\\003\\023\\030DIGICERT TRUSTED ROOT G4"
       },
       {
+        "thumbprint": "2F783D255218A74A653971B52CA29C45156FE919",
+        "store": "system-root",
         "name": "info@izenpe.com",
-        "store": "system-root"
+        "subject": "0x3038310B300906035504061302455331143012060355040A0C0B495A454E504520532E412E3113301106035504030C0A497A656E70652E636F6D  \"081\\0130\\011\\006\\003U\\004\\006\\023\\002ES1\\0240\\022\\006\\003U\\004\\012\\014\\013IZENPE S.A.1\\0230\\021\\006\\003U\\004\\003\\014\\012Izenpe.com"
       },
       {
+        "thumbprint": "E58C1CC4913B38634BE9106EE3AD8E6B9DD9814A",
+        "store": "system-root",
         "name": "GTS Root R1",
-        "store": "system-root"
+        "subject": "0x3047310B300906035504061302555331223020060355040A1319474F4F474C45205452555354205345525649434553204C4C43311430120603550403130B47545320524F4F54205231  \"0G1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\"0 \\006\\003U\\004\\012\\023\\031GOOGLE TRUST SERVICES LLC1\\0240\\022\\006\\003U\\004\\003\\023\\013GTS ROOT R1"
       },
       {
+        "thumbprint": "AD98F9F3E47D753B65D482B3A45217BB6EF5E438",
+        "store": "system-root",
         "name": "Sectigo Public Server Authentication Root R46",
-        "store": "system-root"
+        "subject": "0x305F310B300906035504061302474231183016060355040A130F5345435449474F204C494D49544544313630340603550403132D5345435449474F205055424C4943205345525645522041555448454E5449434154494F4E20524F4F5420523436  \"0_1\\0130\\011\\006\\003U\\004\\006\\023\\002GB1\\0300\\026\\006\\003U\\004\\012\\023\\017SECTIGO LIMITED1604\\006\\003U\\004\\003\\023-SECTIGO PUBLIC SERVER AUTHENTICATION ROOT R46"
       },
       {
+        "thumbprint": "96C91B0B95B4109842FAD0D82279FE60FAB91683",
+        "store": "system-root",
         "name": "D-TRUST Root Class 3 CA 2 EV 2009",
-        "store": "system-root"
+        "subject": "0x3050310B300906035504061302444531153013060355040A0C0C442D547275737420476D6248312A302806035504030C21442D545255535420526F6F7420436C617373203320434120322045562032303039  \"0P1\\0130\\011\\006\\003U\\004\\006\\023\\002DE1\\0250\\023\\006\\003U\\004\\012\\014\\014D-Trust GmbH1*0(\\006\\003U\\004\\003\\014!D-TRUST Root Class 3 CA 2 EV 2009"
       },
       {
+        "thumbprint": "580F804792ABC63BBB80154D4DFDDD8B2EF2674E",
+        "store": "system-root",
         "name": "Apple Root Certificate Authority",
-        "store": "system-root"
+        "subject": "0x308186310B3009060355040613025553311D301B060355040A13144150504C4520434F4D50555445522C20494E432E312D302B060355040B13244150504C4520434F4D505554455220434552544946494341544520415554484F5249545931293027060355040313204150504C4520524F4F5420434552544946494341544520415554484F52495459  \"0\\201\\2061\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0350\\033\\006\\003U\\004\\012\\023\\024APPLE COMPUTER, INC.1-0+\\006\\003U\\004\\013\\023$APPLE COMPUTER CERTIFICATE AUTHORITY1)0'\\006\\003U\\004\\003\\023 APPLE ROOT CERTIFICATE AUTHORITY"
       },
       {
+        "thumbprint": "8AC7AD8F73AC4EC1B5754DA540F4FCCF7CB58E8C",
+        "store": "system-root",
         "name": "emSign Root CA - G1",
-        "store": "system-root"
+        "subject": "0x3067310B300906035504061302494E31133011060355040B130A454D5349474E20504B4931253023060355040A131C454D554448524120544543484E4F4C4F47494553204C494D49544544311C301A06035504031313454D5349474E20524F4F54204341202D204731  \"0g1\\0130\\011\\006\\003U\\004\\006\\023\\002IN1\\0230\\021\\006\\003U\\004\\013\\023\\012EMSIGN PKI1%0#\\006\\003U\\004\\012\\023\\034EMUDHRA TECHNOLOGIES LIMITED1\\0340\\032\\006\\003U\\004\\003\\023\\023EMSIGN ROOT CA - G1"
       },
       {
+        "thumbprint": "D067C11351010CAAD0C76A65373116264F5371A2",
+        "store": "system-root",
         "name": "GLOBALTRUST 2020",
-        "store": "system-root"
+        "subject": "0x304D310B300906035504061302415431233021060355040A131A452D434F4D4D45524345204D4F4E49544F52494E4720474D42483119301706035504031310474C4F42414C54525553542032303230  \"0M1\\0130\\011\\006\\003U\\004\\006\\023\\002AT1#0!\\006\\003U\\004\\012\\023\\032E-COMMERCE MONITORING GMBH1\\0310\\027\\006\\003U\\004\\003\\023\\020GLOBALTRUST 2020"
       },
       {
+        "thumbprint": "0563B8630D62D75ABBC8AB1E4BDFB5A899B24D43",
+        "store": "system-root",
         "name": "DigiCert Assured ID Root CA",
-        "store": "system-root"
+        "subject": "0x3065310B300906035504061302555331153013060355040A130C444947494345525420494E4331193017060355040B13105757572E44494749434552542E434F4D312430220603550403131B4449474943455254204153535552454420494420524F4F54204341  \"0e1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0250\\023\\006\\003U\\004\\012\\023\\014DIGICERT INC1\\0310\\027\\006\\003U\\004\\013\\023\\020WWW.DIGICERT.COM1$0\"\\006\\003U\\004\\003\\023\\033DIGICERT ASSURED ID ROOT CA"
       },
       {
+        "thumbprint": "37EB5EFE1299477CF8C4E894644E56D1DAD76996",
+        "store": "system-root",
         "name": "GlobalSign Verified Mark Root R42",
-        "store": "system-root"
+        "subject": "0x3054310B300906035504061302424531193017060355040A1310474C4F42414C5349474E204E562D5341312A302806035504031321474C4F42414C5349474E205645524946494544204D41524B20524F4F5420523432  \"0T1\\0130\\011\\006\\003U\\004\\006\\023\\002BE1\\0310\\027\\006\\003U\\004\\012\\023\\020GLOBALSIGN NV-SA1*0(\\006\\003U\\004\\003\\023!GLOBALSIGN VERIFIED MARK ROOT R42"
       },
       {
+        "thumbprint": "0F1A0FAE886131C02F2CC2AB006D8F05BA542EA7",
+        "store": "system-root",
         "name": "Apple Platform Code Signing RSA Root CA - G1",
-        "store": "system-root"
+        "subject": "0x3059310B300906035504061302555331133011060355040A0C0A4170706C6520496E632E3135303306035504030C2C4170706C6520506C6174666F726D20436F6465205369676E696E672052534120526F6F74204341202D204731  \"0Y1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1503\\006\\003U\\004\\003\\014,Apple Platform Code Signing RSA Root CA - G1"
       },
       {
+        "thumbprint": "77D30367B5E00C15F60C3861DF7CE13B92464D47",
+        "store": "system-root",
         "name": "GTS Root R4",
-        "store": "system-root"
+        "subject": "0x3047310B300906035504061302555331223020060355040A1319474F4F474C45205452555354205345525649434553204C4C43311430120603550403130B47545320524F4F54205234  \"0G1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\"0 \\006\\003U\\004\\012\\023\\031GOOGLE TRUST SERVICES LLC1\\0240\\022\\006\\003U\\004\\003\\023\\013GTS ROOT R4"
       },
       {
+        "thumbprint": "A8985D3A65E5E5C4B2D7D66D40C6DD2FB19C5436",
+        "store": "system-root",
         "name": "DigiCert Global Root CA",
-        "store": "system-root"
+        "subject": "0x3061310B300906035504061302555331153013060355040A130C444947494345525420494E4331193017060355040B13105757572E44494749434552542E434F4D3120301E06035504031317444947494345525420474C4F42414C20524F4F54204341  \"0a1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0250\\023\\006\\003U\\004\\012\\023\\014DIGICERT INC1\\0310\\027\\006\\003U\\004\\013\\023\\020WWW.DIGICERT.COM1 0\\036\\006\\003U\\004\\003\\023\\027DIGICERT GLOBAL ROOT CA"
       },
       {
+        "thumbprint": "47BEABC922EAE80E78783462A79F45C254FDE68B",
+        "store": "system-root",
         "name": "Go Daddy Root Certificate Authority - G2",
-        "store": "system-root"
+        "subject": "0x308183310B30090603550406130255533110300E060355040813074152495A4F4E41311330110603550407130A53434F54545344414C45311A3018060355040A1311474F44414444592E434F4D2C20494E432E3131302F06035504031328474F20444144445920524F4F5420434552544946494341544520415554484F52495459202D204732  \"0\\201\\2031\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0200\\016\\006\\003U\\004\\010\\023\\007ARIZONA1\\0230\\021\\006\\003U\\004\\007\\023\\012SCOTTSDALE1\\0320\\030\\006\\003U\\004\\012\\023\\021GODADDY.COM, INC.110/\\006\\003U\\004\\003\\023(GO DADDY ROOT CERTIFICATE AUTHORITY - G2"
       },
       {
+        "thumbprint": "2796BAE63F1801E277261BA0D77770028F20EEE4",
+        "store": "system-root",
         "name": "Go Daddy Class 2 Certification Authority",
-        "store": "system-root"
+        "subject": "0x3063310B30090603550406130255533121301F060355040A131854484520474F2044414444592047524F55502C20494E432E3131302F060355040B1328474F20444144445920434C41535320322043455254494649434154494F4E20415554484F52495459  \"0c1\\0130\\011\\006\\003U\\004\\006\\023\\002US1!0\\037\\006\\003U\\004\\012\\023\\030THE GO DADDY GROUP, INC.110/\\006\\003U\\004\\013\\023(GO DADDY CLASS 2 CERTIFICATION AUTHORITY"
       },
       {
+        "thumbprint": "58A2D0EC2052815BC1F3F86402244EC28E024B02",
+        "store": "system-root",
         "name": "Hongkong Post Root CA 3",
-        "store": "system-root"
+        "subject": "0x306F310B300906035504061302484B3112301006035504081309484F4E47204B4F4E473112301006035504071309484F4E47204B4F4E4731163014060355040A130D484F4E474B4F4E4720504F53543120301E06035504031317484F4E474B4F4E4720504F535420524F4F542043412033  \"0o1\\0130\\011\\006\\003U\\004\\006\\023\\002HK1\\0220\\020\\006\\003U\\004\\010\\023\\011HONG KONG1\\0220\\020\\006\\003U\\004\\007\\023\\011HONG KONG1\\0260\\024\\006\\003U\\004\\012\\023\\015HONGKONG POST1 0\\036\\006\\003U\\004\\003\\023\\027HONGKONG POST ROOT CA 3"
       },
       {
+        "thumbprint": "B12E13634586A46F1AB2606837582DC4ACFD9497",
+        "store": "system-root",
         "name": "Certigna",
-        "store": "system-root"
+        "subject": "0x3034310B300906035504061302465231123010060355040A0C094468696D796F7469733111300F06035504030C084365727469676E61  \"041\\0130\\011\\006\\003U\\004\\006\\023\\002FR1\\0220\\020\\006\\003U\\004\\012\\014\\011Dhimyotis1\\0210\\017\\006\\003U\\004\\003\\014\\010Certigna"
       },
       {
+        "thumbprint": "F33E783CACDFF4A2CCAC67556956D7E5163CE1ED",
+        "store": "system-root",
         "name": "Certum EC-384 CA",
-        "store": "system-root"
+        "subject": "0x3074310B300906035504061302504C3121301F060355040A131841535345434F20444154412053595354454D5320532E412E31273025060355040B131E43455254554D2043455254494649434154494F4E20415554484F52495459311930170603550403131043455254554D2045432D333834204341  \"0t1\\0130\\011\\006\\003U\\004\\006\\023\\002PL1!0\\037\\006\\003U\\004\\012\\023\\030ASSECO DATA SYSTEMS S.A.1'0%\\006\\003U\\004\\013\\023\\036CERTUM CERTIFICATION AUTHORITY1\\0310\\027\\006\\003U\\004\\003\\023\\020CERTUM EC-384 CA"
       },
       {
+        "thumbprint": "C95E9C79D60752386209C1E4C68A6B8BD54FF2DB",
+        "store": "system-root",
         "name": "Sectigo Public Time Stamping Root E46",
-        "store": "system-root"
+        "subject": "0x3057310B300906035504061302474231183016060355040A130F5345435449474F204C494D49544544312E302C060355040313255345435449474F205055424C49432054494D45205354414D50494E4720524F4F5420453436  \"0W1\\0130\\011\\006\\003U\\004\\006\\023\\002GB1\\0300\\026\\006\\003U\\004\\012\\023\\017SECTIGO LIMITED1.0,\\006\\003U\\004\\003\\023%SECTIGO PUBLIC TIME STAMPING ROOT E46"
       },
       {
+        "thumbprint": "DF717EAA4AD94EC9558499602D48DE5FBCF03A25",
+        "store": "system-root",
         "name": "IdenTrust Commercial Root CA 1",
-        "store": "system-root"
+        "subject": "0x304A310B300906035504061302555331123010060355040A13094944454E5452555354312730250603550403131E4944454E545255535420434F4D4D45524349414C20524F4F542043412031  \"0J1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0220\\020\\006\\003U\\004\\012\\023\\011IDENTRUST1'0%\\006\\003U\\004\\003\\023\\036IDENTRUST COMMERCIAL ROOT CA 1"
       },
       {
+        "thumbprint": "6252DC40F71143A22FDE9EF7348E064251B18118",
+        "store": "system-root",
         "name": "Certum CA",
-        "store": "system-root"
+        "subject": "0x303E310B300906035504061302504C311B3019060355040A1312554E495A45544F2053502E205A204F2E4F2E311230100603550403130943455254554D204341  \"0>1\\0130\\011\\006\\003U\\004\\006\\023\\002PL1\\0330\\031\\006\\003U\\004\\012\\023\\022UNIZETO SP. Z O.O.1\\0220\\020\\006\\003U\\004\\003\\023\\011CERTUM CA"
       },
       {
+        "thumbprint": "6BA0B098E171EF5AADFE4815807710F4BD6F0B28",
+        "store": "system-root",
         "name": "GlobalSign",
-        "store": "system-root"
+        "subject": "0x305031243022060355040B131B474C4F42414C5349474E2045434320524F4F54204341202D20523431133011060355040A130A474C4F42414C5349474E311330110603550403130A474C4F42414C5349474E  \"0P1$0\"\\006\\003U\\004\\013\\023\\033GLOBALSIGN ECC ROOT CA - R41\\0230\\021\\006\\003U\\004\\012\\023\\012GLOBALSIGN1\\0230\\021\\006\\003U\\004\\003\\023\\012GLOBALSIGN"
       },
       {
+        "thumbprint": "F6108407D6F8BB67980CC2E244C2EBAE1CEF63BE",
+        "store": "system-root",
         "name": "Amazon Root CA 4",
-        "store": "system-root"
+        "subject": "0x3039310B3009060355040613025553310F300D060355040A1306414D415A4F4E3119301706035504031310414D415A4F4E20524F4F542043412034  \"091\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0170\\015\\006\\003U\\004\\012\\023\\006AMAZON1\\0310\\027\\006\\003U\\004\\003\\023\\020AMAZON ROOT CA 4"
       },
       {
+        "thumbprint": "9F5FD91A546DF50C71F0EE7ABD1749988473E239",
+        "store": "system-root",
         "name": "SSL.com TLS ECC Root CA 2022",
-        "store": "system-root"
+        "subject": "0x304E310B300906035504061302555331183016060355040A0C0F53534C20436F72706F726174696F6E3125302306035504030C1C53534C2E636F6D20544C532045434320526F6F742043412032303232  \"0N1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0300\\026\\006\\003U\\004\\012\\014\\017SSL Corporation1%0#\\006\\003U\\004\\003\\014\\034SSL.com TLS ECC Root CA 2022"
       },
       {
+        "thumbprint": "D8A6332CE0036FB185F6634F7D6A066526322827",
+        "store": "system-root",
         "name": "AffirmTrust Premium",
-        "store": "system-root"
+        "subject": "0x3041310B300906035504061302555331143012060355040A0C0B41666669726D5472757374311C301A06035504030C1341666669726D5472757374205072656D69756D  \"0A1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0240\\022\\006\\003U\\004\\012\\014\\013AffirmTrust1\\0340\\032\\006\\003U\\004\\003\\014\\023AffirmTrust Premium"
       },
       {
+        "thumbprint": "E2B8294B5584AB6B58C290466CAC3FB8398F8483",
+        "store": "system-root",
         "name": "CFCA EV ROOT",
-        "store": "system-root"
+        "subject": "0x3056310B300906035504061302434E3130302E060355040A0C274368696E612046696E616E6369616C2043657274696669636174696F6E20417574686F726974793115301306035504030C0C4346434120455620524F4F54  \"0V1\\0130\\011\\006\\003U\\004\\006\\023\\002CN100.\\006\\003U\\004\\012\\014'China Financial Certification Authority1\\0250\\023\\006\\003U\\004\\003\\014\\014CFCA EV ROOT"
       },
       {
+        "thumbprint": "BE64D3DA144BD26BCDAF8FDBA6A672F8DE26F900",
+        "store": "system-root",
         "name": "HARICA Client ECC Root CA 2021",
-        "store": "system-root"
+        "subject": "0x306F310B300906035504061302475231373035060355040A0C2E48656C6C656E69632041636164656D696320616E6420526573656172636820496E737469747574696F6E732043413127302506035504030C1E48415249434120436C69656E742045434320526F6F742043412032303231  \"0o1\\0130\\011\\006\\003U\\004\\006\\023\\002GR1705\\006\\003U\\004\\012\\014.Hellenic Academic and Research Institutions CA1'0%\\006\\003U\\004\\003\\014\\036HARICA Client ECC Root CA 2021"
       },
       {
+        "thumbprint": "5207452EFB088D1DB99C9C24A293963AACA06C58",
+        "store": "system-root",
         "name": "Apple Platform Multipurpose ECC Root CA - G1",
-        "store": "system-root"
+        "subject": "0x3059310B300906035504061302555331133011060355040A0C0A4170706C6520496E632E3135303306035504030C2C4170706C6520506C6174666F726D204D756C7469707572706F73652045434320526F6F74204341202D204731  \"0Y1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1503\\006\\003U\\004\\003\\014,Apple Platform Multipurpose ECC Root CA - G1"
       },
       {
+        "thumbprint": "6C7CCCE7D4AE515F9908CD3FF6E8C378DF6FEF97",
+        "store": "system-root",
         "name": "D-TRUST Root CA 3 2013",
-        "store": "system-root"
+        "subject": "0x3045310B300906035504061302444531153013060355040A0C0C442D547275737420476D6248311F301D06035504030C16442D545255535420526F6F7420434120332032303133  \"0E1\\0130\\011\\006\\003U\\004\\006\\023\\002DE1\\0250\\023\\006\\003U\\004\\012\\014\\014D-Trust GmbH1\\0370\\035\\006\\003U\\004\\003\\014\\026D-TRUST Root CA 3 2013"
       },
       {
+        "thumbprint": "14884E862637B026AF59625C4077EC3529BA9601",
+        "store": "system-root",
         "name": "Entrust Root Certification Authority - G4",
-        "store": "system-root"
+        "subject": "0x3081BE310B300906035504061302555331163014060355040A130D454E54525553542C20494E432E31283026060355040B131F534545205757572E454E54525553542E4E45542F4C4547414C2D5445524D5331393037060355040B1330284329203230313520454E54525553542C20494E432E202D20464F5220415554484F52495A454420555345204F4E4C593132303006035504031329454E545255535420524F4F542043455254494649434154494F4E20415554484F52495459202D204734  \"0\\201\\2761\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0260\\024\\006\\003U\\004\\012\\023\\015ENTRUST, INC.1(0&\\006\\003U\\004\\013\\023\\037SEE WWW.ENTRUST.NET/LEGAL-TERMS1907\\006\\003U\\004\\013\\0230(C) 2015 ENTRUST, INC. - FOR AUTHORIZED USE ONLY1200\\006\\003U\\004\\003\\023)ENTRUST ROOT CERTIFICATION AUTHORITY - G4"
       },
       {
+        "thumbprint": "612556DA6294E5AEB33CF811BDB1DCF8A5D8B3E4",
+        "store": "system-root",
         "name": "Atos TrustedRoot Root CA ECC G2 2020",
-        "store": "system-root"
+        "subject": "0x304B310B3009060355040613024445310D300B060355040A0C0441746F73312D302B06035504030C2441746F732054727573746564526F6F7420526F6F74204341204543432047322032303230  \"0K1\\0130\\011\\006\\003U\\004\\006\\023\\002DE1\\0150\\013\\006\\003U\\004\\012\\014\\004Atos1-0+\\006\\003U\\004\\003\\014$Atos TrustedRoot Root CA ECC G2 2020"
       },
       {
+        "thumbprint": "26F993B4ED3D2827B0B94BA7E9151DA38D92E532",
+        "store": "system-root",
         "name": "certSIGN ROOT CA G2",
-        "store": "system-root"
+        "subject": "0x3041310B300906035504061302524F31143012060355040A130B434552545349474E205341311C301A060355040B1313434552545349474E20524F4F54204341204732  \"0A1\\0130\\011\\006\\003U\\004\\006\\023\\002RO1\\0240\\022\\006\\003U\\004\\012\\023\\013CERTSIGN SA1\\0340\\032\\006\\003U\\004\\013\\023\\023CERTSIGN ROOT CA G2"
       },
       {
+        "thumbprint": "5C27A451BD37843CAA5BF537606BBE5214D0774B",
+        "store": "system-root",
         "name": "Apple Platform Bootstrap ECC Root CA - G1",
-        "store": "system-root"
+        "subject": "0x3056310B300906035504061302555331133011060355040A0C0A4170706C6520496E632E3132303006035504030C294170706C6520506C6174666F726D20426F6F7473747261702045434320526F6F74204341202D204731  \"0V1\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1200\\006\\003U\\004\\003\\014)Apple Platform Bootstrap ECC Root CA - G1"
+      },
+      {
+        "thumbprint": "70339CB85211F94722694E2B695283E1E2BA3CAA",
+        "store": "system",
+        "name": "com.apple.systemdefault",
+        "subject": "0x303C3120301E06035504030C17636F6D2E6170706C652E73797374656D64656661756C7431183016060355040A0C0F53797374656D204964656E74697479  \"0<1 0\\036\\006\\003U\\004\\003\\014\\027com.apple.systemdefault1\\0300\\026\\006\\003U\\004\\012\\014\\017System Identity"
+      },
+      {
+        "thumbprint": "C228E002AE127CC0395DD47911F536DFEDA90528",
+        "store": "system",
+        "name": "com.apple.kerberos.kdc",
+        "subject": "0x303B311F301D06035504030C16636F6D2E6170706C652E6B65726265726F732E6B646331183016060355040A0C0F53797374656D204964656E74697479  \"0;1\\0370\\035\\006\\003U\\004\\003\\014\\026com.apple.kerberos.kdc1\\0300\\026\\006\\003U\\004\\012\\014\\017System Identity"
+      },
+      {
+        "thumbprint": "BDEB56FD25E2A0E80ED710D7B251D47D30EB7458",
+        "store": "system",
+        "name": "com.apple.kerberos.kdc",
+        "subject": "0x303B311F301D06035504030C16636F6D2E6170706C652E6B65726265726F732E6B646331183016060355040A0C0F53797374656D204964656E74697479  \"0;1\\0370\\035\\006\\003U\\004\\003\\014\\026com.apple.kerberos.kdc1\\0300\\026\\006\\003U\\004\\012\\014\\017System Identity"
+      },
+      {
+        "thumbprint": "478208F51B43614B8141892E3349AD2C9018FA6A",
+        "store": "system",
+        "name": "ManSys-MacBook-Air.local",
+        "subject": "0x30303121301F06035504030C184D616E5379732D4D6163426F6F6B2D4169722E6C6F63616C310B3009060355040613025345  \"001!0\\037\\006\\003U\\004\\003\\014\\030ManSys-MacBook-Air.local1\\0130\\011\\006\\003U\\004\\006\\023\\002SE"
+      },
+      {
+        "thumbprint": "3D16221423C5ABCB9C7842E4E8706FBCE73C959A",
+        "store": "system",
+        "name": "Server Fallback SSL Certificate",
+        "subject": "0x30373128302606035504030C1F5365727665722046616C6C6261636B2053534C204365727469666963617465310B3009060355040613025345  \"071(0&\\006\\003U\\004\\003\\014\\037Server Fallback SSL Certificate1\\0130\\011\\006\\003U\\004\\006\\023\\002SE"
+      },
+      {
+        "thumbprint": "FF6797793A3CD798DC5B2ABEF56F73EDC9F83A64",
+        "store": "system",
+        "name": "Apple Worldwide Developer Relations Certification Authority",
+        "subject": "0x308196310B300906035504061302555331133011060355040A0C0A4170706C6520496E632E312C302A060355040B0C234170706C6520576F726C647769646520446576656C6F7065722052656C6174696F6E733144304206035504030C3B4170706C6520576F726C647769646520446576656C6F7065722052656C6174696F6E732043657274696669636174696F6E20417574686F72697479  \"0\\201\\2261\\0130\\011\\006\\003U\\004\\006\\023\\002US1\\0230\\021\\006\\003U\\004\\012\\014\\012Apple Inc.1,0*\\006\\003U\\004\\013\\014#Apple Worldwide Developer Relations1D0B\\006\\003U\\004\\003\\014;Apple Worldwide Developer Relations Certification Authority"
       }
     ]
   },

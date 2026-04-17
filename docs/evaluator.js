@@ -79,6 +79,25 @@
     };
   }
 
+  function compareCertNameExists(actual, expected) {
+    const certs = Array.isArray(actual) ? actual : [];
+    const wanted = String(expected || "").toLowerCase();
+
+    const match = certs.find((cert) => {
+      const name = String((cert && cert.name) || "").toLowerCase();
+      return name === wanted || name.includes(wanted);
+    });
+
+    return {
+      ok: Boolean(match),
+      actual: match || null,
+      expected,
+      detail: match
+        ? `Found certificate: ${match.name || expected}`
+        : `Certificate not found: ${expected}`
+    };
+  }
+
   function evaluateRule(rule, data) {
     const sourceValue = getByPath(data, rule.evidence_field || rule.source);
     let comparison;
@@ -92,6 +111,9 @@
         break;
       case "min_version":
         comparison = compareMinVersion(sourceValue, rule.expected);
+        break;
+      case "cert_name_exists":
+        comparison = compareCertNameExists(sourceValue, rule.expected);
         break;
       default:
         comparison = {

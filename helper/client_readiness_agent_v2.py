@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import platform
+import re
 import shutil
 import socket
 import subprocess
@@ -41,7 +42,7 @@ def check_online(host: str = "8.8.8.8", port: int = 53, timeout: float = 2.0) ->
 
 def collect_meta() -> dict[str, Any]:
     return {
-        "agent_version": "2.0.0",
+        "agent_version": "2.1.0",
         "platform": platform.system(),
         "platform_release": platform.release(),
         "machine": platform.machine(),
@@ -49,32 +50,81 @@ def collect_meta() -> dict[str, Any]:
     }
 
 
+def _parse_security_certificate_text(text: str, store: str) -> list[dict[str, str]]:
+    certs: list[dict[str, str]] = []
+    current: dict[str, str] | None = None
+
+    sha1_re = re.compile(r"SHA-1 hash:\s*([A-Fa-f0-9]{40})")
+    key_value_re = re.compile(r'^\s*"([^"]+)"<[^>]+>=(.*)$')
+
+    for raw_line in text.splitlines():
+        line = raw_line.rstrip()
+
+        sha1_match = sha1_re.search(line)
+        if sha1_match:
+            if current:
+                certs.append(current)
+            current = {
+                "thumbprint": sha1_match.group(1),
+                "store": store,
+            }
+            continue
+
+        kv_match = key_value_re.match(line)
+        if kv_match and current is not None:
+            key = kv_match.group(1).strip()
+            value = kv_match.group(2).strip().strip('"')
+
+            if key == "alis":
+                current["name"] = value
+            elif key == "labl":
+                current.setdefault("name", value)
+            elif key == "subj":
+                current["subject"] = value
+            elif key == "issr":
+                current["issuer"] = value
+            elif key == "cdat":
+                current["not_before"] = value
+            elif key == "mdat":
+                current["not_after"] = value
+
+    if current:
+        certs.append(current)
+
+    return certs
+
+
 def collect_certificates() -> dict[str, Any]:
-    installed: list[str] = []
     details: list[dict[str, str]] = []
 
     if platform.system() == "Darwin" and command_exists("security"):
-        # Enkel och robust startpunkt.
-        # Nästa nivå blir att parsa subject/issuer/expiry mer exakt.
-        output = run_command(
-            [
-                "security",
-                "find-certificate",
-                "-a",
-                "-Z",
+        keychain_sources = [
+            (
                 "/System/Library/Keychains/SystemRootCertificates.keychain",
-            ]
-        )
+                "system-root",
+            ),
+            (
+                "/Library/Keychains/System.keychain",
+                "system",
+            ),
+        ]
 
-        if output:
-            for line in output.splitlines():
-                line = line.strip()
-                if '"alis"' in line:
-                    # Exempelrad innehåller ofta aliasnamn
-                    name = line.split("<blob>=")[-1].strip().strip('"')
-                    if name:
-                        installed.append(name)
-                        details.append({"name": name, "store": "system-root"})
+        for keychain_path, store_name in keychain_sources:
+            if Path(keychain_path).exists():
+                output = run_command(
+                    ["security", "find-certificate", "-a", "-Z", keychain_path],
+                    timeout=20,
+                )
+                if output:
+                    details.extend(_parse_security_certificate_text(output, store_name))
+
+    installed = sorted(
+        {
+            item.get("name", "Unknown Certificate")
+            for item in details
+            if item.get("name")
+        }
+    )
 
     return {
         "installed": installed,
@@ -143,14 +193,9 @@ def build_payload() -> dict[str, Any]:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Client Readiness Agent v2")
     parser.add_argument(
-        "--pretty",
-        action="store_true",
-        help="Pretty-print JSON output",
+        "--pretty", action="store_true", help="Pretty-print JSON output"
     )
-    parser.add_argument(
-        "--out",
-        help="Write JSON output to file",
-    )
+    parser.add_argument("--out", help="Write JSON output to file")
     args = parser.parse_args()
 
     payload = build_payload()
