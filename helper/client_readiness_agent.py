@@ -353,6 +353,31 @@ def browser_checks():
     ]
 
 
+def list_certificate_details():
+    cert_paths = [
+        "/setup/cacerts",
+        "/setup/cacerts/browser",
+        "/setup/cacerts/intcerts",
+        "/setup/cacerts/login",
+    ]
+    details = []
+    for base_path in cert_paths:
+        if os.path.exists(base_path):
+            for root, dirs, files in os.walk(base_path):
+                for file in files:
+                    if file.endswith((".pem", ".crt", ".cer")):
+                        full_path = os.path.join(root, file)
+                        try:
+                            stat = os.stat(full_path)
+                            details.append(
+                                f"{full_path}: {stat.st_size} bytes, "
+                                f"modified {datetime.fromtimestamp(stat.st_mtime).isoformat()}"
+                            )
+                        except OSError:
+                            details.append(f"{full_path}: access denied")
+    return details
+
+
 def certificate_checks():
     certificate_targets = {
         "Browser certificates": ["/setup/cacerts/browser", "/setup/cacerts"],
@@ -400,7 +425,77 @@ def certificate_checks():
         )
     )
 
+    # Detailed certificate listing
+    cert_details = list_certificate_details()
+    checks.append(
+        make_check(
+            "certificates",
+            "Certificate details",
+            "ok" if cert_details else "warn",
+            f"Found {len(cert_details)} certificate files",
+            cert_details[:10]
+            if cert_details
+            else ["No certificate files found in expected locations."],
+            recommended_action="Review certificate files for validity and trust chain.",
+        )
+    )
+
     return checks
+
+
+def diagnostics_checks():
+    checks = []
+
+    # Environment variables
+    env_vars = {
+        k: v
+        for k, v in os.environ.items()
+        if any(
+            keyword in k.lower()
+            for keyword in ["proxy", "ssl", "cert", "ica", "citrix"]
+        )
+    }
+    checks.append(
+        make_check(
+            "diagnostics",
+            "Relevant environment variables",
+            "ok",
+            f"Found {len(env_vars)} relevant variables",
+            [f"{k}={v}" for k, v in list(env_vars.items())[:5]],
+            recommended_action="Review environment variables for proxy, SSL, and Citrix settings.",
+        )
+    )
+
+    # System logs snippet
+    log_snippet = get_system_log_snippet()
+    checks.append(
+        make_check(
+            "diagnostics",
+            "Recent system logs",
+            "ok" if log_snippet else "warn",
+            f"Retrieved {len(log_snippet)} log lines",
+            log_snippet[:5] if log_snippet else ["No system logs accessible."],
+            recommended_action="Check system logs for errors related to certificates or network.",
+        )
+    )
+
+    return checks
+
+
+def get_system_log_snippet():
+    log_paths = ["/var/log/syslog", "/var/log/messages", "/var/log/system.log"]
+    for path in log_paths:
+        if os.path.exists(path):
+            lines = read_file_lines(path, limit=20)
+            return [
+                line
+                for line in lines
+                if any(
+                    keyword in line.lower()
+                    for keyword in ["error", "fail", "cert", "ssl", "ica"]
+                )
+            ]
+    return []
 
 
 def citrix_checks():
@@ -599,6 +694,7 @@ def collect_status(selected_baseline=None):
     checks.extend(certificate_checks())
     checks.extend(citrix_checks())
     checks.extend(management_checks(detection))
+    checks.extend(diagnostics_checks())
     checks = apply_baseline(
         checks, detection, baseline, dns_info, route_info, proxy_hints
     )
