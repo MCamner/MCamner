@@ -25,6 +25,17 @@
       padding: 1rem;
       background: #fafafa;
     }
+    .meta {
+      margin: 1rem 0 1.5rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #f8f8f8;
+    }
+    .meta strong {
+      display: inline-block;
+      min-width: 110px;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -39,12 +50,19 @@
     th { background: #f5f5f5; }
     .PASS { color: #0a7a2f; font-weight: bold; }
     .FAIL { color: #b42318; font-weight: bold; }
+    .WARN { color: #b26a00; font-weight: bold; }
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
   </style>
 </head>
 <body>
   <h1>Client Readiness v2</h1>
   <p>Evaluation engine test view</p>
 
+  <div id="meta" class="meta"></div>
   <div id="summary" class="summary"></div>
 
   <h2>Results</h2>
@@ -66,10 +84,66 @@
 
   <script src="evaluator.js"></script>
   <script>
+    const LIVE_STATUS_URL = "http://127.0.0.1:38765/status";
+    const SAMPLE_DATA_URL = "sample-client-data.json";
+    const PROFILE_URL = "client-readiness-config.v2.json";
+
     async function loadJson(path) {
       const res = await fetch(path);
       if (!res.ok) throw new Error("Failed to load " + path);
       return res.json();
+    }
+
+    async function loadLiveData() {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 2500);
+
+      try {
+        const res = await fetch(LIVE_STATUS_URL, {
+          signal: controller.signal,
+          cache: "no-store"
+        });
+        clearTimeout(timeout);
+
+        if (!res.ok) {
+          throw new Error("Helper returned " + res.status);
+        }
+
+        const json = await res.json();
+        return {
+          source: "live-helper",
+          url: LIVE_STATUS_URL,
+          data: json
+        };
+      } catch (err) {
+        clearTimeout(timeout);
+        return null;
+      }
+    }
+
+    async function loadClientData() {
+      const live = await loadLiveData();
+      if (live) return live;
+
+      const sample = await loadJson(SAMPLE_DATA_URL);
+      return {
+        source: "sample-data",
+        url: SAMPLE_DATA_URL,
+        data: sample
+      };
+    }
+
+    function renderMeta(meta) {
+      const root = document.getElementById("meta");
+      const helperMeta = meta.data && meta.data.meta ? meta.data.meta : {};
+
+      root.innerHTML = `
+        <div><strong>Data source:</strong> ${meta.source}</div>
+        <div><strong>Location:</strong> ${meta.url}</div>
+        <div><strong>Platform:</strong> ${helperMeta.platform || "unknown"}</div>
+        <div><strong>Release:</strong> ${helperMeta.platform_release || "unknown"}</div>
+        <div><strong>Agent version:</strong> ${helperMeta.agent_version || "n/a"}</div>
+      `;
     }
 
     function renderSummary(summary) {
@@ -100,12 +174,18 @@
 
     async function main() {
       try {
-        const [profile, data] = await Promise.all([
-          loadJson("client-readiness-config.v2.json"),
-          loadJson("sample-client-data.json")
+        const [profile, clientPayload] = await Promise.all([
+          loadJson(PROFILE_URL),
+          loadClientData()
         ]);
 
-        const output = window.ClientReadinessEvaluator.evaluateProfile(profile, data);
+        renderMeta(clientPayload);
+
+        const output = window.ClientReadinessEvaluator.evaluateProfile(
+          profile,
+          clientPayload.data
+        );
+
         renderSummary(output.summary);
         renderResults(output.results);
       } catch (err) {
