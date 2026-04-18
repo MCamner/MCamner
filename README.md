@@ -275,33 +275,3 @@ Outside of tech:
 ## 🧩 Motto
 
 > Build things that work. Then make them impossible to break.
-
-## 🔥 Case Study
-
-Most architectures look right.
-Few are validated.
-
-Zephyr models a real enterprise setup — **macOS + Intune + Entra ID + on-prem AD** — and exposes hidden risks instantly.
-
-⚠️ Finds failure points
-🔐 Reveals trust gaps
-📐 Outputs summary + diagram in seconds
-
-👉 [View the full case](docs/case-macos-enterprise.md)
-
-![Zephyr demo](docs/demo.gif)
-
-## 🔥 Case Study
-
-Most architectures look right.
-Few are validated.
-
-Zephyr models a real enterprise setup — **macOS + Intune + Entra ID + on-prem AD** — and exposes hidden risks instantly.
-
-⚠️ Finds failure points
-🔐 Reveals trust gaps
-📐 Outputs summary + diagram in seconds
-
-👉 [View the full case](docs/case-macos-enterprise.md)
-
-![Zephyr demo](docs/demo.gif)
