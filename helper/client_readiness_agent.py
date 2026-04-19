@@ -493,6 +493,32 @@ def run_subprocess(cmd: list, timeout: int = 10) -> str:
         return ""
 
 
+WATCHED_PROCESSES = [
+    "pcscd",
+    "wfica",
+    "selfservice",
+    "AuthManagerDaemon",
+    "storebrowse",
+    "ctxcwahelper",
+    "igel",
+    "rmagent",
+]
+
+
+def collect_processes() -> Dict[str, Any]:
+    running: List[str] = []
+    missing: List[str] = []
+
+    for name in WATCHED_PROCESSES:
+        out = run_subprocess(["pgrep", "-x", name], timeout=5)
+        if out:
+            running.append(name)
+        else:
+            missing.append(name)
+
+    return {"running": running, "missing": missing}
+
+
 def collect_smartcard() -> Dict[str, Any]:
     system = platform.system()
     result: Dict[str, Any] = {
@@ -858,6 +884,7 @@ def collect_status(selected_baseline=None):
         "categories": categories,
         "checks": checks,
         "smartcard": collect_smartcard(),
+        "processes": collect_processes(),
     }
 
 

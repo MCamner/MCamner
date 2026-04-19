@@ -184,6 +184,32 @@ def collect_citrix() -> dict[str, Any]:
     }
 
 
+WATCHED_PROCESSES = [
+    "pcscd",
+    "wfica",
+    "selfservice",
+    "AuthManagerDaemon",
+    "storebrowse",
+    "ctxcwahelper",
+    "igel",
+    "rmagent",
+]
+
+
+def collect_processes() -> dict[str, Any]:
+    running: list[str] = []
+    missing: list[str] = []
+
+    for name in WATCHED_PROCESSES:
+        out = run_command(["pgrep", "-x", name], timeout=5)
+        if out:
+            running.append(name)
+        else:
+            missing.append(name)
+
+    return {"running": running, "missing": missing}
+
+
 def collect_smartcard() -> dict[str, Any]:
     system = platform.system()
     result: dict[str, Any] = {
@@ -281,6 +307,7 @@ def build_payload(profile_name: str) -> dict[str, Any]:
         "citrix": collect_citrix(),
         "network": collect_network(),
         "smartcard": collect_smartcard(),
+        "processes": collect_processes(),
     }
 
 
