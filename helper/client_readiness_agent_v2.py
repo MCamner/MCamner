@@ -52,6 +52,10 @@ def collect_capabilities() -> list[str]:
         "citrix.version",
         "certificates.installed",
         "certificates.details",
+        "smartcard.pcscd_running",
+        "smartcard.readers",
+        "smartcard.usb_devices",
+        "smartcard.opensc_readers",
         "meta.profile",
         "meta.baseline_version",
     ]
@@ -180,6 +184,77 @@ def collect_citrix() -> dict[str, Any]:
     }
 
 
+def collect_smartcard() -> dict[str, Any]:
+    system = platform.system()
+    result: dict[str, Any] = {
+        "pcscd_running": None,
+        "readers": [],
+        "usb_devices": [],
+        "card_present": None,
+        "opensc_readers": [],
+    }
+
+    if system == "Linux":
+        # PC/SC daemon status
+        if command_exists("systemctl"):
+            status_out = run_command(["systemctl", "is-active", "pcscd"])
+            result["pcscd_running"] = status_out == "active"
+        elif command_exists("service"):
+            status_out = run_command(["service", "pcscd", "status"])
+            result["pcscd_running"] = "running" in status_out.lower()
+
+        # Readers via pcsc_scan (non-interactive, list only)
+        if command_exists("pcsc_scan"):
+            readers_out = run_command(["pcsc_scan", "-r"], timeout=5)
+            if readers_out:
+                result["readers"] = [
+                    line.strip()
+                    for line in readers_out.splitlines()
+                    if line.strip() and not line.startswith("PC/SC device scanner")
+                ]
+
+        # USB devices (filter for common smartcard reader vendors)
+        if command_exists("lsusb"):
+            lsusb_out = run_command(["lsusb"])
+            if lsusb_out:
+                result["usb_devices"] = [
+                    line.strip() for line in lsusb_out.splitlines() if line.strip()
+                ]
+
+        # OpenSC readers
+        if command_exists("opensc-tool"):
+            opensc_out = run_command(["opensc-tool", "--list-readers"], timeout=5)
+            if opensc_out:
+                result["opensc_readers"] = [
+                    line.strip() for line in opensc_out.splitlines() if line.strip()
+                ]
+
+    elif system == "Darwin":
+        # macOS: system_profiler gives full smartcard info
+        if command_exists("system_profiler"):
+            sp_out = run_command(
+                ["system_profiler", "SPSmartCardsDataType"], timeout=15
+            )
+            if sp_out:
+                result["system_profiler"] = sp_out
+
+        # sc_auth: smartcard-to-user pairings
+        if command_exists("sc_auth"):
+            sc_out = run_command(["sc_auth", "list"], timeout=5)
+            if sc_out:
+                result["sc_auth_list"] = sc_out
+
+        # OpenSC readers
+        if command_exists("opensc-tool"):
+            opensc_out = run_command(["opensc-tool", "--list-readers"], timeout=5)
+            if opensc_out:
+                result["opensc_readers"] = [
+                    line.strip() for line in opensc_out.splitlines() if line.strip()
+                ]
+
+    return result
+
+
 def collect_network() -> dict[str, Any]:
     local_ips: list[str] = []
 
@@ -205,6 +280,7 @@ def build_payload(profile_name: str) -> dict[str, Any]:
         "certificates": collect_certificates(),
         "citrix": collect_citrix(),
         "network": collect_network(),
+        "smartcard": collect_smartcard(),
     }
 
 
