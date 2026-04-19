@@ -5,7 +5,9 @@ import json
 import locale
 import os
 import platform
+import shutil
 import socket
+import subprocess
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Dict, List
@@ -181,8 +183,6 @@ def parse_proc_route():
 
 def check_default_route_macos():
     try:
-        import subprocess
-
         result = subprocess.run(["netstat", "-rn"], capture_output=True, text=True)
         has_default = "default" in result.stdout
         return {"available": True, "has_default_route": has_default}
@@ -446,8 +446,6 @@ def certificate_checks():
     # Smartcard check
     pcsc_running = False
     try:
-        import subprocess
-
         result = subprocess.run(["pgrep", "pcscd"], capture_output=True, text=True)
         pcsc_running = result.returncode == 0
     except Exception:
@@ -479,6 +477,84 @@ def certificate_checks():
     )
 
     return checks
+
+
+def command_exists(name: str) -> bool:
+    return shutil.which(name) is not None
+
+
+def run_subprocess(cmd: list, timeout: int = 10) -> str:
+    try:
+        result = subprocess.run(
+            cmd, capture_output=True, text=True, timeout=timeout, check=False
+        )
+        return (result.stdout or "").strip()
+    except Exception:
+        return ""
+
+
+def collect_smartcard() -> Dict[str, Any]:
+    system = platform.system()
+    result: Dict[str, Any] = {
+        "pcscd_running": None,
+        "readers": [],
+        "usb_devices": [],
+        "card_present": None,
+        "opensc_readers": [],
+    }
+
+    if system == "Linux":
+        if command_exists("systemctl"):
+            out = run_subprocess(["systemctl", "is-active", "pcscd"])
+            result["pcscd_running"] = out == "active"
+        elif command_exists("service"):
+            out = run_subprocess(["service", "pcscd", "status"])
+            result["pcscd_running"] = "running" in out.lower()
+
+        if command_exists("pcsc_scan"):
+            out = run_subprocess(["pcsc_scan", "-r"], timeout=5)
+            if out:
+                result["readers"] = [
+                    line.strip()
+                    for line in out.splitlines()
+                    if line.strip() and not line.startswith("PC/SC device scanner")
+                ]
+
+        if command_exists("lsusb"):
+            out = run_subprocess(["lsusb"])
+            if out:
+                result["usb_devices"] = [
+                    line.strip() for line in out.splitlines() if line.strip()
+                ]
+
+        if command_exists("opensc-tool"):
+            out = run_subprocess(["opensc-tool", "--list-readers"], timeout=5)
+            if out:
+                result["opensc_readers"] = [
+                    line.strip() for line in out.splitlines() if line.strip()
+                ]
+
+    elif system == "Darwin":
+        if command_exists("system_profiler"):
+            out = run_subprocess(
+                ["system_profiler", "SPSmartCardsDataType"], timeout=15
+            )
+            if out:
+                result["system_profiler"] = out
+
+        if command_exists("sc_auth"):
+            out = run_subprocess(["sc_auth", "list"], timeout=5)
+            if out:
+                result["sc_auth_list"] = out
+
+        if command_exists("opensc-tool"):
+            out = run_subprocess(["opensc-tool", "--list-readers"], timeout=5)
+            if out:
+                result["opensc_readers"] = [
+                    line.strip() for line in out.splitlines() if line.strip()
+                ]
+
+    return result
 
 
 def diagnostics_checks():
@@ -781,6 +857,7 @@ def collect_status(selected_baseline=None):
         "overall_status": overall,
         "categories": categories,
         "checks": checks,
+        "smartcard": collect_smartcard(),
     }
 
 
