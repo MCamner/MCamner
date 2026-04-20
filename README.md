@@ -21,9 +21,10 @@ Checks browser signals, network connectivity, certificates, and Citrix readiness
 
 ### Quick Start
 
-1. Open `docs/index.html` in your browser.
-2. Run the Python agent: `python3 helper/client_readiness_agent.py`
-3. Perform checks on the page.
+1. Open [docs/index.html](docs/index.html) in your browser.
+2. Perform checks on [docs/client-readiness-check.html](docs/client-readiness-check.html).
+3. Try the multi-profile version in [docs/client-readiness-v2.html](docs/client-readiness-v2.html).
+4. Optional host-level data: run `python3 helper/client_readiness_agent.py`.
 
 ---
 
