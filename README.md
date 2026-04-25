@@ -1,278 +1,119 @@
-# 👋 Hi, I'm Mattias Camner
+# Mattias Camner
 
-I design and build real-world infrastructure systems — where **security, usability, and operations actually work together**.
+> Infrastructure / Platform Architect  
+> Building practical systems where infrastructure, automation, and usability work together.
 
-Focused on **EUC, Zero Trust, and automation in complex environments**.
+I design and prototype tools for structured workflows, endpoint visibility, client readiness, and architecture validation.
 
----
+My work is centered around one idea:
 
-## 🚀 Featured: Client Readiness Check
-
-A browser-based client readiness validation tool for endpoint environments.
-
-<p align="center">
-  <img src="https://img.shields.io/badge/status-active-success" />
-  <img src="https://img.shields.io/badge/type-Web%20App-blue" />
-  <img src="https://img.shields.io/badge/platform-Cross--platform-lightgrey" />
-  <img src="https://img.shields.io/badge/focus-Validation-orange" />
-</p>
-
-Checks browser signals, network connectivity, certificates, and Citrix readiness. Includes a Python helper agent for host-level data.
-
-### Quick Start
-
-1. Open [docs/index.html](docs/index.html) in your browser.
-2. Perform checks on [docs/client-readiness-check.html](docs/client-readiness-check.html).
-3. Try the multi-profile version in [docs/client-readiness-v2.html](docs/client-readiness-v2.html).
-4. Optional host-level data: run `python3 helper/client_readiness_agent.py`.
-
----
-
-## 🚀 Featured: macos-scripts
-
-<p align="center">
-  <img src="docs/mqlaunch-demo.png" alt="mqlaunch demo" width="800"/>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/status-active-success" />
-  <img src="https://img.shields.io/badge/type-CLI-blue" />
-  <img src="https://img.shields.io/badge/platform-macOS-lightgrey" />
-  <img src="https://img.shields.io/badge/focus-automation-orange" />
-</p>
-
-A practical macOS toolkit built around **automation, workflows, and terminal-driven operations**.
-
-At the core is:
-
-> **mqlaunch — a modular CLI that turns scattered terminal workflows into one structured system**
-
----
-
-## 💡 TL;DR
-
-I build systems that:
-
-* reduce operational friction
-* improve security without breaking usability
-* scale in real-world environments
-
-If you work with **EUC, infrastructure, or secure digital workplaces — we should talk.**
-
----
-
-## 🧠 What I Actually Do
-
-I work at the intersection of:
-
-* 🏗️ Endpoint & Infrastructure Architecture
-* 🔐 Security, Identity & Zero Trust
-* ⚙️ Automation & System Integration
-
-My focus is simple:
-
-> Turn complex environments into systems that are **usable, secure, and operationally realistic**
-
----
-
-## 🧩 Architecture
-
-<p align="center">
-  <img src="docs/macos-scripts-architecture.png" alt="macos-scripts architecture" width="900"/>
-</p>
-
-**What this means**
-
-* `mqlaunch` is the single entrypoint
-* workflows provide structured execution
-* scripts stay modular underneath
-* the system remains extensible without becoming chaotic
-
----
-
-## ⚡ Quick Start
-
-```bash
-git clone https://github.com/MCamner/macos-scripts
-cd macos-scripts
-./install.sh
-mqlaunch
+```text
+tools → workflows → validation → better systems
 ```
 
 ---
 
-## 🎬 Example
+## Focus
 
-```bash
-$ mqlaunch
+- Infrastructure and platform architecture
+- macOS and endpoint management
+- Client readiness and enterprise validation
+- CLI workflows and automation
+- Systems thinking and architecture modeling
 
-WORKFLOWS
-  1. Dev          2. Git
-  3. Network      4. Performance
-  5. Tools        6. System
+---
+
+## Featured projects
+
+### macos-scripts
+
+A modular CLI for structured terminal workflows, automation, and system tools on macOS.
+
+```text
+one command → structured workflows → repeatable execution
 ```
 
-Instead of:
+Repo: https://github.com/MCamner/macos-scripts  
+Site: https://mcamner.github.io/macos-scripts/
+
+---
+
+### Design-Prototype
+
+Browser-based prototypes for client readiness, endpoint visibility, macOS compliance, fleet views, and certificate expiry risk.
+
+Includes:
+
+- Client Readiness Dashboard
+- Fleet Command Center
+- macOS Enterprise Dashboard
+- Certificate Expiry Timeline
+- MQ Mirror — GUI actions → terminal command equivalents
+
+Repo: https://github.com/MCamner/Design-Prototype  
+Site: https://mcamner.github.io/Design-Prototype/
+
+---
+
+### MQ Mirror
+
+A macOS command-line prototype that maps GUI actions to equivalent terminal commands.
 
 ```bash
-git pull --rebase
-npm run build
-./scripts/check.sh
+tools/mqmirror/mqmirror network
+tools/mqmirror/mqmirror inspect
+tools/mqmirror/mqmirror watch --interval 1 --compact
 ```
 
-You run:
+Part of: https://github.com/MCamner/Design-Prototype/tree/main/tools/mqmirror
 
-```bash
-mqlaunch dev
+---
+
+### mcamner-journal
+
+A command-line inspired journal on systems, technology, and thinking.
+
+```text
+Less publishing. More thinking.
+```
+
+Repo: https://github.com/MCamner/mcamner-journal  
+Site: https://mcamner.github.io/mcamner-journal/
+
+---
+
+### atlas-one
+
+Local prompt routing studio for structured AI workflows and execution handoff.
+
+Repo: https://github.com/MCamner/atlas-one
+
+---
+
+### zephyr-workbench
+
+Executable architecture workbench — model, validate, and visualize infrastructure systems as code.
+
+Repo: https://github.com/MCamner/zephyr-workbench
+
+---
+
+## Direction
+
+Most environments do not lack tools.
+
+They lack structure.
+
+I build small, practical systems that make execution clearer:
+
+```text
+observe → model → automate → validate
 ```
 
 ---
 
-## 🧠 Why This Matters
+## Links
 
-Most environments don’t fail because of missing tools.
-
-They fail because:
-
-* tools are fragmented
-* workflows are unclear
-* execution is inconsistent
-
-This project turns:
-
-> **useful chaos → usable systems**
-
----
-
-## 📌 Case: macos-scripts
-
-### Problem
-
-* Scattered shell scripts
-* Low discoverability
-* High friction in daily workflows
-
-### Constraints
-
-* Real-world environments
-* Mixed tooling
-* Need for safe execution
-
-### Solution
-
-* Single modular CLI (`mqlaunch`)
-* Structured workflows
-* Dry-run + rollback support
-
-### Outcome
-
-* Reduced operational friction
-* Improved consistency
-* Foundation for scalable automation
-
-🔗 Full case:
-https://github.com/MCamner/MCamner/blob/main/cases/macos-scripts.md
-
----
-
-## 🧪 Client Readiness Check (IGEL / Thin Clients)
-
-A browser-based readiness check designed for **locked-down environments**.
-
-### Model
-
-* Browser → baseline validation
-* Local helper → deep validation
-
-### What it validates
-
-**Browser-only:**
-
-* Display, locale, connectivity
-
-**With helper:**
-
-* Certificates
-* Smartcards
-* Citrix Workspace
-
-👉 Built and tested on real IGEL OS 12 clients.
-
-🔗 Case:
-https://github.com/MCamner/MCamner/blob/main/cases/client-readiness-check.md
-
----
-
-## 🧭 How I Work
-
-* Reduce complexity — don’t add layers
-* Build for real operations, not slides
-* Balance security with usability
-* Design systems that survive production
-
----
-
-## 🎯 Who This Is For
-
-* IT Architects
-* Endpoint / EUC Engineers
-* Platform / Infrastructure Engineers
-* Anyone working with complex operational environments
-
----
-
-## 🛠️ Tech & Tools
-
-* Citrix / EUC Architecture
-* IGEL OS / Endpoint Management
-* Active Directory / Identity
-* SCCM / Intune
-* VMware
-* Windows / Linux
-* Zero Trust Architecture
-* Automation & Scripting
-
----
-
-## 📊 GitHub Philosophy
-
-I use GitHub as a **working system**, not just a portfolio.
-
-* Real problems
-* Real constraints
-* Real solutions
-
----
-
-## 📚 Cases
-
-* macos-scripts — modular CLI system
-* secure-workplace — usable security
-* identity-flow — stronger auth without breaking UX
-* endpoint-standardization — reducing complexity
-
-More coming.
-
----
-
-## 🌐 Connect
-
-* https://mcamner.com
-* https://blackiris.se
-* https://www.linkedin.com/in/mattias-camner-75958022
-
----
-
-## ⚡ Edge
-
-Outside of tech:
-
-* 🥋 Brazilian Jiu-Jitsu
-* 🎸 Guitar (Hendrix / metal)
-* 🧠 Psychology & systems thinking
-
----
-
-## 🧩 Motto
-
-> Build things that work. Then make them impossible to break.
+- Website: https://mcamner.com
+- LinkedIn: https://www.linkedin.com/in/mattias-camner-75958022
+- Art platform: https://blackiris.se
