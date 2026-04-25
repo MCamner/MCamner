@@ -2,37 +2,28 @@
 
 I design and build real-world infrastructure systems — where **security, usability, and operations actually work together**.
 
-Focused on **EUC, Zero Trust, and automation in complex environments**.
+Focused on **EUC, Zero Trust, endpoint platforms, and automation in complex environments**.
 
 ---
 
-## 🚀 Featured: Client Readiness Check
+## 💡 TL;DR
 
-A browser-based client readiness validation tool for endpoint environments.
+I build systems that:
 
-<p align="center">
-  <img src="https://img.shields.io/badge/status-active-success" />
-  <img src="https://img.shields.io/badge/type-Web%20App-blue" />
-  <img src="https://img.shields.io/badge/platform-Cross--platform-lightgrey" />
-  <img src="https://img.shields.io/badge/focus-Validation-orange" />
-</p>
+- reduce operational friction
+- improve security without breaking usability
+- make complex environments easier to operate
+- turn scattered tools into structured workflows
 
-Checks browser signals, network connectivity, certificates, and Citrix readiness. Includes a Python helper agent for host-level data.
-
-### Quick Start
-
-1. Open [docs/index.html](docs/index.html) in your browser.
-2. Perform checks on [docs/client-readiness-check.html](docs/client-readiness-check.html).
-3. Try the multi-profile version in [docs/client-readiness-v2.html](docs/client-readiness-v2.html).
-4. Optional host-level data: run `python3 helper/client_readiness_agent.py`.
+```text
+useful chaos → usable systems
+```
 
 ---
 
 ## 🚀 Featured: macos-scripts
 
-<p align="center">
-  <img src="docs/mqlaunch-demo.png" alt="mqlaunch demo" width="800"/>
-</p>
+A practical macOS toolkit built around automation, workflows, and terminal-driven operations.
 
 <p align="center">
   <img src="https://img.shields.io/badge/status-active-success" />
@@ -41,56 +32,19 @@ Checks browser signals, network connectivity, certificates, and Citrix readiness
   <img src="https://img.shields.io/badge/focus-automation-orange" />
 </p>
 
-A practical macOS toolkit built around **automation, workflows, and terminal-driven operations**.
+<p align="center">
+  <img src="docs/mqlaunch-demo.png" alt="mqlaunch demo" />
+</p>
 
 At the core is:
 
-> **mqlaunch — a modular CLI that turns scattered terminal workflows into one structured system**
+> **mqlaunch** — a modular command surface that turns scattered terminal workflows into one structured system.
 
----
+```text
+one command → structured workflows → repeatable execution
+```
 
-## 💡 TL;DR
-
-I build systems that:
-
-* reduce operational friction
-* improve security without breaking usability
-* scale in real-world environments
-
-If you work with **EUC, infrastructure, or secure digital workplaces — we should talk.**
-
----
-
-## 🧠 What I Actually Do
-
-I work at the intersection of:
-
-* 🏗️ Endpoint & Infrastructure Architecture
-* 🔐 Security, Identity & Zero Trust
-* ⚙️ Automation & System Integration
-
-My focus is simple:
-
-> Turn complex environments into systems that are **usable, secure, and operationally realistic**
-
----
-
-## 🧩 Architecture
-
-<p align="center">
-  <img src="docs/macos-scripts-architecture.png" alt="macos-scripts architecture" width="900"/>
-</p>
-
-**What this means**
-
-* `mqlaunch` is the single entrypoint
-* workflows provide structured execution
-* scripts stay modular underneath
-* the system remains extensible without becoming chaotic
-
----
-
-## ⚡ Quick Start
+### Quick Start
 
 ```bash
 git clone https://github.com/MCamner/macos-scripts
@@ -99,11 +53,9 @@ cd macos-scripts
 mqlaunch
 ```
 
----
+### Example
 
-## 🎬 Example
-
-```bash
+```text
 $ mqlaunch
 
 WORKFLOWS
@@ -112,154 +64,175 @@ WORKFLOWS
   5. Tools        6. System
 ```
 
-Instead of:
+Instead of remembering scattered commands, you run structured workflows.
+
+Repo: https://github.com/MCamner/macos-scripts  
+Site: https://mcamner.github.io/macos-scripts/
+
+---
+
+## 🧩 Architecture
+
+<p align="center">
+  <img src="docs/macos-scripts-architecture.png" alt="macos-scripts architecture" />
+</p>
+
+What this means:
+
+- `mqlaunch` is the single entrypoint
+- workflows provide structured execution
+- scripts stay modular underneath
+- the system remains extensible without becoming chaotic
+
+---
+
+## 🧪 Design-Prototype
+
+Browser-based prototypes for client readiness, endpoint visibility, macOS compliance, fleet views, certificate expiry risk, and enterprise validation workflows.
+
+<p align="center">
+  <img src="https://img.shields.io/badge/status-active-success" />
+  <img src="https://img.shields.io/badge/type-Web%20Prototype-blue" />
+  <img src="https://img.shields.io/badge/focus-Endpoint%20Visibility-orange" />
+</p>
+
+Includes:
+
+- Client Readiness Dashboard
+- Fleet Command Center
+- macOS Enterprise Dashboard
+- Certificate Expiry Timeline
+- MQ Mirror — GUI actions → terminal command equivalents
+
+Repo: https://github.com/MCamner/Design-Prototype  
+Site: https://mcamner.github.io/Design-Prototype/
+
+---
+
+## 🪞 MQ Mirror
+
+A macOS command-line prototype that maps GUI actions to equivalent terminal commands.
+
+Example:
 
 ```bash
-git pull --rebase
-npm run build
-./scripts/check.sh
+tools/mqmirror/mqmirror network
+tools/mqmirror/mqmirror inspect
+tools/mqmirror/mqmirror watch --interval 1 --compact --ignore-terminal
 ```
 
-You run:
+The idea:
 
-```bash
-mqlaunch dev
+```text
+GUI action → CLI equivalent → better operational understanding
 ```
 
----
-
-## 🧠 Why This Matters
-
-Most environments don’t fail because of missing tools.
-
-They fail because:
-
-* tools are fragmented
-* workflows are unclear
-* execution is inconsistent
-
-This project turns:
-
-> **useful chaos → usable systems**
+Part of: https://github.com/MCamner/Design-Prototype/tree/main/tools/mqmirror
 
 ---
 
-## 📌 Case: macos-scripts
+## 🧠 What I Actually Do
 
-### Problem
+I work at the intersection of:
 
-* Scattered shell scripts
-* Low discoverability
-* High friction in daily workflows
+- 🏗️ Endpoint & Infrastructure Architecture
+- 🔐 Security, Identity & Zero Trust
+- ⚙️ Automation & System Integration
+- 🧪 Client Readiness & Validation
+- 🧭 Systems Thinking
 
-### Constraints
+My focus is simple:
 
-* Real-world environments
-* Mixed tooling
-* Need for safe execution
-
-### Solution
-
-* Single modular CLI (`mqlaunch`)
-* Structured workflows
-* Dry-run + rollback support
-
-### Outcome
-
-* Reduced operational friction
-* Improved consistency
-* Foundation for scalable automation
-
-🔗 Full case:
-https://github.com/MCamner/MCamner/blob/main/cases/macos-scripts.md
+> Turn complex environments into systems that are usable, secure, and operationally realistic.
 
 ---
 
-## 🧪 Client Readiness Check (IGEL / Thin Clients)
+## 📌 Case Thinking
 
-A browser-based readiness check designed for **locked-down environments**.
+### macos-scripts
 
-### Model
+**Problem**
 
-* Browser → baseline validation
-* Local helper → deep validation
+- scattered shell scripts
+- low discoverability
+- inconsistent execution
 
-### What it validates
+**Solution**
 
-**Browser-only:**
+- single modular CLI
+- structured workflows
+- repeatable execution patterns
 
-* Display, locale, connectivity
+**Outcome**
 
-**With helper:**
-
-* Certificates
-* Smartcards
-* Citrix Workspace
-
-👉 Built and tested on real IGEL OS 12 clients.
-
-🔗 Case:
-https://github.com/MCamner/MCamner/blob/main/cases/client-readiness-check.md
+- reduced operational friction
+- better consistency
+- foundation for scalable automation
 
 ---
 
-## 🧭 How I Work
+### Client Readiness / Endpoint Validation
 
-* Reduce complexity — don’t add layers
-* Build for real operations, not slides
-* Balance security with usability
-* Design systems that survive production
+**Problem**
 
----
+Enterprise clients often fail because readiness is assumed, not verified.
 
-## 🎯 Who This Is For
+**Solution**
 
-* IT Architects
-* Endpoint / EUC Engineers
-* Platform / Infrastructure Engineers
-* Anyone working with complex operational environments
+Browser-based and helper-assisted validation for endpoint signals such as:
+
+- connectivity
+- certificates
+- local configuration
+- Citrix/thin-client readiness
+- macOS compliance signals
+
+**Outcome**
+
+A practical prototype for validating whether a client is actually ready for enterprise workflows.
 
 ---
 
 ## 🛠️ Tech & Tools
 
-* Citrix / EUC Architecture
-* IGEL OS / Endpoint Management
-* Active Directory / Identity
-* SCCM / Intune
-* VMware
-* Windows / Linux
-* Zero Trust Architecture
-* Automation & Scripting
+- Citrix / EUC Architecture
+- IGEL OS / Endpoint Management
+- macOS Enterprise Management
+- Active Directory / Identity
+- SCCM / Intune
+- VMware
+- Windows / Linux
+- Zero Trust Architecture
+- Automation & Scripting
+- Python / Bash / Zsh
 
 ---
 
 ## 📊 GitHub Philosophy
 
-I use GitHub as a **working system**, not just a portfolio.
+I use GitHub as a working system, not just a portfolio.
 
-* Real problems
-* Real constraints
-* Real solutions
+```text
+real problems → real constraints → practical prototypes
+```
 
 ---
 
-## 📚 Cases
+## 🧭 How I Work
 
-* macos-scripts — modular CLI system
-* secure-workplace — usable security
-* identity-flow — stronger auth without breaking UX
-* endpoint-standardization — reducing complexity
-
-More coming.
+- Reduce complexity — don’t add layers
+- Build for real operations, not slides
+- Balance security with usability
+- Design systems that survive production
+- Make workflows discoverable and repeatable
 
 ---
 
 ## 🌐 Connect
 
-* https://mcamner.com
-* https://blackiris.se
-* https://www.linkedin.com/in/mattias-camner-75958022
+- Website: https://mcamner.com
+- LinkedIn: https://www.linkedin.com/in/mattias-camner-75958022
+- Art platform: https://blackiris.se
 
 ---
 
@@ -267,9 +240,10 @@ More coming.
 
 Outside of tech:
 
-* 🥋 Brazilian Jiu-Jitsu
-* 🎸 Guitar (Hendrix / metal)
-* 🧠 Psychology & systems thinking
+- 🥋 Brazilian Jiu-Jitsu
+- 🎸 Guitar
+- 🧠 Psychology & systems thinking
+- 🎨 Art and visual culture
 
 ---
 
