@@ -8,12 +8,7 @@ Focused on **EUC, Zero Trust, endpoint platforms, and automation in complex envi
 
 ## 💡 TL;DR
 
-I build systems that:
-
-- reduce operational friction
-- improve security without breaking usability
-- make complex environments easier to operate
-- turn scattered tools into structured workflows
+I build systems that reduce operational friction, improve security without breaking usability, and turn scattered tools into structured workflows.
 
 ```text
 useful chaos → usable systems
@@ -44,28 +39,6 @@ At the core is:
 one command → structured workflows → repeatable execution
 ```
 
-### Quick Start
-
-```bash
-git clone https://github.com/MCamner/macos-scripts
-cd macos-scripts
-./install.sh
-mqlaunch
-```
-
-### Example
-
-```text
-$ mqlaunch
-
-WORKFLOWS
-  1. Dev          2. Git
-  3. Network      4. Performance
-  5. Tools        6. System
-```
-
-Instead of remembering scattered commands, you run structured workflows.
-
 Repo: https://github.com/MCamner/macos-scripts  
 Site: https://mcamner.github.io/macos-scripts/
 
@@ -76,8 +49,6 @@ Site: https://mcamner.github.io/macos-scripts/
 <p align="center">
   <img src="docs/macos-scripts-architecture.png" alt="macos-scripts architecture" />
 </p>
-
-What this means:
 
 - `mqlaunch` is the single entrypoint
 - workflows provide structured execution
@@ -90,19 +61,13 @@ What this means:
 
 Browser-based prototypes for client readiness, endpoint visibility, macOS compliance, fleet views, certificate expiry risk, and enterprise validation workflows.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/status-active-success" />
-  <img src="https://img.shields.io/badge/type-Web%20Prototype-blue" />
-  <img src="https://img.shields.io/badge/focus-Endpoint%20Visibility-orange" />
-</p>
-
 Includes:
 
 - Client Readiness Dashboard
 - Fleet Command Center
 - macOS Enterprise Dashboard
 - Certificate Expiry Timeline
-- MQ Mirror — GUI actions → terminal command equivalents
+- MQ Mirror
 
 Repo: https://github.com/MCamner/Design-Prototype  
 Site: https://mcamner.github.io/Design-Prototype/
@@ -111,17 +76,13 @@ Site: https://mcamner.github.io/Design-Prototype/
 
 ## 🪞 MQ Mirror
 
-A macOS command-line prototype that maps GUI actions to equivalent terminal commands.
-
-Example:
+MQ Mirror translates macOS GUI actions into terminal command equivalents — helping operators learn, document, and execute faster.
 
 ```bash
 tools/mqmirror/mqmirror network
 tools/mqmirror/mqmirror inspect
 tools/mqmirror/mqmirror watch --interval 1 --compact --ignore-terminal
 ```
-
-The idea:
 
 ```text
 GUI action → CLI equivalent → better operational understanding
@@ -151,60 +112,25 @@ My focus is simple:
 
 ### macos-scripts
 
-**Problem**
-
-- scattered shell scripts
-- low discoverability
-- inconsistent execution
-
-**Solution**
-
-- single modular CLI
-- structured workflows
-- repeatable execution patterns
-
-**Outcome**
-
-- reduced operational friction
-- better consistency
-- foundation for scalable automation
-
----
+**Problem:** scattered shell scripts, low discoverability, inconsistent execution  
+**Solution:** one modular command surface with structured workflows  
+**Outcome:** repeatable execution and reduced operational friction
 
 ### Client Readiness / Endpoint Validation
 
-**Problem**
-
-Enterprise clients often fail because readiness is assumed, not verified.
-
-**Solution**
-
-Browser-based and helper-assisted validation for endpoint signals such as:
-
-- connectivity
-- certificates
-- local configuration
-- Citrix/thin-client readiness
-- macOS compliance signals
-
-**Outcome**
-
-A practical prototype for validating whether a client is actually ready for enterprise workflows.
+**Problem:** enterprise clients often fail because readiness is assumed, not verified  
+**Solution:** browser-based and helper-assisted validation of endpoint signals  
+**Outcome:** practical visibility into whether a client is actually ready for enterprise workflows
 
 ---
 
 ## 🛠️ Tech & Tools
 
-- Citrix / EUC Architecture
-- IGEL OS / Endpoint Management
-- macOS Enterprise Management
-- Active Directory / Identity
-- SCCM / Intune
-- VMware
-- Windows / Linux
-- Zero Trust Architecture
-- Automation & Scripting
-- Python / Bash / Zsh
+**Endpoint & EUC:** Citrix, IGEL OS, Intune, SCCM  
+**Infrastructure:** Active Directory, VMware, Windows, Linux  
+**Security:** Zero Trust, certificates, identity, access patterns  
+**Automation:** Python, Bash, Zsh, CLI workflows  
+**Architecture:** client readiness, validation, structured systems
 
 ---
 
@@ -223,7 +149,6 @@ real problems → real constraints → practical prototypes
 - Reduce complexity — don’t add layers
 - Build for real operations, not slides
 - Balance security with usability
-- Design systems that survive production
 - Make workflows discoverable and repeatable
 
 ---
@@ -233,17 +158,6 @@ real problems → real constraints → practical prototypes
 - Website: https://mcamner.com
 - LinkedIn: https://www.linkedin.com/in/mattias-camner-75958022
 - Art platform: https://blackiris.se
-
----
-
-## ⚡ Edge
-
-Outside of tech:
-
-- 🥋 Brazilian Jiu-Jitsu
-- 🎸 Guitar
-- 🧠 Psychology & systems thinking
-- 🎨 Art and visual culture
 
 ---
 
