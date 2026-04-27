@@ -47,6 +47,22 @@
       font-size: 16px;
     }
 
+    h2 {
+      margin: 32px 0 12px;
+      font-size: 22px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #68777d;
+      line-height: 1.7;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
     .actions {
       display: flex;
       flex-wrap: wrap;
@@ -72,6 +88,29 @@
     .button.secondary {
       background: #e9ece8;
       color: #1f2a2e;
+    }
+
+    .tool-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .tool-list a {
+      display: block;
+      padding: 14px 16px;
+      border: 1px solid #d8d0c4;
+      border-radius: 12px;
+      background: #fcfaf5;
+      text-decoration: none;
+    }
+
+    .tool-list span {
+      display: block;
+      margin-top: 5px;
+      color: #68777d;
+      font-weight: 400;
+      line-height: 1.5;
     }
   </style>
   <script type="application/ld+json">
@@ -104,6 +143,26 @@
     <div class="actions">
       <a class="button" href="./client-readiness-check.html">Open Client Readiness Check</a>
       <a class="button secondary" href="./client-readiness-v2.html">Open Diagnostics v2</a>
+    </div>
+
+    <h2>Endpoint validation focus</h2>
+    <ul>
+      <li>Client readiness checks for browser-visible endpoint signals.</li>
+      <li>IGEL OS 12 and eLux 7 baseline validation for enterprise clients.</li>
+      <li>Citrix access readiness checks for protocol, display, locale, timezone, and endpoint reachability.</li>
+      <li>Support-friendly reporting for operations teams troubleshooting client access issues.</li>
+    </ul>
+
+    <h2>Available tools</h2>
+    <div class="tool-list">
+      <a href="./client-readiness-check.html">
+        Client Readiness Check
+        <span>Interactive endpoint validation for IGEL, eLux, Citrix, secure browser context, display requirements, and support report generation.</span>
+      </a>
+      <a href="./client-readiness-v2.html">
+        Client Readiness Diagnostics v2
+        <span>Multi-profile diagnostics using live helper data, saved client data, and sample fallback data for readiness review.</span>
+      </a>
     </div>
   </main>
 </body>
