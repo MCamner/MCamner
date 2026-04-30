@@ -68,6 +68,7 @@ Includes:
 - macOS Enterprise Dashboard
 - Certificate Expiry Timeline
 - MQ Mirror
+- MQ Client Optimizer
 
 Repo: https://github.com/MCamner/Design-Prototype  
 Site: https://mcamner.github.io/Design-Prototype/
@@ -89,6 +90,25 @@ GUI action → CLI equivalent → better operational understanding
 ```
 
 Part of: https://github.com/MCamner/Design-Prototype/tree/main/tools/mqmirror
+
+---
+
+## 🔍 MQ Client Optimizer
+
+MQ Client Optimizer evaluates IGEL OS 12 and macOS clients against structured baselines — covering Citrix readiness, certificate health, and CIS-style security compliance.
+
+```bash
+python3 tools/mq-client-optimizer/mq_client_optimizer.py list-baselines
+python3 tools/mq-client-optimizer/mq_client_optimizer.py analyze \
+  --baseline macos-enterprise-cis-lite --sample
+python3 tools/mq-client-optimizer/mq_client_optimizer.py serve
+```
+
+```text
+client data → baseline evaluation → scored report
+```
+
+Part of: https://github.com/MCamner/Design-Prototype/tree/main/tools/mq-client-optimizer
 
 ---
 
