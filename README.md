@@ -1,6 +1,7 @@
 # 👋 Hi, I'm Mattias Camner
 
-I design and build real-world infrastructure systems — where **security, usability, and operations actually work together**.
+I design and build real-world infrastructure systems — where **security,
+usability, and operations actually work together**.
 
 Focused on **EUC, Zero Trust, endpoint platforms, and automation in complex environments**.
 
@@ -8,7 +9,8 @@ Focused on **EUC, Zero Trust, endpoint platforms, and automation in complex envi
 
 ## 💡 TL;DR
 
-I build systems that reduce operational friction, improve security without breaking usability, and turn scattered tools into structured workflows.
+I build systems that reduce operational friction, improve security without
+breaking usability, and turn scattered tools into structured workflows.
 
 ```text
 useful chaos → usable systems
@@ -18,37 +20,41 @@ useful chaos → usable systems
 
 ## 🚀 Featured: macos-scripts
 
-A practical macOS toolkit built around automation, workflows, and terminal-driven operations.
+A practical macOS toolkit built around automation, workflows, and
+terminal-driven operations.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/status-active-success" />
-  <img src="https://img.shields.io/badge/type-CLI-blue" />
-  <img src="https://img.shields.io/badge/platform-macOS-lightgrey" />
-  <img src="https://img.shields.io/badge/focus-automation-orange" />
-</p>
+![Status: active](https://img.shields.io/badge/status-active-success)
+![Type: CLI](https://img.shields.io/badge/type-CLI-blue)
+![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey)
+![Focus: automation](https://img.shields.io/badge/focus-automation-orange)
 
-<p align="center">
-  <img src="docs/mqlaunch-demo.png" alt="mqlaunch demo" />
-</p>
+![mqlaunch demo](docs/mqlaunch-demo.png)
 
 At the core is:
 
-> **mqlaunch** — a modular command surface that turns scattered terminal workflows into one structured system.
+> **mqlaunch** — a modular command surface that turns scattered terminal
+> workflows into one structured system.
 
 ```text
 one command → structured workflows → repeatable execution
 ```
 
+<<<<<<< HEAD
 Repo: https://github.com/MCamner/macos-scripts
 Site: https://mcamner.github.io/macos-scripts/
+||||||| parent of 31d58c3 (update documentation)
+Repo: https://github.com/MCamner/macos-scripts  
+Site: https://mcamner.github.io/macos-scripts/
+=======
+Repo: <https://github.com/MCamner/macos-scripts>  
+Site: <https://mcamner.github.io/macos-scripts/>
+>>>>>>> 31d58c3 (update documentation)
 
 ---
 
 ## 🧩 Architecture
 
-<p align="center">
-  <img src="docs/macos-scripts-architecture.png" alt="macos-scripts architecture" />
-</p>
+![macos-scripts architecture](docs/macos-scripts-architecture.png)
 
 - `mqlaunch` is the single entrypoint
 - workflows provide structured execution
@@ -59,7 +65,9 @@ Site: https://mcamner.github.io/macos-scripts/
 
 ## 🧪 Design-Prototype
 
-Browser-based prototypes for client readiness, endpoint visibility, macOS compliance, fleet views, certificate expiry risk, and enterprise validation workflows.
+Browser-based prototypes for client readiness, endpoint visibility, macOS
+compliance, fleet views, certificate expiry risk, and enterprise validation
+workflows.
 
 Includes:
 
@@ -70,14 +78,23 @@ Includes:
 - MQ Mirror
 - MQ Client Optimizer
 
+<<<<<<< HEAD
 Repo: https://github.com/MCamner/Design-Prototype
 Site: https://mcamner.github.io/Design-Prototype/
+||||||| parent of 31d58c3 (update documentation)
+Repo: https://github.com/MCamner/Design-Prototype  
+Site: https://mcamner.github.io/Design-Prototype/
+=======
+Repo: <https://github.com/MCamner/Design-Prototype>  
+Site: <https://mcamner.github.io/Design-Prototype/>
+>>>>>>> 31d58c3 (update documentation)
 
 ---
 
 ## 🪞 MQ Mirror
 
-MQ Mirror translates macOS GUI actions into terminal command equivalents — helping operators learn, document, and execute faster.
+MQ Mirror translates macOS GUI actions into terminal command equivalents —
+helping operators learn, document, and execute faster.
 
 ```bash
 tools/mqmirror/mqmirror network
@@ -89,7 +106,8 @@ tools/mqmirror/mqmirror watch --interval 1 --compact --ignore-terminal
 GUI action → CLI equivalent → better operational understanding
 ```
 
-Part of: https://github.com/MCamner/Design-Prototype/tree/main/tools/mqmirror
+Part of:
+<https://github.com/MCamner/Design-Prototype/tree/main/tools/mqmirror>
 
 ---
 
@@ -124,7 +142,8 @@ I work at the intersection of:
 
 My focus is simple:
 
-> Turn complex environments into systems that are usable, secure, and operationally realistic.
+> Turn complex environments into systems that are usable, secure, and
+> operationally realistic.
 
 ---
 
@@ -132,15 +151,36 @@ My focus is simple:
 
 ### macos-scripts
 
+<<<<<<< HEAD
 **Problem:** scattered shell scripts, low discoverability, inconsistent execution
 **Solution:** one modular command surface with structured workflows
+||||||| parent of 31d58c3 (update documentation)
+**Problem:** scattered shell scripts, low discoverability, inconsistent execution  
+**Solution:** one modular command surface with structured workflows  
+=======
+**Problem:** scattered shell scripts, low discoverability, inconsistent
+execution  
+**Solution:** one modular command surface with structured workflows  
+>>>>>>> 31d58c3 (update documentation)
 **Outcome:** repeatable execution and reduced operational friction
 
 ### Client Readiness / Endpoint Validation
 
+<<<<<<< HEAD
 **Problem:** enterprise clients often fail because readiness is assumed, not verified
 **Solution:** browser-based and helper-assisted validation of endpoint signals
 **Outcome:** practical visibility into whether a client is actually ready for enterprise workflows
+||||||| parent of 31d58c3 (update documentation)
+**Problem:** enterprise clients often fail because readiness is assumed, not verified  
+**Solution:** browser-based and helper-assisted validation of endpoint signals  
+**Outcome:** practical visibility into whether a client is actually ready for enterprise workflows
+=======
+**Problem:** enterprise clients often fail because readiness is assumed, not
+verified  
+**Solution:** browser-based and helper-assisted validation of endpoint signals  
+**Outcome:** practical visibility into whether a client is actually ready for
+enterprise workflows
+>>>>>>> 31d58c3 (update documentation)
 
 ---
 
@@ -175,9 +215,9 @@ real problems → real constraints → practical prototypes
 
 ## 🌐 Connect
 
-- Website: https://mcamner.com
-- LinkedIn: https://www.linkedin.com/in/mattias-camner-75958022
-- Art platform: https://blackiris.se
+- Website: <https://mcamner.com>
+- LinkedIn: <https://www.linkedin.com/in/mattias-camner-75958022>
+- Art platform: <https://blackiris.se>
 
 ---
 
