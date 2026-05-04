@@ -39,7 +39,7 @@ At the core is:
 one command → structured workflows → repeatable execution
 ```
 
-Repo: https://github.com/MCamner/macos-scripts  
+Repo: https://github.com/MCamner/macos-scripts
 Site: https://mcamner.github.io/macos-scripts/
 
 ---
@@ -70,7 +70,7 @@ Includes:
 - MQ Mirror
 - MQ Client Optimizer
 
-Repo: https://github.com/MCamner/Design-Prototype  
+Repo: https://github.com/MCamner/Design-Prototype
 Site: https://mcamner.github.io/Design-Prototype/
 
 ---
@@ -132,24 +132,24 @@ My focus is simple:
 
 ### macos-scripts
 
-**Problem:** scattered shell scripts, low discoverability, inconsistent execution  
-**Solution:** one modular command surface with structured workflows  
+**Problem:** scattered shell scripts, low discoverability, inconsistent execution
+**Solution:** one modular command surface with structured workflows
 **Outcome:** repeatable execution and reduced operational friction
 
 ### Client Readiness / Endpoint Validation
 
-**Problem:** enterprise clients often fail because readiness is assumed, not verified  
-**Solution:** browser-based and helper-assisted validation of endpoint signals  
+**Problem:** enterprise clients often fail because readiness is assumed, not verified
+**Solution:** browser-based and helper-assisted validation of endpoint signals
 **Outcome:** practical visibility into whether a client is actually ready for enterprise workflows
 
 ---
 
 ## 🛠️ Tech & Tools
 
-**Endpoint & EUC:** Citrix, IGEL OS, Intune, SCCM  
-**Infrastructure:** Active Directory, VMware, Windows, Linux  
-**Security:** Zero Trust, certificates, identity, access patterns  
-**Automation:** Python, Bash, Zsh, CLI workflows  
+**Endpoint & EUC:** Citrix, IGEL OS, Intune, SCCM
+**Infrastructure:** Active Directory, VMware, Windows, Linux
+**Security:** Zero Trust, certificates, identity, access patterns
+**Automation:** Python, Bash, Zsh, CLI workflows
 **Architecture:** client readiness, validation, structured systems
 
 ---
