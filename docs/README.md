@@ -8,8 +8,10 @@ endpoint readiness och supportnära felsökning.
 ## Publicerade sidor
 
 - `index.html` - startsida för klientverktygen.
-- `client-readiness-check.html` - första versionen av browser-baserad readiness check.
-- `client-readiness-v2.html` - multi-profile diagnostics med live-, sparad- och exempeldata.
+- `client-readiness-check.html` - första versionen av browser-baserad readiness
+  check.
+- `client-readiness-v2.html` - multi-profile diagnostics med live-, sparad- och
+  exempeldata.
 
 GitHub Pages publicerar normalt innehållet härifrån som:
 
@@ -45,7 +47,10 @@ och som demo utan lokal helper.
 Kör helper-agenten från repo-roten och skriv v2-data till `docs`:
 
 ```bash
-python3 helper/client_readiness_agent_v2.py --profile igel-os12-citrix --pretty --out docs/live-client-data.json
+python3 helper/client_readiness_agent_v2.py \
+  --profile igel-os12-citrix \
+  --pretty \
+  --out docs/live-client-data.json
 ```
 
 Tillgängliga profiler finns i:

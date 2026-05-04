@@ -3,7 +3,8 @@
 I design and build real-world infrastructure systems — where **security,
 usability, and operations actually work together**.
 
-Focused on **EUC, Zero Trust, endpoint platforms, and automation in complex environments**.
+Focused on **EUC, Zero Trust, endpoint platforms, and automation in complex
+environments**.
 
 ---
 
@@ -39,16 +40,8 @@ At the core is:
 one command → structured workflows → repeatable execution
 ```
 
-<<<<<<< HEAD
-Repo: https://github.com/MCamner/macos-scripts
-Site: https://mcamner.github.io/macos-scripts/
-||||||| parent of 31d58c3 (update documentation)
-Repo: https://github.com/MCamner/macos-scripts  
-Site: https://mcamner.github.io/macos-scripts/
-=======
 Repo: <https://github.com/MCamner/macos-scripts>  
 Site: <https://mcamner.github.io/macos-scripts/>
->>>>>>> 31d58c3 (update documentation)
 
 ---
 
@@ -78,16 +71,8 @@ Includes:
 - MQ Mirror
 - MQ Client Optimizer
 
-<<<<<<< HEAD
-Repo: https://github.com/MCamner/Design-Prototype
-Site: https://mcamner.github.io/Design-Prototype/
-||||||| parent of 31d58c3 (update documentation)
-Repo: https://github.com/MCamner/Design-Prototype  
-Site: https://mcamner.github.io/Design-Prototype/
-=======
 Repo: <https://github.com/MCamner/Design-Prototype>  
 Site: <https://mcamner.github.io/Design-Prototype/>
->>>>>>> 31d58c3 (update documentation)
 
 ---
 
@@ -113,7 +98,9 @@ Part of:
 
 ## 🔍 MQ Client Optimizer
 
-MQ Client Optimizer evaluates IGEL OS 12 and macOS clients against structured baselines — covering Citrix readiness, certificate health, and CIS-style security compliance.
+MQ Client Optimizer evaluates IGEL OS 12 and macOS clients against structured
+baselines — covering Citrix readiness, certificate health, and CIS-style
+security compliance.
 
 ```bash
 python3 tools/mq-client-optimizer/mq_client_optimizer.py list-baselines
@@ -126,7 +113,8 @@ python3 tools/mq-client-optimizer/mq_client_optimizer.py serve
 client data → baseline evaluation → scored report
 ```
 
-Part of: https://github.com/MCamner/Design-Prototype/tree/main/tools/mq-client-optimizer
+Part of:
+<https://github.com/MCamner/Design-Prototype/tree/main/tools/mq-client-optimizer>
 
 ---
 
@@ -151,36 +139,18 @@ My focus is simple:
 
 ### macos-scripts
 
-<<<<<<< HEAD
-**Problem:** scattered shell scripts, low discoverability, inconsistent execution
-**Solution:** one modular command surface with structured workflows
-||||||| parent of 31d58c3 (update documentation)
-**Problem:** scattered shell scripts, low discoverability, inconsistent execution  
-**Solution:** one modular command surface with structured workflows  
-=======
 **Problem:** scattered shell scripts, low discoverability, inconsistent
 execution  
 **Solution:** one modular command surface with structured workflows  
->>>>>>> 31d58c3 (update documentation)
 **Outcome:** repeatable execution and reduced operational friction
 
 ### Client Readiness / Endpoint Validation
 
-<<<<<<< HEAD
-**Problem:** enterprise clients often fail because readiness is assumed, not verified
-**Solution:** browser-based and helper-assisted validation of endpoint signals
-**Outcome:** practical visibility into whether a client is actually ready for enterprise workflows
-||||||| parent of 31d58c3 (update documentation)
-**Problem:** enterprise clients often fail because readiness is assumed, not verified  
-**Solution:** browser-based and helper-assisted validation of endpoint signals  
-**Outcome:** practical visibility into whether a client is actually ready for enterprise workflows
-=======
 **Problem:** enterprise clients often fail because readiness is assumed, not
 verified  
 **Solution:** browser-based and helper-assisted validation of endpoint signals  
 **Outcome:** practical visibility into whether a client is actually ready for
 enterprise workflows
->>>>>>> 31d58c3 (update documentation)
 
 ---
 
