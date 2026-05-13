@@ -1,2 +1,21 @@
+# Secrets
+.env
+.env.local
+.envrc
+*.env
+
+# macOS metadata
 .DS_Store
 **/.DS_Store
+
+# Editor temp files
+*.swp
+*.tmp
+*~
+
+# Common build artifacts
+node_modules/
+__pycache__/
+.venv/
+dist/
+build/
