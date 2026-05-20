@@ -205,20 +205,92 @@
       throw new Error("All data sources failed: " + errors.join(" | "));
     }
 
+    function clearElement(element) {
+      while (element.firstChild) {
+        element.removeChild(element.firstChild);
+      }
+    }
+
+    function appendTextRow(root, label, value) {
+      const row = document.createElement("div");
+      const strong = document.createElement("strong");
+      strong.textContent = label + ":";
+      row.appendChild(strong);
+      row.appendChild(document.createTextNode(" " + String(value ?? "")));
+      root.appendChild(row);
+    }
+
+    function appendEmptyMessage(root, message) {
+      clearElement(root);
+      const row = document.createElement("div");
+      const emphasis = document.createElement("em");
+      emphasis.textContent = message;
+      row.appendChild(emphasis);
+      root.appendChild(row);
+    }
+
+    function createBadge(text, color, bold = false) {
+      const badge = document.createElement("span");
+      badge.style.color = color;
+      badge.style.marginRight = "1rem";
+      if (bold) {
+        badge.style.fontWeight = "bold";
+      }
+      badge.textContent = text;
+      return badge;
+    }
+
+    function appendList(root, items) {
+      const list = document.createElement("ul");
+      list.style.margin = "4px 0 0 1.2em";
+      list.style.padding = "0";
+
+      if (items?.length) {
+        items.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          list.appendChild(li);
+        });
+      } else {
+        const li = document.createElement("li");
+        const emphasis = document.createElement("em");
+        emphasis.textContent = "None detected";
+        li.appendChild(emphasis);
+        list.appendChild(li);
+      }
+
+      root.appendChild(list);
+    }
+
+    function appendPreRow(root, label, value) {
+      if (!value) {
+        return;
+      }
+
+      const row = document.createElement("div");
+      const strong = document.createElement("strong");
+      const pre = document.createElement("pre");
+      strong.textContent = label + ":";
+      pre.style.fontSize = "0.85em";
+      pre.style.marginTop = "4px";
+      pre.textContent = value;
+      row.appendChild(strong);
+      row.appendChild(pre);
+      root.appendChild(row);
+    }
+
     function renderMeta(payload, profile) {
       const root = document.getElementById("meta");
       const helperMeta = payload.data && payload.data.meta ? payload.data.meta : {};
-
-      root.innerHTML = `
-        <div><strong>Selected profile:</strong> ${profile.label || profile.profile || "unknown"}</div>
-        <div><strong>Helper profile:</strong> ${helperMeta.profile || "n/a"}</div>
-        <div><strong>Data source:</strong> ${payload.source}</div>
-        <div><strong>Location:</strong> ${payload.url}</div>
-        <div><strong>Platform:</strong> ${helperMeta.platform || "unknown"}</div>
-        <div><strong>Release:</strong> ${helperMeta.platform_release || "unknown"}</div>
-        <div><strong>Agent version:</strong> ${helperMeta.agent_version || "n/a"}</div>
-        <div><strong>Hostname:</strong> ${helperMeta.hostname || payload.data?.network?.hostname || "unknown"}</div>
-      `;
+      clearElement(root);
+      appendTextRow(root, "Selected profile", profile.label || profile.profile || "unknown");
+      appendTextRow(root, "Helper profile", helperMeta.profile || "n/a");
+      appendTextRow(root, "Data source", payload.source);
+      appendTextRow(root, "Location", payload.url);
+      appendTextRow(root, "Platform", helperMeta.platform || "unknown");
+      appendTextRow(root, "Release", helperMeta.platform_release || "unknown");
+      appendTextRow(root, "Agent version", helperMeta.agent_version || "n/a");
+      appendTextRow(root, "Hostname", helperMeta.hostname || payload.data?.network?.hostname || "unknown");
     }
 
     function renderProcesses(data) {
@@ -226,22 +298,44 @@
       const proc = data?.processes;
 
       if (!proc) {
-        root.innerHTML = "<div><em>No process data available.</em></div>";
+        appendEmptyMessage(root, "No process data available.");
         return;
       }
 
-      const running = proc.running?.length
-        ? proc.running.map(p => `<span style="color:#0a7a2f;font-weight:bold;margin-right:1rem">${p}</span>`).join("")
-        : "<em>None</em>";
+      clearElement(root);
 
-      const missing = proc.missing?.length
-        ? proc.missing.map(p => `<span style="color:#888;margin-right:1rem">${p}</span>`).join("")
-        : "<em>None</em>";
+      const runningRow = document.createElement("div");
+      const runningLabel = document.createElement("strong");
+      runningLabel.textContent = "Running:";
+      runningRow.appendChild(runningLabel);
+      runningRow.appendChild(document.createTextNode(" "));
+      if (proc.running?.length) {
+        proc.running.forEach((processName) => {
+          runningRow.appendChild(createBadge(processName, "#0a7a2f", true));
+        });
+      } else {
+        const emphasis = document.createElement("em");
+        emphasis.textContent = "None";
+        runningRow.appendChild(emphasis);
+      }
+      root.appendChild(runningRow);
 
-      root.innerHTML = `
-        <div><strong>Running:</strong> ${running}</div>
-        <div style="margin-top:0.5rem"><strong>Not detected:</strong> ${missing}</div>
-      `;
+      const missingRow = document.createElement("div");
+      const missingLabel = document.createElement("strong");
+      missingRow.style.marginTop = "0.5rem";
+      missingLabel.textContent = "Not detected:";
+      missingRow.appendChild(missingLabel);
+      missingRow.appendChild(document.createTextNode(" "));
+      if (proc.missing?.length) {
+        proc.missing.forEach((processName) => {
+          missingRow.appendChild(createBadge(processName, "#888"));
+        });
+      } else {
+        const emphasis = document.createElement("em");
+        emphasis.textContent = "None";
+        missingRow.appendChild(emphasis);
+      }
+      root.appendChild(missingRow);
     }
 
     function renderSmartcard(data) {
@@ -249,40 +343,41 @@
       const sc = data?.smartcard;
 
       if (!sc) {
-        root.innerHTML = "<div><em>No smartcard data available.</em></div>";
+        appendEmptyMessage(root, "No smartcard data available.");
         return;
       }
 
       const statusColor = sc.pcscd_running === true ? "#0a7a2f" : sc.pcscd_running === false ? "#b42318" : "#8a5a00";
       const statusText = sc.pcscd_running === true ? "Running" : sc.pcscd_running === false ? "Not running" : "Unknown";
+      clearElement(root);
 
-      const readers = sc.readers?.length
-        ? sc.readers.map(r => `<li>${r}</li>`).join("")
-        : "<li><em>None detected</em></li>";
+      const statusRow = document.createElement("div");
+      const statusLabel = document.createElement("strong");
+      const status = document.createElement("span");
+      statusLabel.textContent = "pcscd:";
+      status.style.color = statusColor;
+      status.style.fontWeight = "bold";
+      status.textContent = statusText;
+      statusRow.appendChild(statusLabel);
+      statusRow.appendChild(document.createTextNode(" "));
+      statusRow.appendChild(status);
+      root.appendChild(statusRow);
 
-      const openscReaders = sc.opensc_readers?.length
-        ? sc.opensc_readers.map(r => `<li>${r}</li>`).join("")
-        : "<li><em>None detected</em></li>";
+      [
+        ["Readers (pcsc_scan)", sc.readers],
+        ["Readers (opensc-tool)", sc.opensc_readers],
+        ["USB devices", sc.usb_devices]
+      ].forEach(([label, items]) => {
+        const row = document.createElement("div");
+        const strong = document.createElement("strong");
+        strong.textContent = label + ":";
+        row.appendChild(strong);
+        appendList(row, items);
+        root.appendChild(row);
+      });
 
-      const usbDevices = sc.usb_devices?.length
-        ? sc.usb_devices.map(r => `<li>${r}</li>`).join("")
-        : "<li><em>None detected</em></li>";
-
-      let extra = "";
-      if (sc.system_profiler) {
-        extra += `<div><strong>system_profiler:</strong><pre style="font-size:0.85em;margin-top:4px">${sc.system_profiler}</pre></div>`;
-      }
-      if (sc.sc_auth_list) {
-        extra += `<div><strong>sc_auth list:</strong><pre style="font-size:0.85em;margin-top:4px">${sc.sc_auth_list}</pre></div>`;
-      }
-
-      root.innerHTML = `
-        <div><strong>pcscd:</strong> <span style="color:${statusColor};font-weight:bold">${statusText}</span></div>
-        <div><strong>Readers (pcsc_scan):</strong><ul style="margin:4px 0 0 1.2em;padding:0">${readers}</ul></div>
-        <div><strong>Readers (opensc-tool):</strong><ul style="margin:4px 0 0 1.2em;padding:0">${openscReaders}</ul></div>
-        <div><strong>USB devices:</strong><ul style="margin:4px 0 0 1.2em;padding:0">${usbDevices}</ul></div>
-        ${extra}
-      `;
+      appendPreRow(root, "system_profiler", sc.system_profiler);
+      appendPreRow(root, "sc_auth list", sc.sc_auth_list);
     }
 
     function renderWarning(selectedProfileId, helperProfileId) {
@@ -300,29 +395,60 @@
 
     function renderSummary(summary) {
       const root = document.getElementById("summary");
-      root.innerHTML = `
-        <div class="card"><strong>Total</strong><br>${summary.total}</div>
-        <div class="card"><strong>Passed</strong><br>${summary.passed}</div>
-        <div class="card"><strong>Failed</strong><br>${summary.failed}</div>
-        <div class="card"><strong>Warnings</strong><br>${summary.warnings ?? 0}</div>
-        <div class="card"><strong>Unsupported</strong><br>${summary.unsupported ?? 0}</div>
-      `;
+      clearElement(root);
+
+      [
+        ["Total", summary.total],
+        ["Passed", summary.passed],
+        ["Failed", summary.failed],
+        ["Warnings", summary.warnings ?? 0],
+        ["Unsupported", summary.unsupported ?? 0]
+      ].forEach(([label, value]) => {
+        const card = document.createElement("div");
+        const strong = document.createElement("strong");
+        card.className = "card";
+        strong.textContent = label;
+        card.appendChild(strong);
+        card.appendChild(document.createElement("br"));
+        card.appendChild(document.createTextNode(String(value)));
+        root.appendChild(card);
+      });
     }
 
     function renderResults(results) {
       const body = document.getElementById("results-body");
-      body.innerHTML = results.map((r) => `
-        <tr>
-          <td>${r.id}</td>
-          <td>${r.title}</td>
-          <td class="${r.status}">${r.status}</td>
-          <td>${r.severity}</td>
-          <td><pre>${JSON.stringify(r.expected, null, 2)}</pre></td>
-          <td><pre>${JSON.stringify(r.actual, null, 2)}</pre></td>
-          <td>${r.evidence}</td>
-          <td>${r.remediation || ""}</td>
-        </tr>
-      `).join("");
+      clearElement(body);
+
+      results.forEach((result) => {
+        const row = document.createElement("tr");
+        const fields = [
+          result.id,
+          result.title,
+          result.status,
+          result.severity,
+          JSON.stringify(result.expected, null, 2),
+          JSON.stringify(result.actual, null, 2),
+          result.evidence,
+          result.remediation || ""
+        ];
+
+        fields.forEach((field, index) => {
+          const cell = document.createElement("td");
+          if (index === 2) {
+            cell.className = result.status;
+          }
+          if (index === 4 || index === 5) {
+            const pre = document.createElement("pre");
+            pre.textContent = field;
+            cell.appendChild(pre);
+          } else {
+            cell.textContent = field;
+          }
+          row.appendChild(cell);
+        });
+
+        body.appendChild(row);
+      });
     }
 
     function getRequestedProfileId(profileIndex, helperProfileId) {
@@ -349,11 +475,14 @@
 
     function populateProfileSelect(profileIndex, selectedId) {
       const select = document.getElementById("profile-select");
-      select.innerHTML = profileIndex.profiles.map((profile) => `
-        <option value="${profile.id}" ${profile.id === selectedId ? "selected" : ""}>
-          ${profile.label}
-        </option>
-      `).join("");
+      clearElement(select);
+      profileIndex.profiles.forEach((profile) => {
+        const option = document.createElement("option");
+        option.value = profile.id;
+        option.selected = profile.id === selectedId;
+        option.textContent = profile.label;
+        select.appendChild(option);
+      });
       return select;
     }
 
@@ -395,10 +524,13 @@
           await evaluateSelectedProfile(profileIndex, newProfileId, clientPayload);
         });
       } catch (err) {
-        document.body.insertAdjacentHTML(
-          "beforeend",
-          `<p style="color:red;"><strong>Error:</strong> ${err.message}</p>`
-        );
+        const error = document.createElement("p");
+        const strong = document.createElement("strong");
+        error.style.color = "red";
+        strong.textContent = "Error:";
+        error.appendChild(strong);
+        error.appendChild(document.createTextNode(" " + err.message));
+        document.body.appendChild(error);
       }
     }
 

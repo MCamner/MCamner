@@ -19,6 +19,65 @@ useful chaos → usable systems
 
 ---
 
+## 🧰 This Repo
+
+This repository powers the `mcamner.github.io/MCamner` GitHub Pages site and
+the browser-based client readiness tools under `docs/`.
+
+Key entrypoints:
+
+- `docs/index.html` - public landing page for the client tools
+- `docs/client-readiness-check.html` - v1 browser readiness check
+- `docs/client-readiness-v2.html` - multi-profile readiness diagnostics
+- `helper/client_readiness_agent.py` - primary local helper API for v1
+- `helper/client_readiness_agent_v2.py` - v2 data collector for saved live data
+- `helper/client_helper.py` - experimental helper surface for network,
+  certificate, and smartcard endpoints
+
+Run the static site locally:
+
+```bash
+python3 -m http.server 8000 --directory docs
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000/
+```
+
+Run the primary helper:
+
+```bash
+python3 helper/client_readiness_agent.py --baseline igel-os12
+```
+
+Generate saved v2 live data:
+
+```bash
+python3 helper/client_readiness_agent_v2.py \
+  --profile igel-os12-citrix \
+  --pretty \
+  --out docs/live-client-data.json
+```
+
+Run checks:
+
+```bash
+python3 -m compileall helper tests
+python3 -m pytest tests
+python3 -m flake8 helper tests
+```
+
+Release flow:
+
+```bash
+./release.sh --dry-run <version>
+./release.sh <version>
+```
+
+---
+
 ## 🚀 Featured: macos-scripts
 
 A practical macOS toolkit built around automation, workflows, and

@@ -26,4 +26,4 @@ jobs:
         flake8 helper/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest tests/ || true  # Allow tests to fail if none exist yet
+        pytest tests/

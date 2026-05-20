@@ -794,15 +794,21 @@
     }
 
     function renderChecks(checks) {
-      checkGrid.innerHTML = "";
+      checkGrid.replaceChildren();
       checks.forEach((check) => {
         const card = document.createElement("article");
+        const status = document.createElement("span");
+        const title = document.createElement("h3");
+        const summary = document.createElement("p");
         card.className = "check-card";
-        card.innerHTML = `
-          <span class="${statusClass(check.status)}">${labelFor(check.status)}</span>
-          <h3>${check.name}</h3>
-          <p>${check.summary}</p>
-        `;
+        status.className = statusClass(check.status);
+        status.textContent = labelFor(check.status);
+        title.textContent = check.name;
+        summary.textContent = check.summary;
+        card.appendChild(status);
+        card.appendChild(title);
+        card.appendChild(summary);
+
         const list = document.createElement("ul");
         list.className = "detail-list";
         check.details.forEach((detail) => {
@@ -816,7 +822,7 @@
     }
 
     function renderCategorySummary(categories) {
-      summaryGrid.innerHTML = "";
+      summaryGrid.replaceChildren();
       const entries = Object.entries(categories || {});
       if (!entries.length) {
         return;
@@ -824,12 +830,15 @@
 
       entries.forEach(([name, info]) => {
         const card = document.createElement("div");
+        const title = document.createElement("strong");
+        const status = document.createElement("span");
         card.className = "summary-card";
         const color = info.status === "ok" ? "var(--ok)" : info.status === "warn" ? "var(--warn)" : "var(--fail)";
-        card.innerHTML = `
-          <strong>${name}</strong>
-          <span style="color:${color}">${labelFor(info.status)}</span>
-        `;
+        title.textContent = name;
+        status.style.color = color;
+        status.textContent = labelFor(info.status);
+        card.appendChild(title);
+        card.appendChild(status);
         summaryGrid.appendChild(card);
       });
     }
