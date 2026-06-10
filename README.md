@@ -26,7 +26,8 @@ for support, architecture, and operations teams.
 
 The MQ stack is the core of that work: eight repos that together take a local git repo
 or operational screenshot and produce scored health signals, release gates, regression
-alerts, and structured reviews — all without leaving the terminal.
+alerts, contract checks, CI-enforced stack gates, and structured reviews — all without
+leaving the terminal.
 
 ---
 
@@ -40,7 +41,8 @@ mqlaunch (macos-scripts)
     └──▶ mq-agent
               ├──▶ stack sweep ──▶ repo-signal (score each repo)
               │         └──▶ ~/.mq-agent/sweep-history.jsonl
-              ├──▶ stack history / alert / report / release-check / release-notes
+              ├──▶ stack history / alert / report / release-check / release-notes / contract-check
+              ├──▶ CI gate ──▶ GitHub Actions (contract-check + release-check)
               └──▶ deep review ──▶ mq-mcp (tool runtime)
                                         ├──▶ repo-signal
                                         ├──▶ mq-image-analyze
@@ -50,7 +52,7 @@ mqlaunch (macos-scripts)
 | Repo | Role | Version | Status |
 | --- | --- | --- | --- |
 | [macos-scripts](https://github.com/MCamner/macos-scripts) | Terminal entrypoint — `mqlaunch` menus, stack cockpit, workflow chains | v1.0.0 | B2 Stack Cockpit; menu item 18 runs the full stack sweep pipeline |
-| [mq-agent](https://github.com/MCamner/mq-agent) | Orchestrator — stack sweeps, health history, regression alerts, release gates, release notes, contract gate, code review | v1.11.0 | Stack contract gate live: `sweep → alert → report → release-check → release-notes → contract-check` |
+| [mq-agent](https://github.com/MCamner/mq-agent) | Orchestrator — stack sweeps, health history, regression alerts, release gates, release notes, contract gate, CI gate, code review | v1.11.0 | Stack contract gate live; CI workflow now runs `contract-check` + `release-check` on PRs and main |
 | [mq-mcp](https://github.com/MCamner/mq-mcp) | Deterministic tool runtime — safety classes, contracts, 95+ documented tools | v1.11.0 | Learning contract layer; strong contract governance across the stack |
 | [repo-signal](https://github.com/MCamner/repo-signal) | Repo intelligence — README quality, publish readiness, AI context exports | v1.4.0 | Stable scoring engine; powers `mq-agent stack sweep` per-repo scores |
 | [mq-image-analyze](https://github.com/MCamner/mq-image-analyze) | Visual perception — OCR, diagrams, screenshots, architecture review | v1.4.0 | `image_ocr` MCP tool integrated into mq-agent review flow |
@@ -85,6 +87,18 @@ mq-agent stack release-check
 
 # Draft release notes from git commits since last tag, per repo
 mq-agent stack release-notes
+
+# Contract gate: exits 1 if repo contracts are missing, blocked, or drifting
+mq-agent stack contract-check
+```
+
+CI-enforced stack gate:
+
+```text
+pull request / push to main
+  -> GitHub Actions
+  -> mq-agent stack contract-check --json
+  -> mq-agent stack release-check --json
 ```
 
 Or trigger from the terminal menu (macOS):
@@ -112,7 +126,9 @@ terminal (mqlaunch)
   └──▶ mq-agent stack alert                        (compare last two sweeps)
   └──▶ mq-agent stack report                       (score + trend + alert + ready per repo)
   └──▶ mq-agent stack release-check                (VERSION, CHANGELOG, branch, clean tree)
-  └──▶ mq-agent stack release-notes                 (commits since last tag, per repo)
+  └──▶ mq-agent stack release-notes                (commits since last tag, per repo)
+  └──▶ mq-agent stack contract-check               (.mq/repo-contract.json + VERSION sync)
+  └──▶ GitHub Actions MQ Stack Gate                (CI-enforced contract + release checks)
 ```
 
 History persists across runs — trend and regression data accumulates automatically.
@@ -332,7 +348,7 @@ Part of:
 | Client readiness | Enterprise clients fail when readiness is assumed | Browser + helper validation | Clear support signals before access breaks |
 | Endpoint validation | Client posture is hard to explain under pressure | Baselines, profiles, reports | Shared language for operators and architects |
 | GUI-to-CLI learning | GUI actions hide operational commands | Mirror actions as terminal equivalents | Better documentation and operator confidence |
-| Stack health | Repo quality drifts invisibly across eight repos | Automated sweep + history + alerts | Regression caught before it reaches release |
+| Stack health | Repo quality drifts invisibly across eight repos | Automated sweep + history + alerts + CI gates | Regression caught before it reaches release |
 
 ---
 
@@ -375,7 +391,13 @@ Near-term: keep tightening client readiness diagnostics, improve the static Page
 experience, and turn the strongest endpoint validation patterns into reusable case
 studies under [`cases/`](cases/).
 
-For the MQ stack: the release pipeline is stable at v1.10.0 — sweep, history, alert, report, release-check, and release-notes all ship from one orchestrator. Next focus is tightening the contracts between repos and exploring CI integration of `stack alert`.
+For the MQ stack: the stack control plane is now CI-enforced on `mq-agent` main —
+`sweep`, `history`, `alert`, `report`, `release-check`, `release-notes`, and
+`contract-check` are covered by one orchestrator, with GitHub Actions running
+`contract-check` and `release-check` on PRs and pushes to `main`.
+
+Next MQ focus: formalize the v1.12 release notes and add an mqobsidian stack truth
+export so CI/local gate results become long-term architecture memory.
 
 ---
 
@@ -419,4 +441,3 @@ and intended for publication.
 ## License
 
 MIT
-
