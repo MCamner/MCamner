@@ -50,7 +50,7 @@ mqlaunch (macos-scripts)
 | Repo | Role | Version | Status |
 | --- | --- | --- | --- |
 | [macos-scripts](https://github.com/MCamner/macos-scripts) | Terminal entrypoint — `mqlaunch` menus, stack cockpit, workflow chains | v1.0.0 | B2 Stack Cockpit; menu item 18 runs the full stack sweep pipeline |
-| [mq-agent](https://github.com/MCamner/mq-agent) | Orchestrator — stack sweeps, health history, regression alerts, release gates, release notes, code review | v1.10.0 | Stack health pipeline complete: `sweep → history → alert → report → release-check → release-notes` |
+| [mq-agent](https://github.com/MCamner/mq-agent) | Orchestrator — stack sweeps, health history, regression alerts, release gates, release notes, contract gate, code review | v1.11.0 | Stack contract gate live: `sweep → alert → report → release-check → release-notes → contract-check` |
 | [mq-mcp](https://github.com/MCamner/mq-mcp) | Deterministic tool runtime — safety classes, contracts, 95+ documented tools | v1.11.0 | Learning contract layer; strong contract governance across the stack |
 | [repo-signal](https://github.com/MCamner/repo-signal) | Repo intelligence — README quality, publish readiness, AI context exports | v1.4.0 | Stable scoring engine; powers `mq-agent stack sweep` per-repo scores |
 | [mq-image-analyze](https://github.com/MCamner/mq-image-analyze) | Visual perception — OCR, diagrams, screenshots, architecture review | v1.4.0 | `image_ocr` MCP tool integrated into mq-agent review flow |
