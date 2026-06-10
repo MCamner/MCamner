@@ -51,12 +51,12 @@ mqlaunch (macos-scripts)
 | --- | --- | --- | --- |
 | [macos-scripts](https://github.com/MCamner/macos-scripts) | Terminal entrypoint — `mqlaunch` menus, stack cockpit, workflow chains | v1.0.0 | B2 Stack Cockpit; menu item 18 runs the full stack sweep pipeline |
 | [mq-agent](https://github.com/MCamner/mq-agent) | Orchestrator — stack sweeps, health history, regression alerts, release gates, release notes, code review | v1.10.0 | Stack health pipeline complete: `sweep → history → alert → report → release-check → release-notes` |
-| [mq-mcp](https://github.com/MCamner/mq-mcp) | Deterministic tool runtime — safety classes, contracts, 95+ documented tools | v1.10.0 | Learning contract layer; strong contract governance across the stack |
+| [mq-mcp](https://github.com/MCamner/mq-mcp) | Deterministic tool runtime — safety classes, contracts, 95+ documented tools | v1.11.0 | Learning contract layer; strong contract governance across the stack |
 | [repo-signal](https://github.com/MCamner/repo-signal) | Repo intelligence — README quality, publish readiness, AI context exports | v1.4.0 | Stable scoring engine; powers `mq-agent stack sweep` per-repo scores |
 | [mq-image-analyze](https://github.com/MCamner/mq-image-analyze) | Visual perception — OCR, diagrams, screenshots, architecture review | v1.4.0 | `image_ocr` MCP tool integrated into mq-agent review flow |
 | [mq-hal](https://github.com/MCamner/mq-hal) | Operator layer — safe natural-language command routing | v1.2.0 | Vector-store health and stack status checks |
 | [mq-ums](https://github.com/MCamner/mq-ums) | Browser UI for IGEL UMS operations via allowlisted PowerShell | v0.1.4 | Operator surface validated against live UMS |
-| [atlas-one](https://github.com/MCamner/atlas-one) | Prompt routing studio — structured reasoning and reusable AI workflows | v1.3.0 | MQ ecosystem integration; personal workflow packs |
+| [atlas-one](https://github.com/MCamner/atlas-one) | Prompt routing studio — structured reasoning and reusable AI workflows | v1.4.0 | MQ ecosystem integration; personal workflow packs |
 
 Together, these repos describe one operating pattern:
 
