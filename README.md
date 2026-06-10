@@ -9,7 +9,7 @@ complex enterprise environment -> clear signals -> repeatable action
 
 [![Pages](https://img.shields.io/badge/pages-live-174c5a)](https://mcamner.github.io/MCamner/)
 [![Focus](https://img.shields.io/badge/focus-EUC%20%7C%20Zero%20Trust%20%7C%20Automation-orange)](#what-i-build)
-[![Status](https://img.shields.io/badge/status-active-success)](#quick-start)
+[![Status](https://img.shields.io/badge/status-active-success)](#demo-flow)
 
 I work where infrastructure, security, endpoint platforms, and operations meet:
 Citrix, IGEL OS, eLux, Intune, identity, certificates, client health, and the
@@ -24,6 +24,10 @@ I build local-first tools for endpoint readiness, automation, and AI-assisted op
 My work focuses on turning messy infrastructure signals into clear, repeatable actions
 for support, architecture, and operations teams.
 
+The MQ stack is the core of that work: eight repos that together take a local git repo
+or operational screenshot and produce scored health signals, release gates, regression
+alerts, and structured reviews — all without leaving the terminal.
+
 ---
 
 ## MQ Ecosystem Map
@@ -32,31 +36,82 @@ The MQ projects are a local-first toolchain for turning operational complexity
 into visible state, safer decisions, and repeatable action.
 
 ```text
-mqlaunch -> mq-agent -> mq-mcp
-              |          |
-              v          v
-          repo-signal  mq-image-analyze
-              |
-              v
-            mq-hal
+mqlaunch (macos-scripts)
+    └──▶ mq-agent
+              ├──▶ stack sweep ──▶ repo-signal (score each repo)
+              │         └──▶ ~/.mq-agent/sweep-history.jsonl
+              ├──▶ stack history / alert / report / release-check
+              └──▶ deep review ──▶ mq-mcp (tool runtime)
+                                        ├──▶ repo-signal
+                                        ├──▶ mq-image-analyze
+                                        └──▶ mq-hal / mq-ums
 ```
 
-| Repo | Role | Current status | Next focus |
+| Repo | Role | Version | Status |
 | --- | --- | --- | --- |
-| [macos-scripts](https://github.com/MCamner/macos-scripts) | Human terminal entrypoint through `mqlaunch` menus, checks, and workflows | v0.4.12; release-check and README readiness are green | v0.5.0 review-routing release and stronger release gates |
-| [mq-agent](https://github.com/MCamner/mq-agent) | Orchestration layer for planning, execution, verification, safety, and memory | v1.3.0; architecture memory and model-selection workflows | v1.4.0 perception integration with `mq-image-analyze` |
-| [mq-mcp](https://github.com/MCamner/mq-mcp) | Deterministic tool/runtime layer with safety classes, contracts, review, and memory | v1.10.0; learning contract layer and 95 documented tools | Release Gate v2 and stronger contract governance |
-| [mq-hal](https://github.com/MCamner/mq-hal) | Local operator/status layer for safe natural-language command routing | v1.2.0; vector-store health and stack status | Roadmap cleanup and clearer stack-health reports |
-| [mq-ums](https://github.com/MCamner/mq-ums) | Browser UI for IGEL UMS operations through allowlisted PowerShell commands | v0.1.4 RC; live UMS validation | v0.2.0 daily-use operator UI |
-| [mq-image-analyze](https://github.com/MCamner/mq-image-analyze) | Visual perception layer for screenshots, OCR, diagrams, and architecture review | v1.3.0; `image_ocr` MCP tool and mq-agent examples | Broader perception workflows inside mq-agent/mq-mcp |
-| [repo-signal](https://github.com/MCamner/repo-signal) | Repo intelligence engine for README quality, publish readiness, and AI context exports | v1.1.0; symbolic intelligence exports | Keep repo-quality contracts stable across the MQ stack |
-| [atlas-one](https://github.com/MCamner/atlas-one) | Prompt routing studio for structured reasoning and reusable AI workflows | v0.6.0; MQ ecosystem integration | v0.7.0 personal workflow packs |
+| [macos-scripts](https://github.com/MCamner/macos-scripts) | Terminal entrypoint — `mqlaunch` menus, stack cockpit, workflow chains | v1.0.0 | B2 Stack Cockpit; menu item 18 runs the full stack sweep pipeline |
+| [mq-agent](https://github.com/MCamner/mq-agent) | Orchestrator — stack sweeps, health history, regression alerts, release gates, code review | v1.9.0 | Stack health pipeline complete: `sweep → history → alert → report → release-check` |
+| [mq-mcp](https://github.com/MCamner/mq-mcp) | Deterministic tool runtime — safety classes, contracts, 95+ documented tools | v1.10.0 | Learning contract layer; strong contract governance across the stack |
+| [repo-signal](https://github.com/MCamner/repo-signal) | Repo intelligence — README quality, publish readiness, AI context exports | v1.4.0 | Stable scoring engine; powers `mq-agent stack sweep` per-repo scores |
+| [mq-image-analyze](https://github.com/MCamner/mq-image-analyze) | Visual perception — OCR, diagrams, screenshots, architecture review | v1.4.0 | `image_ocr` MCP tool integrated into mq-agent review flow |
+| [mq-hal](https://github.com/MCamner/mq-hal) | Operator layer — safe natural-language command routing | v1.2.0 | Vector-store health and stack status checks |
+| [mq-ums](https://github.com/MCamner/mq-ums) | Browser UI for IGEL UMS operations via allowlisted PowerShell | v0.1.4 | RC; live UMS validation through the operator surface |
+| [atlas-one](https://github.com/MCamner/atlas-one) | Prompt routing studio — structured reasoning and reusable AI workflows | v1.3.0 | MQ ecosystem integration; personal workflow packs |
 
 Together, these repos describe one operating pattern:
 
 ```text
 local repo / endpoint / screenshot -> structured signal -> reviewed action
 ```
+
+---
+
+## Demo Flow
+
+From one terminal, the full MQ stack health pipeline — no API key, no network calls:
+
+```bash
+# Score every repo in the MQ stack
+mq-agent stack sweep
+
+# Consolidated view: score, trend, alert, ready per repo
+mq-agent stack report
+
+# Regression gate: exits 1 if any repo dropped ≥ 10 pts or fell below 80
+mq-agent stack alert
+
+# Release gate: exits 1 if any repo has blockers (VERSION, CHANGELOG, clean tree)
+mq-agent stack release-check
+```
+
+Or trigger from the terminal menu (macOS):
+
+```bash
+mqlaunch
+# → Agent menu → 18. MQ Stack cockpit
+```
+
+Deep per-repo review (requires OpenAI API key and mq-mcp running):
+
+```bash
+mq-agent signal . --brain        # repo-signal readiness + brain note
+mq-agent review repo . --brain   # mq-mcp code review + brain note
+mq-agent release-check --dry-run # release gate preview
+```
+
+Full signal flow:
+
+```text
+terminal (mqlaunch)
+  └──▶ mq-agent stack sweep
+            └──▶ repo-signal scores each repo     (local, no key)
+            └──▶ history written to JSONL          (~/.mq-agent/sweep-history.jsonl)
+  └──▶ mq-agent stack alert                        (compare last two sweeps)
+  └──▶ mq-agent stack report                       (score + trend + alert + ready per repo)
+  └──▶ mq-agent stack release-check                (VERSION, CHANGELOG, branch, clean tree)
+```
+
+History persists across runs — trend and regression data accumulates automatically.
 
 ---
 
@@ -273,6 +328,7 @@ Part of:
 | Client readiness | Enterprise clients fail when readiness is assumed | Browser + helper validation | Clear support signals before access breaks |
 | Endpoint validation | Client posture is hard to explain under pressure | Baselines, profiles, reports | Shared language for operators and architects |
 | GUI-to-CLI learning | GUI actions hide operational commands | Mirror actions as terminal equivalents | Better documentation and operator confidence |
+| Stack health | Repo quality drifts invisibly across eight repos | Automated sweep + history + alerts | Regression caught before it reaches release |
 
 ---
 
@@ -311,9 +367,12 @@ Release flow:
 
 ## Roadmap
 
-Near-term direction: keep tightening client readiness diagnostics, improve the
-static Pages experience, and turn the strongest endpoint validation patterns
-into reusable case studies under [`cases/`](cases/).
+Near-term: keep tightening client readiness diagnostics, improve the static Pages
+experience, and turn the strongest endpoint validation patterns into reusable case
+studies under [`cases/`](cases/).
+
+For the MQ stack: the sweep pipeline is stable at v1.9.0. Next focus is tightening
+the contracts between repos and exploring CI integration of `stack alert`.
 
 ---
 
