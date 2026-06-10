@@ -55,7 +55,7 @@ mqlaunch (macos-scripts)
 | [repo-signal](https://github.com/MCamner/repo-signal) | Repo intelligence — README quality, publish readiness, AI context exports | v1.4.0 | Stable scoring engine; powers `mq-agent stack sweep` per-repo scores |
 | [mq-image-analyze](https://github.com/MCamner/mq-image-analyze) | Visual perception — OCR, diagrams, screenshots, architecture review | v1.4.0 | `image_ocr` MCP tool integrated into mq-agent review flow |
 | [mq-hal](https://github.com/MCamner/mq-hal) | Operator layer — safe natural-language command routing | v1.2.0 | Vector-store health and stack status checks |
-| [mq-ums](https://github.com/MCamner/mq-ums) | Browser UI for IGEL UMS operations via allowlisted PowerShell | v0.1.4 | RC; live UMS validation through the operator surface |
+| [mq-ums](https://github.com/MCamner/mq-ums) | Browser UI for IGEL UMS operations via allowlisted PowerShell | v0.1.4 | Operator surface validated against live UMS |
 | [atlas-one](https://github.com/MCamner/atlas-one) | Prompt routing studio — structured reasoning and reusable AI workflows | v1.3.0 | MQ ecosystem integration; personal workflow packs |
 
 Together, these repos describe one operating pattern:
