@@ -40,7 +40,7 @@ mqlaunch (macos-scripts)
     └──▶ mq-agent
               ├──▶ stack sweep ──▶ repo-signal (score each repo)
               │         └──▶ ~/.mq-agent/sweep-history.jsonl
-              ├──▶ stack history / alert / report / release-check
+              ├──▶ stack history / alert / report / release-check / release-notes
               └──▶ deep review ──▶ mq-mcp (tool runtime)
                                         ├──▶ repo-signal
                                         ├──▶ mq-image-analyze
@@ -50,7 +50,7 @@ mqlaunch (macos-scripts)
 | Repo | Role | Version | Status |
 | --- | --- | --- | --- |
 | [macos-scripts](https://github.com/MCamner/macos-scripts) | Terminal entrypoint — `mqlaunch` menus, stack cockpit, workflow chains | v1.0.0 | B2 Stack Cockpit; menu item 18 runs the full stack sweep pipeline |
-| [mq-agent](https://github.com/MCamner/mq-agent) | Orchestrator — stack sweeps, health history, regression alerts, release gates, code review | v1.9.0 | Stack health pipeline complete: `sweep → history → alert → report → release-check` |
+| [mq-agent](https://github.com/MCamner/mq-agent) | Orchestrator — stack sweeps, health history, regression alerts, release gates, release notes, code review | v1.10.0 | Stack health pipeline complete: `sweep → history → alert → report → release-check → release-notes` |
 | [mq-mcp](https://github.com/MCamner/mq-mcp) | Deterministic tool runtime — safety classes, contracts, 95+ documented tools | v1.10.0 | Learning contract layer; strong contract governance across the stack |
 | [repo-signal](https://github.com/MCamner/repo-signal) | Repo intelligence — README quality, publish readiness, AI context exports | v1.4.0 | Stable scoring engine; powers `mq-agent stack sweep` per-repo scores |
 | [mq-image-analyze](https://github.com/MCamner/mq-image-analyze) | Visual perception — OCR, diagrams, screenshots, architecture review | v1.4.0 | `image_ocr` MCP tool integrated into mq-agent review flow |
@@ -82,6 +82,9 @@ mq-agent stack alert
 
 # Release gate: exits 1 if any repo has blockers (VERSION, CHANGELOG, clean tree)
 mq-agent stack release-check
+
+# Draft release notes from git commits since last tag, per repo
+mq-agent stack release-notes
 ```
 
 Or trigger from the terminal menu (macOS):
@@ -109,6 +112,7 @@ terminal (mqlaunch)
   └──▶ mq-agent stack alert                        (compare last two sweeps)
   └──▶ mq-agent stack report                       (score + trend + alert + ready per repo)
   └──▶ mq-agent stack release-check                (VERSION, CHANGELOG, branch, clean tree)
+  └──▶ mq-agent stack release-notes                 (commits since last tag, per repo)
 ```
 
 History persists across runs — trend and regression data accumulates automatically.
@@ -371,8 +375,7 @@ Near-term: keep tightening client readiness diagnostics, improve the static Page
 experience, and turn the strongest endpoint validation patterns into reusable case
 studies under [`cases/`](cases/).
 
-For the MQ stack: the sweep pipeline is stable at v1.9.0. Next focus is tightening
-the contracts between repos and exploring CI integration of `stack alert`.
+For the MQ stack: the release pipeline is stable at v1.10.0 — sweep, history, alert, report, release-check, and release-notes all ship from one orchestrator. Next focus is tightening the contracts between repos and exploring CI integration of `stack alert`.
 
 ---
 
@@ -416,3 +419,4 @@ and intended for publication.
 ## License
 
 MIT
+
