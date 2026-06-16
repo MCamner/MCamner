@@ -110,26 +110,53 @@ into visible state, safer decisions, and repeatable action.
 ```text
 mqlaunch (macos-scripts)
     └──▶ mq-agent
-              ├──▶ stack sweep ──▶ repo-signal (score each repo)
+              ├──▶ stack sweep ──▶ repo-signal
               │         └──▶ ~/.mq-agent/sweep-history.jsonl
-              ├──▶ stack history / alert / report / release-check / release-notes / contract-check
-              ├──▶ CI gate ──▶ GitHub Actions (contract-check + release-check)
+              ├──▶ stack history / alert / report
+              ├──▶ release-check / release-notes / contract-check
+              ├──▶ CI gate ──▶ GitHub Actions
+              │         └──▶ contract-check + release-check
               └──▶ deep review ──▶ mq-mcp (tool runtime)
                                         ├──▶ repo-signal
                                         ├──▶ mq-image-analyze
                                         └──▶ mq-hal / mq-ums
 ```
 
-| Repo | Role | Version | Status |
-| --- | --- | --- | --- |
-| [macos-scripts](https://github.com/MCamner/macos-scripts) | Terminal entrypoint — `mqlaunch` menus, stack cockpit, workflow chains | v1.0.0 | B2 Stack Cockpit; menu item 18 runs the full stack sweep pipeline |
-| [mq-agent](https://github.com/MCamner/mq-agent) | Orchestrator — stack sweeps, health history, regression alerts, release gates, release notes, contract gate, CI gate, code review | v1.11.0 | Stack contract gate live; CI workflow now runs `contract-check` + `release-check` on PRs and main |
-| [mq-mcp](https://github.com/MCamner/mq-mcp) | Deterministic tool runtime — safety classes, contracts, 95+ documented tools | v1.11.0 | Learning contract layer; strong contract governance across the stack |
-| [repo-signal](https://github.com/MCamner/repo-signal) | Repo intelligence — README quality, publish readiness, AI context exports | v1.4.0 | Stable scoring engine; powers `mq-agent stack sweep` per-repo scores |
-| [mq-image-analyze](https://github.com/MCamner/mq-image-analyze) | Visual perception — OCR, diagrams, screenshots, architecture review | v1.4.0 | `image_ocr` MCP tool integrated into mq-agent review flow |
-| [mq-hal](https://github.com/MCamner/mq-hal) | Operator layer — safe natural-language command routing | v1.2.0 | Vector-store health and stack status checks |
-| [mq-ums](https://github.com/MCamner/mq-ums) | Browser UI for IGEL UMS operations via allowlisted PowerShell | v0.1.4 | Operator surface validated against live UMS |
-| [atlas-one](https://github.com/MCamner/atlas-one) | Prompt routing studio — structured reasoning and reusable AI workflows | v1.4.0 | MQ ecosystem integration; personal workflow packs |
+### Current MQ Stack Repos
+
+* [macos-scripts](https://github.com/MCamner/macos-scripts)
+  Terminal entrypoint for `mqlaunch` menus, stack cockpit, and workflow chains.
+  Version: `v1.0.0`. Status: B2 Stack Cockpit; menu item 18 runs the full
+  stack sweep pipeline.
+* [mq-agent](https://github.com/MCamner/mq-agent)
+  Orchestrator for stack sweeps, health history, regression alerts, release
+  gates, release notes, contract gate, CI gate, and code review.
+  Version: `v1.11.0`. Status: stack contract gate live; CI now runs
+  `contract-check` and `release-check` on PRs and `main`.
+* [mq-mcp](https://github.com/MCamner/mq-mcp)
+  Deterministic tool runtime with safety classes, contracts, and 95+
+  documented tools.
+  Version: `v1.11.0`. Status: learning contract layer and strong contract
+  governance across the stack.
+* [repo-signal](https://github.com/MCamner/repo-signal)
+  Repo intelligence for README quality, publish readiness, and AI context
+  exports.
+  Version: `v1.4.0`. Status: stable scoring engine that powers
+  `mq-agent stack sweep` per-repo scores.
+* [mq-image-analyze](https://github.com/MCamner/mq-image-analyze)
+  Visual perception for OCR, diagrams, screenshots, and architecture review.
+  Version: `v1.4.0`. Status: `image_ocr` MCP tool integrated into the
+  `mq-agent` review flow.
+* [mq-hal](https://github.com/MCamner/mq-hal)
+  Operator layer for safe natural-language command routing.
+  Version: `v1.2.0`. Status: vector-store health and stack status checks.
+* [mq-ums](https://github.com/MCamner/mq-ums)
+  Browser UI for IGEL UMS operations through allowlisted PowerShell.
+  Version: `v0.1.4`. Status: operator surface validated against live UMS.
+* [atlas-one](https://github.com/MCamner/atlas-one)
+  Prompt routing studio for structured reasoning and reusable AI workflows.
+  Version: `v1.4.0`. Status: MQ ecosystem integration and personal workflow
+  packs.
 
 Together, these repos describe one operating pattern:
 
@@ -192,14 +219,21 @@ Full signal flow:
 ```text
 terminal (mqlaunch)
   └──▶ mq-agent stack sweep
-            └──▶ repo-signal scores each repo     (local, no key)
-            └──▶ history written to JSONL          (~/.mq-agent/sweep-history.jsonl)
-  └──▶ mq-agent stack alert                        (compare last two sweeps)
-  └──▶ mq-agent stack report                       (score + trend + alert + ready per repo)
-  └──▶ mq-agent stack release-check                (VERSION, CHANGELOG, branch, clean tree)
-  └──▶ mq-agent stack release-notes                (commits since last tag, per repo)
-  └──▶ mq-agent stack contract-check               (.mq/repo-contract.json + VERSION sync)
-  └──▶ GitHub Actions MQ Stack Gate                (CI-enforced contract + release checks)
+            ├──▶ repo-signal scores each repo (local, no key)
+            └──▶ history written to JSONL
+                (~/.mq-agent/sweep-history.jsonl)
+  └──▶ mq-agent stack alert
+      compare the last two sweeps
+  └──▶ mq-agent stack report
+      score + trend + alert + ready per repo
+  └──▶ mq-agent stack release-check
+      VERSION, CHANGELOG, branch, clean tree
+  └──▶ mq-agent stack release-notes
+      commits since last tag, per repo
+  └──▶ mq-agent stack contract-check
+      .mq/repo-contract.json + VERSION sync
+  └──▶ GitHub Actions MQ Stack Gate
+      CI-enforced contract + release checks
 ```
 
 History persists across runs — trend and regression data accumulates automatically.
@@ -213,8 +247,8 @@ set of browser-based client readiness tools under `docs/`.
 
 It is both:
 
-- a technical profile for my systems and automation work
-- a working static toolkit for endpoint readiness and validation demos
+* a technical profile for my systems and automation work
+* a working static toolkit for endpoint readiness and validation demos
 
 Live site:
 
@@ -275,15 +309,20 @@ client state -> readiness profile -> pass/fail signals -> support-ready report
 
 Public entrypoints:
 
-- [`docs/index.html`](docs/index.html) - landing page for the client tools
-- [`docs/client-readiness-check.html`](docs/client-readiness-check.html) - v1 browser readiness check
-- [`docs/client-readiness-v2.html`](docs/client-readiness-v2.html) - multi-profile diagnostics
+* [`docs/index.html`](docs/index.html) - landing page for the client tools
+* [`docs/client-readiness-check.html`](docs/client-readiness-check.html)
+  v1 browser readiness check.
+* [`docs/client-readiness-v2.html`](docs/client-readiness-v2.html)
+  multi-profile diagnostics.
 
 Helper entrypoints:
 
-- [`helper/client_readiness_agent.py`](helper/client_readiness_agent.py) - local read-only helper API
-- [`helper/client_readiness_agent_v2.py`](helper/client_readiness_agent_v2.py) - v2 data collector
-- [`helper/client_helper.py`](helper/client_helper.py) - experimental helper surface
+* [`helper/client_readiness_agent.py`](helper/client_readiness_agent.py)
+  local read-only helper API.
+* [`helper/client_readiness_agent_v2.py`](helper/client_readiness_agent_v2.py)
+  v2 data collector.
+* [`helper/client_helper.py`](helper/client_helper.py)
+  experimental helper surface.
 
 The v2 page reads data in this order:
 
@@ -310,21 +349,21 @@ surfaces, system maps, and workflows designed for fast operational scanning.
 
 Tools that make client state visible before production access fails.
 
-- IGEL OS 12 and eLux baseline checks
-- Citrix access readiness
-- browser-visible endpoint signals
-- local helper-assisted diagnostics
-- support-friendly reports
+* IGEL OS 12 and eLux baseline checks
+* Citrix access readiness
+* browser-visible endpoint signals
+* local helper-assisted diagnostics
+* support-friendly reports
 
 ### Automation Surfaces
 
 Command surfaces that turn scattered scripts into structured workflows.
 
-- terminal-native menus
-- repeatable release checks
-- repo intelligence workflows
-- local assistant tooling
-- safe operator prompts
+* terminal-native menus
+* repeatable release checks
+* repo intelligence workflows
+* local assistant tooling
+* safe operator prompts
 
 ### Systems Thinking
 
@@ -350,10 +389,10 @@ Architecture:
 
 ![macos-scripts architecture](docs/macos-scripts-architecture.png)
 
-- one entrypoint
-- modular scripts underneath
-- discoverable terminal workflows
-- automation without hiding execution
+* one entrypoint
+* modular scripts underneath
+* discoverable terminal workflows
+* automation without hiding execution
 
 ---
 
@@ -413,23 +452,36 @@ Part of:
 
 ## Case Thinking
 
-| Area | Problem | Approach | Result |
-| --- | --- | --- | --- |
-| macos-scripts | Scripts were useful but scattered | One modular command surface | Faster discovery and repeatable execution |
-| Client readiness | Enterprise clients fail when readiness is assumed | Browser + helper validation | Clear support signals before access breaks |
-| Endpoint validation | Client posture is hard to explain under pressure | Baselines, profiles, reports | Shared language for operators and architects |
-| GUI-to-CLI learning | GUI actions hide operational commands | Mirror actions as terminal equivalents | Better documentation and operator confidence |
-| Stack health | Repo quality drifts invisibly across eight repos | Automated sweep + history + alerts + CI gates | Regression caught before it reaches release |
+* `macos-scripts`
+  Problem: useful scripts were scattered.
+  Approach: one modular command surface.
+  Result: faster discovery and repeatable execution.
+* `Client readiness`
+  Problem: enterprise clients fail when readiness is assumed.
+  Approach: browser plus helper validation.
+  Result: clear support signals before access breaks.
+* `Endpoint validation`
+  Problem: client posture is hard to explain under pressure.
+  Approach: baselines, profiles, and reports.
+  Result: shared language for operators and architects.
+* `GUI-to-CLI learning`
+  Problem: GUI actions hide operational commands.
+  Approach: mirror actions as terminal equivalents.
+  Result: better documentation and operator confidence.
+* `Stack health`
+  Problem: repo quality drifts invisibly across the stack.
+  Approach: automated sweep, history, alerts, and CI gates.
+  Result: regression caught before it reaches release.
 
 ---
 
 ## Technical Shape
 
-- **Endpoint & EUC:** Citrix, IGEL OS, eLux, Intune, SCCM
-- **Infrastructure:** Active Directory, VMware, Windows, Linux
-- **Security:** Zero Trust, certificates, identity, access patterns
-- **Automation:** Python, Bash, Zsh, CLI workflows
-- **Architecture:** client readiness, validation, structured systems
+* **Endpoint & EUC:** Citrix, IGEL OS, eLux, Intune, SCCM
+* **Infrastructure:** Active Directory, VMware, Windows, Linux
+* **Security:** Zero Trust, certificates, identity, access patterns
+* **Automation:** Python, Bash, Zsh, CLI workflows
+* **Architecture:** client readiness, validation, structured systems
 
 ---
 
@@ -462,7 +514,8 @@ Near-term: keep tightening client readiness diagnostics, improve the static Page
 experience, and turn the strongest endpoint validation patterns into reusable case
 studies under [`cases/`](cases/).
 
-For the MQ stack: the stack control plane is now CI-enforced on `mq-agent` main —
+For the MQ stack: the stack control plane is now CI-enforced on
+`mq-agent` main —
 `sweep`, `history`, `alert`, `report`, `release-check`, `release-notes`, and
 `contract-check` are covered by one orchestrator, with GitHub Actions running
 `contract-check` and `release-check` on PRs and pushes to `main`.
@@ -474,11 +527,11 @@ export so CI/local gate results become long-term architecture memory.
 
 ## How I Work
 
-- reduce complexity instead of adding layers
-- make operational state visible
-- balance security with usability
-- build tools that can be explained under pressure
-- prefer repeatable workflows over heroic manual fixes
+* reduce complexity instead of adding layers
+* make operational state visible
+* balance security with usability
+* build tools that can be explained under pressure
+* prefer repeatable workflows over heroic manual fixes
 
 ```text
 real problems -> real constraints -> practical systems
@@ -488,9 +541,9 @@ real problems -> real constraints -> practical systems
 
 ## Connect
 
-- Website: <https://mcamner.com>
-- LinkedIn: <https://www.linkedin.com/in/mattias-camner-75958022>
-- Art platform: <https://blackiris.se>
+* Website: <https://mcamner.com>
+* LinkedIn: <https://www.linkedin.com/in/mattias-camner-75958022>
+* Art platform: <https://blackiris.se>
 
 ---
 
