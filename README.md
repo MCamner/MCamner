@@ -19,15 +19,86 @@ messy last mile where systems either work for users or quietly fail.
 
 ## In short
 
-I build local-first tools for endpoint readiness, automation, and AI-assisted operations.
+I build practical architecture systems that connect infrastructure, automation,
+endpoint management, and local AI into controlled, reviewable workflows.
 
-My work focuses on turning messy infrastructure signals into clear, repeatable actions
-for support, architecture, and operations teams.
+The common thread is governance: local-first tools, explicit safety boundaries,
+repeatable checks, and enough structure that an operator can understand what
+will happen before anything changes.
 
-The MQ stack is the core of that work: eight repos that together take a local git repo
-or operational screenshot and produce scored health signals, release gates, regression
-alerts, contract checks, CI-enforced stack gates, and structured reviews — all without
-leaving the terminal.
+The MQ stack is the core of that work: a set of repos that take a local git repo,
+endpoint workflow, or operational screenshot and turn it into scored health
+signals, release gates, regression alerts, contract checks, CI-enforced stack
+checks, and structured reviews.
+
+```text
+infrastructure / endpoint / repo -> structured signal -> reviewed action
+```
+
+---
+
+## Portfolio Map
+
+### Architecture & Infrastructure
+
+* [zephyr-workbench](https://github.com/MCamner/zephyr-workbench)
+* [MCamner](https://github.com/MCamner/MCamner)
+
+Executable architecture, validation, and system maps.
+
+### Local AI / Agent Runtime
+
+* [mq-mcp](https://github.com/MCamner/mq-mcp)
+* [mq-agent](https://github.com/MCamner/mq-agent)
+* [mq-hal](https://github.com/MCamner/mq-hal)
+* [atlas-one](https://github.com/MCamner/atlas-one)
+
+Controlled tool execution, orchestration, and local-first AI workflows.
+
+### Enterprise Endpoint Automation
+
+* [mq-ums](https://github.com/MCamner/mq-ums)
+* [Design-Prototype](https://github.com/MCamner/Design-Prototype)
+
+IGEL, Citrix, client readiness, and allowlisted operations.
+
+### Repo Intelligence & Quality Gates
+
+* [repo-signal](https://github.com/MCamner/repo-signal)
+* [mq-image-analyze](https://github.com/MCamner/mq-image-analyze)
+
+Readiness scoring, release gates, and visual review inputs.
+
+### Writing / Knowledge Systems
+
+* [mcamner-journal](https://github.com/MCamner/mcamner-journal)
+* [atlas-loop](https://github.com/MCamner/atlas-loop)
+
+Reusable prompts, notes, and publishing workflows.
+
+---
+
+## Core Portfolio Repos
+
+These are the six repos that best describe the architecture story:
+
+* MCamner — portfolio and case surface
+* mq-mcp — deterministic MCP runtime
+* mq-agent — terminal agent orchestrator
+* repo-signal — repo readiness engine
+* mq-ums — IGEL UMS operator UI
+* zephyr-workbench — architecture workbench
+
+---
+
+## Trust Signals
+
+* local-first execution by default
+* explicit safety classes and allowlisted actions
+* release gates, readiness scoring, and regression checks
+* GitHub Pages demos where a visual surface helps
+* MIT licensing on the main portfolio repos where reuse is intended
+* documented boundaries between runtime, orchestration, and operators
 
 ---
 
