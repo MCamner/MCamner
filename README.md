@@ -15,6 +15,13 @@ I work where infrastructure, security, endpoint platforms, and operations meet:
 Citrix, IGEL OS, eLux, Intune, identity, certificates, client health, and the
 messy last mile where systems either work for users or quietly fail.
 
+## Portfolio snapshot
+
+* Endpoint readiness: Citrix, IGEL OS, eLux, Intune, certificates, and client health
+* Local-first automation: terminal workflows, release gates, and repo scoring
+* AI governance: MCP tools, safety classes, contracts, and reviewed actions
+* Architecture style: practical systems, visible state, and repeatable operations
+
 ---
 
 ## In short
