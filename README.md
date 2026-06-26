@@ -8,12 +8,18 @@
 I build practical systems for the operational last mile — where infrastructure, endpoints, certificates, identity, automation, and real users either connect or fail.
 
 <pre>
-enterprise complexity
-→ operational signal
-→ scored readiness
-→ safe automation
-→ reviewed action
-→ long-term technical memory
+        enterprise complexity
+                  │
+                  ▼
+   ╭──────────────────────────╮
+   │   operational signal      │
+   │   scored readiness        │
+   │   safe automation         │
+   │   reviewed action         │
+   ╰──────────────────────────╯
+                  │
+                  ▼
+      long-term technical memory
 </pre>
 
 [Journal](https://mcamner.github.io/mcamner-journal/) ·
