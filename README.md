@@ -7,20 +7,7 @@
 
 I build practical systems for the operational last mile — where infrastructure, endpoints, certificates, identity, automation, and real users either connect or fail.
 
-<pre>
-      enterprise complexity
-                │
-                ▼
-   ╭──────────────────────────╮
-   │    operational signal    │
-   │     scored readiness     │
-   │      safe automation     │
-   │      reviewed action     │
-   ╰──────────────────────────╯
-                │
-                ▼
-    long-term technical memory
-</pre>
+<img src="docs/operating-model.png" alt="Operating model: enterprise complexity through operational signal, scored readiness, safe automation, and reviewed action into long-term technical memory" width="560">
 
 [Journal](https://mcamner.github.io/mcamner-journal/) ·
 [LinkedIn](https://www.linkedin.com/in/mattias-camner-75958022) ·

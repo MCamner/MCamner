@@ -1,0 +1,54 @@
+<svg width="760" height="470" viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#1f2733" flood-opacity="0.10"/>
+    </filter>
+    <filter id="softDark" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#1f2733" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <!-- canvas -->
+  <rect x="40" y="26" width="680" height="424" rx="20" fill="#f7f9fb" stroke="#e6ebf1" stroke-width="1.5"/>
+
+  <!-- input anchor -->
+  <rect x="240" y="54" width="280" height="54" rx="13" fill="#ffffff" stroke="#dde3ec" stroke-width="1.5" filter="url(#soft)"/>
+  <text x="380" y="86" text-anchor="middle" font-size="17.5" font-weight="600" fill="#2a3038">enterprise complexity</text>
+
+  <!-- connector 1 -->
+  <line x1="380" y1="108" x2="380" y2="148" stroke="#cdd5df" stroke-width="2"/>
+  <circle cx="380" cy="128" r="3.5" fill="#2bb673"/>
+
+  <!-- process band -->
+  <rect x="208" y="148" width="344" height="208" rx="16" fill="#eef2f7" stroke="#e0e6ee" stroke-width="1.5"/>
+
+  <!-- stage rows -->
+  <g>
+    <rect x="230" y="164" width="300" height="38" rx="10" fill="#ffffff" stroke="#e7ecf3" stroke-width="1.2"/>
+    <circle cx="255" cy="183" r="5" fill="#2bb673"/>
+    <text x="275" y="188" font-size="15.5" font-weight="500" fill="#333a43">operational signal</text>
+  </g>
+  <g>
+    <rect x="230" y="210" width="300" height="38" rx="10" fill="#ffffff" stroke="#e7ecf3" stroke-width="1.2"/>
+    <circle cx="255" cy="229" r="5" fill="#2f80ed"/>
+    <text x="275" y="234" font-size="15.5" font-weight="500" fill="#333a43">scored readiness</text>
+  </g>
+  <g>
+    <rect x="230" y="256" width="300" height="38" rx="10" fill="#ffffff" stroke="#e7ecf3" stroke-width="1.2"/>
+    <circle cx="255" cy="275" r="5" fill="#f2994a"/>
+    <text x="275" y="280" font-size="15.5" font-weight="500" fill="#333a43">safe automation</text>
+  </g>
+  <g>
+    <rect x="230" y="302" width="300" height="38" rx="10" fill="#ffffff" stroke="#e7ecf3" stroke-width="1.2"/>
+    <circle cx="255" cy="321" r="5" fill="#9b6dd6"/>
+    <text x="275" y="326" font-size="15.5" font-weight="500" fill="#333a43">reviewed action</text>
+  </g>
+
+  <!-- connector 2 -->
+  <line x1="380" y1="356" x2="380" y2="396" stroke="#cdd5df" stroke-width="2"/>
+  <circle cx="380" cy="376" r="3.5" fill="#2bb673"/>
+
+  <!-- durable output anchor -->
+  <rect x="226" y="396" width="308" height="54" rx="13" fill="#232b36" filter="url(#softDark)"/>
+  <text x="380" y="428" text-anchor="middle" font-size="17.5" font-weight="600" fill="#f4f6f9">long-term technical memory</text>
+</svg>
