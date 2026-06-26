@@ -1,20 +1,26 @@
 # Mattias Camner
 
-<!-- markdownlint-disable MD013 -->
+<div align="center">
 
-**Infrastructure / Endpoint / Automation Architect**  
-Stockholm, Sweden
+### Infrastructure / Endpoint / Automation Architect  
+**Local-first automation · Endpoint readiness · Repo intelligence · Governed AI operations**
 
-I build practical systems where infrastructure, automation, endpoint platforms, and usability work together.
+I build practical systems for the operational last mile — where infrastructure, endpoints, certificates, identity, automation, and real users either connect or fail.
 
-My work focuses on the operational last mile: the point where architecture, security, endpoints, certificates, identity, automation, and real users either connect — or quietly fail.
+<pre>
+enterprise complexity
+→ operational signal
+→ scored readiness
+→ safe automation
+→ reviewed action
+→ long-term technical memory
+</pre>
 
-```text
-complex enterprise environment
-→ clear operational signals
-→ safer decisions
-→ repeatable action
-```
+[Journal](https://mcamner.github.io/mcamner-journal/) ·
+[LinkedIn](https://www.linkedin.com/in/mattias-camner-75958022) ·
+[Black Iris](https://blackiris.se/)
+
+</div>
 
 ---
 
@@ -24,13 +30,13 @@ I build local-first systems for infrastructure validation, endpoint readiness, r
 
 The common thread is simple:
 
-```text
+<pre>
 repo / endpoint / screenshot / workflow
 → structured signal
 → scored readiness
 → reviewable action
 → long-term operational memory
-```
+</pre>
 
 I care about tools that make state visible, decisions explainable, and automation safe enough to trust under real operational pressure.
 
@@ -55,7 +61,7 @@ The **MQ stack** is my local-first operating layer for infrastructure work, repo
 It turns local technical work into structured signals, release checks, review outputs, and reusable knowledge.
 
 | Repository | Purpose |
-| --- | --- |
+|---|---|
 | [`macos-scripts`](https://github.com/MCamner/macos-scripts) | Terminal entrypoint, launcher menus, local workflows, and system tools |
 | [`mq-agent`](https://github.com/MCamner/mq-agent) | Terminal-native orchestrator for sweeps, release gates, alerts, reviews, and workflow execution |
 | [`mq-mcp`](https://github.com/MCamner/mq-mcp) | Deterministic MCP runtime for safe tool execution, policy gates, contracts, and local AI governance |
@@ -84,13 +90,13 @@ It usually fails because something is almost right:
 
 My work is about closing those gaps.
 
-```text
+<pre>
 almost ready
 → measured
 → explained
 → corrected
 → repeatable
-```
+</pre>
 
 ---
 
@@ -186,7 +192,7 @@ Repo: [`mq-ums`](https://github.com/MCamner/mq-ums)
 
 ## Example workflow
 
-```text
+<pre>
 terminal
 → mqlaunch
 → mq-agent stack sweep
@@ -194,18 +200,18 @@ terminal
 → mq-agent reports trend, readiness, alerts, and blockers
 → release gates catch drift before merge
 → mqobsidian stores long-term architecture memory
-```
+</pre>
 
 The pattern:
 
-```text
+<pre>
 local work
 → structured signal
 → review
 → gate
 → memory
 → better future context
-```
+</pre>
 
 ---
 
@@ -265,7 +271,7 @@ The next stage of my work is about connecting local repositories, endpoint opera
 
 The target is a practical architecture loop:
 
-```text
+<pre>
 work session
 → repo or endpoint signal
 → review output
@@ -273,7 +279,7 @@ work session
 → decision record
 → reusable memory
 → better next action
-```
+</pre>
 
 This is the direction behind the MQ stack.
 
