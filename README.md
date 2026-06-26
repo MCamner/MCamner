@@ -72,6 +72,14 @@ It turns local technical work into structured signals, release checks, review ou
 | [`atlas-one`](https://github.com/MCamner/atlas-one) | Prompt routing studio and structured AI workflow design |
 | [`mqobsidian`](https://github.com/MCamner/mqobsidian) | Obsidian-based single source of truth for stack memory, decisions, and system context |
 
+<div align="center">
+
+![macos-scripts architecture](docs/macos-scripts-architecture.png)
+
+<sub>One entrypoint, layered workflows — the operating model the MQ stack is built on.</sub>
+
+</div>
+
 ---
 
 ## Core architecture idea
