@@ -2,6 +2,11 @@
 
 <div align="center">
 
+[![CI](https://github.com/MCamner/MCamner/actions/workflows/ci.yml/badge.svg)](https://github.com/MCamner/MCamner/actions/workflows/ci.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-live-2ea44f)](https://mcamner.github.io/MCamner/)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue)](VERSION)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 ### Infrastructure / Endpoint / Automation Architect  
 **Local-first automation · Endpoint readiness · Repo intelligence · Governed AI operations**
 
@@ -14,6 +19,52 @@ I build practical systems for the operational last mile — where infrastructure
 [Black Iris](https://blackiris.se/)
 
 </div>
+
+---
+
+## Quick start
+
+Open the public client tools:
+
+- [MCamner Client Tools](https://mcamner.github.io/MCamner/)
+- [Client Readiness Check](https://mcamner.github.io/MCamner/client-readiness-check.html)
+- [Diagnostics v2](https://mcamner.github.io/MCamner/client-readiness-v2.html)
+
+This repo contains both my GitHub profile and a static GitHub Pages surface for endpoint readiness and client validation tools.
+
+---
+
+## What is in this repo?
+
+- `docs/` - GitHub Pages site for client readiness tools.
+- `helper/` - local helper agents for live endpoint data.
+- `cases/` - short case notes for endpoint, identity, and secure workplace patterns.
+- `examples/` - public-safe examples.
+- `ROADMAP.md` - current direction and next improvements.
+
+---
+
+## Demo
+
+The GitHub Pages site is the live demo for the public client-readiness surface:
+
+- [Open the tool landing page](https://mcamner.github.io/MCamner/)
+- [Run the readiness check](https://mcamner.github.io/MCamner/client-readiness-check.html)
+- [Open Diagnostics v2](https://mcamner.github.io/MCamner/client-readiness-v2.html)
+
+---
+
+## Examples
+
+- Use the readiness check to validate endpoint prerequisites before client rollout.
+- Use Diagnostics v2 to inspect client-side readiness signals.
+- Read `cases/` for public-safe examples of endpoint, identity, and secure workplace patterns.
+
+---
+
+## Roadmap
+
+Current direction and next improvements are tracked in [`ROADMAP.md`](ROADMAP.md).
 
 ---
 
