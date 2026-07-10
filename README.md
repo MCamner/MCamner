@@ -22,6 +22,12 @@ I build a local AI operating system for infrastructure, endpoint readiness, repo
 
 </div>
 
+## Start here
+
+- **[Run the client readiness tools](https://mcamner.github.io/MCamner/)** — test the public endpoint-readiness surface.
+- **[See how the system works](docs/OPERATING_MODEL.md)** — follow the signal, score, gate, and memory loop.
+- **[Explore the terminal entrypoint](https://github.com/MCamner/macos-scripts)** — start with the front door to the MQ stack.
+
 ## What I build
 
 The MQ stack connects local repositories, endpoint operations, and AI-assisted engineering through one practical loop:
