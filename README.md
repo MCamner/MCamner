@@ -2,6 +2,11 @@
 
 <div align="center">
 
+[![CI](https://github.com/MCamner/MCamner/actions/workflows/ci.yml/badge.svg)](https://github.com/MCamner/MCamner/actions/workflows/ci.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-live-2ea44f)](https://mcamner.github.io/MCamner/)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue)](VERSION)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 ### Infrastructure / Endpoint / Automation Architect
 
 **Endpoint readiness · Repo intelligence · Governed AI operations**
