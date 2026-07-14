@@ -11,11 +11,11 @@
 
 **Endpoint readiness · Repo intelligence · Governed AI operations**
 
-I build a local AI operating system for infrastructure, endpoint readiness, repo intelligence, and safe automation.
+I build local tools that turn infrastructure, endpoint, and repository state into safer, reviewable automation.
 
 <img src="docs/operating-model.png" alt="Operating model: enterprise complexity becomes operational signal, scored readiness, safe automation, reviewed action, and technical memory" width="560">
 
-[Client tools](https://mcamner.github.io/MCamner/) ·
+[Run readiness tools](https://mcamner.github.io/MCamner/) ·
 [Journal](https://mcamner.github.io/mcamner-journal/) ·
 [LinkedIn](https://www.linkedin.com/in/mattias-camner-75958022) ·
 [Black Iris](https://blackiris.se/)
@@ -53,6 +53,7 @@ The focus is operational: make state visible, decisions explainable, and automat
 | [`repo-signal`](https://github.com/MCamner/repo-signal) | Scores repo readiness and exports structured AI context |
 | [`mq-image-analyze`](https://github.com/MCamner/mq-image-analyze) | Extracts operational signal from screenshots and UI states |
 | [`mq-ums`](https://github.com/MCamner/mq-ums) | Provides a gated operator surface for IGEL UMS workflows |
+| [`mqobsidian`](https://github.com/MCamner/mqobsidian) | Single source of truth: technical memory, decisions, and exported agent context |
 
 [Explore the full MQ ecosystem](docs/MQ_ECOSYSTEM.md)
 
