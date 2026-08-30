@@ -11,7 +11,7 @@
 
 **Endpoint readiness · Repo intelligence · Governed AI operations**
 
-I build local tools that turn infrastructure, endpoint, and repository state into safer, reviewable automation.
+I build reviewable tools for endpoint readiness, repository intelligence, and governed local AI operations.
 
 <img src="docs/operating-model.png" alt="Operating model: enterprise complexity becomes operational signal, scored readiness, safe automation, reviewed action, and technical memory" width="560">
 
@@ -24,9 +24,25 @@ I build local tools that turn infrastructure, endpoint, and repository state int
 
 ## Start here
 
-- **[Run the client readiness tools](https://mcamner.github.io/MCamner/)** — test the public endpoint-readiness surface.
-- **[See how the system works](docs/OPERATING_MODEL.md)** — follow the signal, score, gate, and memory loop.
-- **[Explore the terminal entrypoint](https://github.com/MCamner/macos-scripts)** — start with the front door to the MQ stack.
+| I need endpoint readiness | I want to understand the MQ architecture |
+|---|---|
+| **[Run the browser check](https://mcamner.github.io/MCamner/client-readiness-check.html)** for a fast, browser-visible validation. | **[Follow the operating model](docs/OPERATING_MODEL.md)** from signal and score to policy gate and reusable memory. |
+| **[Open Diagnostics v2](https://mcamner.github.io/MCamner/client-readiness-v2.html)** for profile-based evaluation and helper-enriched evidence. | **[Explore `macos-scripts`](https://github.com/MCamner/macos-scripts)** as the terminal entrypoint to the stack. |
+
+## Client readiness in practice
+
+The public demo evaluates endpoint signals against explicit profiles, shows the evidence behind every result, and provides remediation suitable for review by support or operations.
+
+[![Client Readiness Diagnostics v2 showing a sanitized IGEL and Citrix profile evaluation](docs/screenshots/client-readiness-v2.png)](https://mcamner.github.io/MCamner/client-readiness-v2.html)
+
+### Browser check or local helper?
+
+| Mode | What it can inspect | Best for |
+|---|---|---|
+| Browser-only | Browser, secure context, display, locale, timezone, and basic endpoint reachability | Fast first-line validation with no installation |
+| Browser + read-only helper | OS, network, certificates, smartcard, Citrix, management signals, and named baselines | Deeper diagnostics and repeatable operational evidence |
+
+The page automatically falls back to browser-only checks when the helper is unavailable. See the [helper setup and deployment guide](helper/README.md) for the standard-library-only local agent.
 
 ## What I build
 
@@ -69,18 +85,8 @@ The focus is operational: make state visible, decisions explainable, and automat
 
 The model favors signal before action, local execution, explicit policy gates, and reusable technical memory. [Read the operating model](docs/OPERATING_MODEL.md).
 
-## Selected repos
-
-- **[`macos-scripts`](https://github.com/MCamner/macos-scripts)** — the terminal front door for MQ workflows, diagnostics, and stack control.
-- **[`mq-agent`](https://github.com/MCamner/mq-agent)** — coordinates repo intelligence and operational workflows without hiding what happens.
-- **[`mq-mcp`](https://github.com/MCamner/mq-mcp)** — makes AI tool use predictable through contracts, policy gates, and explicit boundaries.
-- **[`repo-signal`](https://github.com/MCamner/repo-signal)** — turns repository state into readiness scores, release checks, and agent context.
-
 [More project notes](docs/PROJECTS.md) · [Security and public-data policy](docs/SECURITY.md)
 
 ## Connect
 
-- [Client readiness tools](https://mcamner.github.io/MCamner/)
-- [Technical journal](https://mcamner.github.io/mcamner-journal/)
-- [LinkedIn](https://www.linkedin.com/in/mattias-camner-75958022)
-- [Black Iris](https://blackiris.se/)
+[Technical journal](https://mcamner.github.io/mcamner-journal/) · [LinkedIn](https://www.linkedin.com/in/mattias-camner-75958022) · [Black Iris](https://blackiris.se/)
