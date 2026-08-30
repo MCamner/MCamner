@@ -6,7 +6,7 @@
     "platform": "Darwin",
     "platform_release": "25.4.0",
     "machine": "arm64",
-    "hostname": "Zephyr.local",
+    "hostname": "client-01.local",
     "capabilities": [
       "certificates.details",
       "certificates.installed",
@@ -1190,9 +1190,9 @@
   },
   "network": {
     "online": true,
-    "hostname": "Zephyr.local",
+    "hostname": "client-01.local",
     "local_ips": [
-      "192.168.0.61"
+      "192.0.2.10"
     ]
   }
 }

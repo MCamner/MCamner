@@ -87,10 +87,15 @@
     .PASS { color: #0a7a2f; font-weight: bold; }
     .FAIL { color: #b42318; font-weight: bold; }
     .WARN { color: #b26a00; font-weight: bold; }
+    td.value-cell {
+      max-width: 260px;
+    }
     pre {
       margin: 0;
       white-space: pre-wrap;
       word-break: break-word;
+      max-height: 12em;
+      overflow: auto;
     }
   </style>
 </head>
@@ -415,6 +420,18 @@
       });
     }
 
+    function formatValueForDisplay(value, limit) {
+      const max = limit || 15;
+      if (Array.isArray(value) && value.length > max) {
+        const shown = value.slice(0, max);
+        return (
+          JSON.stringify(shown, null, 2) +
+          `\n… and ${value.length - max} more (see full JSON export for the rest)`
+        );
+      }
+      return JSON.stringify(value, null, 2);
+    }
+
     function renderResults(results) {
       const body = document.getElementById("results-body");
       clearElement(body);
@@ -426,8 +443,8 @@
           result.title,
           result.status,
           result.severity,
-          JSON.stringify(result.expected, null, 2),
-          JSON.stringify(result.actual, null, 2),
+          formatValueForDisplay(result.expected),
+          formatValueForDisplay(result.actual),
           result.evidence,
           result.remediation || ""
         ];
@@ -438,6 +455,7 @@
             cell.className = result.status;
           }
           if (index === 4 || index === 5) {
+            cell.classList.add("value-cell");
             const pre = document.createElement("pre");
             pre.textContent = field;
             cell.appendChild(pre);

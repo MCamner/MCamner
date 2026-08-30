@@ -1,8 +1,33 @@
 {
+  "meta": {
+    "agent_version": "1.0.0-sample",
+    "baseline_version": "sample",
+    "profile": "igel-os12-citrix",
+    "platform": "Sample",
+    "platform_release": "n/a",
+    "machine": "sample",
+    "hostname": "sample-client",
+    "capabilities": [
+      "certificates.details",
+      "certificates.installed",
+      "citrix.installed",
+      "citrix.version"
+    ]
+  },
   "certificates": {
     "installed": [
       "Company Root CA",
       "Company Issuing CA"
+    ],
+    "details": [
+      {
+        "name": "Company Root CA",
+        "not_after": "2031-01-01T00:00:00Z"
+      },
+      {
+        "name": "Company Issuing CA",
+        "not_after": "2029-01-01T00:00:00Z"
+      }
     ]
   },
   "citrix": {
