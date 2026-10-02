@@ -64,6 +64,7 @@ The focus is operational: make state visible, decisions explainable, and automat
 | Repository | Role |
 |---|---|
 | [`macos-scripts`](https://github.com/MCamner/macos-scripts) | Terminal entrypoint and local workflow toolkit |
+| [`mq-hal`](https://github.com/MCamner/mq-hal) | Operator layer for repo, stack, release, and runtime status with safe command routing |
 | [`mq-agent`](https://github.com/MCamner/mq-agent) | Orchestrates sweeps, reviews, release gates, and alerts |
 | [`mq-mcp`](https://github.com/MCamner/mq-mcp) | Policy-bound MCP runtime for controlled tool execution |
 | [`mqobsidian`](https://github.com/MCamner/mqobsidian) | Single source of truth: technical memory, decisions, and exported agent context |

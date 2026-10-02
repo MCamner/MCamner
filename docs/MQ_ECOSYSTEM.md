@@ -10,7 +10,7 @@ The MQ stack is a set of focused local tools for infrastructure work, endpoint o
 | [`repo-signal`](https://github.com/MCamner/repo-signal) | Repo readiness scoring, release checks, and AI-context exports |
 | [`mq-image-analyze`](https://github.com/MCamner/mq-image-analyze) | Screenshot, OCR, UI-state, and visual-analysis workflows |
 | [`mq-ums`](https://github.com/MCamner/mq-ums) | Allowlisted PowerShell actions for safer IGEL UMS operations |
-| [`mq-hal`](https://github.com/MCamner/mq-hal) | Natural-language routing for safe local commands |
+| [`mq-hal`](https://github.com/MCamner/mq-hal) | Operator layer: repo, stack, release, and runtime status, check-to-check changes, and safe natural-language command routing |
 | [`atlas-one`](https://github.com/MCamner/atlas-one) | Prompt routing and structured AI workflow design |
 | [`mqobsidian`](https://github.com/MCamner/mqobsidian) | Architecture memory, decisions, and long-term stack context |
 
