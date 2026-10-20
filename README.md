@@ -64,13 +64,26 @@ The focus is operational: make state visible, decisions explainable, and automat
 | Repository | Role |
 |---|---|
 | [`macos-scripts`](https://github.com/MCamner/macos-scripts) | Terminal entrypoint and local workflow toolkit |
-| [`mq-hal`](https://github.com/MCamner/mq-hal) | Operator layer for repo, stack, release, and runtime status with safe command routing |
-| [`mq-agent`](https://github.com/MCamner/mq-agent) | Orchestrates sweeps, reviews, release gates, and alerts |
+| [`mq-hal`](https://github.com/MCamner/mq-hal) | Operator views for repo, stack, release, runtime, and changed-file verification, with safe command routing |
+| [`mq-agent`](https://github.com/MCamner/mq-agent) | Orchestrates workflows, reviews, release gates, and repo-owned checks with code-bound verification receipts |
 | [`mq-mcp`](https://github.com/MCamner/mq-mcp) | Policy-bound MCP runtime for controlled tool execution |
-| [`mqobsidian`](https://github.com/MCamner/mqobsidian) | Single source of truth: technical memory, decisions, and exported agent context |
-| [`repo-signal`](https://github.com/MCamner/repo-signal) | Scores repo readiness and exports structured AI context |
+| [`mqobsidian`](https://github.com/MCamner/mqobsidian) | Durable technical memory, reviewed decisions, and compact agent context; current code and runtime remain authoritative in their source repos |
+| [`repo-signal`](https://github.com/MCamner/repo-signal) | Reports structural readiness separately from existing verification evidence, and exports structured AI context |
 | [`mq-image-analyze`](https://github.com/MCamner/mq-image-analyze) | Extracts operational signal from screenshots and UI states |
 | [`mq-ums`](https://github.com/MCamner/mq-ums) | Provides a gated operator surface for IGEL UMS workflows |
+
+### Evidence before action
+
+A high structure score is not proof that tests passed. `mq-agent` runs repo-owned
+checks and binds receipts to the observed code; changed code can make a receipt
+stale. `repo-signal doctor --verification` consumes existing receipt validation,
+and HAL's audit and stack views present `PASS`, `FAIL`, `STALE`, or
+`NOT_VERIFIED` separately from structural scores and runtime health. Those views
+start no tests. A PASS covers changed files against the selected base, not a full
+CI run or release approval; absent evidence stays unverified.
+
+See the [repo-signal verification contract](https://github.com/MCamner/repo-signal/blob/main/docs/DOCTOR_SCHEMA.md#verification-evidence-additive)
+and [HAL operator commands](https://github.com/MCamner/mq-hal/blob/main/docs/COMMAND_SURFACE.md#changed-file-verification).
 
 [Explore the full MQ ecosystem](docs/MQ_ECOSYSTEM.md)
 
