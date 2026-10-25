@@ -31,7 +31,7 @@
       grid-template-columns: 1fr;
     }
     .summary {
-      grid-template-columns: repeat(4, minmax(120px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
     .card {
       border: 1px solid #ddd;
@@ -70,7 +70,8 @@
     select {
       padding: 0.5rem;
       font-size: 1rem;
-      min-width: 280px;
+      width: 100%;
+      min-width: 0;
     }
     table {
       width: 100%;
@@ -97,6 +98,19 @@
       max-height: 12em;
       overflow: auto;
     }
+    * { box-sizing: border-box; }
+    .toolbar[aria-label] { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+    .toolbar[aria-label] > label { grid-column: 1 / -1; }
+    .meta, .warning { overflow-wrap: anywhere; }
+    .results-scroll { overflow-x: auto; max-width: 100%; }
+    .results-scroll table { min-width: 850px; }
+    .results-scroll:focus-visible { outline: 3px solid #9c6500; }
+    button { padding: .65rem .85rem; cursor: pointer; }
+    button:disabled { cursor: default; opacity: .5; }
+    button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #9c6500; outline-offset: 3px; }
+    .NOT_CHECKED, .UNSUPPORTED { color: #805600; }
+    .ERROR { color: #a02020; font-weight: bold; }
+    #data-status { display: block; }
   </style>
 </head>
 <body>
@@ -111,6 +125,18 @@
     </div>
   </div>
 
+  <div class="toolbar" aria-label="Report actions">
+    <button id="refresh-data" type="button">Refresh measurement</button>
+    <button id="import-report" type="button">Import JSON report</button>
+    <input id="report-file" type="file" accept="application/json,.json" hidden>
+    <button id="export-json" type="button" disabled>Export JSON</button>
+    <button id="export-html" type="button" disabled>Export HTML</button>
+    <button id="copy-summary" type="button" disabled>Copy support summary</button>
+    <label><input id="mask-report" type="checkbox" checked> Mask known identity fields in exports</label>
+  </div>
+  <p id="report-feedback" role="status" aria-live="polite"></p>
+  <div id="data-status" class="warning" role="status" aria-live="polite"></div>
+  <textarea id="summary-copy" readonly hidden aria-label="Support summary" rows="8" style="width:100%"></textarea>
   <div id="profile-warning" class="warning"></div>
   <div id="meta" class="meta"></div>
   <div id="summary" class="summary"></div>
@@ -122,6 +148,7 @@
   <div id="smartcard" class="meta"></div>
 
   <h2>Results</h2>
+  <div class="results-scroll" tabindex="0" role="region" aria-label="Readiness results, scroll horizontally for all columns">
   <table>
     <thead>
       <tr>
@@ -137,9 +164,17 @@
     </thead>
     <tbody id="results-body"></tbody>
   </table>
+  </div>
 
   <script src="evaluator.js"></script>
+  <script src="readiness-report.js"></script>
   <script>
+    const reports = window.ClientReadinessReport;
+    let activeReport = null;
+    let importedProfile = null;
+    let currentPayload = null;
+    let profileIndexState = null;
+    const feedback = message => { document.getElementById("report-feedback").textContent = message; };
     const PROFILE_INDEX_URL = "profiles/index.json";
 
     const DATA_SOURCES = [
@@ -197,7 +232,9 @@
             cache: source.cache
           });
 
+          reports.validateData(data);
           return {
+            errors,
             source: source.key,
             url: source.url,
             data
@@ -295,6 +332,9 @@
       appendTextRow(root, "Platform", helperMeta.platform || "unknown");
       appendTextRow(root, "Release", helperMeta.platform_release || "unknown");
       appendTextRow(root, "Agent version", helperMeta.agent_version || "n/a");
+      appendTextRow(root, "Baseline version", helperMeta.baseline_version || "unknown");
+      appendTextRow(root, "Collected at", helperMeta.collected_at || "unknown");
+      if (activeReport) appendTextRow(root, "Evaluated at", activeReport.evaluated_at);
       appendTextRow(root, "Hostname", helperMeta.hostname || payload.data?.network?.hostname || "unknown");
     }
 
@@ -407,7 +447,9 @@
         ["Passed", summary.passed],
         ["Failed", summary.failed],
         ["Warnings", summary.warnings ?? 0],
-        ["Unsupported", summary.unsupported ?? 0]
+        ["Unsupported", summary.unsupported ?? 0],
+        ["Not checked", summary.not_checked ?? 0],
+        ["Collection errors", summary.errors ?? 0]
       ].forEach(([label, value]) => {
         const card = document.createElement("div");
         const strong = document.createElement("strong");
@@ -506,7 +548,19 @@
 
     async function evaluateSelectedProfile(profileIndex, selectedId, clientPayload) {
       const profileMeta = profileIndex.profiles.find(p => p.id === selectedId);
-      const profile = await loadJson(profileMeta.path, { timeoutMs: 2000, cache: "no-store" });
+      const profile = importedProfile?.profile === selectedId ? importedProfile :
+        await loadJson(profileMeta.path, { timeoutMs: 2000, cache: "no-store" });
+      reports.validateProfile(profile);
+      activeReport = reports.create(profile, clientPayload.data, clientPayload.source, clientPayload.evaluated_at);
+      const freshness = reports.freshness(clientPayload.data);
+      const sourceLabel = clientPayload.source === "live-helper" ? "LIVE MEASUREMENT" :
+        clientPayload.source === "sample-data" ? "DEMO — not your device" :
+        clientPayload.source === "saved-live" ? "SAVED MEASUREMENT — not a current device check" :
+        "IMPORTED REPORT — not a current device check";
+      const banner = document.getElementById("data-status");
+      banner.style.display = "block";
+      banner.textContent = `${sourceLabel}. ${freshness.text}. ${clientPayload.errors?.length ? "Earlier sources unavailable: " + clientPayload.errors.join("; ") : ""}`;
+      for (const id of ["export-json", "export-html", "copy-summary"]) document.getElementById(id).disabled = false;
 
       const helperProfileId = clientPayload?.data?.meta?.profile || null;
 
@@ -515,7 +569,7 @@
       renderProcesses(clientPayload.data);
       renderSmartcard(clientPayload.data);
 
-      const output = window.ClientReadinessEvaluator.evaluateProfile(profile, clientPayload.data);
+      const output = activeReport;
       renderSummary(output.summary);
       renderResults(output.results);
     }
@@ -527,6 +581,8 @@
           loadClientData()
         ]);
 
+        currentPayload = clientPayload;
+        profileIndexState = profileIndex;
         const helperProfileId = clientPayload?.data?.meta?.profile || null;
         const selectedId = getRequestedProfileId(profileIndex, helperProfileId);
 
@@ -536,12 +592,15 @@
 
         await evaluateSelectedProfile(profileIndex, selectedId, clientPayload);
 
-        select.addEventListener("change", async (event) => {
+        select.onchange = async (event) => {
           const newProfileId = event.target.value;
           updateUrlProfile(newProfileId);
-          await evaluateSelectedProfile(profileIndex, newProfileId, clientPayload);
-        });
+          try {
+            await evaluateSelectedProfile(profileIndexState, newProfileId, currentPayload);
+          } catch (err) { disableReport(); feedback(err.message); }
+        };
       } catch (err) {
+        disableReport();
         const error = document.createElement("p");
         const strong = document.createElement("strong");
         error.style.color = "red";
@@ -552,6 +611,63 @@
       }
     }
 
+    function disableReport() {
+      activeReport = null;
+      for (const id of ["export-json", "export-html", "copy-summary"]) document.getElementById(id).disabled = true;
+      document.getElementById("results-body").textContent = "";
+      document.getElementById("summary").textContent = "";
+      document.getElementById("data-status").textContent = "No current evaluation. Refresh or import a valid report.";
+    }
+    function exportableReport() {
+      if (!activeReport) throw new Error("No evaluated report to export.");
+      return document.getElementById("mask-report").checked ? reports.redact(activeReport) : activeReport;
+    }
+    function download(content, type, name) {
+      const url = URL.createObjectURL(new Blob([content], {type}));
+      const link = document.createElement("a");
+      link.href = url; link.download = name; link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      feedback("Report exported. Review its contents before sharing; masking covers known identity fields.");
+    }
+    document.getElementById("export-json").onclick = () => download(JSON.stringify(exportableReport(), null, 2), "application/json", "client-readiness-report.json");
+    document.getElementById("export-html").onclick = () => download(reports.html(exportableReport()), "text/html", "client-readiness-report.html");
+    document.getElementById("copy-summary").onclick = async () => {
+      const text = reports.summary(exportableReport());
+      try { await navigator.clipboard.writeText(text); feedback("Support summary copied."); }
+      catch (_) {
+        const field = document.getElementById("summary-copy");
+        field.hidden = false; field.value = text; field.focus(); field.select();
+        feedback("Clipboard unavailable. Copy the selected summary manually.");
+      }
+    };
+    document.getElementById("import-report").onclick = () => document.getElementById("report-file").click();
+    document.getElementById("report-file").onchange = async event => {
+      const file = event.target.files[0];
+      if (!file) return;
+      try {
+        if (file.size > 2 * 1024 * 1024) throw new Error("Report exceeds 2 MB.");
+        const report = reports.parse(await file.text());
+        importedProfile = report.profile;
+        currentPayload = {source: "imported (" + report.source + ")", url: "Local JSON file", data: report.data, evaluated_at: report.evaluated_at};
+        profileIndexState = await loadJson(PROFILE_INDEX_URL);
+        if (!profileIndexState.profiles.some(p => p.id === report.profile.profile)) {
+          profileIndexState.profiles.push({id: report.profile.profile, label: report.profile.label || report.profile.profile});
+        }
+        const select = populateProfileSelect(profileIndexState, report.profile.profile);
+        select.onchange = async () => {
+          try { await evaluateSelectedProfile(profileIndexState, select.value, currentPayload); }
+          catch (err) { disableReport(); feedback(err.message); }
+        };
+        await evaluateSelectedProfile(profileIndexState, report.profile.profile, currentPayload);
+        feedback("Imported locally. Results recalculated using the report's profile and evaluation time.");
+      } catch (err) { disableReport(); feedback("Import failed: " + err.message); }
+      event.target.value = "";
+    };
+    document.getElementById("refresh-data").onclick = async () => {
+      disableReport(); importedProfile = null; feedback("Refreshing measurement…");
+      await main();
+      if (activeReport) feedback("Measurement refreshed.");
+    };
     main();
   </script>
 </body>

@@ -12,7 +12,8 @@
       "certificates.installed",
       "citrix.installed",
       "citrix.version"
-    ]
+    ],
+    "collected_at": null
   },
   "certificates": {
     "installed": [
@@ -36,5 +37,6 @@
   },
   "network": {
     "online": true
-  }
+  },
+  "schema_version": "client-readiness.v2"
 }

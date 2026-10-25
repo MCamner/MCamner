@@ -45,6 +45,27 @@ Health endpoint:
 http://127.0.0.1:38765/health
 ```
 
+### Serve v2 diagnostics
+
+The v2 page requires `client-readiness.v2`; the legacy `client_readiness_agent.py`
+server returns a different contract and is rejected by that page. Stop the v1
+server before starting v2 on the same port:
+
+```bash
+python3 helper/client_readiness_agent_v2.py --serve --profile igel-os12-citrix
+```
+
+The v2 server binds to `127.0.0.1:38765`, with `/health` and `/status`.
+It permits the public Pages origin and local previews on port 8000. Add
+`--allow-origin http://localhost:PORT` for a different preview port.
+The legacy v1 launch scripts remain for the v1 browser page.
+
+Collection results distinguish `ERROR` (evidence collection failed),
+`UNSUPPORTED` (collector unavailable), and `NOT_CHECKED` (missing evidence)
+from an observed `FAIL`. Capabilities depend on the platform and installed
+commands. Certificate expiry is not inferred from keychain modification dates;
+without a real X.509 expiry value, that rule remains `NOT_CHECKED`.
+
 ### Generate v2 client data
 
 `client_readiness_agent_v2.py` collects a v2 JSON payload for the multi-profile page in `docs/client-readiness-v2.html`.
@@ -72,7 +93,7 @@ docs/profiles/index.json
 * The agent is read-only.
 * It uses Python standard library only.
 * The browser page will fall back to browser-only checks if the helper is not running.
-* The v2 page loads data in this order: local helper endpoint, `docs/live-client-data.json`, then `docs/sample-client-data.json`.
+* The v2 page validates the schema before accepting a source and loads data in this order: local helper endpoint, `docs/live-client-data.json`, then `docs/sample-client-data.json`.
 * The current version uses practical heuristics and known local paths for IGEL/eLux-style environments.
 * Baseline-driven checks can mark required items as `fail` when they drift from the expected client profile.
 
@@ -130,3 +151,30 @@ Recommended approach:
 3. Open the readiness page from the client browser.
 4. Confirm that the page shows helper connection and the expected baseline.
 5. Review category status first, then drill into individual checks and recommended actions.
+
+## Reports and repeatable checks
+
+The v2 page marks live, saved, imported, and demo sources explicitly. Measurements
+older than 15 minutes, future timestamps, and unknown collection times are
+flagged. Existing saved fixtures have unknown collection times; no fresh time
+has been invented for them.
+
+Export JSON to preserve the complete measurement, profile snapshot, evaluation
+time, and results. Import recalculates results from those inputs using the
+original evaluation time, including time-sensitive certificate checks. Imports
+are local and limited to 2 MB. HTML exports are standalone readable reports;
+JSON is the re-importable format. Copy support summary has a manual fallback
+when clipboard access is unavailable.
+
+Known hostname, IP, path, certificate identity, and smartcard identity fields
+are masked by default in exports. Masking is not a guarantee of anonymity:
+review free text and report contents before sharing. Uncheck masking only when
+an authorized recipient needs the full evidence. Masking can remove evidence
+used by a custom rule; exported results are recalculated accordingly.
+
+Run the checks without any customer data or live collection:
+
+```bash
+python3 -m pytest -q
+node --test tests/test_readiness_v2.js
+```

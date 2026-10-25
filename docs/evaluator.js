@@ -34,7 +34,7 @@
   }
 
   function compareEquals(actual, expected) {
-    const ok = String(actual) === String(expected);
+    const ok = actual === expected;
     return {
       ok,
       actual,
@@ -46,7 +46,10 @@
   }
 
   function compareMinVersion(actual, expected) {
-    const a = String(actual || "").split(".").map(Number);
+    if (!/^\d+(\.\d+)*$/.test(String(actual)) || !/^\d+(\.\d+)*$/.test(String(expected))) {
+      return {status: "NOT_CHECKED", detail: "Missing or invalid numeric version", actual, expected};
+    }
+    const a = String(actual).split(".").map(Number);
     const e = String(expected || "").split(".").map(Number);
     const len = Math.max(a.length, e.length);
 
@@ -104,11 +107,11 @@
     return isNaN(d.getTime()) ? null : d;
   }
 
-  function compareCertExpiry(actual, rule) {
+  function compareCertExpiry(actual, rule, now) {
     const certs = Array.isArray(actual) ? actual : [];
     const name = String(rule.match || "").toLowerCase();
-    const warnDays = rule.warn_days || 30;
-    const failDays = rule.fail_days || 0;
+    const warnDays = rule.warn_days ?? 30;
+    const failDays = rule.fail_days ?? 0;
 
     const cert = certs.find((c) =>
       String(c.name || "").toLowerCase().includes(name)
@@ -127,15 +130,14 @@
     if (!expiry) {
       return {
         ok: false,
-        status: "FAIL",
+        status: "NOT_CHECKED",
         detail: "Invalid or missing expiry date"
       };
     }
 
-    const now = new Date();
     const diffDays = Math.floor((expiry - now) / (1000 * 60 * 60 * 24));
 
-    if (diffDays < failDays) {
+    if (expiry <= now || diffDays < failDays) {
       return {
         ok: false,
         status: "FAIL",
@@ -164,7 +166,22 @@
     return Array.isArray(capabilities) && capabilities.includes(requiredCapability);
   }
 
-  function evaluateRule(rule, data) {
+  function evaluateRule(rule, data, options = {}) {
+    const now = new Date(options.now || Date.now());
+    const source = rule.evidence_field || rule.source || "";
+    const collection = data.meta?.collection_status?.[source.split(".")[0]];
+    const unavailable = collection && collection.status !== "OK" ? collection.status : null;
+    if (unavailable || getByPath(data, source) === undefined || getByPath(data, source) === null) {
+      const unsupported = !hasCapability(data, rule.required_capability);
+      return {
+        id: rule.id, title: rule.title, category: rule.category || "general",
+        severity: rule.severity || "medium",
+        status: unavailable || (unsupported ? "UNSUPPORTED" : "NOT_CHECKED"),
+        expected: rule.expected ?? rule.match ?? null, actual: null,
+        evidence: collection?.detail || "No observation collected", remediation: rule.remediation || "",
+        source, timestamp: now.toISOString()
+      };
+    }
     if (!hasCapability(data, rule.required_capability)) {
       return {
         id: rule.id,
@@ -177,7 +194,7 @@
         evidence: `Missing helper capability: ${rule.required_capability}`,
         remediation: rule.remediation || "",
         source: rule.source || "",
-        timestamp: new Date().toISOString()
+        timestamp: now.toISOString()
       };
     }
 
@@ -198,7 +215,7 @@
         comparison = compareCertNameExists(sourceValue, rule.expected);
         break;
       case "cert_expiry_days":
-        comparison = compareCertExpiry(sourceValue, rule);
+        comparison = compareCertExpiry(sourceValue, rule, now);
         break;
       default:
         comparison = {
@@ -222,13 +239,13 @@
       evidence: comparison.detail,
       remediation: rule.remediation || "",
       source: rule.source || rule.evidence_field || "",
-      timestamp: new Date().toISOString()
+      timestamp: now.toISOString()
     };
   }
 
-  function evaluateProfile(profile, data) {
+  function evaluateProfile(profile, data, options = {}) {
     const checks = Array.isArray(profile.checks) ? profile.checks : [];
-    const results = checks.map((rule) => evaluateRule(rule, data));
+    const results = checks.map((rule) => evaluateRule(rule, data, options));
 
     const summary = {
       total: results.length,
@@ -236,6 +253,8 @@
       failed: results.filter((r) => r.status === "FAIL").length,
       warnings: results.filter((r) => r.status === "WARN").length,
       unsupported: results.filter((r) => r.status === "UNSUPPORTED").length,
+      not_checked: results.filter((r) => r.status === "NOT_CHECKED").length,
+      errors: results.filter((r) => r.status === "ERROR").length,
       critical_failed: results.filter(
         (r) => r.status === "FAIL" && r.severity === "critical"
       ).length

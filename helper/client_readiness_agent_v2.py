@@ -8,6 +8,9 @@ import re
 import shutil
 import socket
 import subprocess
+from datetime import datetime, timezone
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlsplit
 from pathlib import Path
 from typing import Any
 
@@ -19,7 +22,11 @@ def command_exists(name: str) -> bool:
     return shutil.which(name) is not None
 
 
-def run_command(cmd: list[str], timeout: int = 10) -> str:
+class CollectionError(RuntimeError):
+    """A check could not collect evidence; this is not a client failure."""
+
+
+def run_command(cmd: list[str], timeout: int = 10, allowed_codes=(0,)) -> str:
     try:
         result = subprocess.run(
             cmd,
@@ -28,15 +35,17 @@ def run_command(cmd: list[str], timeout: int = 10) -> str:
             timeout=timeout,
             check=False,
         )
+        if result.returncode not in allowed_codes:
+            raise CollectionError("Command exited with status %s" % result.returncode)
         return (result.stdout or "").strip()
-    except Exception:
-        return ""
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise CollectionError(type(exc).__name__) from exc
 
 
 def check_online(host: str = "8.8.8.8", port: int = 53, timeout: float = 2.0) -> bool:
     try:
-        socket.setdefaulttimeout(timeout)
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(timeout)
             sock.connect((host, port))
         return True
     except Exception:
@@ -44,27 +53,33 @@ def check_online(host: str = "8.8.8.8", port: int = 53, timeout: float = 2.0) ->
 
 
 def collect_capabilities() -> list[str]:
-    capabilities = [
-        "network.online",
-        "network.hostname",
-        "network.local_ips",
-        "citrix.installed",
-        "citrix.version",
-        "certificates.installed",
-        "certificates.details",
-        "smartcard.pcscd_running",
-        "smartcard.readers",
-        "smartcard.usb_devices",
-        "smartcard.opensc_readers",
-        "meta.profile",
-        "meta.baseline_version",
-    ]
+    capabilities = ["network.online", "network.hostname", "network.local_ips", "meta.profile", "meta.baseline_version"]
+    system = platform.system()
+    if system == "Darwin":
+        capabilities.append("citrix.installed")
+        if command_exists("defaults"):
+            capabilities.append("citrix.version")
+        if command_exists("security"):
+            capabilities.extend(["certificates.installed", "certificates.details"])
+    if command_exists("pgrep"):
+        capabilities.extend(["processes.running", "processes.missing"])
+    if system == "Linux" and (command_exists("systemctl") or command_exists("service")):
+        capabilities.append("smartcard.pcscd_running")
+    if system == "Linux" and command_exists("pcsc_scan"):
+        capabilities.append("smartcard.readers")
+    if system == "Linux" and command_exists("lsusb"):
+        capabilities.append("smartcard.usb_devices")
+    if command_exists("opensc-tool"):
+        capabilities.append("smartcard.opensc_readers")
+    if system == "Darwin" and command_exists("system_profiler"):
+        capabilities.append("smartcard.system_profiler")
     return sorted(capabilities)
 
 
 def collect_meta(profile_name: str) -> dict[str, Any]:
     return {
-        "agent_version": "2.3.0",
+        "agent_version": "2.4.0",
+        "collected_at": datetime.now(timezone.utc).isoformat(),
         "baseline_version": BASELINE_VERSION,
         "profile": profile_name,
         "platform": platform.system(),
@@ -108,10 +123,8 @@ def _parse_security_certificate_text(text: str, store: str) -> list[dict[str, st
                 current["subject"] = value
             elif key == "issr":
                 current["issuer"] = value
-            elif key == "cdat":
-                current["not_before"] = value
-            elif key == "mdat":
-                current["not_after"] = value
+            # cdat/mdat are keychain item timestamps, not X.509 validity.
+            # No expiry claim is made without an actual certificate date.
 
     if current:
         certs.append(current)
@@ -201,7 +214,7 @@ def collect_processes() -> dict[str, Any]:
     missing: list[str] = []
 
     for name in WATCHED_PROCESSES:
-        out = run_command(["pgrep", "-x", name], timeout=5)
+        out = run_command(["pgrep", "-x", name], timeout=5, allowed_codes=(0, 1))
         if out:
             running.append(name)
         else:
@@ -223,10 +236,10 @@ def collect_smartcard() -> dict[str, Any]:
     if system == "Linux":
         # PC/SC daemon status
         if command_exists("systemctl"):
-            status_out = run_command(["systemctl", "is-active", "pcscd"])
+            status_out = run_command(["systemctl", "is-active", "pcscd"], allowed_codes=(0, 3))
             result["pcscd_running"] = status_out == "active"
         elif command_exists("service"):
-            status_out = run_command(["service", "pcscd", "status"])
+            status_out = run_command(["service", "pcscd", "status"], allowed_codes=(0, 3))
             result["pcscd_running"] = "running" in status_out.lower()
 
         # Readers via pcsc_scan (non-interactive, list only)
@@ -301,14 +314,57 @@ def collect_network() -> dict[str, Any]:
 
 
 def build_payload(profile_name: str) -> dict[str, Any]:
-    return {
-        "meta": collect_meta(profile_name),
-        "certificates": collect_certificates(),
-        "citrix": collect_citrix(),
-        "network": collect_network(),
-        "smartcard": collect_smartcard(),
-        "processes": collect_processes(),
-    }
+    meta = collect_meta(profile_name)
+    payload = {"schema_version": "client-readiness.v2", "meta": meta}
+    meta["collection_status"] = {}
+    for category, collector in (
+        ("certificates", collect_certificates), ("citrix", collect_citrix),
+        ("network", collect_network), ("smartcard", collect_smartcard),
+        ("processes", collect_processes),
+    ):
+        supported = any(c.startswith(category + ".") for c in meta["capabilities"])
+        try:
+            payload[category] = collector() if supported else {}
+            status = "OK" if supported else "UNSUPPORTED"
+            meta["collection_status"][category] = {"status": status}
+        except CollectionError as exc:
+            payload[category] = {}
+            meta["collection_status"][category] = {"status": "ERROR", "detail": str(exc)}
+    return payload
+
+
+def make_handler(profile_name, allowed_origins):
+    """Serve the v2 contract separately; the legacy v1 endpoint stays available."""
+    class Handler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            origin = self.headers.get("Origin")
+            host = urlsplit("http://" + self.headers.get("Host", "")).hostname
+            if host not in ("localhost", "127.0.0.1") or (origin and origin not in allowed_origins):
+                self.send_error(403, "Host or origin not allowed")
+                return
+            path = urlsplit(self.path).path
+            if path == "/health":
+                payload = {"status": "ok", "schema_version": "client-readiness.v2"}
+            elif path == "/status":
+                payload = build_payload(profile_name)
+            else:
+                self.send_error(404)
+                return
+            body = json.dumps(payload).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.send_header("Cache-Control", "no-store")
+            if origin:
+                self.send_header("Access-Control-Allow-Origin", origin)
+                self.send_header("Vary", "Origin")
+            self.end_headers()
+            self.wfile.write(body)
+
+        def log_message(self, format_string, *args):
+            return
+
+    return Handler
 
 
 def main() -> None:
@@ -322,7 +378,22 @@ def main() -> None:
         "--pretty", action="store_true", help="Pretty-print JSON output"
     )
     parser.add_argument("--out", help="Write JSON output to file")
+    parser.add_argument("--serve", action="store_true", help="Serve the v2 contract on loopback")
+    parser.add_argument("--port", type=int, default=38765)
+    parser.add_argument("--allow-origin", action="append", default=[
+        "https://mcamner.github.io", "http://localhost:8000", "http://127.0.0.1:8000"
+    ])
     args = parser.parse_args()
+    if args.serve:
+        if args.out:
+            parser.error("--out cannot be combined with --serve")
+        with ThreadingHTTPServer(("127.0.0.1", args.port), make_handler(args.profile, args.allow_origin)) as server:
+            print("v2 helper listening on http://127.0.0.1:%s/status" % args.port, flush=True)
+            try:
+                server.serve_forever()
+            except KeyboardInterrupt:
+                pass
+        return
 
     payload = build_payload(args.profile)
     json_text = json.dumps(payload, indent=2 if args.pretty else None)

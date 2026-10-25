@@ -17,7 +17,8 @@
       "network.hostname",
       "network.local_ips",
       "network.online"
-    ]
+    ],
+    "collected_at": null
   },
   "certificates": {
     "installed": [
@@ -1194,5 +1195,6 @@
     "local_ips": [
       "192.0.2.10"
     ]
-  }
+  },
+  "schema_version": "client-readiness.v2"
 }
