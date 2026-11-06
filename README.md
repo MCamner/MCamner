@@ -1,65 +1,44 @@
 # Mattias Camner
 
-<div align="center">
+IT architect in Stockholm. I build local, reviewable tools for endpoint
+readiness, repository health and governed AI operations, mostly in the terminal.
 
-[![CI](https://github.com/MCamner/MCamner/actions/workflows/ci.yml/badge.svg)](https://github.com/MCamner/MCamner/actions/workflows/ci.yml)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-live-2ea44f)](https://mcamner.github.io/MCamner/)
-[![Version](https://img.shields.io/badge/version-0.1.0-blue)](VERSION)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-### Infrastructure / Endpoint / Automation Architect
-
-**Endpoint readiness · Repo intelligence · Governed AI operations**
-
-I build reviewable tools for endpoint readiness, repository intelligence, and governed local AI operations.
-
-<img src="docs/operating-model.png" alt="Operating model: enterprise complexity becomes operational signal, scored readiness, safe automation, reviewed action, and technical memory" width="560">
-
-[Run readiness tools](https://mcamner.github.io/MCamner/) ·
 [Journal](https://mcamner.github.io/mcamner-journal/) ·
 [LinkedIn](https://www.linkedin.com/in/mattias-camner-75958022) ·
 [Black Iris](https://blackiris.se/)
 
-</div>
+<a href="https://github.com/MCamner/macos-scripts">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/hal-brief-dark.png">
+    <img src="docs/screenshots/hal-brief-light.png" alt="Terminal running mqlaunch hal brief: repo, version, git state, doctor, CI, release and next step for macos-scripts" width="720">
+  </picture>
+</a>
+
+<sub>Real output from <code>mqlaunch hal brief</code>, the status view in
+<a href="https://github.com/MCamner/macos-scripts">macos-scripts</a>.</sub>
 
 ## Start here
 
-| I need endpoint readiness | I want to understand the MQ architecture |
-|---|---|
-| **[Run the browser check](https://mcamner.github.io/MCamner/client-readiness-check.html)** for a fast, browser-visible validation. | **[Follow the operating model](docs/OPERATING_MODEL.md)** from signal and score to policy gate and reusable memory. |
-| **[Open Diagnostics v2](https://mcamner.github.io/MCamner/client-readiness-v2.html)** for profile-based evaluation and helper-enriched evidence. | **[Explore `macos-scripts`](https://github.com/MCamner/macos-scripts)** as the terminal entrypoint to the stack. |
+* **[Run the browser readiness check](https://mcamner.github.io/MCamner/client-readiness-check.html)**:
+  validate an endpoint in the browser, no install.
+* **[Open Diagnostics v2](https://mcamner.github.io/MCamner/client-readiness-v2.html)**:
+  profile-based evaluation with evidence behind every result.
+* **[Install macos-scripts](https://github.com/MCamner/macos-scripts#quick-start)**:
+  the terminal entrypoint to the MQ stack.
 
-## Client readiness in practice
+## The MQ stack
 
-The public demo evaluates endpoint signals against explicit profiles, shows the evidence behind every result, and provides remediation suitable for review by support or operations.
+Every tool follows the same loop: make state visible, score it, gate the
+action, and keep what was learned.
 
-[![Client Readiness Diagnostics v2 showing a sanitized IGEL and Citrix profile evaluation](docs/screenshots/client-readiness-v2.png)](https://mcamner.github.io/MCamner/client-readiness-v2.html)
-
-### Browser check or local helper?
-
-| Mode | What it can inspect | Best for |
-|---|---|---|
-| Browser-only | Browser, secure context, display, locale, timezone, and basic endpoint reachability | Fast first-line validation with no installation |
-| Browser + read-only helper | OS, network, certificates, smartcard, Citrix, management signals, and named baselines | Deeper diagnostics and repeatable operational evidence |
-
-The page automatically falls back to browser-only checks when the helper is unavailable. See the [helper setup and deployment guide](helper/README.md) for the standard-library-only local agent.
-
-## What I build
-
-The MQ stack connects local repositories, endpoint operations, and AI-assisted engineering through one practical loop:
-
-<pre>
-endpoint / repo / workflow
-→ signal
-→ score
-→ gate
-→ memory
-→ better next action
-</pre>
-
-The focus is operational: make state visible, decisions explainable, and automation safe enough to use under real pressure.
-
-## MQ ecosystem
+```mermaid
+flowchart LR
+  in["endpoint, repo, workflow"] --> signal["signal<br/>repo-signal<br/>mq-image-analyze"]
+  signal --> score["score<br/>repo-signal"]
+  score --> gate["gate<br/>mq-agent, mq-mcp<br/>mq-ums"]
+  gate --> memory["memory<br/>mqobsidian"]
+  memory --> act["next action<br/>macos-scripts, mq-hal"]
+```
 
 | Repository | Role |
 |---|---|
@@ -67,40 +46,33 @@ The focus is operational: make state visible, decisions explainable, and automat
 | [`mq-hal`](https://github.com/MCamner/mq-hal) | Operator views for repo, stack, release, runtime, and changed-file verification, with safe command routing |
 | [`mq-agent`](https://github.com/MCamner/mq-agent) | Orchestrates workflows, reviews, release gates, and repo-owned checks with code-bound verification receipts |
 | [`mq-mcp`](https://github.com/MCamner/mq-mcp) | Policy-bound MCP runtime for controlled tool execution |
-| [`mqobsidian`](https://github.com/MCamner/mqobsidian) | Durable technical memory, reviewed decisions, and compact agent context; current code and runtime remain authoritative in their source repos |
-| [`repo-signal`](https://github.com/MCamner/repo-signal) | Reports structural readiness separately from existing verification evidence, and exports structured AI context |
+| [`mqobsidian`](https://github.com/MCamner/mqobsidian) | Durable technical memory, reviewed decisions, and compact agent context |
+| [`repo-signal`](https://github.com/MCamner/repo-signal) | Structural readiness scores, kept separate from verification evidence, and structured AI context |
 | [`mq-image-analyze`](https://github.com/MCamner/mq-image-analyze) | Extracts operational signal from screenshots and UI states |
-| [`mq-ums`](https://github.com/MCamner/mq-ums) | Provides a gated operator surface for IGEL UMS workflows |
+| [`mq-ums`](https://github.com/MCamner/mq-ums) | Gated operator surface for IGEL UMS workflows |
 
-### Evidence before action
+A high structure score is not proof that tests passed: verification evidence is
+reported as `PASS`, `FAIL`, `STALE` or `NOT_VERIFIED`, separately from scores.
+See the [repo-signal verification contract](https://github.com/MCamner/repo-signal/blob/main/docs/DOCTOR_SCHEMA.md#verification-evidence-additive).
 
-A high structure score is not proof that tests passed. `mq-agent` runs repo-owned
-checks and binds receipts to the observed code; changed code can make a receipt
-stale. `repo-signal doctor --verification` consumes existing receipt validation,
-and HAL's audit and stack views present `PASS`, `FAIL`, `STALE`, or
-`NOT_VERIFIED` separately from structural scores and runtime health. Those views
-start no tests. A PASS covers changed files against the selected base, not a full
-CI run or release approval; absent evidence stays unverified.
+[Full MQ ecosystem](docs/MQ_ECOSYSTEM.md) · [Operating model](docs/OPERATING_MODEL.md)
 
-See the [repo-signal verification contract](https://github.com/MCamner/repo-signal/blob/main/docs/DOCTOR_SCHEMA.md#verification-evidence-additive)
-and [HAL operator commands](https://github.com/MCamner/mq-hal/blob/main/docs/COMMAND_SURFACE.md#changed-file-verification).
+## Client readiness in practice
 
-[Explore the full MQ ecosystem](docs/MQ_ECOSYSTEM.md)
+The public demo evaluates endpoint signals against explicit profiles, shows the
+evidence behind every result, and suggests remediation that support or
+operations can review.
 
-## Operating model
+[![Client Readiness Diagnostics v2 showing a sanitized IGEL and Citrix profile evaluation](docs/screenshots/client-readiness-v2.png)](https://mcamner.github.io/MCamner/client-readiness-v2.html)
 
-<div align="center">
+| Mode | What it can inspect | Best for |
+|---|---|---|
+| Browser-only | Browser, secure context, display, locale, timezone, and basic endpoint reachability | Fast first-line validation with no installation |
+| Browser + read-only helper | OS, network, certificates, smartcard, Citrix, management signals, and named baselines | Deeper diagnostics and repeatable operational evidence |
 
-![MQ operating architecture](docs/macos-scripts-architecture.png)
+The page falls back to browser-only checks when the helper is unavailable. See
+the [helper setup and deployment guide](helper/README.md).
 
-<sub>One entrypoint, layered workflows, reviewable actions.</sub>
+---
 
-</div>
-
-The model favors signal before action, local execution, explicit policy gates, and reusable technical memory. [Read the operating model](docs/OPERATING_MODEL.md).
-
-[More project notes](docs/PROJECTS.md) · [Security and public-data policy](docs/SECURITY.md)
-
-## Connect
-
-[Technical journal](https://mcamner.github.io/mcamner-journal/) · [LinkedIn](https://www.linkedin.com/in/mattias-camner-75958022) · [Black Iris](https://blackiris.se/)
+[Project notes](docs/PROJECTS.md) · [Security and public-data policy](docs/SECURITY.md)
