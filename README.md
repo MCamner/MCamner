@@ -1,7 +1,7 @@
 # Mattias Camner
 
-IT architect in Stockholm. I build local, reviewable tools for endpoint
-readiness, repository health and governed AI operations, mostly in the terminal.
+IT architect in Stockholm. I build local, reviewable tools for repository
+health, governed AI operations and endpoint work, mostly in the terminal.
 
 [Journal](https://mcamner.github.io/mcamner-journal/) ·
 [LinkedIn](https://www.linkedin.com/in/mattias-camner-75958022)
@@ -18,19 +18,20 @@ readiness, repository health and governed AI operations, mostly in the terminal.
 
 ## Start here
 
-* **[Run the browser readiness check](https://mcamner.github.io/MCamner/client-readiness-check.html)**:
-  validate an endpoint in the browser, no install.
-* **[Open Diagnostics v2](https://mcamner.github.io/MCamner/client-readiness-v2.html)**:
-  profile-based evaluation with evidence behind every result.
-* **[Install macos-scripts](https://github.com/MCamner/macos-scripts#quick-start)**:
-  the terminal entrypoint to the MQ stack.
+* **[mq-agent](https://github.com/MCamner/mq-agent#quick-start)**: the core of
+  the MQ stack. Workflows, reviews and release gates with verification receipts.
+* **[macos-scripts](https://github.com/MCamner/macos-scripts#quick-start)**:
+  the terminal entrypoint to the stack, through `mqlaunch`.
+* **[Atlas Core](https://mcamner.github.io/atlas-core/)**: a standalone loop
+  engine for routed, evaluated, retryable AI-assisted work.
 
 ## The MQ stack
 
-Every tool follows the same loop: make state visible, score it, gate the
+Every MQ tool follows the same loop: make state visible, score it, gate the
 action, and keep what was learned.
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#ffb000", "primaryTextColor": "#1a1205", "primaryBorderColor": "#9a6a1c", "lineColor": "#9a6a1c", "edgeLabelBackground": "#ffe2a3", "fontFamily": "JetBrains Mono, ui-monospace, monospace"}}}%%
 flowchart LR
   in["endpoint, repo, workflow"] --> signal["signal<br/>repo-signal<br/>mq-image-analyze"]
   signal --> score["score<br/>repo-signal"]
@@ -41,12 +42,12 @@ flowchart LR
 
 | Repository | Role |
 |---|---|
-| [`macos-scripts`](https://github.com/MCamner/macos-scripts) | Terminal entrypoint and local workflow toolkit |
-| [`mq-hal`](https://github.com/MCamner/mq-hal) | Operator views for repo, stack, release, runtime, and changed-file verification, with safe command routing |
 | [`mq-agent`](https://github.com/MCamner/mq-agent) | Orchestrates workflows, reviews, release gates, and repo-owned checks with code-bound verification receipts |
-| [`mq-mcp`](https://github.com/MCamner/mq-mcp) | Policy-bound MCP runtime for controlled tool execution |
+| [`macos-scripts`](https://github.com/MCamner/macos-scripts) | Terminal entrypoint and local workflow toolkit |
 | [`mqobsidian`](https://github.com/MCamner/mqobsidian) | Durable technical memory, reviewed decisions, and compact agent context |
+| [`mq-mcp`](https://github.com/MCamner/mq-mcp) | Policy-bound MCP runtime for controlled tool execution |
 | [`repo-signal`](https://github.com/MCamner/repo-signal) | Structural readiness scores, kept separate from verification evidence, and structured AI context |
+| [`mq-hal`](https://github.com/MCamner/mq-hal) | Operator views for repo, stack, release, runtime, and changed-file verification, with safe command routing |
 | [`mq-image-analyze`](https://github.com/MCamner/mq-image-analyze) | Extracts operational signal from screenshots and UI states |
 | [`mq-ums`](https://github.com/MCamner/mq-ums) | Gated operator surface for IGEL UMS workflows |
 
@@ -56,21 +57,31 @@ See the [repo-signal verification contract](https://github.com/MCamner/repo-sign
 
 [Full MQ ecosystem](docs/MQ_ECOSYSTEM.md) · [Operating model](docs/OPERATING_MODEL.md)
 
-## Client readiness in practice
+## Outside MQ
 
-The public demo evaluates endpoint signals against explicit profiles, shows the
-evidence behind every result, and suggests remediation that support or
-operations can review.
+[**Atlas Core**](https://github.com/MCamner/atlas-core) is a bounded task loop,
+kept separate from the MQ stack on purpose: MQ, GitHub and memory plug in as
+adapters, not as the core. Experimental.
 
-[![Client Readiness Diagnostics v2 showing a sanitized IGEL and Citrix profile evaluation](docs/screenshots/client-readiness-v2.png)](https://mcamner.github.io/MCamner/client-readiness-v2.html)
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#ffb000", "primaryTextColor": "#1a1205", "primaryBorderColor": "#9a6a1c", "lineColor": "#9a6a1c", "edgeLabelBackground": "#ffe2a3", "fontFamily": "JetBrains Mono, ui-monospace, monospace"}}}%%
+flowchart LR
+  observe --> route --> plan --> execute --> evaluate
+  evaluate -- "retry / replan" --> plan
+  evaluate --> finalize
+```
 
-| Mode | What it can inspect | Best for |
-|---|---|---|
-| Browser-only | Browser, secure context, display, locale, timezone, and basic endpoint reachability | Fast first-line validation with no installation |
-| Browser + read-only helper | OS, network, certificates, smartcard, Citrix, management signals, and named baselines | Deeper diagnostics and repeatable operational evidence |
+[Site](https://mcamner.github.io/atlas-core/) · [Wiki](https://github.com/MCamner/atlas-core/wiki)
 
-The page falls back to browser-only checks when the helper is unavailable. See
-the [helper setup and deployment guide](helper/README.md).
+The [Journal](https://mcamner.github.io/mcamner-journal/) is where I write about
+systems, technology and thinking.
+
+## Endpoint tools
+
+Browser-based readiness checks for endpoints, with an optional read-only local
+helper: [browser check](https://mcamner.github.io/MCamner/client-readiness-check.html) ·
+[Diagnostics v2](https://mcamner.github.io/MCamner/client-readiness-v2.html) ·
+[helper guide](helper/README.md).
 
 ---
 
