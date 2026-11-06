@@ -4,8 +4,7 @@ IT architect in Stockholm. I build local, reviewable tools for endpoint
 readiness, repository health and governed AI operations, mostly in the terminal.
 
 [Journal](https://mcamner.github.io/mcamner-journal/) ·
-[LinkedIn](https://www.linkedin.com/in/mattias-camner-75958022) ·
-[Black Iris](https://blackiris.se/)
+[LinkedIn](https://www.linkedin.com/in/mattias-camner-75958022)
 
 <a href="https://github.com/MCamner/macos-scripts">
   <picture>
